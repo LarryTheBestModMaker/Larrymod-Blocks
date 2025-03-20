@@ -181,6 +181,15 @@ Blockly.BlockSvg.NOTCH_PATH_RIGHT = (
   'l -4,-4 ' +
   'c -1,-1 -2,-2 -4,-2'
 );
+/**
+ * @const
+ */
+Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT = `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 c 2 0 4 -4 6 -4 c 2 0 4 4 6 4 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`;
+
+/**
+ * @const
+ */
+Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT = `c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 c -2 0 -4 -4 -6 -4 c -2 0 -4 4 -6 4 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2`;
 
 /**
  * Amount of padding before the notch.
@@ -1693,7 +1702,7 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
  */
 Blockly.BlockSvg.drawStatementInputFromTopRight_ = function(steps, cursorX,
     rightEdge, row) {
-  Blockly.BlockSvg.drawStatementInputTop_(steps, cursorX);
+  Blockly.BlockSvg.drawStatementInputTop_(steps, cursorX, row);
   steps.push('v', row.height - 2 * Blockly.BlockSvg.CORNER_RADIUS);
   Blockly.BlockSvg.drawStatementInputBottom_(steps, rightEdge, row);
 };
@@ -1704,13 +1713,20 @@ Blockly.BlockSvg.drawStatementInputFromTopRight_ = function(steps, cursorX,
  * @param {!Array.<string>} steps Path of block outline.
  * @param {number} cursorX The x position of the start of the notch at the top
  *     of the input.
+ * @param {!Array.<!Object>} row An object containing information about the
+ *     current row, including its height and whether it should have a notch at
+ *     the bottom.
  * @private
  */
-Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX) {
+Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row) {
   steps.push(Blockly.BlockSvg.BOTTOM_RIGHT_CORNER);
   steps.push('H', cursorX + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE +
     2 * Blockly.BlockSvg.CORNER_RADIUS);
-  steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
+  if (row.connection && row.connection.check_.includes("switchCase")) {
+    steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
+  } else {
+    steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
+  }
   steps.push('h', '-' + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
   steps.push(Blockly.BlockSvg.INNER_TOP_LEFT_CORNER);
 };
@@ -1730,7 +1746,11 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
   steps.push(Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER);
   if (row.statementNotchAtBottom) {
     steps.push('h ', Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
-    steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
+    if (row.connection && row.connection.check_.includes("switchCase")) {
+      steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
+    } else {
+      steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
+    }
   }
   steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS);
 };
