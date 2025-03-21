@@ -180,7 +180,7 @@ Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT = `c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 
  * @const
  * @type {boolean}
  */
-Blockly.BlockSvg.NOTCH_SWITCH_ENABLE = false
+Blockly.BlockSvg.NOTCH_SWITCH_ENABLE = true
 
 /**
  * Amount of padding before the notch.
