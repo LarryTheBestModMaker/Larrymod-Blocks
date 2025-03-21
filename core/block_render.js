@@ -158,29 +158,29 @@ Blockly.BlockSvg.START_HAT_PATH = 'c 25,-22 71,-22 96,0';
  * SVG path for drawing next/previous notch from left to right.
  * @const
  */
-Blockly.BlockSvg.NOTCH_PATH_LEFT = `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 h 12 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`;
+Blockly.BlockSvg.NOTCH_PATH_LEFT = (
+  'c 2,0 3,1 4,2 ' +
+  'l 4,4 ' +
+  'c 1,1 2,2 4,2 ' +
+  'h 12 ' +
+  'c 2,0 3,-1 4,-2 ' +
+  'l 4,-4 ' +
+  'c 1,-1 2,-2 4,-2'
+);
 
 /**
  * SVG path for drawing next/previous notch from right to left.
  * @const
  */
-Blockly.BlockSvg.NOTCH_PATH_RIGHT = `c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 h -12 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2`;
-
-/**
- * @const
- */
-Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT = `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 c 2 0 4 -4 6 -4 c 2 0 4 4 6 4 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`;
-
-/**
- * @const
- */
-Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT = `c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 c -2 0 -4 -4 -6 -4 c -2 0 -4 4 -6 4 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2`;
-
-/**
- * @const
- * @type {boolean}
- */
-Blockly.BlockSvg.NOTCH_SWITCH_ENABLE = false
+Blockly.BlockSvg.NOTCH_PATH_RIGHT = (
+  'c -2,0 -3,1 -4,2 ' +
+  'l -4,4 ' +
+  'c -1,1 -2,2 -4,2 ' +
+  'h -12 ' +
+  'c -2,0 -3,-1 -4,-2 ' +
+  'l -4,-4 ' +
+  'c -1,-1 -2,-2 -4,-2'
+);
 
 /**
  * Amount of padding before the notch.
@@ -1701,7 +1701,7 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
  */
 Blockly.BlockSvg.drawStatementInputFromTopRight_ = function(steps, cursorX,
     rightEdge, row) {
-  Blockly.BlockSvg.drawStatementInputTop_(steps, cursorX, row);
+  Blockly.BlockSvg.drawStatementInputTop_(steps, cursorX);
   steps.push('v', row.height - 2 * Blockly.BlockSvg.CORNER_RADIUS);
   Blockly.BlockSvg.drawStatementInputBottom_(steps, rightEdge, row);
 };
@@ -1712,12 +1712,9 @@ Blockly.BlockSvg.drawStatementInputFromTopRight_ = function(steps, cursorX,
  * @param {!Array.<string>} steps Path of block outline.
  * @param {number} cursorX The x position of the start of the notch at the top
  *     of the input.
- * @param {!Array.<!Object>} row An object containing information about the
- *     current row, including its height and whether it should have a notch at
- *     the bottom.
  * @private
  */
-Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row) {
+Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX) {
   steps.push(Blockly.BlockSvg.BOTTOM_RIGHT_CORNER);
   steps.push('H', cursorX + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE +
     2 * Blockly.BlockSvg.CORNER_RADIUS);
