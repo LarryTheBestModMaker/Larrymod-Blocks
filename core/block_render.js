@@ -1746,9 +1746,9 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
   if (row.statementNotchAtBottom) {
     steps.push('h ', Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
     if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row.connection && row.connection.check_.includes("switchCase")) {
-      steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
+      steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT);
     } else {
-      steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
+      steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
     }
   }
   steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS);
