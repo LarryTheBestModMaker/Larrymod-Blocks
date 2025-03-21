@@ -1352,7 +1352,7 @@ Blockly.BlockSvg.prototype.renderDrawTop_ = function(steps, rightEdge) {
     if (this.previousConnection) {
       // Space before the notch
       steps.push('H', Blockly.BlockSvg.NOTCH_START_PADDING);
-      if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && this.previousConnection.check_.includes("switchCase")) {
+      if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && (this.previousConnection.check_ || []).includes("switchCase")) {
         steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT);
       } else {
         steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
@@ -1545,7 +1545,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
       Blockly.BlockSvg.CORNER_RADIUS
     );
     steps.push('H', notchStart, ' ');
-    if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && this.nextConnection.check_.includes("switchCase")) {
+    if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && (this.nextConnection.check_ || []).includes("switchCase")) {
       steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
     } else {
       steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
@@ -1721,7 +1721,7 @@ Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row) {
   steps.push(Blockly.BlockSvg.BOTTOM_RIGHT_CORNER);
   steps.push('H', cursorX + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE +
     2 * Blockly.BlockSvg.CORNER_RADIUS);
-  if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row.connection && row.connection.check_.includes("switchCase")) {
+  if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row.connection && (row.connection.check_ || []).includes("switchCase")) {
     steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
   } else {
     steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
@@ -1745,7 +1745,7 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
   steps.push(Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER);
   if (row.statementNotchAtBottom) {
     steps.push('h ', Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
-    if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row.connection && row.connection.check_.includes("switchCase")) {
+    if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row.connection && (row.connection.check_ || []).includes("switchCase")) {
       steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT);
     } else {
       steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
