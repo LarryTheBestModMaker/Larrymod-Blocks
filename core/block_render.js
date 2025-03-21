@@ -158,29 +158,29 @@ Blockly.BlockSvg.START_HAT_PATH = 'c 25,-22 71,-22 96,0';
  * SVG path for drawing next/previous notch from left to right.
  * @const
  */
-Blockly.BlockSvg.NOTCH_PATH_LEFT = (
-  'c 2,0 3,1 4,2 ' +
-  'l 4,4 ' +
-  'c 1,1 2,2 4,2 ' +
-  'h 12 ' +
-  'c 2,0 3,-1 4,-2 ' +
-  'l 4,-4 ' +
-  'c 1,-1 2,-2 4,-2'
-);
+Blockly.BlockSvg.NOTCH_PATH_LEFT = `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 h 12 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`;
 
 /**
  * SVG path for drawing next/previous notch from right to left.
  * @const
  */
-Blockly.BlockSvg.NOTCH_PATH_RIGHT = (
-  'c -2,0 -3,1 -4,2 ' +
-  'l -4,4 ' +
-  'c -1,1 -2,2 -4,2 ' +
-  'h -12 ' +
-  'c -2,0 -3,-1 -4,-2 ' +
-  'l -4,-4 ' +
-  'c -1,-1 -2,-2 -4,-2'
-);
+Blockly.BlockSvg.NOTCH_PATH_RIGHT = `c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 h -12 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2`;
+
+/**
+ * @const
+ */
+Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT = `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 c 2 0 4 -4 6 -4 c 2 0 4 4 6 4 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`;
+
+/**
+ * @const
+ */
+Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT = `c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 c -2 0 -4 -4 -6 -4 c -2 0 -4 4 -6 4 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2`;
+
+/**
+ * @const
+ * @type {boolean}
+ */
+Blockly.BlockSvg.NOTCH_SWITCH_ENABLE = false
 
 /**
  * Amount of padding before the notch.
