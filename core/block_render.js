@@ -1624,7 +1624,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps) {
  * @private
  */
 Blockly.BlockSvg.prototype.drawEdgeShapeRight_ = function(steps) {
-  if (this.edgeShape_) {
+  if (this.edgeShape_ && !this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
     // Draw the right-side edge shape.
     if (this.edgeShape_ === Blockly.OUTPUT_SHAPE_ROUND) {
       // Draw a rounded arc.
