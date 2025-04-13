@@ -350,6 +350,19 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     }
   },
 
+  saveExtraState: function() {
+    let number = Number(this.inputs_);
+    if (isNaN(number)) number = 0;
+    return {inputs: number}
+  },
+
+  loadExtraState: function(state) {
+    this.inputs_ = isNaN(state.inputs) ? 0 : state.inputs;
+    for (let i = 0; i < this.inputs_; i++) {
+      this.appendValueInput(`INPUT${i + 1}`);
+    }
+  },
+
   // updateShape_: function () {
   //   this.lastMutation_ = this.mutationToDom();
   //   console.log('updateShape_');
