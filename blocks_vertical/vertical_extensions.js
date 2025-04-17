@@ -142,6 +142,19 @@ Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_NUMBER = function() {
 };
 
 /**
+ * Extension to make represent a number reporter in Scratch-Blocks.
+ * That means the block has inline inputs, a round output shape, and a 'Color'
+ * output type.
+ * @this {Blockly.Block}
+ * @readonly
+ */
+Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_COLOUR_PICKER = function() {
+  this.setInputsInline(true);
+  this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+  this.setOutput(true, 'Color');
+};
+
+/**
  * Extension to make represent a string reporter in Scratch-Blocks.
  * That means the block has inline inputs, a round output shape, and a 'String'
  * output type.

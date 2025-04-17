@@ -199,6 +199,10 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
         this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
         this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Number')
         break
+      case 'color':
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Color')
+        break
       case 'boolean':
         this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL);
         this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Boolean')
@@ -398,6 +402,10 @@ Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
     var shadowType = 'math_number';
     var fieldName = 'NUM';
     var fieldValue = '1';
+  } else if (type == 'co') {
+    var shadowType = 'colour_picker';
+    var fieldName = 'COL';
+    var fieldValue = '#FF0000';
   } else {
     var shadowType = 'text';
     var fieldName = 'TEXT';
@@ -467,6 +475,9 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentReporter_ = function(
           break;
         case 'c':
           var blockType = 'argument_reporter_command';
+          break;
+        case 'co':
+          var blockType = 'argument_reporter_color_picker';
           break;
   }
   Blockly.Events.disable();
@@ -642,6 +653,9 @@ Blockly.ScratchBlocks.ProcedureUtils.checkOldTypeMatches_ = function(oldBlock,
   if (type == 'c' && oldBlock.type == 'argument_reporter_command') {
     return true;
   }
+  if (type == 'co' && oldBlock.type == 'argument_reporter_color_picker') {
+    return true;
+  }
   return false;
 };
 
@@ -673,6 +687,8 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentEditor_ = function(
         break;
       case 'c':
         var newBlock = this.workspace.newBlock('argument_editor_command')
+        case 'c':
+        var newBlock = this.workspace.newBlock('argument_editor_color_picker')
     }
     newBlock.setFieldValue(displayName, 'TEXT');
     newBlock.setShadow(true);
@@ -721,6 +737,9 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDeclarationProcCode_ = function() {
           break;
         case 'argument_editor_command':
           this.procCode_ += "%c";
+          break;
+          case 'argument_editor_color_picker':
+          this.procCode_ += "%co";
           break;
       }
     } else {
@@ -791,7 +810,7 @@ Blockly.ScratchBlocks.ProcedureUtils.addCommandExternal = function () {
 Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal = function() {
   Blockly.WidgetDiv.hide(true);
   this.procCode_ = this.procCode_ + ' %s';
-  this.displayNames_.push('number or text');
+  this.displayNames_.push('text');
   this.argumentIds_.push(Blockly.utils.genUid());
   this.argumentDefaults_.push('');
   this.updateDisplay_();
@@ -807,6 +826,21 @@ Blockly.ScratchBlocks.ProcedureUtils.addNumberExternal = function() {
   Blockly.WidgetDiv.hide(true);
   this.procCode_ = this.procCode_ + ' %n';
   this.displayNames_.push('number');
+  this.argumentIds_.push(Blockly.utils.genUid());
+  this.argumentDefaults_.push('');
+  this.updateDisplay_();
+  this.focusLastEditor_();
+};
+
+/**
+ * Externally-visible function to add a color argument to the procedure
+ * declaration.
+ * @public
+ */
+Blockly.ScratchBlocks.ProcedureUtils.addColorExternal = function() {
+  Blockly.WidgetDiv.hide(true);
+  this.procCode_ = this.procCode_ + ' %co';
+  this.displayNames_.push('color');
   this.argumentIds_.push(Blockly.utils.genUid());
   this.argumentDefaults_.push('');
   this.updateDisplay_();
@@ -943,6 +977,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateArgumentReporterNames_ = function(pre
     var block = allBlocks[i];
     if ((block.type === 'argument_reporter_string_number' ||
         block.type === 'argument_reporter_boolean' ||
+        block.type === 'argument_reporter_color_picker' ||
         block.type === 'argument_reporter_command') &&
         !block.isShadow()) { // Exclude arg reporters in the prototype block, which are shadows.
       argReporters.push(block);
@@ -1217,6 +1252,25 @@ Blockly.Blocks['argument_reporter_string_number'] = {
   domToMutation: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation
 };
 
+Blockly.Blocks['argument_reporter_color_picker'] = {
+  init: function() {
+    this.jsonInit({ 
+      "message0": " %1",
+      "args0": [
+        {
+          "type": "field_label_serializable",
+          "name": "VALUE",
+          "text": ""
+        }
+      ],
+      "extensions": ["colours_more", "output_colour_picker"]
+    });
+  },
+  updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
+  mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom,
+  domToMutation: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation
+};
+
 Blockly.Blocks['argument_reporter_command'] = {
   init: function () {
     this.jsonInit({ "message0": " %1",
@@ -1289,6 +1343,25 @@ Blockly.Blocks['argument_editor_number'] = {
       "colourSecondary": Blockly.Colours.textField,
       "colourTertiary": Blockly.Colours.textField,
       "extensions": ["output_number"]
+    });
+  },
+  // Exist on declaration and arguments editors, with different implementations.
+  removeFieldCallback: Blockly.ScratchBlocks.ProcedureUtils.removeArgumentCallback_
+};
+
+Blockly.Blocks['argument_editor_color_picker'] = {
+  init: function() {
+    this.jsonInit({ "message0": " %1",
+      "args0": [
+        {
+          "type": "field_input_removable",
+          "name": "TEXT",
+        }
+      ],
+      "colour": Blockly.Colours.textField,
+      "colourSecondary": Blockly.Colours.textField,
+      "colourTertiary": Blockly.Colours.textField,
+      "extensions": ["output_colour_picker"]
     });
   },
   // Exist on declaration and arguments editors, with different implementations.
