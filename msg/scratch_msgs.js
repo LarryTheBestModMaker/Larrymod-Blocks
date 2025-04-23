@@ -49,6 +49,7 @@ Blockly.ScratchMsgs.locales["ab"] =
     "DATA_INDEX_LAST": "аҵыхәтәантәи",
     "DATA_INDEX_RANDOM": "иарбанзаалакь",
     "EVENT_WHENFLAGCLICKED": "%1 ҳанақәыӷәӷәалакь",
+    "EVENT_WHENSTOPCLICKED": "%1 ҳанақәыӷәӷәалакь",
     "EVENT_WHENTHISSPRITECLICKED": "анагӡаҩ ҳаниқәыӷәӷәалакь",
     "EVENT_WHENSTAGECLICKED": "асцена ҳанақәыӷәӷәалакь",
     "EVENT_WHENTOUCHINGOBJECT": "ари анагӡаҩ %1 данадкьысло",
@@ -72,6 +73,7 @@ Blockly.ScratchMsgs.locales["ab"] =
     "LOOKS_THINKFORSECS": "ахәыцра %1 %2  секундк ",
     "LOOKS_THINK": "ахәыцра %1 ",
     "LOOKS_HMM": "М-м-м...",
+    "LOOKS_STOPTALKING": "aцәажәара уаҟәыҵ",
     "LOOKS_SHOW": "ацәырҵра",
     "LOOKS_HIDE": "аҽыҵәахра",
     "LOOKS_HIDEALLSPRITES": "иҵәахтәуп анагӡаҩцәа зегьы",
@@ -291,7 +293,13 @@ Blockly.ScratchMsgs.locales["ab"] =
     "NEW_BROADCAST_MESSAGE": "Ацҳамҭа ҿыц",
     "NEW_BROADCAST_MESSAGE_TITLE": "Ацҳамҭа ахьӡ ҿыц:",
     "BROADCAST_MODAL_TITLE": "Ацҳамҭа ҿыц",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ацҳамҭа1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ацҳамҭа1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["af"] =
@@ -578,7 +586,13 @@ Blockly.ScratchMsgs.locales["af"] =
     "NEW_BROADCAST_MESSAGE": "Nuwe boodskap",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nuwe boodskapnaam:",
     "BROADCAST_MODAL_TITLE": "Nuwe Boodskap",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "boodskap1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "boodskap1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ar"] =
@@ -865,7 +879,13 @@ Blockly.ScratchMsgs.locales["ar"] =
     "NEW_BROADCAST_MESSAGE": "رسالة جديدة",
     "NEW_BROADCAST_MESSAGE_TITLE": "اسم الرسالة الجديدة:",
     "BROADCAST_MODAL_TITLE": "رسالة جديدة",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "الرسالة 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "الرسالة 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["am"] =
@@ -1152,7 +1172,13 @@ Blockly.ScratchMsgs.locales["am"] =
     "NEW_BROADCAST_MESSAGE": "አዲስ መልዕክት",
     "NEW_BROADCAST_MESSAGE_TITLE": "አዲስ የመልዕክት ስም፡",
     "BROADCAST_MODAL_TITLE": "አዲስ መልእክት",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "መልእክት1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "መልእክት1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["an"] =
@@ -1439,7 +1465,13 @@ Blockly.ScratchMsgs.locales["an"] =
     "NEW_BROADCAST_MESSAGE": "Nuevo mensache",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nombre d'o nuevo mensache:",
     "BROADCAST_MODAL_TITLE": "Nuevo Mensache",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensache1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensache1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ast"] =
@@ -1726,7 +1758,13 @@ Blockly.ScratchMsgs.locales["ast"] =
     "NEW_BROADCAST_MESSAGE": "Mensaxe nuevu",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nome del nuevu mensaxe:",
     "BROADCAST_MODAL_TITLE": "Mensaxe Nuevu",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaxe1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaxe1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["az"] =
@@ -2013,7 +2051,13 @@ Blockly.ScratchMsgs.locales["az"] =
     "NEW_BROADCAST_MESSAGE": "Yeni ismarıc",
     "NEW_BROADCAST_MESSAGE_TITLE": "Yeni ismarıcın adı:",
     "BROADCAST_MODAL_TITLE": "Yeni ismarıc",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ismarıc 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ismarıc 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["id"] =
@@ -2300,7 +2344,13 @@ Blockly.ScratchMsgs.locales["id"] =
     "NEW_BROADCAST_MESSAGE": "Pesan baru",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nama pesan baru:",
     "BROADCAST_MODAL_TITLE": "Pesan Baru",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "pesan1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "pesan1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["bn"] =
@@ -2587,7 +2637,13 @@ Blockly.ScratchMsgs.locales["bn"] =
     "NEW_BROADCAST_MESSAGE": "নতুন বার্তা",
     "NEW_BROADCAST_MESSAGE_TITLE": "নতুন বার্তার নাম:",
     "BROADCAST_MODAL_TITLE": "নতুন বার্তা",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "বার্তা1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "বার্তা1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["be"] =
@@ -2632,6 +2688,7 @@ Blockly.ScratchMsgs.locales["be"] =
     "DATA_INDEX_LAST": "апошні",
     "DATA_INDEX_RANDOM": "выпадковы",
     "EVENT_WHENFLAGCLICKED": "калі %1 націснуты",
+    "EVENT_WHENSTOPCLICKED": "калі %1 націснуты",
     "EVENT_WHENTHISSPRITECLICKED": "калі спрайт націснуты",
     "EVENT_WHENSTAGECLICKED": "калі клікнуць па сцэне",
     "EVENT_WHENTOUCHINGOBJECT": "калі спрайт кранаецца %1",
@@ -2655,6 +2712,7 @@ Blockly.ScratchMsgs.locales["be"] =
     "LOOKS_THINKFORSECS": "думаць %1 %2 секунд",
     "LOOKS_THINK": "думаць %1",
     "LOOKS_HMM": "Хм...",
+    "LOOKS_STOPTALKING": "перастаньце гаварыць",
     "LOOKS_SHOW": "паказацца",
     "LOOKS_HIDE": "схавацца",
     "LOOKS_HIDEALLSPRITES": "схаваць усе спрайты",
@@ -2874,7 +2932,13 @@ Blockly.ScratchMsgs.locales["be"] =
     "NEW_BROADCAST_MESSAGE": "Новае паведамленне",
     "NEW_BROADCAST_MESSAGE_TITLE": "Новае імя паведамлення:",
     "BROADCAST_MODAL_TITLE": "Новае паведамленне",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "паведамленне1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "паведамленне1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["bg"] =
@@ -3161,7 +3225,13 @@ Blockly.ScratchMsgs.locales["bg"] =
     "NEW_BROADCAST_MESSAGE": "Ново съобщение",
     "NEW_BROADCAST_MESSAGE_TITLE": "Име на новото съобщение:",
     "BROADCAST_MODAL_TITLE": "Ново съобщение",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "съобщение1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "съобщение1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ca"] =
@@ -3448,7 +3518,13 @@ Blockly.ScratchMsgs.locales["ca"] =
     "NEW_BROADCAST_MESSAGE": "Nou missatge",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nou nom per al missatge:",
     "BROADCAST_MODAL_TITLE": "Missatge nou",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "missatge1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "missatge1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["cs"] =
@@ -3735,7 +3811,13 @@ Blockly.ScratchMsgs.locales["cs"] =
     "NEW_BROADCAST_MESSAGE": "Nová zpráva",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nový název zprávy:",
     "BROADCAST_MODAL_TITLE": "Nová zpráva",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "zpráva1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "zpráva1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["cy"] =
@@ -4022,7 +4104,13 @@ Blockly.ScratchMsgs.locales["cy"] =
     "NEW_BROADCAST_MESSAGE": "Neges newydd",
     "NEW_BROADCAST_MESSAGE_TITLE": "Enw neges newydd:",
     "BROADCAST_MODAL_TITLE": "Neges Newydd",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "neges1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "neges1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["da"] =
@@ -4309,7 +4397,13 @@ Blockly.ScratchMsgs.locales["da"] =
     "NEW_BROADCAST_MESSAGE": "Ny besked",
     "NEW_BROADCAST_MESSAGE_TITLE": "Navn på ny besked:",
     "BROADCAST_MODAL_TITLE": "Ny besked",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "besked1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "besked1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["de"] =
@@ -4329,6 +4423,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "CONTROL_FOREACH": "wiederhole für jedes %1 in %2",
     "CONTROL_STARTASCLONE": "Wenn ich als Klon entstehe",
     "CONTROL_CREATECLONEOF": "erzeuge Klon von %1",
+    "CONTROL_DELETECLONESOF": "lösche alle Klone von %2",
     "CONTROL_CREATECLONEOF_MYSELF": "mir selbst",
     "CONTROL_DELETETHISCLONE": "lösche diesen Klon",
     "CONTROL_COUNTER": "Zähler",
@@ -4354,6 +4449,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "DATA_INDEX_LAST": "letztes",
     "DATA_INDEX_RANDOM": "zufälliges",
     "EVENT_WHENFLAGCLICKED": "Wenn %1 angeklickt wird",
+    "EVENT_WHENSTOPCLICKED": "Wenn %1 angeklickt wird",
     "EVENT_WHENTHISSPRITECLICKED": "Wenn diese Figur angeklickt wird",
     "EVENT_WHENSTAGECLICKED": "Wenn die Bühne angeklickt wird",
     "EVENT_WHENTOUCHINGOBJECT": "Wenn diese Figur %1 berührt",
@@ -4377,8 +4473,10 @@ Blockly.ScratchMsgs.locales["de"] =
     "LOOKS_THINKFORSECS": "denke %1 für %2 Sekunden",
     "LOOKS_THINK": "denke %1",
     "LOOKS_HMM": "Hmm...",
+    "LOOKS_STOPTALKING": "hör auf zu reden",
     "LOOKS_SHOW": "zeige dich",
     "LOOKS_HIDE": "verstecke dich",
+    "LOOKS_GETSPRITEVISIBLE": "sichtbar?",
     "LOOKS_HIDEALLSPRITES": "Alle Figuren verbergen",
     "LOOKS_EFFECT_COLOR": "Farbe",
     "LOOKS_EFFECT_FISHEYE": "Fischauge",
@@ -4387,6 +4485,11 @@ Blockly.ScratchMsgs.locales["de"] =
     "LOOKS_EFFECT_MOSAIC": "Mosaik",
     "LOOKS_EFFECT_BRIGHTNESS": "Helligkeit",
     "LOOKS_EFFECT_GHOST": "Durchsichtigkeit",
+    "LOOKS_EFFECT_SATURATION": "Sättigung",
+    "LOOKS_EFFECT_RED": "Rötlichkeit",
+    "LOOKS_EFFECT_GREEN": "Grünlichkeit",
+    "LOOKS_EFFECT_BLUE": "Bläulichkeit",
+    "LOOKS_EFFECT_OPAQUE": "Undurchsichtigkeit",
     "LOOKS_CHANGEEFFECTBY": "ändere Effekt %1 um %2",
     "LOOKS_SETEFFECTTO": "setze Effekt %1 auf %2",
     "LOOKS_CLEARGRAPHICEFFECTS": "schalte Grafikeffekte aus",
@@ -4397,6 +4500,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "LOOKS_SETSTRETCHTO": "setze Dehnung auf %1 %",
     "LOOKS_SWITCHCOSTUMETO": "wechsle zu Kostüm %1",
     "LOOKS_NEXTCOSTUME": "wechsle zum nächsten Kostüm",
+    "LOOKS_PREVIOUSCOSTUME": "wechsle zum vorherigen Kostüm",
     "LOOKS_SWITCHBACKDROPTO": "wechsle zu Bühnenbild %1",
     "LOOKS_GOTOFRONTBACK": "gehe zu %1 Ebene",
     "LOOKS_GOTOFRONTBACK_FRONT": "vorderster",
@@ -4414,9 +4518,14 @@ Blockly.ScratchMsgs.locales["de"] =
     "LOOKS_PREVIOUSBACKDROP": "vorheriges Bühnenbild",
     "LOOKS_RANDOMBACKDROP": "zufälliges Bühnenbild",
     "MOTION_MOVESTEPS": "gehe %1 er Schritt",
+    "MOTION_MOVEBACKSTEPS": "gehe %1 er Schritt rückwärts",
+    "MOTION_MOVEUPDOWNSTEPS": "gehe %2 er Schritt nach %1",
+    "MOTION_MOVEUPDOWNSTEPS_UP": "oben",
+    "MOTION_MOVEUPDOWNSTEPS_DOWN": "unten",
     "MOTION_TURNLEFT": "drehe dich %1 um %2 Grad",
     "MOTION_TURNRIGHT": "drehe dich %1 um %2 Grad",
     "MOTION_POINTINDIRECTION": "setze Richtung auf %1 Grad",
+    "MOTION_TURNAROUND": "dreh dich um",
     "MOTION_POINTTOWARDS": "drehe dich zu %1",
     "MOTION_POINTTOWARDS_POINTER": "Mauszeiger",
     "MOTION_POINTTOWARDS_RANDOM": "Zufallsrichtung",
@@ -4433,6 +4542,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "MOTION_CHANGEYBY": "ändere y um %1",
     "MOTION_SETY": "setze y auf %1",
     "MOTION_IFONEDGEBOUNCE": "pralle vom Rand ab",
+    "MOTION_IFONSPRITEBOUNCE": "pralle vom %1 ab",
     "MOTION_SETROTATIONSTYLE": "setze Drehtyp auf %1",
     "MOTION_SETROTATIONSTYLE_LEFTRIGHT": "links-rechts",
     "MOTION_SETROTATIONSTYLE_DONTROTATE": "nicht drehen",
@@ -4549,6 +4659,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "CATEGORY_CONTROL": "Steuerung",
     "CATEGORY_SENSING": "Fühlen",
     "CATEGORY_OPERATORS": "Operatoren",
+    "CATEGORY_MENUS": "Menüs",
     "CATEGORY_VARIABLES": "Variablen",
     "CATEGORY_MYBLOCKS": "Meine Blöcke",
     "DUPLICATE": "Duplizieren",
@@ -4596,7 +4707,13 @@ Blockly.ScratchMsgs.locales["de"] =
     "NEW_BROADCAST_MESSAGE": "Neue Nachricht",
     "NEW_BROADCAST_MESSAGE_TITLE": "Neuer Nachrichtentext:",
     "BROADCAST_MODAL_TITLE": "Neue Nachricht",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "Nachricht1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "Nachricht1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["et"] =
@@ -4883,7 +5000,13 @@ Blockly.ScratchMsgs.locales["et"] =
     "NEW_BROADCAST_MESSAGE": "Uus teade",
     "NEW_BROADCAST_MESSAGE_TITLE": "Uue teate nimi:",
     "BROADCAST_MODAL_TITLE": "Uus teade",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "teade1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "teade1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["el"] =
@@ -5170,7 +5293,13 @@ Blockly.ScratchMsgs.locales["el"] =
     "NEW_BROADCAST_MESSAGE": "Νέο μήνυμα",
     "NEW_BROADCAST_MESSAGE_TITLE": "Όνομα νέου μηνύματος:",
     "BROADCAST_MODAL_TITLE": "Νέο μήνυμα",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "μήνυμα1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "μήνυμα1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["en"] =
@@ -5215,6 +5344,7 @@ Blockly.ScratchMsgs.locales["en"] =
     "DATA_INDEX_LAST": "last",
     "DATA_INDEX_RANDOM": "random",
     "EVENT_WHENFLAGCLICKED": "when %1 clicked",
+    "EVENT_WHENSTOPCLICKED": "when %1 clicked",
     "EVENT_WHENTHISSPRITECLICKED": "when this sprite clicked",
     "EVENT_WHENSTAGECLICKED": "when stage clicked",
     "EVENT_WHENTOUCHINGOBJECT": "when this sprite touches %1",
@@ -5238,6 +5368,7 @@ Blockly.ScratchMsgs.locales["en"] =
     "LOOKS_THINKFORSECS": "think %1 for %2 seconds",
     "LOOKS_THINK": "think %1",
     "LOOKS_HMM": "Hmm...",
+    "LOOKS_STOPTALKING": "stop speaking",
     "LOOKS_SHOW": "show",
     "LOOKS_HIDE": "hide",
     "LOOKS_HIDEALLSPRITES": "hide all sprites",
@@ -5392,6 +5523,7 @@ Blockly.ScratchMsgs.locales["en"] =
     "SENSING_CURRENT_HOUR": "hour",
     "SENSING_CURRENT_MINUTE": "minute",
     "SENSING_CURRENT_SECOND": "second",
+    "SENSING_CURRENT_TIMESTAMP": "js timestamp",
     "SENSING_DAYSSINCE2000": "days since 2000",
     "SENSING_USERNAME": "username",
     "SENSING_USERID": "user id",
@@ -5461,7 +5593,9 @@ Blockly.ScratchMsgs.locales["en"] =
     "NEW_BROADCAST_MESSAGE": "New message",
     "NEW_BROADCAST_MESSAGE_TITLE": "New message name:",
     "BROADCAST_MODAL_TITLE": "New Message",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "message1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "message1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_ADVLOG": "log %1 %2"
 };
 
 Blockly.ScratchMsgs.locales["es"] =
@@ -5506,6 +5640,7 @@ Blockly.ScratchMsgs.locales["es"] =
     "DATA_INDEX_LAST": "último",
     "DATA_INDEX_RANDOM": "aleatorio",
     "EVENT_WHENFLAGCLICKED": "al hacer clic en %1",
+    "EVENT_WHENSTOPCLICKED": "al hacer clic en %1",
     "EVENT_WHENTHISSPRITECLICKED": "al hacer clic en este objeto",
     "EVENT_WHENSTAGECLICKED": "al hacer clic en el escenario",
     "EVENT_WHENTOUCHINGOBJECT": "cuando el objeto toque %1",
@@ -5529,6 +5664,7 @@ Blockly.ScratchMsgs.locales["es"] =
     "LOOKS_THINKFORSECS": "pensar %1 durante %2 segundos",
     "LOOKS_THINK": "pensar %1",
     "LOOKS_HMM": "Umm...",
+    "LOOKS_STOPTALKING": "deja de hablar",
     "LOOKS_SHOW": "mostrar",
     "LOOKS_HIDE": "esconder",
     "LOOKS_HIDEALLSPRITES": "esconder todos los objetos",
@@ -5748,7 +5884,13 @@ Blockly.ScratchMsgs.locales["es"] =
     "NEW_BROADCAST_MESSAGE": "Nuevo mensaje",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nombre del mensaje:",
     "BROADCAST_MODAL_TITLE": "Nuevo Mensaje",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaje1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaje1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["es-419"] =
@@ -5793,6 +5935,7 @@ Blockly.ScratchMsgs.locales["es-419"] =
     "DATA_INDEX_LAST": "último",
     "DATA_INDEX_RANDOM": "al azar",
     "EVENT_WHENFLAGCLICKED": "al presionar %1",
+    "EVENT_WHENSTOPCLICKED": "al presionar %1",
     "EVENT_WHENTHISSPRITECLICKED": "al hacer clic en este objeto",
     "EVENT_WHENSTAGECLICKED": "al hacer clic en el escenario",
     "EVENT_WHENTOUCHINGOBJECT": "cuando este objeto toque %1",
@@ -6035,7 +6178,13 @@ Blockly.ScratchMsgs.locales["es-419"] =
     "NEW_BROADCAST_MESSAGE": "Nuevo mensaje",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nombre para el nuevo mensaje:",
     "BROADCAST_MODAL_TITLE": "Nuevo Mensaje",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaje1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaje1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["eo"] =
@@ -6322,7 +6471,13 @@ Blockly.ScratchMsgs.locales["eo"] =
     "NEW_BROADCAST_MESSAGE": "Nova mesaĝo",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nomo de nova mesaĝo:",
     "BROADCAST_MODAL_TITLE": "Nova mesaĝo",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mesaĝo1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mesaĝo1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["eu"] =
@@ -6609,7 +6764,13 @@ Blockly.ScratchMsgs.locales["eu"] =
     "NEW_BROADCAST_MESSAGE": "Mezu berria",
     "NEW_BROADCAST_MESSAGE_TITLE": "Mezu berriaren izena:",
     "BROADCAST_MODAL_TITLE": "Mezu berria",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mezua1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mezua1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["fa"] =
@@ -6896,7 +7057,13 @@ Blockly.ScratchMsgs.locales["fa"] =
     "NEW_BROADCAST_MESSAGE": "پیام جدید",
     "NEW_BROADCAST_MESSAGE_TITLE": "نام پیام جدید:",
     "BROADCAST_MODAL_TITLE": "پیام جدید",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "پیام 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "پیام 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["fil"] =
@@ -6941,6 +7108,7 @@ Blockly.ScratchMsgs.locales["fil"] =
     "DATA_INDEX_LAST": "huli",
     "DATA_INDEX_RANDOM": "kahit ano",
     "EVENT_WHENFLAGCLICKED": "kapag pinindot ang %1",
+    "EVENT_WHENSTOPCLICKED": "kapag pinindot ang %1",
     "EVENT_WHENTHISSPRITECLICKED": "kapag pinindot ang sprite na ito",
     "EVENT_WHENSTAGECLICKED": "kapag pinindot ang stage",
     "EVENT_WHENTOUCHINGOBJECT": "kapag tumama ang sprite na ito sa %1",
@@ -6964,6 +7132,7 @@ Blockly.ScratchMsgs.locales["fil"] =
     "LOOKS_THINKFORSECS": "isipin ang %1 nang %2 (na) segundo",
     "LOOKS_THINK": "isipin ang %1",
     "LOOKS_HMM": "Hmm...",
+    "LOOKS_STOPTALKING": "huminto sa pagsasalita",
     "LOOKS_SHOW": "ipakita",
     "LOOKS_HIDE": "itago",
     "LOOKS_HIDEALLSPRITES": "itago lahat ng sprite",
@@ -7183,7 +7352,13 @@ Blockly.ScratchMsgs.locales["fil"] =
     "NEW_BROADCAST_MESSAGE": "Bagong mensahe",
     "NEW_BROADCAST_MESSAGE_TITLE": "Pangalan ng bagong mensahe:",
     "BROADCAST_MODAL_TITLE": "Bagong Mensahe",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensahe1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensahe1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["fr"] =
@@ -7228,6 +7403,7 @@ Blockly.ScratchMsgs.locales["fr"] =
     "DATA_INDEX_LAST": "dernier",
     "DATA_INDEX_RANDOM": "au hasard",
     "EVENT_WHENFLAGCLICKED": "quand %1 est cliqué",
+    "EVENT_WHENSTOPCLICKED": "quand %1 est cliqué",
     "EVENT_WHENTHISSPRITECLICKED": "quand ce sprite est cliqué",
     "EVENT_WHENSTAGECLICKED": "quand la scène est cliquée",
     "EVENT_WHENTOUCHINGOBJECT": "quand ce sprite touche %1",
@@ -7251,6 +7427,7 @@ Blockly.ScratchMsgs.locales["fr"] =
     "LOOKS_THINKFORSECS": "penser à %1 pendant %2 secondes",
     "LOOKS_THINK": "penser à %1",
     "LOOKS_HMM": "Hmm...",
+    "LOOKS_STOPTALKING": "arrêter de parler",
     "LOOKS_SHOW": "montrer",
     "LOOKS_HIDE": "cacher",
     "LOOKS_HIDEALLSPRITES": "cacher tous les sprites",
@@ -7470,7 +7647,13 @@ Blockly.ScratchMsgs.locales["fr"] =
     "NEW_BROADCAST_MESSAGE": "Nouveau message",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nom du nouveau message :",
     "BROADCAST_MODAL_TITLE": "Nouveau message",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "message1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "message1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["fy"] =
@@ -7757,7 +7940,13 @@ Blockly.ScratchMsgs.locales["fy"] =
     "NEW_BROADCAST_MESSAGE": "Nij berjocht",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nije berjochttitel:",
     "BROADCAST_MODAL_TITLE": "Nij Berjocht",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "berjocht1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "berjocht1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ga"] =
@@ -8044,7 +8233,13 @@ Blockly.ScratchMsgs.locales["ga"] =
     "NEW_BROADCAST_MESSAGE": "Teachtaireacht nua",
     "NEW_BROADCAST_MESSAGE_TITLE": "Ainm na teachtaireachta nua:",
     "BROADCAST_MODAL_TITLE": "Teachtaireacht Nua",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "teachtaireacht1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "teachtaireacht1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["gd"] =
@@ -8331,7 +8526,13 @@ Blockly.ScratchMsgs.locales["gd"] =
     "NEW_BROADCAST_MESSAGE": "Teachdaireachd ùr",
     "NEW_BROADCAST_MESSAGE_TITLE": "Ainm na teachdaireachd ùire:",
     "BROADCAST_MODAL_TITLE": "teachdaireachd ùr",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "teachdaireachd1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "teachdaireachd1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["gl"] =
@@ -8618,7 +8819,13 @@ Blockly.ScratchMsgs.locales["gl"] =
     "NEW_BROADCAST_MESSAGE": "Nova mensaxe",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nome da nova mensaxe:",
     "BROADCAST_MODAL_TITLE": "Mensaxe nova",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaxe1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensaxe1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ko"] =
@@ -8905,7 +9112,13 @@ Blockly.ScratchMsgs.locales["ko"] =
     "NEW_BROADCAST_MESSAGE": "새로운 메시지",
     "NEW_BROADCAST_MESSAGE_TITLE": "새로운 메시지 이름:",
     "BROADCAST_MODAL_TITLE": "새로운 메시지",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "메시지1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "메시지1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ha"] =
@@ -9192,7 +9405,13 @@ Blockly.ScratchMsgs.locales["ha"] =
     "NEW_BROADCAST_MESSAGE": "sabon saƙo",
     "NEW_BROADCAST_MESSAGE_TITLE": "sunan sabon saƙo:",
     "BROADCAST_MODAL_TITLE": "sabon saƙo",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "saƙon1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "saƙon1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["hy"] =
@@ -9479,7 +9698,13 @@ Blockly.ScratchMsgs.locales["hy"] =
     "NEW_BROADCAST_MESSAGE": "Նոր հաղորդագրություն",
     "NEW_BROADCAST_MESSAGE_TITLE": "Նոր հաղորդագրության անունը՝",
     "BROADCAST_MODAL_TITLE": "Նոր հաղորդագրություն",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "հաղորդագրություն1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "հաղորդագրություն1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["he"] =
@@ -9766,7 +9991,13 @@ Blockly.ScratchMsgs.locales["he"] =
     "NEW_BROADCAST_MESSAGE": "מסר חדש",
     "NEW_BROADCAST_MESSAGE_TITLE": "צור מסר חדש",
     "BROADCAST_MODAL_TITLE": "מסר חדש",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "מסר 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "מסר 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["hr"] =
@@ -10053,7 +10284,13 @@ Blockly.ScratchMsgs.locales["hr"] =
     "NEW_BROADCAST_MESSAGE": "Nova poruka",
     "NEW_BROADCAST_MESSAGE_TITLE": "Naziv nove poruke:",
     "BROADCAST_MODAL_TITLE": "Nova poruka",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "poruka1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "poruka1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["xh"] =
@@ -10340,7 +10577,13 @@ Blockly.ScratchMsgs.locales["xh"] =
     "NEW_BROADCAST_MESSAGE": "umyalezo omtsha",
     "NEW_BROADCAST_MESSAGE_TITLE": "igama lomyalezo elitsha",
     "BROADCAST_MODAL_TITLE": "umyalezo omtsha",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "umyalezo1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "umyalezo1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["zu"] =
@@ -10627,7 +10870,13 @@ Blockly.ScratchMsgs.locales["zu"] =
     "NEW_BROADCAST_MESSAGE": "Umyalezo omusha",
     "NEW_BROADCAST_MESSAGE_TITLE": "Igama lomyalezo elisha",
     "BROADCAST_MODAL_TITLE": "Umyalezo Omusha",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "umyalezo wokuqala"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "umyalezo wokuqala",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["is"] =
@@ -10914,7 +11163,13 @@ Blockly.ScratchMsgs.locales["is"] =
     "NEW_BROADCAST_MESSAGE": "Ný skilaboð",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nafn nýrra skilaboða",
     "BROADCAST_MODAL_TITLE": "Ný skilaboð",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "dæmiUmNafnÁSkilaboðum"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "dæmiUmNafnÁSkilaboðum",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["it"] =
@@ -11201,7 +11456,13 @@ Blockly.ScratchMsgs.locales["it"] =
     "NEW_BROADCAST_MESSAGE": "Nuovo messaggio...",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nome del nuovo messaggio:",
     "BROADCAST_MODAL_TITLE": "Nuovo Messaggio...",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "messaggio1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "messaggio1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ka"] =
@@ -11488,7 +11749,13 @@ Blockly.ScratchMsgs.locales["ka"] =
     "NEW_BROADCAST_MESSAGE": "ახალი შეტყობინება",
     "NEW_BROADCAST_MESSAGE_TITLE": "ახალი შეტყობინების სახელი",
     "BROADCAST_MODAL_TITLE": "ახალი შეტყობინება",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "შეტყობინება1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "შეტყობინება1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["kk"] =
@@ -11775,7 +12042,13 @@ Blockly.ScratchMsgs.locales["kk"] =
     "NEW_BROADCAST_MESSAGE": "Жаға хабарлама",
     "NEW_BROADCAST_MESSAGE_TITLE": "Жаңа хабарламаның атауы",
     "BROADCAST_MODAL_TITLE": "Жаңа Хабарлама",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "хабарлама1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "хабарлама1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["qu"] =
@@ -12062,7 +12335,13 @@ Blockly.ScratchMsgs.locales["qu"] =
     "NEW_BROADCAST_MESSAGE": "Musuq qillqa",
     "NEW_BROADCAST_MESSAGE_TITLE": "Musuq qillqapa sutin:",
     "BROADCAST_MODAL_TITLE": "Musuq Qillqa",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "qillqa1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "qillqa1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["sw"] =
@@ -12349,7 +12628,13 @@ Blockly.ScratchMsgs.locales["sw"] =
     "NEW_BROADCAST_MESSAGE": "Ujumbe mpya",
     "NEW_BROADCAST_MESSAGE_TITLE": "Jina la ujumbe mpya:",
     "BROADCAST_MODAL_TITLE": "Ujumbe Mpya",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ujumbe1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ujumbe1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ht"] =
@@ -12636,7 +12921,13 @@ Blockly.ScratchMsgs.locales["ht"] =
     "NEW_BROADCAST_MESSAGE": "Nouvo mesaj",
     "NEW_BROADCAST_MESSAGE_TITLE": "Non nouvo mesaj la:",
     "BROADCAST_MODAL_TITLE": "Nouvo Mesaj",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mesaj1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mesaj1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ku"] =
@@ -12923,7 +13214,13 @@ Blockly.ScratchMsgs.locales["ku"] =
     "NEW_BROADCAST_MESSAGE": "Peyama nû",
     "NEW_BROADCAST_MESSAGE_TITLE": "Navê peyama nû:",
     "BROADCAST_MODAL_TITLE": "Peyama Nû",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "peyam1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "peyam1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ckb"] =
@@ -13210,7 +13507,13 @@ Blockly.ScratchMsgs.locales["ckb"] =
     "NEW_BROADCAST_MESSAGE": "پەیامی نوێ",
     "NEW_BROADCAST_MESSAGE_TITLE": "ناوی نامەی نوێی",
     "BROADCAST_MODAL_TITLE": "پەیامی نوێ",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "نامەی1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "نامەی1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["lv"] =
@@ -13497,7 +13800,13 @@ Blockly.ScratchMsgs.locales["lv"] =
     "NEW_BROADCAST_MESSAGE": "Jauna ziņa",
     "NEW_BROADCAST_MESSAGE_TITLE": "Jauns ziņas nosaukums:",
     "BROADCAST_MODAL_TITLE": "Jauna ziņa",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ziņa1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ziņa1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["lt"] =
@@ -13784,7 +14093,13 @@ Blockly.ScratchMsgs.locales["lt"] =
     "NEW_BROADCAST_MESSAGE": "Nauja žinutė",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nauja žinutė pavadinimu:",
     "BROADCAST_MODAL_TITLE": "Nauja žinutė",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "žinutė1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "žinutė1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["hu"] =
@@ -14071,7 +14386,13 @@ Blockly.ScratchMsgs.locales["hu"] =
     "NEW_BROADCAST_MESSAGE": "Új üzenet",
     "NEW_BROADCAST_MESSAGE_TITLE": "Új üzenet neve:",
     "BROADCAST_MODAL_TITLE": "Új üzenet",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "üzenet1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "üzenet1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["mi"] =
@@ -14358,7 +14679,13 @@ Blockly.ScratchMsgs.locales["mi"] =
     "NEW_BROADCAST_MESSAGE": "Karere hou",
     "NEW_BROADCAST_MESSAGE_TITLE": "Ingoa karere hou:",
     "BROADCAST_MODAL_TITLE": "Karere Hou",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "karere1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "karere1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["mn"] =
@@ -14645,7 +14972,13 @@ Blockly.ScratchMsgs.locales["mn"] =
     "NEW_BROADCAST_MESSAGE": "Шинэ мэссэж",
     "NEW_BROADCAST_MESSAGE_TITLE": "Шинэ мэссэжийн нэр:",
     "BROADCAST_MODAL_TITLE": "Шинэ мэссэж",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "мэссэж1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "мэссэж1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["nl"] =
@@ -14932,7 +15265,13 @@ Blockly.ScratchMsgs.locales["nl"] =
     "NEW_BROADCAST_MESSAGE": "Nieuw bericht",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nieuwe berichtnaam:",
     "BROADCAST_MODAL_TITLE": "Nieuw bericht",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "bericht1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "bericht1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ja"] =
@@ -15219,7 +15558,13 @@ Blockly.ScratchMsgs.locales["ja"] =
     "NEW_BROADCAST_MESSAGE": "新しいメッセージ",
     "NEW_BROADCAST_MESSAGE_TITLE": "新しいメッセージ名:",
     "BROADCAST_MODAL_TITLE": "新しいメッセージ",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "メッセージ1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "メッセージ1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ja-Hira"] =
@@ -15506,7 +15851,13 @@ Blockly.ScratchMsgs.locales["ja-Hira"] =
     "NEW_BROADCAST_MESSAGE": "あたらしいメッセージ",
     "NEW_BROADCAST_MESSAGE_TITLE": "あたらしいメッセージめい:",
     "BROADCAST_MODAL_TITLE": "あたらしいメッセージ",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "メッセージ1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "メッセージ1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["nb"] =
@@ -15793,7 +16144,13 @@ Blockly.ScratchMsgs.locales["nb"] =
     "NEW_BROADCAST_MESSAGE": "Ny melding",
     "NEW_BROADCAST_MESSAGE_TITLE": "Skriv ny  melding:",
     "BROADCAST_MODAL_TITLE": "Ny melding",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "melding1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "melding1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["nn"] =
@@ -16080,7 +16437,13 @@ Blockly.ScratchMsgs.locales["nn"] =
     "NEW_BROADCAST_MESSAGE": "Ny melding",
     "NEW_BROADCAST_MESSAGE_TITLE": "Namn på ny melding:",
     "BROADCAST_MODAL_TITLE": "Ny melding",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "melding1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "melding1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["oc"] =
@@ -16367,7 +16730,13 @@ Blockly.ScratchMsgs.locales["oc"] =
     "NEW_BROADCAST_MESSAGE": "Messatge novèl",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nom del messatge novèl",
     "BROADCAST_MODAL_TITLE": "Messatge novèl",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "messatge1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "messatge1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["or"] =
@@ -16654,7 +17023,13 @@ Blockly.ScratchMsgs.locales["or"] =
     "NEW_BROADCAST_MESSAGE": "ନୂଆ ସନ୍ଦେଶ",
     "NEW_BROADCAST_MESSAGE_TITLE": "ନୂଆ ସନ୍ଦେଶ ର ନାମ:",
     "BROADCAST_MODAL_TITLE": "ନୂଆ ସନ୍ଦେଶ",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ସନ୍ଦେଶ 1 "
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ସନ୍ଦେଶ 1 ",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["uz"] =
@@ -16941,7 +17316,13 @@ Blockly.ScratchMsgs.locales["uz"] =
     "NEW_BROADCAST_MESSAGE": "Yangi xabar",
     "NEW_BROADCAST_MESSAGE_TITLE": "Yangi xabar nomi:",
     "BROADCAST_MODAL_TITLE": "Yangi xabar",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "xabar1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "xabar1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["th"] =
@@ -17228,7 +17609,13 @@ Blockly.ScratchMsgs.locales["th"] =
     "NEW_BROADCAST_MESSAGE": "ข้อความใหม่",
     "NEW_BROADCAST_MESSAGE_TITLE": "ชื่อข้อความใหม่:",
     "BROADCAST_MODAL_TITLE": "ข้อความใหม่",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ข้อความ1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ข้อความ1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["km"] =
@@ -17515,7 +17902,13 @@ Blockly.ScratchMsgs.locales["km"] =
     "NEW_BROADCAST_MESSAGE": "សារថ្មី",
     "NEW_BROADCAST_MESSAGE_TITLE": "ឈ្មោះសារថ្មី៖",
     "BROADCAST_MODAL_TITLE": "សារថ្មី",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "សារ 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "សារ 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["pl"] =
@@ -17802,7 +18195,13 @@ Blockly.ScratchMsgs.locales["pl"] =
     "NEW_BROADCAST_MESSAGE": "Nowa wiadomość",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nowa nazwa wiadomości:",
     "BROADCAST_MODAL_TITLE": "Nowa wiadomość",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "wiadomość1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "wiadomość1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["pt"] =
@@ -18089,7 +18488,13 @@ Blockly.ScratchMsgs.locales["pt"] =
     "NEW_BROADCAST_MESSAGE": "Nova mensagem",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nome da nova mensagem:",
     "BROADCAST_MODAL_TITLE": "Nova Mensagem",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "Mensagem 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "Mensagem 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["pt-br"] =
@@ -18376,7 +18781,13 @@ Blockly.ScratchMsgs.locales["pt-br"] =
     "NEW_BROADCAST_MESSAGE": "Nova mensagem",
     "NEW_BROADCAST_MESSAGE_TITLE": "Novo nome de mensagem:",
     "BROADCAST_MODAL_TITLE": "Nova Mensagem",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensagem 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mensagem 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["rap"] =
@@ -18663,7 +19074,13 @@ Blockly.ScratchMsgs.locales["rap"] =
     "NEW_BROADCAST_MESSAGE": "parau apī",
     "NEW_BROADCAST_MESSAGE_TITLE": "iŋoa o te papaʾi:",
     "BROADCAST_MODAL_TITLE": "parau apī",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "ki hāŋa1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "ki hāŋa1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ro"] =
@@ -18950,7 +19367,13 @@ Blockly.ScratchMsgs.locales["ro"] =
     "NEW_BROADCAST_MESSAGE": "Mesaj nou",
     "NEW_BROADCAST_MESSAGE_TITLE": "Numele mesajului",
     "BROADCAST_MODAL_TITLE": "Mesaj nou",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "mesaj1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "mesaj1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["ru"] =
@@ -19237,7 +19660,13 @@ Blockly.ScratchMsgs.locales["ru"] =
     "NEW_BROADCAST_MESSAGE": "Новое сообщение",
     "NEW_BROADCAST_MESSAGE_TITLE": "Новое имя сообщения:",
     "BROADCAST_MODAL_TITLE": "Новое сообщение",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "сообщение1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "сообщение1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["nso"] =
@@ -19524,7 +19953,13 @@ Blockly.ScratchMsgs.locales["nso"] =
     "NEW_BROADCAST_MESSAGE": "Molaetša o moswa",
     "NEW_BROADCAST_MESSAGE_TITLE": "Leina la molaetša o moswa",
     "BROADCAST_MODAL_TITLE": "Molaetša o Moswa",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "molaetša1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "molaetša1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["tn"] =
@@ -19811,7 +20246,13 @@ Blockly.ScratchMsgs.locales["tn"] =
     "NEW_BROADCAST_MESSAGE": "Molaetsa o montšhwa",
     "NEW_BROADCAST_MESSAGE_TITLE": "Leina la molaetsa o montšhwa:",
     "BROADCAST_MODAL_TITLE": "Molaetsa o montšhwa",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "molaetsa 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "molaetsa 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["sk"] =
@@ -20098,7 +20539,13 @@ Blockly.ScratchMsgs.locales["sk"] =
     "NEW_BROADCAST_MESSAGE": "nová správa...",
     "NEW_BROADCAST_MESSAGE_TITLE": "Meno novej správy:",
     "BROADCAST_MODAL_TITLE": "Nová správa",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "správa1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "správa1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["sl"] =
@@ -20385,7 +20832,13 @@ Blockly.ScratchMsgs.locales["sl"] =
     "NEW_BROADCAST_MESSAGE": "Novo sporočilo",
     "NEW_BROADCAST_MESSAGE_TITLE": "Ime novega sporočila:",
     "BROADCAST_MODAL_TITLE": "Novo sporočilo",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "sporočilo1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "sporočilo1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["sr"] =
@@ -20672,7 +21125,13 @@ Blockly.ScratchMsgs.locales["sr"] =
     "NEW_BROADCAST_MESSAGE": "Нова порука",
     "NEW_BROADCAST_MESSAGE_TITLE": "Име нове поруке:",
     "BROADCAST_MODAL_TITLE": "Нова порука",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "порука1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "порука1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["fi"] =
@@ -20959,7 +21418,13 @@ Blockly.ScratchMsgs.locales["fi"] =
     "NEW_BROADCAST_MESSAGE": "Uusi viesti",
     "NEW_BROADCAST_MESSAGE_TITLE": "Uuden viestin nimi:",
     "BROADCAST_MODAL_TITLE": "Uusi viesti",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "viesti1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "viesti1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["sv"] =
@@ -21246,7 +21711,13 @@ Blockly.ScratchMsgs.locales["sv"] =
     "NEW_BROADCAST_MESSAGE": "Nytt meddelande",
     "NEW_BROADCAST_MESSAGE_TITLE": "Nytt namn på meddelande:",
     "BROADCAST_MODAL_TITLE": "Nytt meddelande",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "meddelande1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "meddelande1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["vi"] =
@@ -21533,7 +22004,13 @@ Blockly.ScratchMsgs.locales["vi"] =
     "NEW_BROADCAST_MESSAGE": "Thông báo mới",
     "NEW_BROADCAST_MESSAGE_TITLE": "Tên thông báo mới:",
     "BROADCAST_MODAL_TITLE": "Tin nhắn mới",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "tin nhắn 1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "tin nhắn 1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["tr"] =
@@ -21820,7 +22297,13 @@ Blockly.ScratchMsgs.locales["tr"] =
     "NEW_BROADCAST_MESSAGE": "Yeni haber",
     "NEW_BROADCAST_MESSAGE_TITLE": "Yeni haber adı:",
     "BROADCAST_MODAL_TITLE": "Yeni Haber",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "haber1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "haber1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["uk"] =
@@ -22107,7 +22590,13 @@ Blockly.ScratchMsgs.locales["uk"] =
     "NEW_BROADCAST_MESSAGE": "Нове повідомлення",
     "NEW_BROADCAST_MESSAGE_TITLE": "Нове ім’я повідомлення:",
     "BROADCAST_MODAL_TITLE": "Нове повідомлення",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "повідомлення1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "повідомлення1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_JOIN3": "join %1 %2 %3",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 
 Blockly.ScratchMsgs.locales["zh-cn"] =
@@ -22398,7 +22887,9 @@ Blockly.ScratchMsgs.locales["zh-cn"] =
     "NEW_BROADCAST_MESSAGE": "新消息",
     "NEW_BROADCAST_MESSAGE_TITLE": "新消息的名称：",
     "BROADCAST_MODAL_TITLE": "新消息",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "消息1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "消息1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_ADVLOG": "log %1 %2"
 };
 
 Blockly.ScratchMsgs.locales["zh-tw"] =
@@ -22686,6 +23177,11 @@ Blockly.ScratchMsgs.locales["zh-tw"] =
     "NEW_BROADCAST_MESSAGE": "新的訊息",
     "NEW_BROADCAST_MESSAGE_TITLE": "新訊息的名稱",
     "BROADCAST_MODAL_TITLE": "新的訊息",
-    "DEFAULT_BROADCAST_MESSAGE_NAME": "message1"
+    "DEFAULT_BROADCAST_MESSAGE_NAME": "message1",
+    "EVENT_WHENANYTHING": "when %1",
+    "OPERATORS_LETTERSFROMTOIN": "letters from %1 to %2 in %3",
+    "OPERATORS_ADVLOG": "log %1 %2",
+    "SENSING_CLIPBOARDITEM": "clipboard item",
+    "SENSING_ADDTOCLIPBOARD": "add %1 to clipboard"
 };
 // End of combined translations

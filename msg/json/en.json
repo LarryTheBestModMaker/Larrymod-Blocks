@@ -236,6 +236,7 @@
     "CATEGORY_CONTROL": "Control",
     "CATEGORY_SENSING": "Sensing",
     "CATEGORY_OPERATORS": "Operators",
+    "CATEGORY_MENUS": "MENUS",
     "CATEGORY_VARIABLES": "Variables",
     "CATEGORY_MYBLOCKS": "My Blocks",
     "DUPLICATE": "Duplicate",
