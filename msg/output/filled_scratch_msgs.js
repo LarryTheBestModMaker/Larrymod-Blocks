@@ -4424,7 +4424,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "CONTROL_FOREACH": "wiederhole für jedes %1 in %2",
     "CONTROL_STARTASCLONE": "Wenn ich als Klon entstehe",
     "CONTROL_CREATECLONEOF": "erzeuge Klon von %1",
-    "CONTROL_DELETECLONESOF": "lösche alle Klone von %2",
+    "CONTROL_DELETECLONESOF": "lösche alle Klone von %1",
     "CONTROL_CREATECLONEOF_MYSELF": "mir selbst",
     "CONTROL_DELETETHISCLONE": "lösche diesen Klon",
     "CONTROL_COUNTER": "Zähler",
