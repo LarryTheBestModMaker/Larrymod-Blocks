@@ -8,7 +8,7 @@ on:
 jobs:
   rebuild:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -18,7 +18,7 @@ jobs:
       
       - name: Rebuild
         run: |
-         sudo apt install python2-minimal
+         sudo apt install python2
          npm install
          npm run translate
        
@@ -61,4 +61,9 @@ jobs:
           committer_name: GitHub Actions
           committer_email: actions@github.com
         
-
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2.0.1
+        with:
+          token: ${{ secrets.t }}
+          event-type: update
+          repository: Dinosaurmod/dinosaurmod.github.io
