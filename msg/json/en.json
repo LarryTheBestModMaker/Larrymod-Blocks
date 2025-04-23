@@ -16,7 +16,7 @@
     "CONTROL_STARTASCLONE": "when I start as a clone",
     "CONTROL_CREATECLONEOF": "create clone of %1",
     "CONTROL_CREATECLONEOF_MYSELF": "myself",
-    "CONTROL_DELETECLONEOF": "delete clones of %1",
+    "CONTROL_DELETECLONESOF": "delete clones of %1",
     "CONTROL_DELETETHISCLONE": "delete this clone",
     "CONTROL_COUNTER": "counter",
     "CONTROL_INCRCOUNTER": "increment counter",
