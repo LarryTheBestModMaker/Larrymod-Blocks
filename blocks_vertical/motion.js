@@ -55,7 +55,7 @@ Blockly.Blocks['motion_movebacksteps'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "move back %1 steps",
+      "message0": Blockly.Msg.MOTION_MOVEBACKSTEPS,
       "args0": [
         {
           "type": "input_value",
@@ -75,14 +75,14 @@ Blockly.Blocks['motion_moveupdownsteps'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "move %1 %2 steps",
+      "message0": Blockly.Msg.MOTION_MOVEUPDOWNSTEPS,
       "args0": [
         {
           "type": "field_dropdown",
           "name": "DIRECTION",
           "options": [
-            ['up', 'up'],
-            ['down', 'down']
+            [Blockly.Msg.MOTION_MOVEUPDOWNSTEPS_UP, 'up'],
+            [Blockly.Msg.MOTION_MOVEUPDOWNSTEPS_DOWN, 'down']
           ]
         },
         {
@@ -641,7 +641,7 @@ Blockly.Blocks['motion_ifonspritebounce'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "if touching %1, bounce",
+      "message0": Blockly.Msg.MOTION_IFONSPRITEBOUNCE,
       "args0": [
         {
           "type": "input_value",

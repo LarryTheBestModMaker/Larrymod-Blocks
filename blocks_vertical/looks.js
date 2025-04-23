@@ -382,11 +382,11 @@ Blockly.Blocks['looks_changeeffectby'] = {
             [Blockly.Msg.LOOKS_EFFECT_MOSAIC, 'MOSAIC'],
             [Blockly.Msg.LOOKS_EFFECT_BRIGHTNESS, 'BRIGHTNESS'],
             [Blockly.Msg.LOOKS_EFFECT_GHOST, 'GHOST'],
-            ["saturation", 'SATURATION'],
-            ["red", 'RED'],
-            ["green", 'GREEN'],
-            ["blue", 'BLUE'],
-            ["opaque", 'OPAQUE']
+            [Blockly.Msg.COLOUR_SATURATION_LABEL, 'SATURATION'],
+            [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
+            [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
+            [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE']
           ]
         },
         {
@@ -625,7 +625,7 @@ Blockly.Blocks['looks_previouscostume'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "previous costume",
+      "message0": Blockly.Msg.LOOKS_PREVIOUSCOSTUME,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
     });
@@ -883,7 +883,7 @@ Blockly.Blocks['looks_previousbackdrop'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "previous backdrop",
+      "message0": Blockly.Msg.LOOKS_PREVIOUSBACKDROP,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
     });
@@ -1067,7 +1067,7 @@ Blockly.Blocks['looks_stoptalking'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "stop speaking",
+      "message0": Blockly.Msg.LOOKS_STOPTALKING,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
     });

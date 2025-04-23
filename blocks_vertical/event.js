@@ -102,7 +102,7 @@ Blockly.Blocks['event_whenstopclicked'] = {
   init: function () {
     this.jsonInit({
       "id": "event_whenstopclicked",
-      "message0": "when %1 clicked",
+      "message0": Blockly.Msg.EVENT_WHENFLAGCLICKED,
       "args0": [
         {
           "type": "field_image",
