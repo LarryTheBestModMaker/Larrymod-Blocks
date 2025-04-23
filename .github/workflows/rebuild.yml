@@ -64,6 +64,6 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.0.1
         with:
-          token: ${{ secrets.t }}
+          token: ${{ secrets.T }}
           event-type: update
           repository: Dinosaurmod/dinosaurmod.github.io
