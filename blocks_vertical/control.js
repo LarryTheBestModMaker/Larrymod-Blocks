@@ -361,8 +361,8 @@ Blockly.Blocks['control_waitsecondsoruntil'] = {
    */
   init: function() {
     this.jsonInit({
-      "id": Blockly.Msg.CONTROL_WAITSECONDSORUNTIL,
-      "message0": "wait %1 seconds or until %2",
+      "id": "control_waitsecondsoruntil",
+      "message0": Blockly.Msg.CONTROL_WAITSECONDSORUNTIL,
       "args0": [
         {
           "type": "input_value",
@@ -610,8 +610,8 @@ Blockly.Blocks['control_delete_clones_of'] = {
    */
   init: function() {
     this.jsonInit({
-      "id": Blockly.Msg.CONTROL_DELETECLONESOF,
-      "message0": "delete clones of %1",
+      "id": "control_delete_clones_of",
+      "message0": Blockly.Msg.CONTROL_DELETECLONESOF,
       "args0": [
         {
           "type": "input_value",
