@@ -99,6 +99,7 @@ Blockly.Msg["LOOKS_CHANGESTRETCHBY"] = "change stretch by %1";
 Blockly.Msg["LOOKS_SETSTRETCHTO"] = "set stretch to %1 %";
 Blockly.Msg["LOOKS_SWITCHCOSTUMETO"] = "switch costume to %1";
 Blockly.Msg["LOOKS_NEXTCOSTUME"] = "next costume";
+Blockly.Msg["LOOKS_PREVIOUSCOSTUME_BLOCK"] = "previous costume";
 Blockly.Msg["LOOKS_PREVIOUSCOSTUME"] = "previous costume";
 Blockly.Msg["LOOKS_SWITCHBACKDROPTO"] = "switch backdrop to %1";
 Blockly.Msg["LOOKS_GOTOFRONTBACK"] = "go to %1 layer";

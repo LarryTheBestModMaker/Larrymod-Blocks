@@ -93,6 +93,7 @@
     "LOOKS_SETSTRETCHTO": "set stretch to %1 %",
     "LOOKS_SWITCHCOSTUMETO": "switch costume to %1",
     "LOOKS_NEXTCOSTUME": "next costume",
+    "LOOKS_PREVIOUSCOSTUME_BLOCK": "previous costume",
     "LOOKS_PREVIOUSCOSTUME": "previous costume",
     "LOOKS_SWITCHBACKDROPTO": "switch backdrop to %1",
     "LOOKS_GOTOFRONTBACK": "go to %1 layer",
