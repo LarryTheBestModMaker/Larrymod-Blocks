@@ -947,7 +947,7 @@ Blockly.Blocks["looks_getSpriteVisible"] = {
     this.jsonInit({
       "inputsInline": true,
       "category": "looks",
-      "message0": "visible?",
+      "message0": Blockly.Msg.LOOKS_GETSPRITEVISIBLE,
       "extensions": [
         "output_boolean",
         "colours_looks"
