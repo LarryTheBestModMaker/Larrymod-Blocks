@@ -108,8 +108,8 @@ Blockly.Blocks['sensing_fulltouchingobjectmenu'] = {
           "type": "field_dropdown",
           "name": "FULLTOUCHINGOBJECTMENU",
           "options": [
-            ["mouse-pointer", '_mouse_'],
-            ["edge", '_edge_'],
+            [Blockly.Msg.SENSING_DISTANCETO_POINTER, '_mouse_'],
+            [Blockly.Msg.SENSING_TOUCHINGOBJECT_EDGE, '_edge_'],
             ["this sprite", '_myself_']
           ]
         }
@@ -455,7 +455,7 @@ Blockly.Blocks['sensing_mouseclicked'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "mouse clicked?",
+      "message0": Blockly.Msg.SENSING_MOUSECLICKED,
       "category": Blockly.Categories.sensing,
       "extensions": ["colours_sensing", "output_boolean"]
     });

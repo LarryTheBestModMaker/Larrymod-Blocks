@@ -653,7 +653,7 @@ Blockly.Blocks['control_stop_sprite_menu'] = {
           "type": "field_dropdown",
           "name": "STOP_OPTION",
           "options": [
-            ["stage", '_stage_']
+            [Blockly.Msg.SENSING_OF_STAGE, '_stage_']
           ]
         }
       ],
@@ -696,7 +696,7 @@ Blockly.Blocks['control_run_as_sprite_menu'] = {
           "type": "field_dropdown",
           "name": "RUN_AS_OPTION",
           "options": [
-            ["Stage", '_stage_']
+            [Blockly.Msg.SENSING_OF_STAGE, '_stage_']
           ]
         }
       ],

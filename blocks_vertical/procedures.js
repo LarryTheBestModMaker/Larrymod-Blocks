@@ -1391,7 +1391,7 @@ Blockly.Blocks['argument_editor_command'] = {
 Blockly.Blocks['procedures_set'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'set %1 to %2',
+      "message0": Blockly.Msg.DATA_SETVARIABLETO,
       "args0": [
         {
           "type": "input_value",
