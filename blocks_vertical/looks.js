@@ -625,7 +625,7 @@ Blockly.Blocks['looks_previouscostume'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": Blockly.Msg.LOOKS_PREVIOUSCOSTUME_BLOCK,
+      "message0": Blockly.Msg.LOOKS_PREVIOUSCOSTUME,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
     });
@@ -883,7 +883,7 @@ Blockly.Blocks['looks_previousbackdrop'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": Blockly.Msg.LOOKS_PREVIOUSBACKDROP,
+      "message0": Blockly.Msg.LOOKS_PREVIOUSBACKDROP_BLOCK,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
     });
