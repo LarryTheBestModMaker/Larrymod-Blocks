@@ -990,7 +990,7 @@ Blockly.Blocks["operator_trueBoolean"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "true",
+      "message0": Blockly.Msg.OPERATORS_TRUEBOOLEAN,
       "args0": [],
       "category": Blockly.Categories.operators,
       "extensions": ["colours_operators", "output_boolean"]
@@ -1002,7 +1002,7 @@ Blockly.Blocks["operator_falseBoolean"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "false",
+      "message0": Blockly.Msg.OPERATORS_FALSEBOOLEAN,
       "args0": [],
       "category": Blockly.Categories.operators,
       "extensions": ["colours_operators", "output_boolean"]
@@ -1014,7 +1014,7 @@ Blockly.Blocks["operator_randomBoolean"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "random",
+      "message0": Blockly.Msg.OPERATORS_RANDOMBOOLEAN,
       "args0": [],
       "category": Blockly.Categories.operators,
       "extensions": ["colours_operators", "output_boolean"]
@@ -1110,7 +1110,7 @@ Blockly.Blocks["operator_textStartsOrEndsWith"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 %2 with %3?",
+      "message0": Blockly.Msg.OPERATORS_TEXTSTARTSORENDSWITH,
       "args0": [
         {
           "type": "input_value",
@@ -1120,8 +1120,8 @@ Blockly.Blocks["operator_textStartsOrEndsWith"] = {
           "type": "field_dropdown",
           "name": "OPTION",
           "options": [
-            ["starts", "starts"],
-            ["ends", "ends"]
+            [Blockly.Msg.OPERATORS_TEXTSTARTSORENDSWITH_STARTS, "starts"],
+            [Blockly.Msg.OPERATORS_TEXTSTARTSORENDSWITH_ENDS, "ends"]
           ]
         },
         {
