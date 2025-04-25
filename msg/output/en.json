@@ -20,6 +20,7 @@
     "CONTROL_DELETETHISCLONE": "delete this clone",
     "CONTROL_COUNTER": "counter",
     "CONTROL_INCRCOUNTER": "increment counter",
+    "CONTROL_DECRCOUNTER": "decrement counter",
     "CONTROL_CLEARCOUNTER": "clear counter",
     "CONTROL_ALLATONCE": "all at once",
     "DATA_SETVARIABLETO": "set %1 to %2",

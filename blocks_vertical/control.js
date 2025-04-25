@@ -640,6 +640,21 @@ Blockly.Blocks['control_delete_this_clone'] = {
   }
 };
 
+Blockly.Blocks['control_is_clone'] = {
+  /**
+   * pm: Block to check if a sprite is a clone.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "is clone?",
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "output_boolean"]
+    });
+  }
+};
+
+
 Blockly.Blocks['control_stop_sprite_menu'] = {
   /**
    * pm: Stop-sprite drop-down menu.
@@ -789,7 +804,7 @@ Blockly.Blocks['control_decr_counter'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "decrement counter",
+      "message0": Blockly.Msg.CONTROL_DECRCOUNTER,
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_statement"]
     });

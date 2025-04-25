@@ -68,6 +68,7 @@ Blockly.Msg.CONTROL_DELETECLONESOF = 'delete clones of %1';
 Blockly.Msg.CONTROL_DELETETHISCLONE = 'delete this clone';
 Blockly.Msg.CONTROL_COUNTER = 'counter';
 Blockly.Msg.CONTROL_INCRCOUNTER = 'increment counter';
+Blockly.Msg.CONTROL_DECRCOUNTER = 'decrement counter';
 Blockly.Msg.CONTROL_CLEARCOUNTER = 'clear counter';
 Blockly.Msg.CONTROL_ALLATONCE = 'all at once';
 
