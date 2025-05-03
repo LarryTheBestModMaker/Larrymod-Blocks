@@ -155,7 +155,7 @@ Blockly.Blocks['motion_turnrightaroundxy'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "turn %1 %2 degrees around x: %3 y: %4",
+      "message0": Blockly.Msg.MOTION_TURNRIGHTAROUNDXY,
       "args0": [
         {
           "type": "field_image",
@@ -189,7 +189,7 @@ Blockly.Blocks['motion_turnleftaroundxy'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "turn %1 %2 degrees around x: %3 y: %4",
+      "message0": Blockly.Msg.MOTION_TURNLEFTAROUNDXY,
       "args0": [
         {
           "type": "field_image",

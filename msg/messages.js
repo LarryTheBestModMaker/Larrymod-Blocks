@@ -176,6 +176,8 @@ Blockly.Msg.MOTION_MOVEUPDOWNSTEPS_UP = 'up';
 Blockly.Msg.MOTION_MOVEUPDOWNSTEPS_DOWN = 'down';
 Blockly.Msg.MOTION_TURNLEFT = 'turn %1 %2 degrees';
 Blockly.Msg.MOTION_TURNRIGHT = 'turn %1 %2 degrees';
+Blockly.Msg.MOTION_TURNLEFTAROUNDXY = "turn %1 %2 degrees around x: %3 y: %4";
+Blockly.Msg.MOTION_TURNRIGHTAROUNDXY = "turn %1 %2 degrees around x: %3 y: %4";
 Blockly.Msg.MOTION_POINTINDIRECTION = 'point in direction %1';
 Blockly.Msg.MOTION_TURNAROUND = 'turn around';
 Blockly.Msg.MOTION_POINTTOWARDS = 'point towards %1';
@@ -336,6 +338,7 @@ Blockly.Msg.CATEGORY_SENSING = 'Sensing';
 Blockly.Msg.CATEGORY_OPERATORS = 'Operators';
 Blockly.Msg.CATEGORY_MENUS = 'Menus';
 Blockly.Msg.CATEGORY_VARIABLES = 'Variables';
+Blockly.Msg.CATEGORY_LISTS = 'Lists';
 Blockly.Msg.CATEGORY_MYBLOCKS = 'My Blocks';
 
 // Context menus
