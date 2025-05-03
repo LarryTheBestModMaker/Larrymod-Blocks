@@ -4588,7 +4588,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "OPERATORS_LETTEROF_APPLE": "a",
     "OPERATORS_LENGTH": "Länge von %1",
     "OPERATORS_CONTAINS": "%1 enthält %2?",
-    "OPERATORS_TEXTSTARTSORENDSWITH": "%2 %1 mit %3?",
+    "OPERATORS_TEXTSTARTSORENDSWITH": "%1 mit %3 %2?",
     "OPERATORS_TEXTSTARTSORENDSWITH_STARTS": "beginnt",
     "OPERATORS_TEXTSTARTSORENDSWITH_ENDS": "endet",
     "OPERATORS_MOD": "%1 mod %2",
