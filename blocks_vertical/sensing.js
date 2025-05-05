@@ -985,7 +985,7 @@ Blockly.Blocks["sensing_getspritewithattrib"] = {
 Blockly.Blocks['sensing_distanceTo'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'distance from %1 %2 to %3 %4',
+      "message0": Blockly.Msg.SENSING_DISTANCETO2,
       "args0": [
         {
           "type": "input_value",
@@ -1013,7 +1013,7 @@ Blockly.Blocks['sensing_distanceTo'] = {
 Blockly.Blocks['sensing_directionTo'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'direction to %1 %2 from %3 %4',
+      "message0": Blockly.Msg.SENSING_DIRECTIONTO,
       "args0": [
         {
           "type": "input_value",
