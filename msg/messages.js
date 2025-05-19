@@ -187,6 +187,7 @@ Blockly.Msg.MOTION_GOTO = 'go to %1';
 Blockly.Msg.MOTION_GOTO_POINTER = 'mouse-pointer';
 Blockly.Msg.MOTION_GOTO_RANDOM = 'random position';
 Blockly.Msg.MOTION_GOTOXY = 'go to x: %1 y: %2';
+Blockly.Msg.MOTION_CHANGEBYXY = 'change by x: %1 y: %2';
 Blockly.Msg.MOTION_GLIDESECSTOXY = 'glide %1 secs to x: %2 y: %3';
 Blockly.Msg.MOTION_GLIDETO = 'glide %1 secs to %2';
 Blockly.Msg.MOTION_GLIDETO_POINTER = 'mouse-pointer';

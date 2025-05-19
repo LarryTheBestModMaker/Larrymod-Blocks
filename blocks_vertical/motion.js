@@ -269,7 +269,7 @@ Blockly.Blocks['motion_turnaround'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "turn around",
+      "message0": Blockly.Msg.MOTION_TURNAROUND,
       "category": Blockly.Categories.motion,
       "extensions": ["colours_motion", "shape_statement"]
     });
@@ -523,7 +523,7 @@ Blockly.Blocks['motion_changebyxy'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "change by x: %1 y: %2",
+      "message0": Blockly.Msg.MOTION_CHANGEBYXY,
       "args0": [
         {
           "type": "input_value",
