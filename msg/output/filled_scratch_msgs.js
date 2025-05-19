@@ -4530,7 +4530,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "MOTION_TURNLEFTAROUNDXY": "drehe dich %1 %2 Grad um x: %3 y: %4 herum",
     "MOTION_TURNRIGHTAROUNDXY": "drehe dich %1 %2 Grad um x: %3 y: %4 herum",
     "MOTION_POINTINDIRECTION": "setze Richtung auf %1 Grad",
-    "MOTION_TURNAROUND": "dreh dich um",
+    "MOTION_TURNAROUND": "drehe dich um",
     "MOTION_POINTTOWARDS": "drehe dich zu %1",
     "MOTION_POINTTOWARDS_POINTER": "Mauszeiger",
     "MOTION_POINTTOWARDS_RANDOM": "Zufallsrichtung",
