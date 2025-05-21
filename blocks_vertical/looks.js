@@ -931,7 +931,7 @@ Blockly.Blocks["looks_changeStretch"] = {
           "name": "Y"
         }
       ],
-      "message0": "set stretch to x: %1 y: %2",
+      "message0": "change stretch by x: %1 y: %2",
       "extensions": [
         "shape_statement",
         "colours_looks"
