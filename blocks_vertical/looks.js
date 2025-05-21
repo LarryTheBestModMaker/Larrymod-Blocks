@@ -916,6 +916,30 @@ Blockly.Blocks["looks_setStretch"] = {
   }
 };
 
+Blockly.Blocks["looks_changeStretch"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "X"
+        },
+        {
+          "type": "input_value",
+          "name": "Y"
+        }
+      ],
+      "message0": "change stretch by x: %1 y: %2",
+      "extensions": [
+        "shape_statement",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
 Blockly.Blocks["looks_stretchGetX"] = {
   init: function() {
     this.jsonInit({
