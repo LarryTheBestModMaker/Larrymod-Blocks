@@ -297,7 +297,7 @@ Blockly.Blocks['motion_pointtowardsxy'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "point towards x: %1 y: %2",
+      "message0": Blockly.Msg.MOTION_POINTTOWARDSXY,
       "args0": [
         {
           "type": "input_value",
@@ -801,21 +801,21 @@ Blockly.Blocks['motion_move_sprite_to_scene_side'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "move to stage %1",
+      "message0": Blockly.Msg.MOTION_MOVESPRITETOSCENE,
       "args0": [
         {
           "type": "field_dropdown",
           "name": "ALIGNMENT",
           "options": [
             [Blockly.Msg.MOTION_ALIGNSCENE_BOTTOMLEFT, 'bottom-left'],
-            ['bottom', 'bottom'],
+            [Blockly.Msg.MOTION_MOVESPRITETOSCENE_BOTTOM, 'bottom'],
             [Blockly.Msg.MOTION_ALIGNSCENE_BOTTOMRIGHT, 'bottom-right'],
             [Blockly.Msg.MOTION_ALIGNSCENE_MIDDLE, 'middle'],
             [Blockly.Msg.MOTION_ALIGNSCENE_TOPLEFT, 'top-left'],
-            ['top', 'top'],
+            [Blockly.Msg.MOTION_MOVESPRITETOSCENE_TOP, 'top'],
             [Blockly.Msg.MOTION_ALIGNSCENE_TOPRIGHT, 'top-right'],
-            ['left', 'left'],
-            ['right', 'right'],
+            [Blockly.Msg.MOTION_MOVESPRITETOSCENE_LEFT, 'left'],
+            [Blockly.Msg.MOTION_MOVESPRITETOSCENE_RIGHT, 'right'],
           ]
         }
       ],
