@@ -603,7 +603,7 @@ Blockly.VerticalFlyout.prototype.createRect_ = function(block, x, y,
  */
 Blockly.VerticalFlyout.prototype.createCheckbox_ = function(block, cursorX,
     cursorY, blockHW) {
-  var checkboxState = Blockly.VerticalFlyout.getCheckboxState(block.id);
+  var checkboxState = Blockly.VerticalFlyout.getCheckboxState(block.id, block.inputList);
   var svgRoot = block.getSvgRoot();
   var extraSpace = this.CHECKBOX_SIZE + this.CHECKBOX_MARGIN;
   var width = this.RTL ? this.getWidth() / this.workspace_.scale - extraSpace : cursorX;
