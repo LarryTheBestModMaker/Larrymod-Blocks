@@ -608,7 +608,19 @@ Blockly.BlockSvg.prototype.updateColour = function() {
     if (this.getShadowColour()) {
       var fillColour = this.getShadowColour();
     } else {
-      var fillColour = this.getColourSecondary();
+      //if reporter and only contain menu field, set color to parent
+      if (
+        renderShadowed &&
+        this.parentBlock_ &&
+        this.outputConnection &&
+        this.inputList.length == 1 &&
+        this.inputList[0].fieldRow.length == 1 &&
+        this.inputList[0].fieldRow[0] instanceof Blockly.FieldDropdown
+      ) {
+        var fillColour = this.parentBlock_.getColourSecondary();
+      } else {
+        var fillColour = this.getColourSecondary();
+      }
     }
   } else {
     var fillColour = this.getColour();
