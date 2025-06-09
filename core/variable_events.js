@@ -86,10 +86,10 @@ Blockly.Events.VarCreate = function(variable) {
     return;  // Blank event to be populated by fromJson.
   }
   Blockly.Events.VarCreate.superClass_.constructor.call(this, variable);
-  this.varType = variable.type;
   this.varName = variable.name;
   this.isLocal = variable.isLocal;
   this.isCloud = variable.isCloud;
+  this.varType = variable.type;
 };
 goog.inherits(Blockly.Events.VarCreate, Blockly.Events.VarBase);
 
@@ -105,10 +105,10 @@ Blockly.Events.VarCreate.prototype.type = Blockly.Events.VAR_CREATE;
  */
 Blockly.Events.VarCreate.prototype.toJson = function() {
   var json = Blockly.Events.VarCreate.superClass_.toJson.call(this);
-  json['varType'] = this.varType;
   json['varName'] = this.varName;
   json['isLocal'] = this.isLocal;
   json['isCloud'] = this.isCloud;
+  json['varType'] = this.varType;
   return json;
 };
 
@@ -118,10 +118,10 @@ Blockly.Events.VarCreate.prototype.toJson = function() {
  */
 Blockly.Events.VarCreate.prototype.fromJson = function(json) {
   Blockly.Events.VarCreate.superClass_.fromJson.call(this, json);
-  this.varType = json['varType'];
   this.varName = json['varName'];
   this.isLocal = json['isLocal'];
   this.isCloud = json['isCloud'];
+  this.varType = json['varType'];
 };
 
 /**
@@ -149,10 +149,10 @@ Blockly.Events.VarDelete = function(variable) {
     return;  // Blank event to be populated by fromJson.
   }
   Blockly.Events.VarDelete.superClass_.constructor.call(this, variable);
-  this.varType = variable.type;
   this.varName = variable.name;
   this.isLocal = variable.isLocal;
   this.isCloud = variable.isCloud;
+  this.varType = variable.type;
 };
 goog.inherits(Blockly.Events.VarDelete, Blockly.Events.VarBase);
 
@@ -168,10 +168,10 @@ Blockly.Events.VarDelete.prototype.type = Blockly.Events.VAR_DELETE;
  */
 Blockly.Events.VarDelete.prototype.toJson = function() {
   var json = Blockly.Events.VarDelete.superClass_.toJson.call(this);
-  json['varType'] = this.varType;
   json['varName'] = this.varName;
   json['isLocal'] = this.isLocal;
   json['isCloud'] = this.isCloud;
+  json['varType'] = this.varType;
   return json;
 };
 
@@ -181,10 +181,10 @@ Blockly.Events.VarDelete.prototype.toJson = function() {
  */
 Blockly.Events.VarDelete.prototype.fromJson = function(json) {
   Blockly.Events.VarDelete.superClass_.fromJson.call(this, json);
-  this.varType = json['varType'];
   this.varName = json['varName'];
   this.isLocal = json['isLocal'];
   this.isCloud = json['isCloud'];
+  this.varType = json['varType'];
 };
 
 /**
@@ -213,8 +213,11 @@ Blockly.Events.VarRename = function(variable, newName) {
     return;  // Blank event to be populated by fromJson.
   }
   Blockly.Events.VarRename.superClass_.constructor.call(this, variable);
+  this.varType = variable.type;
   this.oldName = variable.name;
   this.newName = newName;
+  this.isLocal = variable.isLocal;
+  this.isCload = variable.isCloud;
 };
 goog.inherits(Blockly.Events.VarRename, Blockly.Events.VarBase);
 
@@ -230,8 +233,11 @@ Blockly.Events.VarRename.prototype.type = Blockly.Events.VAR_RENAME;
  */
 Blockly.Events.VarRename.prototype.toJson = function() {
   var json = Blockly.Events.VarRename.superClass_.toJson.call(this);
+  json['varType'] = this.varType;
   json['oldName'] = this.oldName;
   json['newName'] = this.newName;
+  json['isLocal'] = this.isLocal;
+  json['isCloud'] = this.isCloud;
   return json;
 };
 
@@ -241,8 +247,11 @@ Blockly.Events.VarRename.prototype.toJson = function() {
  */
 Blockly.Events.VarRename.prototype.fromJson = function(json) {
   Blockly.Events.VarRename.superClass_.fromJson.call(this, json);
+  this.varType = json['varType'];
   this.oldName = json['oldName'];
   this.newName = json['newName'];
+  this.isLocal = json['isLocal'];
+  this.isCloud = json['isCloud'];
 };
 
 /**
