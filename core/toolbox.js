@@ -569,21 +569,24 @@ Blockly.Toolbox.prototype.selectCategoryById = function(id) {
  */
 Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
   var selectedItem = item;
-  var RTL = this.RTL
+  var RTL = this.RTL;
+  console.log("TEST1", item, item.getMenuOptions());
   if (item.getMenuOptions()) {
     return function(e) {
+      console.log("TEST2", e);
       if (e.button == 0) {
         if (!this.workspace_.isDragging()) {
           this.setSelectedItem(selectedItem);
           Blockly.Touch.clearTouchIdentifier();
         }
       } else if (e.button == 2) {
-        var menuOptions = selectedItem.getMenuOptions()
-        Blockly.ContextMenu.show(e, menuOptions, RTL)
+        var menuOptions = selectedItem.getMenuOptions();
+        Blockly.ContextMenu.show(e, menuOptions, RTL);
       }
     };
   }
   return function(e) {
+    console.log("TEST3", !this.workspace_.isDragging());
     if (!this.workspace_.isDragging()) {
       this.setSelectedItem(selectedItem);
       Blockly.Touch.clearTouchIdentifier();
