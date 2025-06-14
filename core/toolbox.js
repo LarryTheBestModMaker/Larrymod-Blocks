@@ -570,11 +570,9 @@ Blockly.Toolbox.prototype.selectCategoryById = function(id) {
 Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
   var selectedItem = item;
   var RTL = this.RTL;
-  console.log("TEST1", item, item.getMenuOptions());
   if (item.getMenuOptions()) {
     return function(e) {
-      console.log("TEST2", e);
-      if (e.button == 0) {
+      if (e.button === undefined || e.button == 0) {
         if (!this.workspace_.isDragging()) {
           this.setSelectedItem(selectedItem);
           Blockly.Touch.clearTouchIdentifier();
@@ -585,8 +583,7 @@ Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
       }
     };
   }
-  return function(e) {
-    console.log("TEST3", !this.workspace_.isDragging());
+  return function() {
     if (!this.workspace_.isDragging()) {
       this.setSelectedItem(selectedItem);
       Blockly.Touch.clearTouchIdentifier();
