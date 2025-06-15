@@ -572,7 +572,7 @@ Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
   var RTL = this.RTL
   if (item.getMenuOptions()) {
     return function(e) {
-      if (e.button == 0) {
+      if (e.button === undefined || e.button == 0) {
         if (!this.workspace_.isDragging()) {
           this.setSelectedItem(selectedItem);
           Blockly.Touch.clearTouchIdentifier();
