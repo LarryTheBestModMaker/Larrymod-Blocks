@@ -654,6 +654,7 @@ Blockly.Blocks['operator_mathop'] = {
             [Blockly.Msg.OPERATORS_MATHOP_ASIN, 'asin'],
             [Blockly.Msg.OPERATORS_MATHOP_ACOS, 'acos'],
             [Blockly.Msg.OPERATORS_MATHOP_ATAN, 'atan'],
+            ['atan2', 'atan2'],
             [Blockly.Msg.OPERATORS_MATHOP_LN, 'ln'],
             [Blockly.Msg.OPERATORS_MATHOP_LOG, 'log'],
             ['log2', 'log2'],
