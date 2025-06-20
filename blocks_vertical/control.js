@@ -304,7 +304,7 @@ Blockly.Blocks['control_stop'] = {
       // Return null at the end because setValue is called here already.
       Blockly.Events.setGroup(true);
       var oldMutation = Blockly.Xml.domToText(this.sourceBlock_.mutationToDom());
-      this.sourceBlock_.setNextStatement(option == OTHER_SCRIPTS);
+      this.sourceBlock_.setNextStatement(option == OTHER_SCRIPTS, "normal");
       var newMutation = Blockly.Xml.domToText(this.sourceBlock_.mutationToDom());
       Blockly.Events.fire(new Blockly.Events.BlockChange(this.sourceBlock_,
           'mutation', null, oldMutation, newMutation));
