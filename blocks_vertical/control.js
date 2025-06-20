@@ -320,7 +320,7 @@ Blockly.Blocks['control_stop'] = {
         Blockly.Colours.control.secondary,
         Blockly.Colours.control.tertiary
     );
-    this.setPreviousStatement(true);
+    this.setPreviousStatement(true, "normal");
   },
   mutationToDom: function() {
     var container = document.createElement('mutation');
@@ -329,7 +329,7 @@ Blockly.Blocks['control_stop'] = {
   },
   domToMutation: function(xmlElement) {
     var hasNext = (xmlElement.getAttribute('hasnext') == 'true');
-    this.setNextStatement(hasNext);
+    this.setNextStatement(hasNext, "normal");
   }
 };
 
