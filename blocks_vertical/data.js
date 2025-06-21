@@ -141,8 +141,6 @@ Blockly.Blocks['data_hidevariable'] = {
           "name": "VARIABLE"
         }
       ],
-      "previousStatement": null,
-      "nextStatement": null,
       "category": Blockly.Categories.data,
       "colour": Blockly.Colours.data.primary,
       "colourSecondary": Blockly.Colours.data.secondary,
