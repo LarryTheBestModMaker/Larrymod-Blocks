@@ -439,6 +439,7 @@ Blockly.VariableCategory.addCreateButton = function(xmlList, workspace, type) {
     msg = Blockly.Msg.NEW_LIST;
     callbackKey = 'CREATE_LIST';
     callback = function(button) {
+      const workspace = button.getTargetWorkspace();
       Blockly.Variables.createVariable(workspace, null,
           Blockly.LIST_VARIABLE_TYPE);};
       const updatedToolbox = workspace.options.languageTree.cloneNode(true)
