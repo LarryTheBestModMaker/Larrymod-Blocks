@@ -430,14 +430,19 @@ Blockly.VariableCategory.addCreateButton = function(xmlList, workspace, type) {
   var msg = Blockly.Msg.NEW_VARIABLE;
   var callbackKey = 'CREATE_VARIABLE';
   var callback = function(button) {
-    Blockly.Variables.createVariable(button.getTargetWorkspace(), null, '');};
+    const workspace = button.getTargetWorkspace();
+    Blockly.Variables.createVariable(workspace, null, '');};
+    const updatedToolbox = workspace.options.languageTree.cloneNode(true)
+    workspace.updateToolbox(updatedToolbox);
 
   if (type === 'LIST') {
     msg = Blockly.Msg.NEW_LIST;
     callbackKey = 'CREATE_LIST';
     callback = function(button) {
-      Blockly.Variables.createVariable(button.getTargetWorkspace(), null,
+      Blockly.Variables.createVariable(workspace, null,
           Blockly.LIST_VARIABLE_TYPE);};
+      const updatedToolbox = workspace.options.languageTree.cloneNode(true)
+      workspace.updateToolbox(updatedToolbox);
   }
   button.setAttribute('text', msg);
   button.setAttribute('callbackKey', callbackKey);
