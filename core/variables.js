@@ -324,6 +324,8 @@ Blockly.Variables.createVariable = function(workspace, opt_callback, opt_type) {
           }
           if (!variable) {
             variable = workspace.createVariable(validatedText, opt_type, null, isLocal, isCloud);
+            const updatedToolbox = workspace.options.languageTree.cloneNode(true)
+            workspace.updateToolbox(updatedToolbox);
           }
 
           var flyout = workspace.isFlyout ? workspace : workspace.getFlyout();
