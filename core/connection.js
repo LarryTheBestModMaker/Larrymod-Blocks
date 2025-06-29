@@ -650,9 +650,12 @@ Blockly.Connection.prototype.targetBlock = function() {
  */
 Blockly.Connection.prototype.checkType_ = function(otherConnection) {
   if (!this.check_ || !otherConnection.check_) {
-    // One or both sides are promiscuous enough that anything will fit.
+    // One or both sides are promiscuous enough that anything will fit,
+    // as long as the other is not a procedure.
+    if (otherConnection.check_ && otherConnection.check_[0] === 'procedure') return false;
     return true;
   }
+
   // Find any intersection in the check lists.
   for (var i = 0; i < this.check_.length; i++) {
     if (otherConnection.check_.indexOf(this.check_[i]) != -1) {
