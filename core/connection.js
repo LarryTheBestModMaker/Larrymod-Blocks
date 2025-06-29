@@ -520,6 +520,20 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   // Determine which block is superior (higher in the source stack).
   if (this.isSuperior()) {
     // Superior block.
+    if (!this.otherConnection && (this.check_ || otherConnection.connectionShapeShouldReset)) {
+      // reshape the connected block so it inherits the parent shape
+      const block = otherConnection.sourceBlock_;
+      const lastConnectShape = block.outputShape_;
+      if (!this.check_ && otherConnection.connectionShapeShouldReset) {
+        block.outputShape_ = 2; // default string reporter
+      } else {
+        block.outputShape_ = this.shape_ ? this.shape_ : this.type;
+
+        // flag for reset if block is placed in a null connection type in the future
+        this.connectionShapeShouldReset = true;
+      }
+      if (block.outputShape_ !== lastConnectShape) block.render(true);
+    }
     this.connect_(otherConnection);
   } else {
     // Inferior block.
