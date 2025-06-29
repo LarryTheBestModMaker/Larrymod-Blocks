@@ -511,7 +511,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
  * Connect this connection to another connection.
  * @param {!Blockly.Connection} otherConnection Connection to connect to.
  */
-Blockly.Connection.prototype.Connection.prototype.connect = function(otherConnection) {
+Blockly.Connection.prototype.connect = function(otherConnection) {
   if (this.targetConnection == otherConnection) {
     // Already connected together. NOP.
     return;
