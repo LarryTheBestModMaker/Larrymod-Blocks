@@ -530,7 +530,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       if (!otherConnection.check_ && this.connectionShapeShouldReset) {
         block.outputShape_ = 2; // default string reporter
       } else {
-        block.outputShape_ = otherConnection.shape_ ?? otherConnection.type;
+        block.outputShape_ = otherConnection.shape_ ? otherConnection.shape_ : otherConnection.type;
 
         // flag for reset if block is placed in a null connection type in the future
         this.connectionShapeShouldReset = true;
