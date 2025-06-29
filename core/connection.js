@@ -511,7 +511,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
  * Connect this connection to another connection.
  * @param {!Blockly.Connection} otherConnection Connection to connect to.
  */
-Blockly.Connection.prototype.connect = function(otherConnection) {
+Blockly.Connection.prototype.Connection.prototype.connect = function(otherConnection) {
   if (this.targetConnection == otherConnection) {
     // Already connected together. NOP.
     return;
@@ -523,16 +523,18 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     if (!this.otherConnection && (this.check_ || otherConnection.connectionShapeShouldReset)) {
       // reshape the connected block so it inherits the parent shape
       const block = otherConnection.sourceBlock_;
-      const lastConnectShape = block.outputShape_;
-      if (!this.check_ && otherConnection.connectionShapeShouldReset) {
-        block.outputShape_ = 2; // default string reporter
-      } else {
-        block.outputShape_ = this.shape_ ? this.shape_ : this.type;
+      if (block.type !== 'procedures_prototype') {
+        const lastConnectShape = block.outputShape_;
+        if (!this.check_ && otherConnection.connectionShapeShouldReset)) {
+          block.outputShape_ = 2; // default string reporter
+        } else {
+          block.outputShape_ = this.shape_ ? this.shape_ : this.type;
 
-        // flag for reset if block is placed in a null connection type in the future
-        this.connectionShapeShouldReset = true;
+          // flag for reset if block is placed in a null connection type in the future
+          this.connectionShapeShouldReset = true;
+        }
+        if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
       }
-      if (block.outputShape_ !== lastConnectShape) block.render(true);
     }
     this.connect_(otherConnection);
   } else {
@@ -549,7 +551,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
         // flag for reset if block is placed in a null connection type in the future
         this.connectionShapeShouldReset = true;
       }
-      if (block.outputShape_ !== lastConnectShape) block.render(true);
+      if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
     }
     otherConnection.connect_(this);
   }
