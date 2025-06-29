@@ -525,7 +525,7 @@ Blockly.Connection.prototype.Connection.prototype.connect = function(otherConnec
       const block = otherConnection.sourceBlock_;
       if (block.type !== 'procedures_prototype') {
         const lastConnectShape = block.outputShape_;
-        if (!this.check_ && otherConnection.connectionShapeShouldReset)) {
+        if (!this.check_ && otherConnection.connectionShapeShouldReset) {
           block.outputShape_ = 2; // default string reporter
         } else {
           block.outputShape_ = this.shape_ ? this.shape_ : this.type;
