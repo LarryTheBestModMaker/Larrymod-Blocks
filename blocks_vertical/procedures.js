@@ -193,12 +193,12 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
     switch (ConectionType) {
       case 'string':
       case 'number':
-      case 'boolean':
       default:
-        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : null);
-        break;
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND); break;
+      case 'boolean':
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL); break;
     }
+    this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : null);
   } else {
     this.setOutput(false)
     switch (ConectionType) {
