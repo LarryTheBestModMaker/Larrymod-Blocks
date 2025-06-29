@@ -513,7 +513,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
  */
 Blockly.Connection.prototype.connect = function(otherConnection) {
   if (this.targetConnection == otherConnection) {
-    // Already connected together.  NOP.
+    // Already connected together. NOP.
     return;
   }
   this.checkConnection_(otherConnection);
@@ -523,6 +523,20 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     this.connect_(otherConnection);
   } else {
     // Inferior block.
+    if (!this.check_ && (otherConnection.check_ || this.connectionShapeShouldReset)) {
+      // reshape the connected block so it inherits the parent shape
+      const block = this.sourceBlock_;
+      const lastConnectShape = block.outputShape_;
+      if (!otherConnection.check_ && this.connectionShapeShouldReset) {
+        block.outputShape_ = 2; // default string reporter
+      } else {
+        block.outputShape_ = otherConnection.shape_ ?? otherConnection.type;
+
+        // flag for reset if block is placed in a null connection type in the future
+        this.connectionShapeShouldReset = true;
+      }
+      if (block.outputShape_ !== lastConnectShape) block.render(true);
+    }
     otherConnection.connect_(this);
   }
 };
