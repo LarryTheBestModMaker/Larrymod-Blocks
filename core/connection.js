@@ -520,37 +520,23 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   // Determine which block is superior (higher in the source stack).
   if (this.isSuperior()) {
     // Superior block.
-    if (!this.otherConnection && (this.check_ || otherConnection.connectionShapeShouldReset)) {
+    if (!this.otherConnection && this.check_) {
       // reshape the connected block so it inherits the parent shape
       const block = otherConnection.sourceBlock_;
       if (block.type !== 'procedures_prototype') {
         const lastConnectShape = block.outputShape_;
-        if (!this.check_ && otherConnection.connectionShapeShouldReset) {
-          block.outputShape_ = 2; // default string reporter
-        } else {
-          block.outputShape_ = this.shape_ ? this.shape_ : this.type;
-
-          // flag for reset if block is placed in a null connection type in the future
-          this.connectionShapeShouldReset = true;
-        }
+        block.outputShape_ = this.getOutputShape();
         if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
       }
     }
     this.connect_(otherConnection);
   } else {
     // Inferior block.
-    if (!this.check_ && (otherConnection.check_ || this.connectionShapeShouldReset)) {
+    if (!this.check_ && otherConnection.check_) {
       // reshape the connected block so it inherits the parent shape
       const block = this.sourceBlock_;
       const lastConnectShape = block.outputShape_;
-      if (!otherConnection.check_ && this.connectionShapeShouldReset) {
-        block.outputShape_ = 2; // default string reporter
-      } else {
-        block.outputShape_ = otherConnection.shape_ ? otherConnection.shape_ : otherConnection.type;
-
-        // flag for reset if block is placed in a null connection type in the future
-        this.connectionShapeShouldReset = true;
-      }
+      block.outputShape_ = otherConnection.getOutputShape();
       if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
     }
     otherConnection.connect_(this);
