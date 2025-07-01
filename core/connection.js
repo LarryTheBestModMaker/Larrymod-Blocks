@@ -524,6 +524,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       // reshape the connected block so it inherits the parent shape
       const block = otherConnection.sourceBlock_;
       if (block.type !== 'procedures_prototype') {
+        if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
         const lastConnectShape = block.outputShape_;
         block.outputShape_ = this.getOutputShape();
         if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
@@ -535,6 +536,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     if (!this.check_ && otherConnection.check_) {
       // reshape the connected block so it inherits the parent shape
       const block = this.sourceBlock_;
+      if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
       const lastConnectShape = block.outputShape_;
       block.outputShape_ = otherConnection.getOutputShape();
       if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
@@ -600,6 +602,7 @@ Blockly.Connection.prototype.disconnect = function() {
     childBlock = this.sourceBlock_;
     parentConnection = otherConnection;
   }
+  if (childBlock.originalOutputShape_ !== undefined) childBlock.outputShape_ = childBlock.originalOutputShape_;
   this.disconnectInternal_(parentBlock, childBlock);
   parentConnection.respawnShadow_();
 };
