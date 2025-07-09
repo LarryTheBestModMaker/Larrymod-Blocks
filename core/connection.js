@@ -523,7 +523,8 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     if (!this.otherConnection && this.check_) {
       // reshape the connected block so it inherits the parent shape
       const block = otherConnection.sourceBlock_;
-      if (block.type !== 'procedures_prototype') {
+      const hasBranches = block.inputList.some(i => i.type === Blockly.NEXT_STATEMENT);
+      if (!hasBranches && block.type !== 'procedures_prototype') {
         if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
         const lastConnectShape = block.outputShape_;
         block.outputShape_ = this.getOutputShape();
@@ -536,10 +537,14 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     if (!this.check_ && otherConnection.check_) {
       // reshape the connected block so it inherits the parent shape
       const block = this.sourceBlock_;
-      if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
-      const lastConnectShape = block.outputShape_;
-      block.outputShape_ = otherConnection.getOutputShape();
-      if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
+      const hasBranches = block.inputList.some(i => i.type === Blockly.NEXT_STATEMENT);
+
+      if (!hasBranches) {
+        if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
+        const lastConnectShape = block.outputShape_;
+        block.outputShape_ = otherConnection.getOutputShape();
+        if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
+      }
     }
     otherConnection.connect_(this);
   }
