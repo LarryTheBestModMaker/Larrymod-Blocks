@@ -192,7 +192,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
     this.setNextStatement(false)
     switch (ConectionType) {
       case 'string':
-        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
         this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'String')
         break
       case 'number':
