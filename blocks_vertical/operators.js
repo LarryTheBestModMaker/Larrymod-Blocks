@@ -557,7 +557,7 @@ Blockly.Blocks['operator_length'] = {
         }
       ],
       "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_string"]
+      "extensions": ["colours_operators", "output_number"]
     });
   }
 };
@@ -928,7 +928,7 @@ Blockly.Blocks["operator_lerpFunc"] = {
         }
       ],
       "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_string"]
+      "extensions": ["colours_operators", "output_number"]
     });
   }
 };
@@ -958,7 +958,7 @@ Blockly.Blocks["operator_advMath"] = {
         }
       ],
       "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_string"]
+      "extensions": ["colours_operators", "output_number"]
     });
   }
 };
@@ -983,7 +983,7 @@ Blockly.Blocks["operator_constrainnumber"] = {
         }
       ],
       "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_string"]
+      "extensions": ["colours_operators", "output_number"]
     });
   }
 };

@@ -945,7 +945,7 @@ Blockly.Blocks["looks_stretchGetX"] = {
       "category": "looks",
       "message0": "x stretch",
       "extensions": [
-        "output_string",
+        "output_number",
         "colours_looks"
       ]
     });
@@ -959,7 +959,7 @@ Blockly.Blocks["looks_stretchGetY"] = {
       "category": "looks",
       "message0": "y stretch",
       "extensions": [
-        "output_string",
+        "output_number",
         "colours_looks"
       ]
     });
@@ -1063,7 +1063,7 @@ Blockly.Blocks["looks_sayHeight"] = {
       "category": "looks",
       "message0": "bubble height",
       "extensions": [
-        "output_string",
+        "output_number",
         "colours_looks"
       ]
     });
@@ -1077,7 +1077,7 @@ Blockly.Blocks["looks_sayWidth"] = {
       "category": "looks",
       "message0": "bubble width",
       "extensions": [
-        "output_string",
+        "output_number",
         "colours_looks"
       ]
     });
