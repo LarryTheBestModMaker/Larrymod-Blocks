@@ -990,6 +990,28 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     }
     previousRow = row;
   }
+
+  // fix incorrect width calculations for mega-chin blocks
+  // ie, C- or E- shaped blocks with labels and/or inputs on the end branch
+  if (hasStatement) {
+    // the mega-chin block issue only happens to blocks with images
+    const input = inputList[inputList.length - 1];
+    const field = input.fieldRow[0];
+    if (field instanceof Blockly.FieldImage) {
+      // check for inputs before the last branch
+      const measureables = [];
+      for (var i = inputList.length - 1; i--; ) {
+        if (inputList[i].type == Blockly.NEXT_STATEMENT) break;
+        measureables.push(inputList[i]);
+      }
+
+      if (measureables.length) {
+        const newWidth = measureables.reduce((w, input) => w + (input.fieldWidth), 0);
+        input.fieldWidth = newWidth * (Blockly.BlockSvg.BOX_FIELD_PADDING / 4);
+      }
+    }
+  }
+
   // Compute padding for output blocks.
   // Data is attached to the row.
   this.computeOutputPadding_(inputRows);
