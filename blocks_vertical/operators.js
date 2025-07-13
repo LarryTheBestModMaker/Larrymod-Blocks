@@ -1256,7 +1256,7 @@ Blockly.Blocks["operator_javascript_boolean"] = {
   }
 };
 
-Blockly.Blocks["operator_percentange"] = {
+Blockly.Blocks["operator_percentage"] = {
   /**
    * dinosaurmod: a block that could be added to dinosaurmod.
    * this is NOT compatible with PenguinMod.
