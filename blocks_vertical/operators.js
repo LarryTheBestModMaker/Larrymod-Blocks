@@ -1255,3 +1255,59 @@ Blockly.Blocks["operator_javascript_boolean"] = {
     });
   }
 };
+
+Blockly.Blocks["operator_percentange"] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 \% of %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "PER"
+        },
+        {
+          "type": "input_value",
+          "name": "NUM"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_clamp"] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "clamp %1 min: %2 max: %3",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NUM"
+        },
+        {
+          "type": "input_value",
+          "name": "MIN"
+        },
+        {
+          "type": "input_value",
+          "name": "MAX"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+  }
+};
