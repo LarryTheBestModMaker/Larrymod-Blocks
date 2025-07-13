@@ -962,6 +962,66 @@ Blockly.Blocks["operator_advMath"] = {
     });
   }
 };
+Blockly.Blocks["operator_advMathExpanded"] = {
+  /**
+   * pm: Duplicate of operator_advMath to prevent breaking old projects.
+   * Updated to split power and root + log, while also allowing extra params for them
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 * %2 %3 %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        },
+        {
+          "type": "input_value",
+          "name": "TWO"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OPTION",
+          "options": [
+            ["root", "root"],
+            ["log", "log"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "THREE"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+  }
+};
+Blockly.Blocks['operator_power'] = {
+  /**
+   * pm: Block for getting a ^ b.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 ^ %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NUM1"
+        },
+        {
+          "type": "input_value",
+          "name": "NUM2"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+  }
+};
 
 Blockly.Blocks["operator_constrainnumber"] = {
   init: function() {

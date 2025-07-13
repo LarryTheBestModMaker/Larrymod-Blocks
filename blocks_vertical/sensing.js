@@ -832,6 +832,26 @@ Blockly.Blocks['sensing_dayssince2000'] = {
     });
   }
 };
+Blockly.Blocks['sensing_dayssince'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "days since %1",
+      "args0": [
+        {
+          "type":"input_value",
+          "name":"year"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
 
 Blockly.Blocks['sensing_username'] = {
   /**

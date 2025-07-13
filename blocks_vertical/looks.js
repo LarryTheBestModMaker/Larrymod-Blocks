@@ -331,6 +331,20 @@ Blockly.Blocks['looks_hideallsprites'] = {
     });
   }
 };
+Blockly.Blocks['looks_showallsprites'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "show all sprites",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
 
 Blockly.Blocks["looks_setTintColor"] = {
   init: function() {

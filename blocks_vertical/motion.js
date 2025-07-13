@@ -750,6 +750,22 @@ Blockly.Blocks['motion_direction'] = {
   }
 };
 
+Blockly.Blocks['motion_rotationstyle'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "rotation style",
+      "category": Blockly.Categories.motion,
+      "checkboxInFlyout": true,
+      "extensions": ["colours_motion", "output_string"]
+    });
+  }
+};
+
 Blockly.Blocks['motion_scroll_right'] = {
   /**
    * Block to scroll the stage right. Does not actually do anything. This is
