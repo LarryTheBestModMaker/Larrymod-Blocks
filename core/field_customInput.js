@@ -22,7 +22,7 @@ Blockly.FieldCustom = function(options) {
    * input ID used to identify input from 'customInputs'
    * @type {string}
    */
-  this.inputID = options.name ? options.name : null;
+  this.inputID = options.id ? options.id : null;
 
   /**
    * value of the field
@@ -58,19 +58,19 @@ Blockly.FieldCustom.fromJson = function(options) {
 
 Blockly.FieldCustom.registerInput = function(id, html, onInit, onClick, onUpdate) {
   if (!html || !(html instanceof Node)) {
-    console.warn('Param 1 must be a valid DOM element!');
+    console.warn('Param 2 must be a valid DOM element!');
     return;
   }
   if (!onInit || typeof onInit !== 'function') {
-    console.warn('Param 2 must be a function!');
-    return;
-  }
-  if (!onClick || typeof onClick !== 'function') {
     console.warn('Param 3 must be a function!');
     return;
   }
-  if (!onUpdate || typeof onUpdate !== 'function') {
+  if (!onClick || typeof onClick !== 'function') {
     console.warn('Param 4 must be a function!');
+    return;
+  }
+  if (!onUpdate || typeof onUpdate !== 'function') {
+    console.warn('Param 5 must be a function!');
     return;
   }
   customInputs.set(id, { html, onInit, onClick, onUpdate });
@@ -100,7 +100,9 @@ Blockly.FieldCustom.prototype.init = function() {
 
   // Build the DOM.
   const htmlDOM = this.inputParts.html.cloneNode(true);
+  htmlDOM.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
   this.inputParts.html = htmlDOM; // makes it easier for ext devs to find the input theyre editting
+  
   this.fieldGroup_ = Blockly.utils.createSvgElement('g', {}, null);
   this.size_.width = htmlDOM.width ? htmlDOM.width : htmlDOM.style.width ? parseFloat(htmlDOM.style.width) :
     htmlDOM.getBoundingClientRect().width;
@@ -109,14 +111,14 @@ Blockly.FieldCustom.prototype.init = function() {
 
   this.inputSource = Blockly.utils.createSvgElement('foreignObject', {
     'width': this.size_.width, 'height': this.size_.height,
-    'pointer-events': 'bounding-box', 'cursor': 'pointer'
+    'pointer-events': 'all', 'cursor': 'pointer'
   }, this.fieldGroup_);
   this.inputSource.appendChild(htmlDOM);
 
   this.mouseDownWrapper_ = Blockly.bindEventWithChecks_(
       this.getClickTarget_(), 'mousedown', this, this.onMouseDown_
   );
-  this.inputParts.onInit(this);
+  this.inputParts.onInit(this, htmlDOM);
 };
 
 /**
@@ -134,7 +136,10 @@ Blockly.FieldCustom.prototype.setValue = function(value) {
     ));
   }
   this.value_ = value;
-  if (this.inputParts !== undefined) this.inputParts.onUpdate(this);
+  if (this.inputParts !== undefined) {
+    const htmlDOM = this.inputParts.html;
+    this.inputParts.onUpdate(this, htmlDOM);
+  }
 };
 
 /**
@@ -150,7 +155,8 @@ Blockly.FieldCustom.prototype.getValue = function() {
  * @private
  */
 Blockly.FieldCustom.prototype.showEditor_ = function() {
-  this.inputParts.onClick(this);
+  const htmlDOM = this.inputParts.html;
+  this.inputParts.onClick(this, htmlDOM);
 };
 
 /**
