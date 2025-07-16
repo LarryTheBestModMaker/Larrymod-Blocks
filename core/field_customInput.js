@@ -111,7 +111,7 @@ Blockly.FieldCustom.prototype.init = function() {
 
   this.inputSource = Blockly.utils.createSvgElement('foreignObject', {
     'width': this.size_.width, 'height': this.size_.height,
-    'pointer-events': 'all', 'cursor': 'pointer'
+    'pointer-events': 'all', 'cursor': 'pointer', 'overflow': 'visible'
   }, this.fieldGroup_);
   this.inputSource.appendChild(htmlDOM);
 
