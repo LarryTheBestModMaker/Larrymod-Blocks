@@ -699,7 +699,7 @@ Blockly.Blocks['data_arraylist'] = {
 Blockly.Blocks['data_listforeachnum'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'For each item # %2 in %1',
+      "message0": 'for each index: %2 in %1',
       "message1": "%1",
       "message2": "%1",
       "lastDummyAlign2": "RIGHT",
@@ -740,7 +740,7 @@ Blockly.Blocks['data_listforeachnum'] = {
 Blockly.Blocks['data_listforeachitem'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'For each item %2 in %1',
+      "message0": 'for each value: %2 in %1',
       "message1": "%1",
       "message2": "%1",
       "lastDummyAlign2": "RIGHT",
