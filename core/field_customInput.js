@@ -57,7 +57,7 @@ Blockly.FieldCustom.fromJson = function(options) {
 };
 
 Blockly.FieldCustom.registerInput = function(id, templateHTML, onInit, onClick, onUpdate) {
-  if (!html || !(html instanceof Node)) {
+  if (!templateHTML || !(templateHTML instanceof Node)) {
     console.warn('Param 2 must be a valid DOM element!');
     return;
   }
