@@ -94,7 +94,7 @@ Blockly.FieldCustom.prototype.init = function() {
   // Build the DOM.
   const htmlDOM = this.inputParts.html;
   this.fieldGroup_ = Blockly.utils.createSvgElement('g', {}, null);
-  this.size_.width = htmlDOM.width ?? htmlDOM.style.width ? parseFloat(htmlDOM.style.width) :
+  this.size_.width = htmlDOM.width ? htmlDOM.width : htmlDOM.style.width ? parseFloat(htmlDOM.style.width) :
     htmlDOM.getBoundingClientRect().width;
 
   this.sourceBlock_.getSvgRoot().appendChild(this.fieldGroup_);
