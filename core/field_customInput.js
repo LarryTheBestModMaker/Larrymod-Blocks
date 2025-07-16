@@ -96,7 +96,7 @@ Blockly.FieldCustom.prototype.init = function() {
   }
 
   // Build the DOM.
-  const htmlDOM = this.inputParts.html;
+  const htmlDOM = this.inputParts.html.cloneNode(true);
   this.fieldGroup_ = Blockly.utils.createSvgElement('g', {}, null);
   this.size_.width = htmlDOM.width ? htmlDOM.width : htmlDOM.style.width ? parseFloat(htmlDOM.style.width) :
     htmlDOM.getBoundingClientRect().width;
@@ -107,6 +107,7 @@ Blockly.FieldCustom.prototype.init = function() {
     'width': this.size_.width, 'height': this.size_.height,
     'pointer-events': 'bounding-box', 'cursor': 'pointer'
   }, this.fieldGroup_);
+  this.inputSource.appendChild(htmlDOM);
 
   this.mouseDownWrapper_ = Blockly.bindEventWithChecks_(
       this.getClickTarget_(), 'mousedown', this, this.onMouseDown_
