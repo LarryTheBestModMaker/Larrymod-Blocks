@@ -129,7 +129,7 @@ Blockly.FieldCustom.prototype.setValue = function(value) {
     ));
   }
   this.value_ = value;
-  this.inputParts.onUpdate(this);
+  this.inputParts?.onUpdate(this);
 };
 
 /**
