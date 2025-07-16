@@ -78,6 +78,9 @@ Blockly.FieldCustom.registerInput = function(id, html, onInit, onClick, onUpdate
 Blockly.FieldCustom.unregisterInput = function(id) {
   customInputs.delete(id);
 };
+Blockly.FieldCustom.registeredInputs = function() {
+  return customInputs;
+};
 
 /**
  * Called when the field is placed on a block.
@@ -97,6 +100,7 @@ Blockly.FieldCustom.prototype.init = function() {
 
   // Build the DOM.
   const htmlDOM = this.inputParts.html.cloneNode(true);
+  this.inputParts.html = htmlDOM; // makes it easier for ext devs to find the input theyre editting
   this.fieldGroup_ = Blockly.utils.createSvgElement('g', {}, null);
   this.size_.width = htmlDOM.width ? htmlDOM.width : htmlDOM.style.width ? parseFloat(htmlDOM.style.width) :
     htmlDOM.getBoundingClientRect().width;
