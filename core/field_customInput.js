@@ -118,7 +118,9 @@ Blockly.FieldCustom.prototype.init = function() {
   this.mouseDownWrapper_ = Blockly.bindEventWithChecks_(
       this.getClickTarget_(), 'mousedown', this, this.onMouseDown_
   );
-  this.inputParts.onInit(this, htmlDOM);
+  queueMicrotask(() => {
+    this.inputParts.onInit(this, this.inputParts.html);
+  });
 };
 
 /**
