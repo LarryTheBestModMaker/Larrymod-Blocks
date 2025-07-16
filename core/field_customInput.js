@@ -10,20 +10,25 @@ const customInputs = new Map();
 
 /**
  * Class for a custom field.
- * @param {string} value The default value for the field
+ * @param {object} options Object containing the default value, inputID, etc for the field
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldCustom = function(value) {
-  Blockly.FieldCustom.superClass_.constructor.call(this, value);
+Blockly.FieldCustom = function(options) {
+  Blockly.FieldCustom.superClass_.constructor.call(this, options);
   this.addArgType('text');
 
   /**
    * input ID used to identify input from 'customInputs'
    * @type {string}
    */
-  this.inputID = null;
+  this.inputID = options.name ? : options.name : null;
 
+  /**
+   * value of the field
+   * @type {any}
+   */
+  this.value_ = options.value ? : options.value : '';
   /**
    * input parts stored in 'customInputs'
    * @type {object}
@@ -48,8 +53,7 @@ goog.inherits(Blockly.FieldCustom, Blockly.Field);
  * @nocollapse
  */
 Blockly.FieldCustom.fromJson = function(options) {
-  console.log("new custom field", options);
-  return new Blockly.FieldCustom(options['custom']);
+  return new Blockly.FieldCustom(options);
 };
 
 Blockly.FieldCustom.registerInput = function(id, html, onInit, onClick, onUpdate) {
