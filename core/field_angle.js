@@ -248,6 +248,9 @@ Blockly.FieldAngle.prototype.showEditor_ = function() {
       'xlink:href',
       Blockly.mainWorkspace.options.pathToMedia + Blockly.FieldAngle.ARROW_SVG_PATH
   );
+  const blockHSL = goog.color.hexToHsl(srcBlock.getColour());
+  // -214.86 stems from the blue hue in 'Blockly.FieldAngle.ARROW_SVG_PATH'
+  this.arrowSvg_.setAttribute("filter", `hue-rotate(${-214.86 + blockHSL[0]}deg) saturate(${blockHSL[1]}) brightness(${blockHSL[2] * 1.8})`);
 
   Blockly.DropDownDiv.setColour(srcBlock.getColour(), this.sourceBlock_.getColourTertiary());
   Blockly.DropDownDiv.setCategory(srcBlock.getCategory());
