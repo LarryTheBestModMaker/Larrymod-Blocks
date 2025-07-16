@@ -56,7 +56,7 @@ Blockly.FieldCustom.fromJson = function(options) {
   return new Blockly.FieldCustom(options);
 };
 
-Blockly.FieldCustom.registerInput = function(id, html, onInit, onClick, onUpdate) {
+Blockly.FieldCustom.registerInput = function(id, templateHTML, onInit, onClick, onUpdate) {
   if (!html || !(html instanceof Node)) {
     console.warn('Param 2 must be a valid DOM element!');
     return;
@@ -73,7 +73,7 @@ Blockly.FieldCustom.registerInput = function(id, html, onInit, onClick, onUpdate
     console.warn('Param 5 must be a function!');
     return;
   }
-  customInputs.set(id, { html, onInit, onClick, onUpdate });
+  customInputs.set(id, { templateHTML, onInit, onClick, onUpdate });
 };
 Blockly.FieldCustom.unregisterInput = function(id) {
   customInputs.delete(id);
@@ -99,7 +99,7 @@ Blockly.FieldCustom.prototype.init = function() {
   }
 
   // Build the DOM.
-  const htmlDOM = this.inputParts.html.cloneNode(true);
+  const htmlDOM = this.inputParts.templateHTML.cloneNode(true);
   htmlDOM.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
   this.inputParts.html = htmlDOM; // makes it easier for ext devs to find the input theyre editting
   
