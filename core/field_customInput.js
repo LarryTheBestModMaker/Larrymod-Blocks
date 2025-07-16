@@ -22,13 +22,13 @@ Blockly.FieldCustom = function(options) {
    * input ID used to identify input from 'customInputs'
    * @type {string}
    */
-  this.inputID = options.name ? : options.name : null;
+  this.inputID = options.name ? options.name : null;
 
   /**
    * value of the field
    * @type {any}
    */
-  this.value_ = options.value ? : options.value : '';
+  this.value_ = options.value ? options.value : '';
   /**
    * input parts stored in 'customInputs'
    * @type {object}
