@@ -136,7 +136,7 @@ Blockly.FieldCustom.prototype.setValue = function(value) {
     ));
   }
   this.value_ = value;
-  if (this.inputParts !== undefined) {
+  if (this.inputParts !== undefined && this.inputParts.onUpdate) {
     const htmlDOM = this.inputParts.html;
     this.inputParts.onUpdate(this, htmlDOM);
   }
