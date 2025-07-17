@@ -173,7 +173,10 @@ Blockly.FieldCustom.prototype.showEditor_ = function() {
 Blockly.FieldCustom.prototype.dispose_ = function() {
   var thisField = this;
   return function() {
-    if (thisField.inputParts.optOnDispose) thisField.inputParts.optOnDispose();
+    if (thisField.inputParts.optOnDispose) {
+      const htmlDOM = this.inputParts.html;
+      thisField.inputParts.optOnDispose(thisField, htmlDOM);
+    }
     Blockly.FieldCustom.superClass_.dispose_.call(thisField)();
     if (thisField.mouseDownWrapper_) Blockly.unbindEvent_(thisField.mouseDownWrapper_);
   };
