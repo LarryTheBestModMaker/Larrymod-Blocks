@@ -56,7 +56,7 @@ Blockly.FieldCustom.fromJson = function(options) {
   return new Blockly.FieldCustom(options);
 };
 
-Blockly.FieldCustom.registerInput = function(id, templateHTML, onInit, onClick, onUpdate) {
+Blockly.FieldCustom.registerInput = function(id, templateHTML, onInit, onClick, onUpdate, optOnDispose) {
   if (!templateHTML || !(templateHTML instanceof Node)) {
     console.warn('Param 2 must be a valid DOM element!');
     return;
@@ -73,7 +73,11 @@ Blockly.FieldCustom.registerInput = function(id, templateHTML, onInit, onClick, 
     console.warn('Param 5 must be a function!');
     return;
   }
-  customInputs.set(id, { templateHTML, onInit, onClick, onUpdate });
+  if (optOnDispose && typeof optOnDispose !== 'function') {
+    console.warn('Param 6 must be a function!');
+    return;
+  }
+  customInputs.set(id, { templateHTML, onInit, onClick, onUpdate, optOnDispose });
 };
 Blockly.FieldCustom.unregisterInput = function(id) {
   customInputs.delete(id);
@@ -169,6 +173,7 @@ Blockly.FieldCustom.prototype.showEditor_ = function() {
 Blockly.FieldCustom.prototype.dispose_ = function() {
   var thisField = this;
   return function() {
+    if (thisField.inputParts.optOnDispose) thisField.inputParts.optOnDispose();
     Blockly.FieldCustom.superClass_.dispose_.call(thisField)();
     if (thisField.mouseDownWrapper_) Blockly.unbindEvent_(thisField.mouseDownWrapper_);
   };
