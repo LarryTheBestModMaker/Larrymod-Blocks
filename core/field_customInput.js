@@ -108,8 +108,11 @@ Blockly.FieldCustom.prototype.init = function() {
   this.inputParts.html = htmlDOM; // makes it easier for ext devs to find the input theyre editting
   
   this.fieldGroup_ = Blockly.utils.createSvgElement('g', {}, null);
+  const boundingBox = htmlDOM.getBoundingClientRect();
   this.size_.width = htmlDOM.width ? htmlDOM.width : htmlDOM.style.width ? parseFloat(htmlDOM.style.width) :
-    htmlDOM.getBoundingClientRect().width;
+    boundingBox.width;
+  this.size_.height = htmlDOM.height ? htmlDOM.height : htmlDOM.style.height ? parseFloat(htmlDOM.style.height) :
+    Math.max(32, boundingBox.height);
 
   this.sourceBlock_.getSvgRoot().appendChild(this.fieldGroup_);
 
