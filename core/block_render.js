@@ -1489,7 +1489,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
           if (!this.edgeShape_ || this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
             // Include corner radius in drawing the horizontal line.
-            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS - this.edgeShapeWidth_);
+            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS - (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? 0 : this.edgeShapeWidth_));
             steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
           } else {
             // Don't include corner radius - no corner (edge shape drawn).
