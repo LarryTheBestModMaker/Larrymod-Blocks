@@ -1303,7 +1303,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
   this.renderDrawTop_(steps, inputRows.rightEdge);
   var cursorY = this.renderDrawRight_(steps, inputRows, iconWidth);
   this.renderDrawBottom_(steps, cursorY);
-  this.renderDrawLeft_(steps);
+  this.renderDrawLeft_(steps, cursorY);
 
   var pathString = steps.join(' ');
   this.svgPath_.setAttribute('d', pathString);
@@ -1631,7 +1631,9 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
  * @param {number} cursorY Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps) {
+Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
+  let scale = this.height / 2
+
   if (this.outputConnection) {
     // Scratch-style reporters have output connection y at half block height.
     this.outputConnection.setOffsetInBlock(0, this.height / 2);
@@ -1641,26 +1643,26 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps) {
     switch (this.edgeShape_) {
       case Blockly.OUTPUT_SHAPE_ROUND:
         // Draw a rounded arc.
-        steps.push('a ' + this.edgeShapeWidth_ + ' ' + this.edgeShapeWidth_ + ' 0 0 1 0 -' + this.edgeShapeWidth_ * 2);
+        steps.push('a ' + scale + ' ' + scale + ' 0 0 1 0 -' + scale * 2);
         break;
       case Blockly.OUTPUT_SHAPE_HEXAGONAL:
         // Draw a half-hexagon.
-        steps.push('l ' + -this.edgeShapeWidth_ + ' ' + -this.edgeShapeWidth_ +
-          ' l ' + this.edgeShapeWidth_ + ' ' + -this.edgeShapeWidth_);
+        steps.push('l ' + -scale + ' ' + -scale +
+          ' l ' + scale + ' ' + -scale);
         break;
       case Blockly.OUTPUT_SHAPE_LEAF:
         // Draw a half-leaf.
         steps.push(
-          `a ${this.edgeShapeWidth_} ${this.edgeShapeWidth_} 0 0 1 -${this.edgeShapeWidth_} -${this.edgeShapeWidth_} ` +
-          `l 0 -${this.edgeShapeWidth_ * 0.6} ` +
-          `a ${this.edgeShapeWidth_ * 0.4} ${this.edgeShapeWidth_ * 0.4} 0 0 1 ${this.edgeShapeWidth_ * 0.4} -${this.edgeShapeWidth_ * 0.4}`
+          `a ${scale} ${scale} 0 0 1 -${scale} -${scale} ` +
+          `l 0 -${scale * 0.6} ` +
+          `a ${scale * 0.4} ${scale * 0.4} 0 0 1 ${scale * 0.4} -${scale * 0.4}`
         );
         break;
       case Blockly.OUTPUT_SHAPE_PLUS: {
         // Draw a half-plus.
         const unit = 6;
-        const remainingHeight = this.edgeShapeWidth_ * 2 - 36;
-        const remainingWidth = this.edgeShapeWidth_  - 20;
+        const remainingHeight = scale * 2 - 36;
+        const remainingWidth = scale  - 20;
         steps.push(
           `l -${remainingWidth} 0 ` +
           `a ${unit} ${unit} 0 0 1 -${unit} -${unit} ` +
