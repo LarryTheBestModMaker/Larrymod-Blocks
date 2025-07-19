@@ -1332,7 +1332,7 @@ Blockly.BlockSvg.prototype.renderClassify_ = function() {
         shapes.push('plus');
         break;
       default: {
-        const isCustomShape = Blockly.BlockSvg.CUSTOM_SHAPES.has(shape);
+        const isCustomShape = Blockly.BlockSvg.CUSTOM_SHAPES.has(this.edgeShape_);
         if (isCustomShape) shapes.push('custom');
       }
     }
