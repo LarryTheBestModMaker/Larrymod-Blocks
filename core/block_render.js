@@ -2005,7 +2005,7 @@ Blockly.BlockSvg.prototype.renderMoveConnections_ = function() {
   for (var i = 0; i < this.inputList.length; i++) {
     var conn = this.inputList[i].connection;
     if (conn) {
-      conn.moveToOffset(blockTL);
+      conn.moveToOffset(blockTL.translate(this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0, 0));
       if (conn.isConnected()) {
         conn.tighten_();
       }
