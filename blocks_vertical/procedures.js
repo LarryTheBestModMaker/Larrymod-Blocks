@@ -1388,6 +1388,20 @@ Blockly.Blocks['argument_editor_command'] = {
   removeFieldCallback: Blockly.ScratchBlocks.ProcedureUtils.removeArgumentCallback_,
 };
 
+Blockly.Blocks['procedures_runhat'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "run hat",
+      "extensions": ["colours_more", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['procedures_set'] = {
   init: function() {
     this.jsonInit({
