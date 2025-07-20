@@ -1489,7 +1489,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
           if (!this.edgeShape_ || this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
             // Include corner radius in drawing the horizontal line.
-            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS - (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? 0 : this.edgeShapeWidth_));
+            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS + this.edgeShapeWidth_);
             steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
           } else {
             // Don't include corner radius - no corner (edge shape drawn).
@@ -1517,7 +1517,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
           this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
         } else {
           Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
-              inputRows.rightEdge, row);
+              inputRows.rightEdge, row, this);
         }
   
         // Create statement connection.
@@ -1621,7 +1621,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
     // Bottom left corner
     steps.push(Blockly.BlockSvg.BOTTOM_LEFT_CORNER);
   } else {
-    steps.push('H', this.edgeShapeWidth_);
+    steps.push('H', this.height / 2);
   }
 };
 
@@ -1788,10 +1788,10 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
  * @private
  */
 Blockly.BlockSvg.drawStatementInputFromTopRight_ = function(steps, cursorX,
-    rightEdge, row) {
-  Blockly.BlockSvg.drawStatementInputTop_(steps, cursorX, row);
+    rightEdge, row, block) {
+  Blockly.BlockSvg.drawStatementInputTop_(steps, cursorX, row, block);
   steps.push('v', row.height - 2 * Blockly.BlockSvg.CORNER_RADIUS);
-  Blockly.BlockSvg.drawStatementInputBottom_(steps, rightEdge, row);
+  Blockly.BlockSvg.drawStatementInputBottom_(steps, rightEdge, row, block);
 };
 
 /**
@@ -1826,7 +1826,7 @@ Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row) {
  *     the bottom.
  * @private
  */
-Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
+Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row, block) {
   steps.push(Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER);
   if (row.statementNotchAtBottom) {
     steps.push('h ', Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
@@ -1836,7 +1836,7 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
       steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
     }
   }
-  steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS);
+  steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS + block.edgeShapeWidth_);
 };
 
 /**
