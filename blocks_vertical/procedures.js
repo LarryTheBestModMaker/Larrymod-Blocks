@@ -219,6 +219,10 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
         this.setPreviousStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
         this.setNextStatement(false, 'procedure')
         break
+      case 'hat':
+        this.setPreviousStatement(false, 'procedure')
+        this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
+        break
     }
   }
 
