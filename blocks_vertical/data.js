@@ -385,21 +385,17 @@ Blockly.Blocks['data_replaceitemoflist'] = {
 };
 
 Blockly.Blocks['data_itemoflist'] = {
-  /** 
+  /**
    * Block for reporting item of list.
    * @this Blockly.Block
-  */
+   */
   init: function() {
     this.jsonInit({
       "message0": Blockly.Msg.DATA_ITEMOFLIST,
       "args0": [
         {
-          "type": "field_textdropdown",
-          "name": "INDEX",
-          "options": [
-            [ "last", "last" ],
-            [ "random", "random" ],
-          ]
+          "type": "input_value",
+          "name": "INDEX"
         },
         {
           "type": "field_variable",
