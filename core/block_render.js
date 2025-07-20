@@ -1482,7 +1482,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge);
         // Move to the right edge
         cursorX = Math.max(cursorX, inputRows.rightEdge);
-        this.width = Math.max(this.width, cursorX);
+        this.width = Math.max(this.width, cursorX + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
         if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
           this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY, cursorX);
         }
@@ -1525,7 +1525,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         input.connection.setOffsetInBlock(connectionX, cursorY);
         if (input.connection.isConnected()) {
           this.width = Math.max(this.width, inputRows.statementEdge +
-            input.connection.targetBlock().getHeightWidth().width);
+            input.connection.targetBlock().getHeightWidth().width + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
         }
         if ((!(this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
           this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return')) &&
