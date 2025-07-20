@@ -2004,15 +2004,17 @@ Blockly.BlockSvg.prototype.renderMoveConnections_ = function() {
     this.outputConnection.moveToOffset(blockTL);
   }
 
+  blockTL = blockTL.translate(this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0, 0)
   for (var i = 0; i < this.inputList.length; i++) {
     var conn = this.inputList[i].connection;
     if (conn) {
-      conn.moveToOffset(blockTL.translate(this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0, 0));
+      conn.moveToOffset(blockTL);
       if (conn.isConnected()) {
         conn.tighten_();
       }
     }
   }
+  blockTL = blockTL.translate(this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? -this.edgeShapeWidth_ : 0, 0)
 
   if (this.nextConnection) {
     this.nextConnection.moveToOffset(blockTL);
