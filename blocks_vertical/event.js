@@ -220,6 +220,33 @@ Blockly.Blocks['event_whengreaterthan'] = {
     });
   }
 };
+Blockly.Blocks['event_whenlesserthan'] = {
+  /**
+   * Block for when loudness/timer/video motion is lesser than the value.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "when %1 < %2",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "WHENGREATERTHANMENU",
+          "options": [
+            [Blockly.Msg.EVENT_WHENGREATERTHAN_LOUDNESS, 'LOUDNESS'],
+            [Blockly.Msg.EVENT_WHENGREATERTHAN_TIMER, 'TIMER']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        }
+      ],
+      "category": Blockly.Categories.event,
+      "extensions": ["colours_event", "shape_hat"]
+    });
+  }
+};
 
 Blockly.Blocks['event_broadcast_menu'] = {
   /**
