@@ -1802,10 +1802,10 @@ Blockly.BlockSvg.drawStatementInputFromTopRight_ = function(steps, cursorX,
  *     of the input.
  * @private
  */
-Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row) {
+Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row, block) {
   steps.push(Blockly.BlockSvg.BOTTOM_RIGHT_CORNER);
   steps.push('H', cursorX + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE +
-    2 * Blockly.BlockSvg.CORNER_RADIUS);
+    2 * Blockly.BlockSvg.CORNER_RADIUS + block.edgeShapeWidth_);
   if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row[0].connection && (row[0].connection.check_ || []).includes("switchCase")) {
     steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
   } else {
