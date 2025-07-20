@@ -1480,7 +1480,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         cursorX += row.paddingEnd;
         // Update right edge for all inputs, such that all rows
         // stretch to be at least the size of all previous rows.
-        inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge);
+        inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge, this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT + this.edgeShapeWidth_ : 0);
         // Move to the right edge
         cursorX = Math.max(cursorX, inputRows.rightEdge);
         this.width = Math.max(this.width, cursorX + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
@@ -1490,7 +1490,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
           if (!this.edgeShape_ || this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
             // Include corner radius in drawing the horizontal line.
-            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS + this.edgeShapeWidth_);
+            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS);
             steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
           } else {
             // Don't include corner radius - no corner (edge shape drawn).
@@ -1996,6 +1996,7 @@ Blockly.BlockSvg.getAlignedCursor_ = function(cursorX, input, rightEdge) {
  */
 Blockly.BlockSvg.prototype.renderMoveConnections_ = function() {
   var blockTL = this.getRelativeToSurfaceXY();
+  var branchedReporterTL = blockTL.clone().translate(this.edgeShapeWidth_, 0);
   // Don't tighten previous or output connections because they are inferior.
   if (this.previousConnection) {
     this.previousConnection.moveToOffset(blockTL);
@@ -2004,17 +2005,15 @@ Blockly.BlockSvg.prototype.renderMoveConnections_ = function() {
     this.outputConnection.moveToOffset(blockTL);
   }
 
-  blockTL = blockTL.translate(this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0, 0)
   for (var i = 0; i < this.inputList.length; i++) {
     var conn = this.inputList[i].connection;
     if (conn) {
-      conn.moveToOffset(blockTL);
+      conn.moveToOffset(this.inputList[i].type == Blockly.NEXT_STATEMENT ? branchedReporterTL : blockTL);
       if (conn.isConnected()) {
         conn.tighten_();
       }
     }
   }
-  blockTL = blockTL.translate(this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? -this.edgeShapeWidth_ : 0, 0)
 
   if (this.nextConnection) {
     this.nextConnection.moveToOffset(blockTL);
