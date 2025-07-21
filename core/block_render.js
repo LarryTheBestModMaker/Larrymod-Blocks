@@ -2302,7 +2302,7 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
         },
     }],
     [Blockly.OUTPUT_SHAPE_TICKET, {
-        emptyInputPath: "m 0 0 m 15 0 H 48 z L 0 0 L 0 10 L 7 10 c 4 2 4 9 0 11 L 0 21 L 0 32 L 48 32 L 48 21 L 41 21 c -4 -2 -4 -9 0 -11 L 48 10 L 48 0 z",
+        emptyInputPath: "m 0 0 m 15 0 H 46 z L 2 0 A 2 2 0 0 0 0 2 L 0 8 A 2 2 0 0 0 2 10 L 7 10 c 4 2 4 9 0 11 L 2 21 A 2 2 0 0 0 0 23 L 0 30 A 2 2 0 0 0 2 32 L 46 32 A 2 2 0 0 0 48 30 L 48 23 A 2 2 0 0 0 46 21 L 41 21 c -4 -2 -4 -9 0 -11 L 46 10 A 2 2 0 0 0 48 8 L 48 2 A 2 2 0 0 0 46 0 z",
         emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
         // 13.4 is the height of the hole
         leftPath: (block) => {
