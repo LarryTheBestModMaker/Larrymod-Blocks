@@ -1963,7 +1963,7 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row, blo
       steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
     }
   }
-  steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS + block.edgeShapeWidth_);
+  steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS);
 };
 
 /**
