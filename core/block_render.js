@@ -1608,7 +1608,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge, this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT + this.edgeShapeWidth_ : 0);
         // Move to the right edge
         cursorX = Math.max(cursorX, inputRows.rightEdge);
-        this.width = Math.max(this.width, cursorX + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
+        this.width = Math.max(this.width, cursorX);
         if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
           this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY, cursorX);
         }
@@ -2159,11 +2159,11 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
         emptyInputWidth: 14 * Blockly.BlockSvg.GRID_UNIT,
         leftPath: (block) => {
             const scale = block.height / 2;
-            return [`l ${-scale / 2} ${-scale / 2} l 0 ${-scale} l ${scale / 2} ${-scale / 2}`];
+            return [`l ${-scale / 2} 0 l ${-scale / 2} ${-scale / 2} l 0 ${-scale} l ${scale / 2} ${-scale / 2} l ${scale / 2} 0`];
         },
         rightPath: (block) => {
             const scale = block.edgeShapeWidth_;
-            return [`l ${scale / 2} ${scale / 2} l 0 ${scale} l ${-scale / 2} ${scale / 2}`];
+            return [`l ${scale / 2} 0 l ${scale / 2} ${scale / 2} l 0 ${scale} l ${-scale / 2} ${scale / 2} l ${-scale / 2} 0`];
         },
         blockPaddingStart: (_, __, firstInput) => {
             return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER) - 4) / 2, 0);
