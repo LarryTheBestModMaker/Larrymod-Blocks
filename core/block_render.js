@@ -2306,7 +2306,7 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
         emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
         // 13.4 is the height of the hole
         leftPath: (block) => {
-            const w = block.edgeShapeWidth_;
+            const w = block.height / 2;
             return [
                 `h-${w - 1}`,
                 `a 2 2 0 0 1 -2 -2`, // 2unit rounded
