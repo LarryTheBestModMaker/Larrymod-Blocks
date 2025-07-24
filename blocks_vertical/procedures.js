@@ -1425,6 +1425,21 @@ Blockly.Blocks['procedures_set'] = {
   }
 };
 
+Blockly.Blocks['procedures_stopcallerscript'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * inspired by the "stop caller script" block in sharkpool-sp's extension "My Blocks Plus"
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": 'stop caller script',
+      "extensions": ["colours_more", "shape_end"]
+    });
+  }
+};
+
 Blockly.Blocks['procedures_return'] = {
   init: function() {
     this.jsonInit({
