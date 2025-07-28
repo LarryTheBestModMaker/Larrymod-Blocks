@@ -757,7 +757,7 @@ Blockly.BlockSvg.prototype.updateColour = function() {
       input.outlinePath.setAttribute('fill', this.getColourTertiary());
     }
     if (this.textColour) for (const field of input.fieldRow) {
-      if (field instanceof Blockly.FieldLabel) {
+      if (field.textElement_ && field instanceof Blockly.FieldLabel) {
         field.textElement_.style.fill = this.textColour;
         field.textElement_.setAttribute('stoke', this.textColour);
       }
