@@ -1407,7 +1407,7 @@ Blockly.Block.prototype.setColourFromRawValues_ = function(primary, secondary,
 Blockly.Block.prototype.setColourFromJson_ = function(json) {
   this.setColourFromRawValues_(json['colour'], json['colourSecondary'],
       json['colourTertiary']);
-  if (json['textColour']) this.setTextColour(json['textColour']);
+  if (json['blockText']) this.setTextColour(json['blockText']);
 };
 
 /**
