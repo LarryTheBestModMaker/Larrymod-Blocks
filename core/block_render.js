@@ -751,10 +751,16 @@ Blockly.BlockSvg.prototype.updateColour = function() {
   // Render opacity
   this.svgPath_.setAttribute('fill-opacity', this.getOpacity());
 
-  // Update colours of input shapes.
+  // Update colours of input shapes and block text color.
   for (var i = 0, input; input = this.inputList[i]; i++) {
     if (input.outlinePath) {
       input.outlinePath.setAttribute('fill', this.getColourTertiary());
+    }
+    if (this.textColour) for (const field of input.fieldRow) {
+      if (field instanceof Blockly.FieldLabel) {
+        field.textElement_.style.fill = this.textColour;
+        field.textElement_.setAttribute('stoke', this.textColour);
+      }
     }
   }
 
