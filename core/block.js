@@ -880,7 +880,7 @@ Blockly.Block.prototype.setColour = function(colour, colourSecondary, colourTert
  * @param {number|string} colour HSV hue value, or #RRGGBB string.
  */
 Blockly.Block.prototype.setTextColour = function(colour) {
-  this.colour_ = this.makeColour_(colour);
+  this.textColour = this.makeColour_(colour);
   if (this.rendered) {
     this.updateColour();
   }
