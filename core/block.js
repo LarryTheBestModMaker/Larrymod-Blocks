@@ -876,6 +876,17 @@ Blockly.Block.prototype.setColour = function(colour, colourSecondary, colourTert
 };
 
 /**
+ * Change the colour of the text in a block
+ * @param {number|string} colour HSV hue value, or #RRGGBB string.
+ */
+Blockly.Block.prototype.setTextColour = function(colour) {
+  this.colour_ = this.makeColour_(colour);
+  if (this.rendered) {
+    this.updateColour();
+  }
+};
+
+/**
  * Sets a callback function to use whenever the block's parent workspace
  * changes, replacing any prior onchange handler. This is usually only called
  * from the constructor, the block type initializer function, or an extension
