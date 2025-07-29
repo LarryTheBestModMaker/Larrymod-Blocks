@@ -1183,7 +1183,7 @@ Blockly.Blocks['argument_reporter_string_number'] = {
           "text": ""
         }
       ],
-      "extensions": ["colours_more", "output_number", "output_string"]
+      "extensions": ["colours_more", "output_any"]
     });
   },
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
