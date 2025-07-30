@@ -1597,7 +1597,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
             if (this.previousConnection) {
               cursorX = Math.max(cursorX, Blockly.BlockSvg.INPUT_AND_FIELD_MIN_X);
             }
-            if (this.outputConnection && (input.connection.targetConnection?.getOutputShape() || input.connection.getOutputShape()) === Blockly.OUTPUT_SHAPE_SQUARE && this.outputConnection.getOutputShape !== Blockly.OUTPUT_SHAPE_SQUARE) {
+            if (this.outputConnection && (input.connection.targetConnection ? input.connection.targetConnection.getOutputShape() : input.connection.getOutputShape()) === Blockly.OUTPUT_SHAPE_SQUARE && this.outputConnection.getOutputShape !== Blockly.OUTPUT_SHAPE_SQUARE) {
               cursorX = Math.max(cursorX, this.edgeShapeWidth_)
             }
             connectionX = this.RTL ? -cursorX : cursorX;
