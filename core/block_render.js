@@ -1749,7 +1749,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
       // this could be a custom notch
       const checkStatement = (this.nextConnection.check_ || [])[0];
       const customNotch = Blockly.BlockSvg.CUSTOM_NOTCHES.get(checkStatement);
-      if (customNotch) steps.push(customNotch.left);
+      if (customNotch) steps.push(customNotch.right);
       else steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
     }
     // Create next block connection.
@@ -1956,7 +1956,7 @@ Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row, block) {
     // this could be a custom notch
     const checkStatement = (row[0].connection.check_ || [])[0];
     const customNotch = Blockly.BlockSvg.CUSTOM_NOTCHES.get(checkStatement);
-    if (customNotch) steps.push(customNotch.left);
+    if (customNotch) steps.push(customNotch.right);
     else steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
   }
   steps.push('h', '-' + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
