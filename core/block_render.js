@@ -1545,7 +1545,11 @@ Blockly.BlockSvg.prototype.renderDrawTop_ = function(steps, rightEdge) {
       if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && (this.previousConnection.check_ || []).includes("switchCase")) {
         steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT);
       } else {
-        steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
+        // this could be a custom notch
+        const checkStatement = (this.previousConnection.check_ || [])[0];
+        const customNotch = Blockly.BlockSvg.CUSTOM_NOTCHES.get(checkStatement);
+        if (customNotch) steps.push(customNotch.left);
+        else steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
       }
       // Create previous block connection.
       var connectionX = (this.RTL ?
@@ -1742,7 +1746,11 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
     if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && (this.nextConnection.check_ || []).includes("switchCase")) {
       steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
     } else {
-      steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
+      // this could be a custom notch
+      const checkStatement = (this.nextConnection.check_ || [])[0];
+      const customNotch = Blockly.BlockSvg.CUSTOM_NOTCHES.get(checkStatement);
+      if (customNotch) steps.push(customNotch.left);
+      else steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
     }
     // Create next block connection.
     var connectionX = this.RTL ? -Blockly.BlockSvg.NOTCH_WIDTH :
@@ -1945,7 +1953,11 @@ Blockly.BlockSvg.drawStatementInputTop_ = function(steps, cursorX, row, block) {
   if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row[0].connection && (row[0].connection.check_ || []).includes("switchCase")) {
     steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_RIGHT);
   } else {
-    steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
+    // this could be a custom notch
+    const checkStatement = (row[0].connection.check_ || [])[0];
+    const customNotch = Blockly.BlockSvg.CUSTOM_NOTCHES.get(checkStatement);
+    if (customNotch) steps.push(customNotch.left);
+    else steps.push(Blockly.BlockSvg.NOTCH_PATH_RIGHT);
   }
   steps.push('h', '-' + Blockly.BlockSvg.STATEMENT_INPUT_INNER_SPACE);
   steps.push(Blockly.BlockSvg.INNER_TOP_LEFT_CORNER);
@@ -1969,7 +1981,11 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row, blo
     if (Blockly.BlockSvg.NOTCH_SWITCH_ENABLE && row[0].connection && (row[0].connection.check_ || []).includes("switchCase")) {
       steps.push(Blockly.BlockSvg.NOTCH_SWITCH_PATH_LEFT);
     } else {
-      steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
+      // this could be a custom notch
+      const checkStatement = (row[0].connection.check_ || [])[0];
+      const customNotch = Blockly.BlockSvg.CUSTOM_NOTCHES.get(checkStatement);
+      if (customNotch) steps.push(customNotch.left);
+      else steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
     }
   }
   steps.push('H', rightEdge - Blockly.BlockSvg.CORNER_RADIUS);
@@ -2156,6 +2172,87 @@ Blockly.BlockSvg.prototype.renderMoveConnections_ = function() {
     }
   }
 };
+
+/* -= Custom Block Notch API =- */
+// utility functions
+Blockly.BlockSvg.CUSTOM_NOTCH_UTIL = {
+  supportedCommands: { m: 2, l: 2, h: 1, v: 1, c: 6, s: 4, q: 4, t: 2, a: 7 },
+  commandXpos: { m: [0], l: [0], h: [0], c: [0, 2, 4], s: [0, 2], q: [0, 2], t: [0], a: [5] },
+  path2TokenList: (pathStr) => {
+    return pathStr.match(/[a-z]|-?\d*\.?\d+(?:[eE][-+]?\d+)?/g);
+  },
+  validateSVGPath: (pathStr) => {
+    const util = Blockly.BlockSvg.CUSTOM_NOTCH_UTIL;
+    const tokens = util.path2TokenList(pathStr);
+    let i = 0;
+    while (i < tokens.length) {
+      const cmd = tokens[i++];
+      const expected = util.supportedCommands[cmd];
+      if (expected === undefined) throw new Error(`Unsupported or invalid command '${cmd}'`);
+      while (i + expected <= tokens.length && !/^[a-z]$/.test(tokens[i])) {
+        for (let j = 0; j < expected; j++) {
+          if (!/^[-+]?\d*\.?\d+(e[-+]?\d+)?$/i.test(tokens[i + j])) {
+            throw new Error(`Invalid number '${tokens[i + j]}' in '${cmd}' command`);
+          }
+        }
+        i += expected;
+      }
+    }
+    return true;
+  },
+  flipPathX: (pathStr) => {
+    const util = Blockly.BlockSvg.CUSTOM_NOTCH_UTIL;
+    const tokens = util.path2TokenList(pathStr);
+    let i = 0, result = [];
+    while (i < tokens.length) {
+      const cmd = tokens[i++];
+      result.push(cmd);
+      const expected = util.supportedCommands[cmd];
+      const xIndexes = util.commandXpos[cmd] || [];
+      while (i + expected <= tokens.length && !/^[a-z]$/.test(tokens[i])) {
+        const group = [];
+        for (let j = 0; j < expected; j++) {
+          let val = parseFloat(tokens[i + j]);
+          if (xIndexes.includes(j)) val = -val;
+          group.push(val);
+        }
+        result.push(...group);
+        i += expected;
+      }
+    }
+    return result.join(' ');
+  }
+};
+
+// Stores all user-defined custom shapes
+Blockly.BlockSvg.CUSTOM_NOTCHES = new Map([]);
+
+/**
+ * Register a custom block notch
+ * @param {string} name The name used to identify the custom notch
+ * @param {string} path SVG Path that resembles the notch
+ */
+Blockly.BlockSvg.registerCustomNotch = function(name, path) {
+  if (!name || typeof path !== 'string') {
+    console.error([
+      `Registration for Notch '${name}' failed`,
+      "Param 2 must be a SVG path",
+      "Use 'BlockSvg.NOTCH_PATH_LEFT' as a reference"
+    ].join("\n"));
+    return;
+  }
+
+  try {
+    const util = Blockly.BlockSvg.CUSTOM_NOTCH_UTIL;
+    if (util.validateSVGPath(path)) Blockly.BlockSvg.CUSTOM_NOTCHES.set(String(name), {
+      left: path, right: util.flipPathX(path)
+    });
+  } catch (err) {
+    // svg path was probably Invalid
+    console.error(err);
+  }
+};
+
 
 /* -= Custom Block Shape API =- */
 // Stores all user-defined custom shapes
