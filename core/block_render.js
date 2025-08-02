@@ -2208,13 +2208,23 @@ Blockly.BlockSvg.CUSTOM_NOTCH_UTIL = {
       const cmd = tokens[i++];
       result.push(cmd);
       const expected = util.supportedCommands[cmd];
-      const xIndexes = util.commandXpos[cmd] || [];
       while (i + expected <= tokens.length && !/^[a-z]$/.test(tokens[i])) {
         const group = [];
-        for (let j = 0; j < expected; j++) {
-          let val = parseFloat(tokens[i + j]);
-          if (xIndexes.includes(j)) val = -val;
-          group.push(val);
+        if (cmd === 'a') {
+          // Arc: rx ry x-axis-rotation large-arc-flag sweep-flag dx dy
+          group.push(
+            parseFloat(tokens[i]), parseFloat(tokens[i + 1]),
+            parseFloat(tokens[i + 2]), parseInt(tokens[i + 3]),
+            1 - parseInt(tokens[i + 4]),
+            -parseFloat(tokens[i + 5]), parseFloat(tokens[i + 6])
+          );
+        } else {
+          const xIndexes = util.commandXpos[cmd] || [];
+          for (let j = 0; j < expected; j++) {
+            let val = parseFloat(tokens[i + j]);
+            if (xIndexes.includes(j)) val = -val;
+            group.push(val);
+          }
         }
         result.push(...group);
         i += expected;
