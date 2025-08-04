@@ -26,6 +26,7 @@
 
 goog.provide('Blockly.FieldCheckboxOriginal');
 
+goog.require('Blockly.Colours');
 goog.require('Blockly.Field');
 
 
@@ -85,7 +86,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     },
     this.fieldGroup_
   );
-  this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
+  this.setValue(this.getValue())
 };
 
 /**
@@ -111,6 +112,15 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
     this.state_ = newState;
     if (this.checkElement_) {
       this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
+    }
+    if (this.sourceBlock_ && !this.sourceBlock_.isInsertionMarker()) {
+      if (this.state_ == "TRUE") {
+        this.sourceBlock_.setColour(Blockly.Colours.operators.primary, Blockly.Colours.operators.primary, this.sourceBlock_.getColourTertiary());
+      } else {
+        this.sourceBlock_.setColour(
+          this.sourceBlock_.getColourTertiary(), this.sourceBlock_.getColourTertiary(), this.sourceBlock_.getColourTertiary()
+        );
+      }
     }
   }
 };
