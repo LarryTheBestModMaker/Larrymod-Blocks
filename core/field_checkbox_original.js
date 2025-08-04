@@ -29,13 +29,6 @@ goog.provide('Blockly.FieldCheckboxOriginal');
 goog.require('Blockly.Colours');
 goog.require('Blockly.Field');
 
-// basic utility function
-const updateCheckColor = (field) => {
-  if (field.state_ == "TRUE") field.sourceBlock_.setColour("#59C059"); // operator green
-  else field.sourceBlock_.setColour(
-    field.sourceBlock_.parentBlock_.getColourSecondary().substring(0, 7)
-  );
-};
 
 /**
  * Class for a checkbox field.
@@ -93,9 +86,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     },
     this.fieldGroup_
   );
-  this.setValue(this.getValue());
-  this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
-  updateCheckColor(this);
+  this.setValue(this.getValue(), true)
 };
 
 /**
@@ -111,9 +102,9 @@ Blockly.FieldCheckboxOriginal.prototype.getValue = function() {
  * unchecks otherwise.
  * @param {string|boolean} newBool New state.
  */
-Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
+Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool, force = false) {
   var newState = (typeof newBool == 'string') ? (newBool.toUpperCase() == 'TRUE' ? 'TRUE' : 'FALSE') : String(!!newBool).toUpperCase();
-  if (this.state_ !== newState) {
+  if (this.state_ !== newState || force) {
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       Blockly.Events.fire(new Blockly.Events.BlockChange(
           this.sourceBlock_, 'field', this.name, this.state_, newState));
@@ -122,7 +113,15 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
     if (this.checkElement_) {
       this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
     }
-    if (this.sourceBlock_ && !this.sourceBlock_.isInsertionMarker()) updateCheckColor(this);
+    if (this.sourceBlock_ && !this.sourceBlock_.isInsertionMarker()) {
+      if (this.state_ == "TRUE") {
+        this.sourceBlock_.setColour(Blockly.Colours.operators.primary, Blockly.Colours.operators.primary, this.sourceBlock_.getColourTertiary());
+      } else {
+        this.sourceBlock_.setColour(
+          this.sourceBlock_.getColourTertiary(), this.sourceBlock_.getColourTertiary(), this.sourceBlock_.getColourTertiary()
+        );
+      }
+    }
   }
 };
 
