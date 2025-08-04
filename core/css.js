@@ -475,7 +475,7 @@ Blockly.Css.CONTENT = [
   '}',
   
   '.blocklyCheckbox {',
-    'fill: $colour_textFieldText;',
+    'fill: $colour_text;',
   '}',
 
   '.blocklyNonEditableText>text {',
