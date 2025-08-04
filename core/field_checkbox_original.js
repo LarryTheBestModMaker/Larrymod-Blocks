@@ -86,8 +86,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     },
     this.fieldGroup_
   );
-  this.setValue(this.getValue())
-  Blockly.FieldCheckboxOriginal.superClass_.render_.call(this);
+  this.setValue(this.getValue(), true)
 };
 
 /**
@@ -103,9 +102,9 @@ Blockly.FieldCheckboxOriginal.prototype.getValue = function() {
  * unchecks otherwise.
  * @param {string|boolean} newBool New state.
  */
-Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
+Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool, force = false) {
   var newState = (typeof newBool == 'string') ? (newBool.toUpperCase() == 'TRUE' ? 'TRUE' : 'FALSE') : String(!!newBool).toUpperCase();
-  if (this.state_ !== newState) {
+  if (this.state_ !== newState || force) {
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       Blockly.Events.fire(new Blockly.Events.BlockChange(
           this.sourceBlock_, 'field', this.name, this.state_, newState));
