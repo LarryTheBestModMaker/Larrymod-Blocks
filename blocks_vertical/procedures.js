@@ -414,7 +414,7 @@ Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
  * @this Blockly.Block
  */
 Blockly.ScratchBlocks.ProcedureUtils.attachShadow_ = function(input, argumentType) {
-  if (['n', 's', /*'b'*/].includes(argumentType)) {
+  if (['n', 's', 'b'].includes(argumentType)) {
     var blockType = {'n': 'math_number', 's': 'text', 'b': 'checkbox'}[argumentType];
     Blockly.Events.disable();
     try {
