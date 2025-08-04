@@ -87,6 +87,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     this.fieldGroup_
   );
   this.setValue(this.getValue())
+  Blockly.FieldCheckboxOriginal.superClass_.render_.call(this);
 };
 
 /**
