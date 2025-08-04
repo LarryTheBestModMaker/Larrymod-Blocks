@@ -48,7 +48,7 @@ Blockly.FieldCheckboxOriginal = function(state, opt_validator) {
 goog.inherits(Blockly.FieldCheckboxOriginal, Blockly.Field);
 
 /**
- * Construct a FieldCheckboxOriginal from a JSON arg object.
+ * Construct a FieldCheckbox from a JSON arg object.
  * @param {!Object} options A JSON object with options (checked).
  * @returns {!Blockly.FieldCheckboxOriginal} The new field instance.
  * @package
@@ -58,10 +58,9 @@ Blockly.FieldCheckboxOriginal.fromJson = function(options) {
   return new Blockly.FieldCheckboxOriginal(options['checked'] ? 'TRUE' : 'FALSE');
 };
 
-/**
- * Icon for the checkmark.
- */
-Blockly.FieldCheckboxOriginal.CHECKMARK = 'M -4.5 1.5 A 1 1 90 0 1 -2.5 -0.5 L -1.5 0.5 L 2.5 -3.5 A 1 1 0 0 1 4.5 -1.5 L -0.5 3.5 Q -1.5 4.5 -2.5 3.5 Z';
+Blockly.FieldCheckboxOriginal.SYMBOL_FALSE = 'M -2.5 -4.5 A 1 1 0 0 0 -4.5 -2.5 L -2 0 L -4.5 2.5 A 1 1 0 0 0 -2.5 4.5 L 0 2 L 2.5 4.5 A 1 1 0 0 0 4.5 2.5 L 2 0 L 4.5 -2.5 A 1 1 0 0 0 2.5 -4.5 L 0 -2 Z'
+
+Blockly.FieldCheckboxOriginal.SYMBOL_TRUE = 'M -4.5 1.5 A 1 1 90 0 1 -2.5 -0.5 L -1.5 0.5 L 2.5 -3.5 A 1 1 0 0 1 4.5 -1.5 L -0.5 3.5 Q -1.5 4.5 -2.5 3.5 Z'
 
 /**
  * Mouse cursor style when over the hotspot that initiates editability.
@@ -86,7 +85,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     },
     this.fieldGroup_
   );
-  this.checkElement_.setAttribute('d', this.state_ ? Blockly.FieldCheckboxOriginal.CHECKMARK : 'M 0 0 Z');
+  this.checkElement_.setAttribute('d', this.state_ ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
 };
 
 /**
@@ -112,7 +111,7 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
     }
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.setAttribute('d', newState ? Blockly.FieldCheckboxOriginal.CHECKMARK : 'M 0 0 Z');
+      this.checkElement_.setAttribute('d', newState ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
     }
   }
 };
