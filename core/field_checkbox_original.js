@@ -97,7 +97,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
   );
   this.setValue(this.getValue());
   this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
-  updateCheckColor(this);
+  queueMicrotask(() => updateCheckColor(this));
 };
 
 /**
