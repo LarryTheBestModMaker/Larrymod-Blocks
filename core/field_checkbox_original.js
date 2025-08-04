@@ -85,7 +85,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     },
     this.fieldGroup_
   );
-  this.checkElement_.setAttribute('d', this.state_ ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
+  this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
 };
 
 /**
@@ -102,8 +102,7 @@ Blockly.FieldCheckboxOriginal.prototype.getValue = function() {
  * @param {string|boolean} newBool New state.
  */
 Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
-  var newState = (typeof newBool == 'string') ?
-      (newBool.toUpperCase() == 'TRUE') : !!newBool;
+  var newState = (typeof newBool == 'string') ? (newBool.toUpperCase() == 'TRUE' ? 'TRUE' : 'FALSE') : String(!!newBool).toUpperCase();
   if (this.state_ !== newState) {
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       Blockly.Events.fire(new Blockly.Events.BlockChange(
@@ -111,7 +110,7 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
     }
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.setAttribute('d', newState ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
+      this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
     }
   }
 };
@@ -121,7 +120,7 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
  * @private
  */
 Blockly.FieldCheckboxOriginal.prototype.showEditor_ = function() {
-  var newState = !this.state_;
+  var newState = this.state_ == "TRUE" ? "FALSE" : "TRUE";
   if (this.sourceBlock_) {
     // Call any validation function, and allow it to override.
     newState = this.callValidator(newState);
