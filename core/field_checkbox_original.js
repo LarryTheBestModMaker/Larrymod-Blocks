@@ -31,6 +31,7 @@ goog.require('Blockly.Field');
 
 // basic utility function
 const updateCheckColor = (field) => {
+  if (!field.sourceBlock_) return;
   if (field.state_ == "TRUE") field.sourceBlock_.setColour("#59C059"); // operator green
   else if (field.sourceBlock_.parentBlock_) {
     field.sourceBlock_.setColour(
