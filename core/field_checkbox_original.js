@@ -26,12 +26,13 @@
 
 goog.provide('Blockly.FieldCheckboxOriginal');
 
+goog.require('Blockly.Colours');
 goog.require('Blockly.Field');
 
 
 /**
  * Class for a checkbox field.
- * @param {string} state The initial state of the field ('TRUE' or 'FALSE').
+ * @param {string} state The initial state of the field ('true' or 'false').
  * @param {Function=} opt_validator A function that is executed when a new
  *     option is selected.  Its sole argument is the new checkbox state.  If
  *     it returns a value, this becomes the new checkbox state, unless the
@@ -55,18 +56,23 @@ goog.inherits(Blockly.FieldCheckboxOriginal, Blockly.Field);
  * @nocollapse
  */
 Blockly.FieldCheckboxOriginal.fromJson = function(options) {
-  return new Blockly.FieldCheckboxOriginal(options['checked'] ? 'TRUE' : 'FALSE');
+  return new Blockly.FieldCheckboxOriginal(options['checked'] ? 'true' : 'false');
 };
 
 /**
- * Character for the checkmark.
+ * Icon for the checkmark.
  */
-Blockly.FieldCheckboxOriginal.CHECK_CHAR = '\u2713';
+Blockly.FieldCheckboxOriginal.CHECKMARK = 'M -4.5 1.5 A 1 1 90 0 1 -2.5 -0.5 L -1.5 0.5 L 2.5 -3.5 A 1 1 0 0 1 4.5 -1.5 L -0.5 3.5 Q -1.5 4.5 -2.5 3.5 Z';
+
+/**
+ * Icon for the cross mark.
+ */
+Blockly.FieldCheckboxOriginal.CROSS = 'M -2.5 -4.5 A 1 1 0 0 0 -4.5 -2.5 L -2 0 L -4.5 2.5 A 1 1 0 0 0 -2.5 4.5 L 0 2 L 2.5 4.5 A 1 1 0 0 0 4.5 2.5 L 2 0 L 4.5 -2.5 A 1 1 0 0 0 2.5 -4.5 L 0 -2 Z';
 
 /**
  * Mouse cursor style when over the hotspot that initiates editability.
  */
-Blockly.FieldCheckboxOriginal.prototype.CURSOR = 'default';
+Blockly.FieldCheckboxOriginal.prototype.CURSOR = 'pointer';
 
 /**
  * Install this checkbox on a block.
@@ -77,85 +83,80 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     return;
   }
   Blockly.FieldCheckboxOriginal.superClass_.init.call(this);
-  this.size_.width = 32;
-  var notInShadow = !this.sourceBlock_.isShadow();
   // The checkbox doesn't use the inherited text element.
-  // Instead it uses a custom checkmark image that is either visible or not.
-  this.checkElement_ = Blockly.utils.createSvgElement('image',
-      {
-        'class': 'blocklyCheckbox',
-        'width': 31,
-        'height': 32,
-        'x': 0,
-        'y': 0
-    }, this.fieldGroup_);
-  this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink',
-    'xlink:href', Blockly.mainWorkspace.options.pathToMedia + 'checkmark-dark.svg');
-
-  if (notInShadow) {
-    this.box_ = Blockly.utils.createSvgElement('rect',
-      {
-        'rx': Blockly.BlockSvg.CORNER_RADIUS,
-        'ry': Blockly.BlockSvg.CORNER_RADIUS,
-        'x': 0,
-        'y': 0,
-        'width': this.size_.width,
-        'height': this.size_.height,
-        'fill': "#fff",
-        'stroke': this.sourceBlock_.getColourTertiary(),
-        'cursor': 'pointer'
-      }
-    );
-    this.fieldGroup_.insertBefore(this.box_, this.checkElement_);
-  }
-  this.checkElement_.style.display = this.state_ ? 'block' : 'none';
-  this.checkElement_.style.cursor = 'pointer';
+  // Instead it uses a custom checkmark element that is either visible or not.
+  this.checkElement_ = Blockly.utils.createSvgElement('path',
+    {
+      'class': 'blocklyText',
+      'transform': `translate(${this.textElement_.getAttribute('x')},${this.textElement_.getAttribute('y')-2}) scale(1.5)`
+    },
+    this.fieldGroup_
+  );
+  this.render_();
 };
 
 /**
- * overide the width update so that this field has a width of 32
- **/
-// Blockly.FieldCheckboxOriginal.prototype.updateWidth = function () {
-//   // call the orignal updateWidth
-//   Blockly.FieldCheckboxOriginal.superClass_.updateWidth.call(this);
-//   this.size_.width = 32;
-// }
-// /**
-//  * overide the width update so that this field has a width of 32
-//  **/
-// Blockly.FieldCheckboxOriginal.prototype.getSize = function () {
-//   const size = Blockly.FieldCheckboxOriginal.superClass_.getSize.call(this);
-//   return {
-//     ...size,
-//     width: 32
-//   };
-// }
-
-/**
- * Return 'TRUE' if the checkbox is checked, 'FALSE' otherwise.
+ * Return 'true' if the checkbox is checked, 'false' otherwise.
  * @return {string} Current state.
  */
 Blockly.FieldCheckboxOriginal.prototype.getValue = function() {
-  return String(this.state_).toUpperCase();
+  return this.state_ ? 'true' : 'false';
+};
+
+Blockly.FieldCheckboxOriginal.prototype.updateState = function() {
+  if (this.checkElement_) {
+    this.checkElement_.setAttribute('d', this.state_ ? Blockly.FieldCheckboxOriginal.CHECKMARK : Blockly.FieldCheckboxOriginal.CROSS);
+    this.checkElement_.setAttribute('opacity', this.state_ ? 1 : 0.5);
+  }
+  if (this.sourceBlock_ && !this.sourceBlock_.isInsertionMarker()) {
+    if (this.state_) {
+      this.sourceBlock_.setColour(Blockly.Colours.operators.primary, Blockly.Colours.operators.primary, this.sourceBlock_.getColourTertiary(),
+          this.sourceBlock_.getColourQuaternary());
+    } else {
+      this.sourceBlock_.setColour(
+        this.sourceBlock_.getColourTertiary(), this.sourceBlock_.getColourTertiary(),
+        this.sourceBlock_.getColourTertiary(), this.sourceBlock_.getColourQuaternary()
+      );
+    }
+  }
 };
 
 /**
- * Set the checkbox to be checked if newBool is 'TRUE' or true,
+ * Attach this field to a block.
+ * @param {!Blockly.Block} block The block containing this field.
+ */
+Blockly.FieldCheckboxOriginal.prototype.setSourceBlock = function(block) {
+  Blockly.FieldCheckboxOriginal.superClass_.setSourceBlock.call(this, block);
+  // HACK: for shadow blocks. wait until the block is inserted into its parent
+  if (window.queueMicrotask) {
+    window.queueMicrotask(this.updateState.bind(this));
+  } else {
+    // eslint-disable-next-line no-undef
+    Promise.resolve().then(this.updateState.bind(this));
+  }
+};
+
+
+Blockly.FieldCheckboxOriginal.prototype.render_ = function() {
+  this.updateState();
+  Blockly.FieldCheckboxOriginal.superClass_.render_.call(this);
+};
+
+/**
+ * Set the checkbox to be checked if newBool is 'true' or true,
  * unchecks otherwise.
  * @param {string|boolean} newBool New state.
  */
 Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
   var newState = (typeof newBool == 'string') ?
-      (newBool.toUpperCase() == 'TRUE') : !!newBool;
+      (newBool.toLowerCase() == 'true') : !!newBool;
   if (this.state_ !== newState) {
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       Blockly.Events.fire(new Blockly.Events.BlockChange(
-          this.sourceBlock_, 'field', this.name, this.state_, newState));
+          this.sourceBlock_, 'field', this.name, this.state_ ? 'true' : 'false', newState ? 'true' : 'false'));
     }
     this.state_ = newState;
-    if (this.checkElement_) {
-      this.checkElement_.style.display = newState ? 'block' : 'none';
-    }
+    this.render_();
   }
 };
 
@@ -170,8 +171,14 @@ Blockly.FieldCheckboxOriginal.prototype.showEditor_ = function() {
     newState = this.callValidator(newState);
   }
   if (newState !== null) {
-    this.setValue(String(newState).toUpperCase());
+    this.setValue(newState ? 'true' : 'false');
   }
 };
 
-Blockly.Field.register('field_checkbox_original', Blockly.FieldCheckboxOriginal);
+Blockly.FieldCheckboxOriginal.prototype.updateWidth = function() {
+  Blockly.FieldCheckboxOriginal.superClass_.updateWidth.call(this);
+  this.size_.width = 8 * Blockly.BlockSvg.GRID_UNIT;
+  this.updateState();
+};
+
+Blockly.Field.register('field_checkbox', Blockly.FieldCheckboxOriginal);

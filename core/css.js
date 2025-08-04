@@ -473,6 +473,10 @@ Blockly.Css.CONTENT = [
   '.blocklyTextTruncated {',
     'font-size: 11pt;',
   '}',
+  
+  '.blocklyCheckbox {',
+    'fill: $colour_textFieldText;',
+  '}',
 
   '.blocklyNonEditableText>text {',
     'pointer-events: none;',
