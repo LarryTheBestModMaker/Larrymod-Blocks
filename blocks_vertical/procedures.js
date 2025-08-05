@@ -471,6 +471,8 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentReporter_ = function(
     argumentType, displayName) {
       switch (argumentType) {
         case 'n':
+          var blockType = 'argument_reporter_number';
+          break;
         case 's':
           var blockType = 'argument_reporter_string_number';
           break;
