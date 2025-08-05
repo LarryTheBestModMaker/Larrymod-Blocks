@@ -32,7 +32,7 @@ goog.require('Blockly.Field');
 // basic utility function
 const updateCheckColor = (field) => {
   if (!field.sourceBlock_) return;
-  if (field.state_ == "TRUE") field.sourceBlock_.setShadowColour("#26E600");
+  if (field.state_ == "TRUE") field.sourceBlock_.setShadowColour("#33D833");
   else if (field.sourceBlock_.parentBlock_) {
     field.sourceBlock_.setShadowColour(
       field.sourceBlock_.parentBlock_.getColourTertiary().substring(0, 7)
