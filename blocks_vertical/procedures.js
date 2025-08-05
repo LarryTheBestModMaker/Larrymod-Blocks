@@ -1035,6 +1035,34 @@ Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay = function(do
   this.setColour(...this.color)
 };
 
+Blockly.FieldNumberRemovable = function(value, min, max, precision, validator) {
+  Blockly.FieldNumberRemovable.superClass_.constructor.call(
+    this,
+    value || 0,
+    min,
+    max,
+    precision,
+    validator
+  );
+};
+Blockly.utils.object.inherits(Blockly.FieldNumberRemovable, Blockly.FieldNumber);
+
+Blockly.FieldNumberRemovable.fromJson = function(options) {
+  return new Blockly.FieldNumberRemovable(
+    options['value'],
+    options['min'],
+    options['max'],
+    options['precision'],
+    undefined
+  );
+};
+
+Blockly.fieldRegistry.register('field_number_removable', Blockly.FieldNumberRemovable);
+
+Blockly.FieldNumberRemovable.prototype.setRemoveFieldCallback = function(cb) {
+  this.removeFieldCallback_ = cb;
+};
+
 Blockly.Blocks['procedures_definition'] = {
   /**
    * Block for defining a procedure with no return value.
@@ -1341,7 +1369,7 @@ Blockly.Blocks['argument_editor_number'] = {
     this.jsonInit({ "message0": " %1",
       "args0": [
         {
-          "type": "field_input_removable",
+          "type": "field_number_removable",
           "name": "TEXT",
         }
       ],
