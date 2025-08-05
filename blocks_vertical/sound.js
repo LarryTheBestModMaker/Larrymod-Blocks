@@ -56,10 +56,8 @@ Blockly.Blocks['sound_sounds_menu'] = {
           ]
         }
       ],
-      "colour": Blockly.Colours.sounds.secondary,
-      "colourSecondary": Blockly.Colours.sounds.secondary,
-      "colourTertiary": Blockly.Colours.sounds.tertiary,
-      "extensions": ["output_string"]
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "output_string"]
     });
   }
 };
