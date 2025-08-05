@@ -32,10 +32,10 @@ goog.require('Blockly.Field');
 // basic utility function
 const updateCheckColor = (field) => {
   if (!field.sourceBlock_) return;
-  if (field.state_ == "TRUE") field.sourceBlock_.setColour("#59C059"); // operator green
+  if (field.state_ == "TRUE") field.sourceBlock_.setShadowColour("#26E600");
   else if (field.sourceBlock_.parentBlock_) {
-    field.sourceBlock_.setColour(
-      field.sourceBlock_.parentBlock_.getColourSecondary().substring(0, 7)
+    field.sourceBlock_.setShadowColour(
+      field.sourceBlock_.parentBlock_.getColourTertiary().substring(0, 7)
     );
   }
 };
@@ -98,6 +98,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
   );
   this.setValue(this.getValue());
   this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
+  this.checkElement_.setAttribute('opacity', this.state_ == "TRUE" ? 1 : 0.5);
   queueMicrotask(() => updateCheckColor(this));
 };
 
@@ -124,6 +125,7 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
     this.state_ = newState;
     if (this.checkElement_) {
       this.checkElement_.setAttribute('d', this.state_ == "TRUE" ? Blockly.FieldCheckboxOriginal.SYMBOL_TRUE : Blockly.FieldCheckboxOriginal.SYMBOL_FALSE);
+      this.checkElement_.setAttribute('opacity', this.state_ == "TRUE" ? 1 : 0.5);
     }
     if (this.sourceBlock_ && !this.sourceBlock_.isInsertionMarker()) updateCheckColor(this);
   }
