@@ -267,6 +267,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     this.rootBlock_.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
     this.rootBlock_.setOutput(true, "normal");
     this.rootBlock_.setPreviousStatement(false);
+    this.rootBlock_.startHat_ = false;
 
     // fixup checkbox colors
     for (const input of this.rootBlock_.inputList) {
