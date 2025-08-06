@@ -126,7 +126,11 @@ Blockly.Icon.prototype.iconClick_ = function(e) {
     // Drag operation is concluding.  Don't open the editor.
     return;
   }
-  if (!this.block_.isInFlyout && !Blockly.utils.isRightButton(e)) {
+  if (!Blockly.utils.isRightButton(e)) {
+    queueMicrotask(() => {
+      // fake a Field Edit Event to prevent block clicks
+      Blockly.WidgetDiv.owner_ = true;
+    });
     this.setVisible(!this.isVisible());
   }
 };
