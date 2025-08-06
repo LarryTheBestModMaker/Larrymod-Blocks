@@ -69,23 +69,23 @@ Blockly.Mutator.prototype.drawIcon_ = function(group) {
   Blockly.utils.createSvgElement('rect',
       {
         'class': 'blocklyIconShape',
-        'rx': '4',
-        'ry': '4',
-        'height': '16',
-        'width': '16'
+        'rx': '6',
+        'ry': '6',
+        'height': '20',
+        'width': '20',
+        'transform': 'translate(0, -2)'
       },
       group);
   // Gear teeth.
   Blockly.utils.createSvgElement('path',
       {
         'class': 'blocklyIconSymbol',
-        'd': 'm4.203,7.296 0,1.368 -0.92,0.677 -0.11,0.41 0.9,1.559 0.41,' +
-             '0.11 1.043,-0.457 1.187,0.683 0.127,1.134 0.3,0.3 1.8,0 0.3,' +
-             '-0.299 0.127,-1.138 1.185,-0.682 1.046,0.458 0.409,-0.11 0.9,' +
-             '-1.559 -0.11,-0.41 -0.92,-0.677 0,-1.366 0.92,-0.677 0.11,' +
-             '-0.41 -0.9,-1.559 -0.409,-0.109 -1.046,0.458 -1.185,-0.682 ' +
-             '-0.127,-1.138 -0.3,-0.299 -1.8,0 -0.3,0.3 -0.126,1.135 -1.187,' +
-             '0.682 -1.043,-0.457 -0.41,0.11 -0.899,1.559 0.108,0.409z'
+        'd': 'm5.4436 7.2552 0 1.6416-1.104.8124-.132.492 1.08 1.8708.492.132 ' +
+              '1.2516-.5484 1.4244.8196.1524 1.3608.36.36 2.16 0 .36-.3588.1524-1.3656 ' +
+              '1.422-.8184 1.2552.5496.4908-.132 1.08-1.8708-.132-.492-1.104-.8124 0' +
+              '-1.6392 1.104-.8124.132-.492-1.08-1.8708-.4908-.1308-1.2552.5496-1.422' +
+              '-.8184-.1524-1.3656-.36-.3588-2.16 0-.36.36-.1512 1.362-1.4244.8184' +
+              '-1.2516-.5484-.492.132-1.0788 1.8708.1296.4908z'
       },
       group);
   // Axle hole.
@@ -95,7 +95,8 @@ Blockly.Mutator.prototype.drawIcon_ = function(group) {
         'class': 'blocklyIconShape',
         'r': '2.7',
         'cx': '8',
-        'cy': '8'
+        'cy': '8',
+        'transform': 'translate(2, 0)'
       },
       group);
 };
@@ -263,6 +264,24 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     // The root block should not be dragable or deletable.
     this.rootBlock_.setMovable(false);
     this.rootBlock_.setDeletable(false);
+    this.rootBlock_.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
+    this.rootBlock_.setOutput(true, "normal");
+    this.rootBlock_.setPreviousStatement(false);
+
+    // fixup checkbox colors
+    for (const input of this.rootBlock_.inputList) {
+      for (const field of input.fieldRow) {
+        if (field instanceof Blockly.FieldCheckboxOriginal) {
+          field.fieldGroup_.insertBefore(Blockly.utils.createSvgElement('path',
+            {
+              'd': 'M25.9 2.5H6.1A3.6 3.6 90 002.5 6.1v19.8A3.6 3.6 90 006.1 29.5h19.8a3.6 3.6 90 003.6-3.6V6.1A3.6 3.6 90 0025.9 2.5',
+              'fill': '#00000055'
+            }
+          ), field.checkElement_);
+        }
+      }
+    }
+
     if (this.workspace_.flyout_) {
       var margin = this.workspace_.flyout_.CORNER_RADIUS * 2;
       var x = this.workspace_.flyout_.width_ + margin;
