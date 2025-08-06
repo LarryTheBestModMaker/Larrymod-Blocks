@@ -163,8 +163,10 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
  */
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
+
+  if (this.procCode_ === "") this.procCode_ = "unnamed block";
   // @todo add statement check?
-  var ConectionType = (this.outputType || (this.output_ ? 'string' : 'statement')).toLowerCase()
+  var ConectionType = (this.outputType || (this.output_ ? 'string' : 'statement')).toLowerCase();
   this.rendered = false;
 
   var connectionMap = this.disconnectOldBlocks_();
