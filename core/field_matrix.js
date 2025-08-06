@@ -52,7 +52,7 @@ Blockly.FieldMatrix = function(matrix) {
   this.ledButtons_ = [];
   /**
    * String for storing current matrix value.
-   * @type {!String]
+   * @type {!String}
    * @private
    */
   this.matrix_ = '';
@@ -134,9 +134,23 @@ Blockly.FieldMatrix.fromJson = function(options) {
 /**
  * Fixed size of the matrix thumbnail in the input field, in px.
  * @type {number}
+ * @deprecated
  * @const
  */
 Blockly.FieldMatrix.THUMBNAIL_SIZE = 26;
+
+/**
+ * Width of the matrix thumbnail in the input field, in px.
+ * @returns {number}
+ */
+Blockly.FieldMatrix.prototype.THUMBNAIL_WIDTH = function() {
+  return (Blockly.FieldMatrix.THUMBNAIL_NODE_SIZE + Blockly.FieldMatrix.THUMBNAIL_NODE_PAD) * this.matrixWidth_ + Blockly.FieldMatrix.THUMBNAIL_NODE_PAD;
+}
+
+
+Blockly.FieldMatrix.prototype.THUMBNAIL_HEIGHT = function() {
+  return (Blockly.FieldMatrix.THUMBNAIL_NODE_SIZE + Blockly.FieldMatrix.THUMBNAIL_NODE_PAD) * this.matrixHeight_ + Blockly.FieldMatrix.THUMBNAIL_NODE_PAD;
+}
 
 /**
  * Fixed size of each matrix thumbnail node, in px.
@@ -231,13 +245,17 @@ Blockly.FieldMatrix.prototype.init = function() {
 
   // Build the DOM.
   this.fieldGroup_ = Blockly.utils.createSvgElement('g', {}, null);
-  this.size_.width = Blockly.FieldMatrix.THUMBNAIL_SIZE +
-    Blockly.FieldMatrix.ARROW_SIZE + (Blockly.BlockSvg.DROPDOWN_ARROW_PADDING * 1.5);
+  this.size_.width = this.THUMBNAIL_WIDTH() +
+    Blockly.FieldMatrix.ARROW_SIZE + this.THUMBNAIL_HEIGHT() - 8;
+  this.size_.height = Math.max(
+    this.size_.height,
+    this.THUMBNAIL_HEIGHT() + 8
+  );
 
   this.sourceBlock_.getSvgRoot().appendChild(this.fieldGroup_);
 
-  var thumbX = Blockly.BlockSvg.DROPDOWN_ARROW_PADDING / 2;
-  var thumbY = (this.size_.height - Blockly.FieldMatrix.THUMBNAIL_SIZE) / 2;
+  var thumbX = this.THUMBNAIL_HEIGHT() / 2 - 8;
+  var thumbY = (this.size_.height - this.THUMBNAIL_HEIGHT()) / 2;
   var thumbnail = Blockly.utils.createSvgElement('g', {
     'transform': 'translate(' + thumbX + ', ' + thumbY + ')',
     'pointer-events': 'bounding-box', 'cursor': 'pointer'
@@ -262,8 +280,7 @@ Blockly.FieldMatrix.prototype.init = function() {
   }
 
   if (!this.arrow_) {
-    var arrowX = Blockly.FieldMatrix.THUMBNAIL_SIZE +
-      Blockly.BlockSvg.DROPDOWN_ARROW_PADDING * 1.5;
+    var arrowX = this.THUMBNAIL_WIDTH() + thumbX + Blockly.BlockSvg.DROPDOWN_ARROW_PADDING;
     var arrowY = (this.size_.height - Blockly.FieldMatrix.ARROW_SIZE) / 2;
     this.arrow_ = Blockly.utils.createSvgElement('image', {
       'height': Blockly.FieldMatrix.ARROW_SIZE + 'px',
