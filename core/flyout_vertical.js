@@ -151,7 +151,7 @@ Blockly.VerticalFlyout.prototype.createDom = function(tagName) {
 
   /*
     <defs>
-      <clipPath id="blocklyBlockMenuClipPath">
+      <clipPath id="blocklyBlockMenuClipPath-ID">
         <rect id="blocklyBlockMenuClipRect" height="1147px"
             width="248px" y="0" x="0">
         </rect>
@@ -160,7 +160,7 @@ Blockly.VerticalFlyout.prototype.createDom = function(tagName) {
   */
   this.defs_ = Blockly.utils.createSvgElement('defs', {}, this.svgGroup_);
   var clipPath = Blockly.utils.createSvgElement('clipPath',
-      {'id':'blocklyBlockMenuClipPath'}, this.defs_);
+      {'id':`blocklyBlockMenuClipPath-${this.workspace_ ? this.workspace_.id : ""}`}, this.defs_);
   this.clipRect_ = Blockly.utils.createSvgElement('rect',
       {
         'id': 'blocklyBlockMenuClipRect',
@@ -171,7 +171,7 @@ Blockly.VerticalFlyout.prototype.createDom = function(tagName) {
       },
       clipPath);
   this.workspace_.svgGroup_.setAttribute(
-      'clip-path', 'url(#blocklyBlockMenuClipPath)');
+      'clip-path', `url(#blocklyBlockMenuClipPath-${this.workspace_ ? this.workspace_.id : ""})`);
 
   return this.svgGroup_;
 };
