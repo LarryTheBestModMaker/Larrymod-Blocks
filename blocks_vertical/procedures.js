@@ -391,14 +391,22 @@ Blockly.ScratchBlocks.ProcedureUtils.addLabelEditor_ = function(text) {
  */
 Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
   var shadowDom = goog.dom.createDom('shadow');
-  if (type == 'n') {
-    var shadowType = 'math_number';
-    var fieldName = 'NUM';
-    var fieldValue = '1';
-  } else {
-    var shadowType = 'text';
-    var fieldName = 'TEXT';
-    var fieldValue = '';
+  switch (type) {
+    case 'n':
+      var shadowType = 'math_number';
+      var fieldName = 'NUM';
+      var fieldValue = '1';
+      break
+    case 's':
+      var shadowType = 'text';
+      var fieldName = 'TEXT';
+      var fieldValue = '';
+      break
+    case 'b':
+      var shadowType = 'checkbox';
+      var fieldName = 'CHECKBOX';
+      var fieldValue = 'FALSE';
+      break
   }
   shadowDom.setAttribute('type', shadowType);
   var fieldDom = goog.dom.createDom('field', null, fieldValue);
