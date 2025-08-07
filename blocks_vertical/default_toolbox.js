@@ -550,7 +550,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="extension_wedo_hat" id="extension_wedo_hat"></block>' +
     '<block type="extension_wedo_boolean" id="extension_wedo_boolean"></block>' +
     '<block type="control_fieldbutton" id="control_fieldbutton">' +
-          '<field name="TEST_BUTTON"></field>' +
+          '<field name="BUTTON" id="TEST_BUTTON"></field>' +
     '</block>' +
     '<block type="control_fieldcheckboxoriginal" id="control_fieldcheckboxoriginal"></block>' +
     '<block type="motion_mutatorCheckboxTest" id="motion_mutatorCheckboxTest"></block>' +
