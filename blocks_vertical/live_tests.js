@@ -207,7 +207,7 @@ Blockly.FieldCustom.registerInput(
   'TEST_BUTTON',
   (() => {
     const div = document.createElement("div");
-    div.setAttribute("style", `width: 32px; height: 32px; padding: 6px 10px; border-radius: 4px; border: solid 1.5px #00000030;`);
+    div.setAttribute("style", `width: 32px; height: 32px; padding: 6px 10px; border-radius: 4px; border: solid 1px #00000030;`);
     return div;
   })(),
   (field, input) => {
