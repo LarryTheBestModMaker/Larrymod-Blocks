@@ -321,7 +321,7 @@ Blockly.FieldMatrix.prototype.setValue = function(matrix) {
  * @return {string} Current matrix value.
  */
 Blockly.FieldMatrix.prototype.getValue = function() {
-  return String(this.matrix_);
+  return String(this.matrix_ + this.ZEROS().substr(0, this.matrixWidth*this.matrixHeight - this.matrix_.length));
 };
 
 /**
@@ -439,13 +439,13 @@ Blockly.FieldMatrix.prototype.createButton_ = function(fill) {
  * @private
  */
 Blockly.FieldMatrix.prototype.updateMatrix_ = function() {
-  for (var i = 0; i < this.matrix_.length; i++) {
-    if (this.matrix_[i] === '0') {
-      this.fillMatrixNode_(this.ledButtons_, i, this.sourceBlock_.colourSecondary_);
-      this.fillMatrixNode_(this.ledThumbNodes_, i, this.sourceBlock_.colour_);
-    } else {
+  for (var i = 0; i < (this.matrixWidth*this.matrixHeight); i++) {
+    if (this.matrix_[i] === '1') {
       this.fillMatrixNode_(this.ledButtons_, i, '#FFFFFF');
       this.fillMatrixNode_(this.ledThumbNodes_, i, '#FFFFFF');
+    } else {
+      this.fillMatrixNode_(this.ledButtons_, i, this.sourceBlock_.colourSecondary_);
+      this.fillMatrixNode_(this.ledThumbNodes_, i, this.sourceBlock_.colour_);
     }
   }
 };
