@@ -240,7 +240,8 @@ Blockly.Blocks['control_fieldbutton'] = {
       "args0": [
         {
           "type": "field_customInput",
-          "name": "TEST_BUTTON",
+          "name": "BUTTON",
+          "id": "TEST_BUTTON",
           "opcode": "alert"
         }
       ],
