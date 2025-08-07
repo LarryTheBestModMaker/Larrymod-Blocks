@@ -561,13 +561,13 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in plus.
   },
   6 : { // Outer shape: octagon.
-    0 : 5 * Blockly.BlockSvg.GRID_UNIT, // Field in octagon.
+    0 : 3 * Blockly.BlockSvg.GRID_UNIT, // Field in octagon.
     1 : 2 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in octagon.
-    2 : 5 * Blockly.BlockSvg.GRID_UNIT, // Round in octagon.
+    2 : 1 * Blockly.BlockSvg.GRID_UNIT, // Round in octagon.
     3 : 5 * Blockly.BlockSvg.GRID_UNIT, // Square in octagon.
     4 : 5 * Blockly.BlockSvg.GRID_UNIT, // Leaf in octagon.
     5 : 3 * Blockly.BlockSvg.GRID_UNIT, // Plus in octagon.
-    6 : 4 * Blockly.BlockSvg.GRID_UNIT, // Octagon in octagon.
+    6 : 1 * Blockly.BlockSvg.GRID_UNIT, // Octagon in octagon.
     7 : 5 * Blockly.BlockSvg.GRID_UNIT, // Bumped in octagon.
     8 : 2 * Blockly.BlockSvg.GRID_UNIT, // Indented in octagon.
     9 : 2 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in octagon.
@@ -2271,12 +2271,6 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
         rightPath: (block) => {
             const scale = block.edgeShapeWidth_;
             return [`l ${scale / 2} 0 l ${scale / 2} ${scale / 2} l 0 ${scale} l ${-scale / 2} ${scale / 2} l ${-scale / 2} 0`];
-        },
-        blockPaddingStart: () => {
-            return -8;
-        },
-        blockPaddingEnd: () => {
-            return 8
         },
     }],
     [Blockly.OUTPUT_SHAPE_BUMPED, {
