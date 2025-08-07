@@ -38,17 +38,38 @@ Blockly.Blocks['matrix'] = {
    * @this Blockly.Block
    */
   init: function() {
+    this.width = 5;
+    this.height = 5;
+
     this.jsonInit({
       "message0": "%1",
       "args0": [
         {
           "type": "field_matrix",
-          "name": "MATRIX"
+          "name": "MATRIX",
+          "width": this.width,
+          "height": this.height
         }
       ],
       "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
       "output": "Number",
       "extensions": ["colours_pen"]
     });
-  }
+  },
+  mutationToDom: function() {
+    const container = document.createElement('mutation');
+    const field = this.getField('MATRIX')
+
+    container.setAttribute('width', field.matrixWidth);
+    container.setAttribute('height', field.matrixHeight);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    const width = parseInt(xmlElement.getAttribute('width'), 10);
+    const height = parseInt(xmlElement.getAttribute('height'), 10);
+
+    const field = this.getField('MATRIX')
+    field.matrixWidth = width;
+    field.matrixHeight = height;
+  },
 };

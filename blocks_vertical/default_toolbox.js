@@ -564,6 +564,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="extension_microbit_display" id="extension_microbit_display">' +
       '<value name="MATRIX">' +
         '<shadow type="matrix">' +
+          '<mutation width="10" height="10"></mutation>' +
           '<field name="MATRIX">0101010101100010101000100</field>' +
         '</shadow>' +
       '</value>' +
