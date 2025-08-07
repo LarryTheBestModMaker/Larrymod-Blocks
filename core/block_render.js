@@ -511,7 +511,7 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     3 : 3 * Blockly.BlockSvg.GRID_UNIT, // Square in round.
     4 : 3 * Blockly.BlockSvg.GRID_UNIT, // Leaf in round.
     5 : 2 * Blockly.BlockSvg.GRID_UNIT, // Plus in round.
-    6 : 0 * Blockly.BlockSvg.GRID_UNIT, // Octagon in round.
+    6 : 1 * Blockly.BlockSvg.GRID_UNIT, // Octagon in round.
     7 : 1 * Blockly.BlockSvg.GRID_UNIT, // Bumped in round.
     8 : 3 * Blockly.BlockSvg.GRID_UNIT, // Indented in round.
     9 : 3 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in round.
