@@ -34,9 +34,8 @@ const updateCheckColor = (field) => {
   if (!field.sourceBlock_) return;
   if (field.state_ == "TRUE") field.sourceBlock_.setShadowColour("#33D833");
   else if (field.sourceBlock_.parentBlock_) {
-    field.sourceBlock_.setShadowColour(
-      field.sourceBlock_.parentBlock_.getColourTertiary().substring(0, 7)
-    );
+    field.sourceBlock_.shadowColour_ = "#00000035";
+    field.sourceBlock_.updateColour();
   }
 };
 
