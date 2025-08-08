@@ -31,11 +31,13 @@ goog.require('Blockly.Field');
 
 // basic utility function
 const updateCheckColor = (field) => {
-  if (!field.sourceBlock_) return;
-  if (field.state_ == "TRUE") field.sourceBlock_.setShadowColour("#33D833");
-  else if (field.sourceBlock_.parentBlock_) {
-    field.sourceBlock_.shadowColour_ = "#00000035";
-    field.sourceBlock_.updateColour();
+  const srcBlock = field.sourceBlock_;
+  if (!srcBlock) return;
+  if (field.state_ == "TRUE") srcBlock.setShadowColour("#33D833");
+  else if (srcBlock.parentBlock_) {
+    srcBlock.shadowColour_ = "#00000035";
+    srcBlock.updateColour();
+    if (srcBlock.svgPath_) srcBlock.svgPath_.setAttribute("stroke", "#00000000");
   }
 };
 
