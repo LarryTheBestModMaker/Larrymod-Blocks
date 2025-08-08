@@ -834,6 +834,32 @@ Blockly.Blocks["looks_layersGetLayer"] = {
   }
 };
 
+Blockly.Blocks['looks_getcostumelength'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "# of %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "TARGET",
+          "options": [
+            ["costumes", 'sprite'],
+            ["backdrops", 'stage']
+          ]
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "checkboxInFlyout": true,
+      "extensions": ["colours_looks", "output_number"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_backdropnumbername'] = {
   /**
    * Block to report backdrop's number or name
