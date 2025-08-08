@@ -756,6 +756,21 @@ Blockly.Blocks['sensing_resumetimer'] = {
   }
 };
 
+Blockly.Blocks['sensing_istimerpaused'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "is timer paused?",
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
 Blockly.Blocks['sensing_of_object_menu'] = {
   /**
    * "* of _" object menu.
