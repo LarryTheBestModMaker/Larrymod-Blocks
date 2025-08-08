@@ -207,7 +207,7 @@ Blockly.FieldCustom.registerInput(
   'TEST_BUTTON',
   (() => {
     const div = document.createElement("div");
-    div.setAttribute("style", `width: 32px; height: 32px; padding: 6px 10px; border-radius: 4px; border: solid 1px #00000030;`);
+    div.setAttribute("style", `width: 32px; height: 32px; padding: 6px 10px; text-align: center; font-weight: 500; border-radius: 4px; border: solid 1px #00000030;`);
     return div;
   })(),
   (field, input) => {
@@ -216,7 +216,7 @@ Blockly.FieldCustom.registerInput(
 
     input.textContent = "alert";
     input.style.width = "max-content";
-    input.style.color = srcBlock.textColor ? srcBlock.textColor : "#fff";
+    input.style.color = srcBlock && srcBlock.textColor ? srcBlock.textColor : "#fff";
 
     const properWidth = goog.style.getSize(input).width;
     input.style.width = properWidth + "px";
