@@ -854,7 +854,7 @@ Blockly.Blocks['looks_getcostumelength'] = {
         }
       ],
       "category": Blockly.Categories.looks,
-      "checkboxInFlyout": true,
+      "checkboxInFlyout": false,
       "extensions": ["colours_looks", "output_number"]
     });
   }
