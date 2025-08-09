@@ -979,15 +979,15 @@ Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom = function() 
 
 Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation = function(dom) {
   try {
-    this.color = JSON.parse(dom.getAttribute('color'))
-    this.updateDisplay_()
+    this.color = JSON.parse(dom.getAttribute('color'));
+    this.updateDisplay_();
   } catch (err) {
     console.warn('unknown old argument reporter')
   }
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay = function(dom) {
-  this.setColour(...this.color)
+  this.setColour(...this.color);
 };
 
 Blockly.Blocks['procedures_definition'] = {
@@ -1129,11 +1129,16 @@ Blockly.Blocks['procedures_declaration'] = {
     this.argumentDefaults_ = [];
     this.warp_ = false;
     this.output_ = false;
-    this.isDisplayOnly = true
-    this.edited = false
-    this.outputType = 'statement'
-    this.image = ''
-    this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
+    this.isDisplayOnly = true;
+    this.edited = false;
+    this.outputType = 'statement';
+    this.image = '';
+    this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary];
+
+    queueMicrotask(() => {
+      this.setColour(...this.color);
+      this.parentBlock_.setColour(...this.color);console.log(this.color);
+    });
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
