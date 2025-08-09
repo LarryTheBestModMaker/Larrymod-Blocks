@@ -1096,6 +1096,7 @@ Blockly.Blocks['procedures_prototype'] = {
     queueMicrotask(() => {
       if (this.parentBlock_) this.parentBlock_.setColour(...this.color);
       this.setColour(...this.color);
+      if (this.childBlocks_) for (const block of this.childBlocks_) block.setColour(...this.color);
     });
   },
   // Shared.
