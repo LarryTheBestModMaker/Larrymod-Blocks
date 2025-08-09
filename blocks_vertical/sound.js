@@ -144,6 +144,27 @@ Blockly.Blocks['sound_pause'] = {
   }
 };
 
+Blockly.Blocks['sound_resume'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "resume sound %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['sound_set_stop_fadeout_to'] = {
   /**
    * pm: Block to set the fadeout time on a sound.
@@ -241,6 +262,20 @@ Blockly.Blocks['sound_pauseallsounds'] = {
   init: function() {
     this.jsonInit({
       "message0": "pause all sounds",
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_resumeallsounds'] = {
+  /**
+   * pm: Block to resume all sounds
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "resume all sounds",
       "category": Blockly.Categories.sound,
       "extensions": ["colours_sounds", "shape_statement"]
     });
