@@ -564,7 +564,13 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnPrototype_ = function(
     Blockly.ScratchBlocks.ProcedureUtils.checkOldTypeMatches_(oldBlock, type);
   var displayName = this.displayNames_[index];
 
-  // Decide which block to attach.
+  // For update colors
+  if (oldBlock) {
+    oldBlock.color = this.color;
+    oldBlock.setColour(...oldBlock.color);
+    this.setColour(...this.color);
+  }
+  // Decide which block to attach
   if (connectionMap && oldBlock && oldTypeMatches) {
     // Update the text if needed. The old argument reporter is the same type,
     // and on the same input, but the argument's display name may have changed.
