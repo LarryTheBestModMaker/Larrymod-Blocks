@@ -1087,11 +1087,16 @@ Blockly.Blocks['procedures_prototype'] = {
     this.argumentDefaults_ = [];
     this.warp_ = false;
     this.output_ = false;
-    this.isDisplayOnly = true
-    this.edited = false
-    this.outputType = 'statement'
-    this.image = ''
+    this.isDisplayOnly = true;
+    this.edited = false;
+    this.outputType = 'statement';
+    this.image = '';
     this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
+
+    queueMicrotask(() => {
+      if (this.parentBlock_) this.parentBlock_.setColour(...this.color);
+      this.setColour(...this.color);
+    });
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -1134,11 +1139,6 @@ Blockly.Blocks['procedures_declaration'] = {
     this.outputType = 'statement';
     this.image = '';
     this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary];
-
-    queueMicrotask(() => {
-      this.setColour(...this.color);
-      if (this.parentBlock_) this.parentBlock_.setColour(...this.color);
-    });
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
