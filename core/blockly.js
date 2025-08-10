@@ -451,6 +451,17 @@ Blockly.prompt = function(message, defaultValue, callback, _opt_title,
 };
 
 /**
+ * Custom Modal API, overwritten in penguinmod.github.io repo
+ * @param {string} title The title of this empty popup
+ * @param {object} scale Object containing the properties: width and height, to set the modal scale
+ * @param {object} enterInfo Object containing the properties: name and callback, to add functionality to the 'okay' button
+ * @param {object} closeInfo Object containing the properties: name and callback, to add functionality to the 'close' button
+ */
+Blockly.customPrompt = function(title, scale, enterInfo, closeInfo) {
+  window.prompt(title);
+};
+
+/**
  * A callback for status buttons. The window.alert is here for testing and
  * should be overridden.
  * @param {string} id An identifier.
