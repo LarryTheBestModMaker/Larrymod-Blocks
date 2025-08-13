@@ -452,10 +452,16 @@ Blockly.prompt = function(message, defaultValue, callback, _opt_title,
 
 /**
  * Custom Modal API, overwritten in penguinmod.github.io repo
- * @param {string} config The config for the modal
- * @param {{content:CSSStyleDeclaration, overlay:CSSStyleDeclaration}} styles Object containing the properties: content and overlay, to set the modal's styles
- * @param {{name:string, callback:function():void}} enterInfo Object containing the properties: name and callback, to add functionality to the 'okay' button
- * @param {{name:string, callback:function():void}} closeInfo Object containing the properties: name and callback, to add functionality to the 'close' button
+ * @param {{title:string, scrollable:boolean?}} config The config for the modal
+ * @param {{content:CSSStyleDeclaration?, overlay:CSSStyleDeclaration?}?} styles Sets styles on parts of the modal. If specified, at least one of the parts should have styles.
+ * @param {Array<{
+ *      name:string,
+ *      role:"ok"|"close"|null,
+ *      class:"ok"|"cancel"|null,
+ *      style:CSSStyleDeclaration?,
+ *      dontClose:boolean?,
+ *      callback:function():void
+ * }>?} buttons Buttons to place onto the modal. `role` makes the button callback run for other types of interactions.
  * @returns {Promise<HTMLElement>}
  */
 Blockly.customPrompt = function (config, styles, enterInfo, closeInfo) {
