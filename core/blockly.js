@@ -452,13 +452,13 @@ Blockly.prompt = function(message, defaultValue, callback, _opt_title,
 
 /**
  * Custom Modal API, overwritten in penguinmod.github.io repo
- * @param {string} title The title of this empty popup
- * @param {object} scale Object containing the properties: width and height, to set the modal scale
- * @param {object} enterInfo Object containing the properties: name and callback, to add functionality to the 'okay' button
- * @param {object} closeInfo Object containing the properties: name and callback, to add functionality to the 'close' button
+ * @param {string} config The config for the modal
+ * @param {{content:CSSStyleDeclaration, overlay:CSSStyleDeclaration}} styles Object containing the properties: content and overlay, to set the modal's styles
+ * @param {{name:string, callback:function():void}} enterInfo Object containing the properties: name and callback, to add functionality to the 'okay' button
+ * @param {{name:string, callback:function():void}} closeInfo Object containing the properties: name and callback, to add functionality to the 'close' button
  */
-Blockly.customPrompt = function(title, scale, enterInfo, closeInfo) {
-  window.prompt(title);
+Blockly.customPrompt = function (config, styles, enterInfo, closeInfo) {
+    throw new Error("Custom Modal API not implemented here");
 };
 
 /**
