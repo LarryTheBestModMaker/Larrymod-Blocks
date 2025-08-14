@@ -876,6 +876,7 @@ Blockly.Blocks['sensing_current'] = {
             [Blockly.Msg.SENSING_CURRENT_HOUR, 'HOUR'],
             [Blockly.Msg.SENSING_CURRENT_MINUTE, 'MINUTE'],
             [Blockly.Msg.SENSING_CURRENT_SECOND, 'SECOND'],
+            ['millisecond', 'MILLISECOND'],
             ['js timestamp', 'TIMESTAMP']
           ]
         }
