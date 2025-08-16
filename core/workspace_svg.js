@@ -309,6 +309,11 @@ Blockly.WorkspaceSvg.prototype.inverseScreenCTM_ = null;
 Blockly.WorkspaceSvg.prototype.inverseScreenCTMDirty_ = true;
 
 /**
+ * @type {boolean} True if this workspace is allowed to be dragged.
+ */
+Blockly.WorkspaceSvg.prototype.allowDragging = true;
+
+/**
  * Getter for the inverted screen CTM.
  * @return {SVGMatrix} The matrix to use in mouseToSvg
  */
@@ -1342,7 +1347,7 @@ Blockly.WorkspaceSvg.prototype.isDragging = function() {
  * @return {boolean} True if this workspace may be dragged.
  */
 Blockly.WorkspaceSvg.prototype.isDraggable = function() {
-  return !!this.scrollbar;
+  return allowDragging && !!this.scrollbar;
 };
 
 /**
