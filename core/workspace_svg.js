@@ -1347,7 +1347,7 @@ Blockly.WorkspaceSvg.prototype.isDragging = function() {
  * @return {boolean} True if this workspace may be dragged.
  */
 Blockly.WorkspaceSvg.prototype.isDraggable = function() {
-  return Blockly.WorkspaceSvg.prototype.allowDragging && !!this.scrollbar;
+  return this.allowDragging && !!this.scrollbar;
 };
 
 /**
