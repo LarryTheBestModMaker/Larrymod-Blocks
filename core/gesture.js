@@ -913,7 +913,16 @@ Blockly.Gesture.prototype.isBlockClick_ = function() {
 Blockly.Gesture.prototype.isFieldClick_ = function() {
   var fieldEditable = this.startField_ ?
       this.startField_.isCurrentlyEditable() : false;
-  return fieldEditable && !this.hasExceededDragRadius_;
+  if (fieldEditable && !this.hasExceededDragRadius_) {
+    if (!this.startField_.box_) return true;
+    // likely a field click, confirm by checking if mouse is within
+    // the field's bounding box. We dont include checks on the y axis
+    // as that portion is always clickable with such a small gap
+    const bounds = this.startField_.box_.getBoundingClientRect();
+    const { x, y } = this.mouseDownXY_;
+    if (x > bounds.left && bounds.right > x) return true;
+  }
+  return false;
 };
 
 /**
