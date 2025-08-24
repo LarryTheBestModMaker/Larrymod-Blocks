@@ -1222,6 +1222,36 @@ Blockly.Blocks["operator_toUpperLowerCase"] = {
   }
 };
 
+Blockly.Blocks["operator_isUpperLowerCase"] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "is %1 %2 ?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OPTION",
+          "options": [
+            ["uppercase", "upper"],
+            ["lowercase", "lower"]
+          ]
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+
 Blockly.Blocks["operator_javascript_output"] = {
   init: function () {
     this.jsonInit({
