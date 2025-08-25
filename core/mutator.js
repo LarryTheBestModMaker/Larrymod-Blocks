@@ -269,20 +269,6 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     this.rootBlock_.setPreviousStatement(false);
     this.rootBlock_.output_ = true;
 
-    // fixup checkbox colors
-    for (const input of this.rootBlock_.inputList) {
-      for (const field of input.fieldRow) {
-        if (field instanceof Blockly.FieldCheckboxOriginal) {
-          field.fieldGroup_.insertBefore(Blockly.utils.createSvgElement('path',
-            {
-              'd': 'M25.9 2.5H6.1A3.6 3.6 90 002.5 6.1v19.8A3.6 3.6 90 006.1 29.5h19.8a3.6 3.6 90 003.6-3.6V6.1A3.6 3.6 90 0025.9 2.5',
-              'fill': '#00000055'
-            }
-          ), field.checkElement_);
-        }
-      }
-    }
-
     if (this.workspace_.flyout_) {
       var margin = this.workspace_.flyout_.CORNER_RADIUS * 2;
       var x = this.workspace_.flyout_.width_ + margin;

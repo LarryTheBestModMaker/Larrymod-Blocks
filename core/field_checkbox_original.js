@@ -34,6 +34,7 @@ const updateCheckColor = (field) => {
   const srcBlock = field.sourceBlock_;
   if (!srcBlock) return;
   if (field.state_ == "TRUE") srcBlock.setShadowColour("#33D833");
+  if (field.checkBackground_) field.checkBackground_.setAttribute('fill', field.state_ == "TRUE" ? "#33D833" : srcBlock.getColourTertiary())
   else if (srcBlock.parentBlock_) {
     srcBlock.shadowColour_ = "#00000035";
     srcBlock.updateColour();
@@ -88,6 +89,14 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     return;
   }
   Blockly.FieldCheckboxOriginal.superClass_.init.call(this);
+  if (this.sourceBlock_ && (this.sourceBlock_.inputList.length > 1 || this.sourceBlock_.inputList[0].fieldRow.length > 1)) {
+    this.checkBackground_ = Blockly.utils.createSvgElement('path',
+      {
+        'd': 'M25.9 2.5H6.1A3.6 3.6 90 002.5 6.1v19.8A3.6 3.6 90 006.1 29.5h19.8a3.6 3.6 90 003.6-3.6V6.1A3.6 3.6 90 0025.9 2.5'
+      },
+      this.fieldGroup_
+    )
+  }
   // The checkbox doesn't use the inherited text element.
   // Instead it uses a custom checkmark element that is either visible or not.
   this.checkElement_ = Blockly.utils.createSvgElement('path',
