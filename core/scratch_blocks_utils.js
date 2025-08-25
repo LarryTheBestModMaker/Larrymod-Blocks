@@ -94,7 +94,7 @@ Blockly.scratchBlocksUtils.shadowArgumentReporters = [
  * @package
  */
 Blockly.scratchBlocksUtils.isShadowArgumentReporter = function(block) {
-  return (block.isShadow() && Blockly.scratchBlocksUtils.shadowArgumentReporters.includes(block.type));
+  return (block.isShadow() && (Blockly.scratchBlocksUtils.shadowArgumentReporters.includes(block.type) || block.canDragDuplicate()));
 };
 
 /**
