@@ -34,12 +34,12 @@ const updateCheckColor = (field) => {
   const srcBlock = field.sourceBlock_;
   if (!srcBlock) return;
   if (field.state_ == "TRUE") srcBlock.setShadowColour("#33D833");
-  if (field.checkBackground_) field.checkBackground_.setAttribute('fill', field.state_ == "TRUE" ? "#33D833" : srcBlock.getColourTertiary())
   else if (srcBlock.parentBlock_) {
     srcBlock.shadowColour_ = "#00000035";
     srcBlock.updateColour();
     if (srcBlock.svgPath_) srcBlock.svgPath_.setAttribute("stroke", "#00000000");
   }
+  if (field.checkBackground_) field.checkBackground_.setAttribute('fill', field.state_ == "TRUE" ? "#33D833" : srcBlock.getColourTertiary());
 };
 
 /**
