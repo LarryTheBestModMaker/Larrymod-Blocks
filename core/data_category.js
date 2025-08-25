@@ -123,6 +123,7 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
     Blockly.VariableCategory.addSep(xmlList);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_reverselist', 'LIST');
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_shufflelist', 'LIST');
+    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_filterlist', 'LIST', ['INDEX', 'data_filterlistindex'], ['ITEM', 'data_filterlistitem']);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_arraylist',
         'LIST', ['VALUE', 'text', '["a", "b", "c"]']);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_listarray', 'LIST');
@@ -503,6 +504,7 @@ Blockly.VariableCategory.addBlock = function(xmlList, variable, blockType,
  * @return {string} The generated dom element in text.
  */
 Blockly.VariableCategory.createValue = function(valueName, type, value) {
+  var isShadowBlock = type.startsWith("data_");
   var fieldName;
   switch (valueName) {
     case 'ITEM':
@@ -524,7 +526,7 @@ Blockly.VariableCategory.createValue = function(valueName, type, value) {
   var valueField =
       '<value name="' + valueName + '">' +
       '<shadow type="' + type + '">' +
-      '<field name="' + fieldName + '">' + value + '</field>' +
+      (isShadowBlock ? '' : '<field name="' + fieldName + '">' + value + '</field>') +
       '</shadow>' +
       '</value>';
   return valueField;
