@@ -499,6 +499,7 @@ Blockly.VariableCategory.addBlock = function(xmlList, variable, blockType,
  * @return {string} The generated dom element in text.
  */
 Blockly.VariableCategory.createValue = function(valueName, type, value) {
+  var isShadowBlock = type.startsWith("data_");
   var fieldName;
   switch (valueName) {
     case 'ITEM':
@@ -520,7 +521,7 @@ Blockly.VariableCategory.createValue = function(valueName, type, value) {
   var valueField =
       '<value name="' + valueName + '">' +
       '<shadow type="' + type + '">' +
-      '<field name="' + fieldName + '">' + value + '</field>' +
+      (isShadowBlock ? '' : '<field name="' + fieldName + '">' + value + '</field>') +
       '</shadow>' +
       '</value>';
   return valueField;
