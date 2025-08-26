@@ -828,7 +828,7 @@ Blockly.Gesture.prototype.setStartBlock = function(block) {
   if (!this.startBlock_ && !this.startBubble_) {
     this.startBlock_ = block;
     this.shouldDuplicateOnDrag_ =
-        Blockly.scratchBlocksUtils.isShadowArgumentReporter(block) || block.canDragDuplicate();
+        (Blockly.scratchBlocksUtils.isShadowArgumentReporter(block) || block.canDragDuplicate()) && !block.isInFlyout;
     if (block.isInFlyout && block != block.getRootBlock()) {
       this.setTargetBlock_(block.getRootBlock());
     } else {

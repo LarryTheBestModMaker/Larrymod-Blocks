@@ -65,9 +65,6 @@ Blockly.Flyout = function(workspaceOptions) {
   this.workspace_.newBlock = function(type, id) {
     // Use `type` if `id` isn't passed. `this` will be workspace.
     const block = newBlock.call(this, type, id || type);
-
-    // prevent duplication glitch from drag duplicate blocks in the palette 
-    if (block && block.isInFlyout) block.setDragDuplication(false)
     return block;
   };
 
