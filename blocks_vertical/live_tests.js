@@ -343,68 +343,25 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     });
 
     this.inputs_ = 0;
-    // this.lastMutation_ = null;
   },
 
   mutationToDom: function () {
     // on save
-    // console.log('mutationToDom');
     const container = document.createElement("mutation");
     let number = Number(this.inputs_);
     if (isNaN(number)) number = 0;
-    container.setAttribute("INPUTCOUNT", String(number));
-    // console.log(this.inputs_);
+    container.setAttribute("inputcount", String(number));
     return container;
   },
 
   domToMutation: function (xmlElement) {
     // on load
-    // console.log('domToMutation');
-    // console.log(xmlElement.getAttribute("INPUTCOUNT"));
-    const inputCount = Number(xmlElement.getAttribute("INPUTCOUNT"));
-    // console.log(inputCount);
+    const inputCount = Number(xmlElement.getAttribute("inputcount"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
-    // console.log(this.inputs_);
     for (let i = 0; i < this.inputs_; i++) {
       this.appendValueInput(`INPUT${i + 1}`);
     }
   },
-
-  saveExtraState: function() {
-    let number = Number(this.inputs_);
-    if (isNaN(number)) number = 0;
-    return {inputs: number}
-  },
-
-  loadExtraState: function(state) {
-    this.inputs_ = isNaN(state.inputs) ? 0 : state.inputs;
-    for (let i = 0; i < this.inputs_; i++) {
-      this.appendValueInput(`INPUT${i + 1}`);
-    }
-  },
-
-  // updateShape_: function () {
-  //   this.lastMutation_ = this.mutationToDom();
-  //   console.log('updateShape_');
-  //   console.log(this.inputs_);
-  //   for (let i = 0; i < this.inputs_; i++) {
-  //     this.appendValueInput(`INPUT${i + 1}`);
-  //   }
-  //   this.updateIfNeeded_();
-  // },
-  // updateIfNeeded_: function () {
-  //   this.initSvg();
-  //   if (this.rendered) {
-  //     this.render();
-  //   }
-  //   // manually update because idk why
-  //   Blockly.Events.setGroup(true);
-  //   var oldMutation = Blockly.Xml.domToText(this.lastMutation_);
-  //   var newMutation = Blockly.Xml.domToText(this.mutationToDom());
-  //   Blockly.Events.fire(new Blockly.Events.BlockChange(this,
-  //     'mutation', null, oldMutation, newMutation));
-  //   Blockly.Events.setGroup(false);
-  // },
 
   onExpandableButtonClicked_: function (isAdding) {
     // Create an event group to keep field value and mutator in sync
@@ -418,19 +375,16 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
       if (this.inputs_ < 0) {
         this.inputs_ = 0;
       }
-      // console.log(this.inputs_);
-      // this.updateIfNeeded_();
     } else {
       this.inputs_++;
       const number = this.inputs_;
       this.appendValueInput(`INPUT${number}`);
-      // console.log(this.inputs_);
-      // this.updateIfNeeded_();
     }
     this.initSvg();
     if (this.rendered) {
       this.render();
     }
+
     var newMutation = Blockly.Xml.domToText(this.mutationToDom());
     Blockly.Events.fire(new Blockly.Events.BlockChange(this,
       'mutation', null, oldMutation, newMutation));
