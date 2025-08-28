@@ -1077,8 +1077,8 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
       // Get the dimensions of the field.
       var fieldSize = field.getSize();
       field.renderWidth = fieldSize.width;
-      field.renderSep = (previousFieldEditable && field.EDITABLE) ?
-          Blockly.BlockSvg.SEP_SPACE_X : 0;
+      field.renderSep = field.overrideSep ? field.overrideSep :
+          (previousFieldEditable && field.EDITABLE) ? Blockly.BlockSvg.SEP_SPACE_X : 0;
       // See github.com/LLK/scratch-blocks/issues/1658
       if (!isSecondInputOnProcedure) {
         input.fieldWidth += field.renderWidth + field.renderSep;
