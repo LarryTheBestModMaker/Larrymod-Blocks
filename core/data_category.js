@@ -499,7 +499,7 @@ Blockly.VariableCategory.addLabel = function(xmlList, text) {
  * @return {string} The generated dom element in text.
  */
 Blockly.VariableCategory.createValue = function(valueName, type, value) {
-  var isShadowBlock = type.startsWith("data_");
+  var isShadowBlock = type.startsWith("data_") || type === "checkbox";
   var fieldName;
   switch (valueName) {
     case 'ITEM':
