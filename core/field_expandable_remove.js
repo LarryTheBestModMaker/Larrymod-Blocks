@@ -19,8 +19,8 @@
  */
 
 /**
- * @fileoverview Checkbox field.  Checked or not checked.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Expandable Remove field.
+ * @author SharkPool & JeremyGamer13
  */
 'use strict';
 
@@ -28,6 +28,10 @@ goog.provide('Blockly.FieldExpandableRemove');
 
 goog.require('Blockly.Field');
 
+/**
+ * Icon used by Button
+ */
+const removeIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSI0Ljg4IiB2aWV3Qm94PSIwIDAgMTIgNC44OCI+PGcgc3Ryb2tlLXdpZHRoPSIwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiPjxwYXRoIGQ9Ik0xLjkwMyA0Ljg4Qy44NTEgNC44OCAwIDMuOTc2IDAgMi44NTl2LS44MzdDMCAuOTA1Ljg1MiAwIDEuOTAzIDBoOC4xOTNjMS4wNTIgMCAxLjkwMy45MDQgMS45MDMgMi4wMjF2LjgzN2MwIDEuMTE2LS44NTIgMi4wMjEtMS45MDMgMi4wMjF6IiBmaWxsLW9wYWNpdHk9Ii4xMDIiIGZpbGw9IiMyNDIwMjEiLz48cGF0aCBkPSJNMi4yMjggNC4wMzhBMS40MjcgMS40MjcgMCAwIDEgLjgwMSAyLjYxMVYyLjI3QTEuNDI3IDEuNDI3IDAgMCAxIDIuMjI4Ljg0M2g3LjU0NGExLjQyNyAxLjQyNyAwIDAgMSAxLjQyNyAxLjQyN3YuMzQxYTEuNDI3IDEuNDI3IDAgMCAxLTEuNDI3IDEuNDI3eiIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4=';
 
 /**
  * Class for a button field.
@@ -59,15 +63,16 @@ Blockly.FieldExpandableRemove.fromJson = function(options) {
 Blockly.FieldExpandableRemove.prototype.CURSOR = 'pointer';
 
 /**
- * Install this checkbox on a block.
+ * Install this button on a block.
  */
 Blockly.FieldExpandableRemove.prototype.init = function() {
   if (this.fieldGroup_) {
-    // Checkbox has already been initialized once.
+    // Button has already been initialized once.
     return;
   }
   Blockly.FieldExpandableRemove.superClass_.init.call(this);
 
+  this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
   this.box_ = Blockly.utils.createSvgElement('rect',
     {
       'x': 0,
@@ -76,17 +81,25 @@ Blockly.FieldExpandableRemove.prototype.init = function() {
       'ry': 4,
       'width': this.size_.width,
       'height': this.size_.height,
-      'fill': "#ff0000",
-      'stroke': "rgba(0, 0, 0, 0.25)",
+      'fill': "#00000000",
+      'stroke': "#00000035",
       'cursor': this.CURSOR
-    }
+    },
+    this.boxGroup_
   );
-  this.fieldGroup_.insertBefore(this.box_, this.textElement_);
-  // var textNode = document.createTextNode(this.label_);
-  // textNode.style.fill = "#ffffff";
-  // this.textElement_.append(textNode);
-  // this.fieldGroup_.append(this.textElement_);
+  this.icon_ = Blockly.utils.createSvgElement('image',
+    {
+      'x': 2.5,
+      'y': 5,
+      'width': this.size_.height / 1.5,
+      'height': this.size_.height / 1.5,
+      'href': removeIcon,
+    },
+    this.boxGroup_
+  );
+  this.fieldGroup_.insertBefore(this.boxGroup_, this.textElement_);
 };
+
 
 /**
  * Returns an empty string.
