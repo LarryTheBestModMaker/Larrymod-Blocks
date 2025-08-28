@@ -124,6 +124,136 @@ Blockly.Blocks['operator_divide'] = {
   }
 };
 
+Blockly.Blocks['operator_expandableMath'] = {
+  /**
+   * pm: Block for performing multiple math operations (determined by user)
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": '%1 %2',
+      "args0": [
+        {
+          "type": "field_expandable_remove",
+          "name": "REMOVE"
+        },
+        {
+          "type": "field_expandable_add",
+          "name": "ADD"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+
+    this.inputs_ = 2;
+    if (this.isInFlyout) {
+      const input1 = this.appendValueInput("NUM1");
+      this.fillInBlock(input1.connection, 0);
+      const input2 = this.appendValueInput("NUM2");
+      input2.appendField(this.menuGenerator());
+      this.fillInBlock(input2.connection, 1);
+    }
+  },
+
+  menuGenerator: function() {
+    const dropdown = new Blockly.FieldDropdown(function () {
+      return [
+        ["+", "+"], ["-", "-"],
+        ["*", "*"], ["/", "/"],
+        ["^", "^"],
+      ];
+    });
+    const ogSetValue = dropdown.setValue;
+    dropdown.setValue = function (value, omitMutation) {
+      const srcBlock = this.sourceBlock_;
+      let oldMutation;
+      if (!omitMutation) oldMutation = Blockly.Xml.domToText(srcBlock.mutationToDom());
+
+      ogSetValue.call(this, value);
+      if (!omitMutation) {
+        const newMutation = Blockly.Xml.domToText(srcBlock.mutationToDom());
+        Blockly.Events.fire(new Blockly.Events.BlockChange(
+          srcBlock, 'mutation', null, oldMutation, newMutation
+        ));
+      }
+    }
+    return dropdown;
+  },
+  fillInBlock: function (connection, index) {
+    if (connection.sourceBlock_.isInsertionMarker_) return;
+    const block = this.workspace.newBlock('math_number');
+    block.setShadow(true);
+    block.initSvg();
+    block.render(false);
+    block.outputConnection.connect(connection);
+  },
+
+  mutationToDom: function () {
+    // on save
+    const container = document.createElement("mutation");
+    let number = Number(this.inputs_);
+    if (isNaN(number)) number = 1;
+    container.setAttribute("inputcount", String(number));
+    let orderedOperations = "";
+    for (var i = 1; i < this.inputList.length; i++) {
+      const input = this.inputList[i];
+      if (input.fieldRow[0]) orderedOperations += input.fieldRow[0].getValue();
+    }
+    container.setAttribute("menuvalues", orderedOperations);
+    return container;
+  },
+
+  domToMutation: function (xmlElement) {
+    // on load
+    const inputCount = Number(xmlElement.getAttribute("inputcount"));
+    const menuValues = String(xmlElement.getAttribute("menuvalues"));
+    this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
+    for (let i = 0; i < this.inputs_; i++) {
+      const input = this.appendValueInput(`NUM${i + 1}`);
+      if (i > 0) {
+        const menu = input.appendField(this.menuGenerator());
+        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "+", true);
+      }
+      this.fillInBlock(input.connection, i);
+    }
+    queueMicrotask(() => {
+      const connections = this.getConnections_();
+      for (let i = 1; i < connections.length; i++) {
+        const block = connections[i].targetBlock();
+        if (!block) continue;
+        if (!block.category_ && !block.isShadow()) block.dispose();
+      }
+    });
+  },
+
+  onExpandableButtonClicked_: function (isAdding) {
+    // Create an event group to keep field value and mutator in sync
+    // Return null at the end because setValue is called here already.
+    Blockly.Events.setGroup(true);
+    var oldMutation = Blockly.Xml.domToText(this.mutationToDom());
+    if (isAdding) {
+      this.inputs_++;
+      const number = this.inputs_;
+      const newInput = this.appendValueInput(`NUM${number}`);
+      newInput.appendField(this.menuGenerator());
+      this.fillInBlock(newInput.connection, number - 1);
+    } else if (this.inputs_ > 1) {
+      const number = this.inputs_;
+      this.removeInput(`NUM${number}`);
+      this.inputs_--;
+    }
+    this.initSvg();
+    if (this.rendered) this.render();
+
+    const newMutation = Blockly.Xml.domToText(this.mutationToDom());
+    Blockly.Events.fire(new Blockly.Events.BlockChange(
+      this, 'mutation', null, oldMutation, newMutation
+    ));
+    Blockly.Events.setGroup(false);
+  }
+};
+
 Blockly.Blocks['operator_random'] = {
   /**
    * Block for picking a random number.
@@ -518,7 +648,6 @@ Blockly.Blocks['operator_join3'] = {
   }
 };
 
-
 Blockly.Blocks['operators_expandablejoininputs'] = {
   /**
    * pm: Block for joining strings together (determined by user)
@@ -558,7 +687,7 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     block.setFieldValue(text ? text : "...", "TEXT");
     block.setShadow(true);
     block.initSvg();
-    block.render(true);
+    block.render(false);
     block.outputConnection.connect(connection);
   },
 
@@ -608,8 +737,9 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     if (this.rendered) this.render();
 
     var newMutation = Blockly.Xml.domToText(this.mutationToDom());
-    Blockly.Events.fire(new Blockly.Events.BlockChange(this,
-      'mutation', null, oldMutation, newMutation));
+    Blockly.Events.fire(new Blockly.Events.BlockChange(
+      this, 'mutation', null, oldMutation, newMutation
+    ));
     Blockly.Events.setGroup(false);
   }
 };
