@@ -359,7 +359,7 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
     for (let i = 0; i < this.inputs_; i++) {
-      this.appendValueInput(`INPUT${i + 1}`);
+      let input = this.appendValueInput(`INPUT${i + 1}`)
     }
   },
 
@@ -378,7 +378,13 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     } else {
       this.inputs_++;
       const number = this.inputs_;
-      this.appendValueInput(`INPUT${number}`);
+      let input = this.appendValueInput(`INPUT${number}`)
+      let shadow = this.workspace.newBlock('text')
+      shadow.setFieldValue('text', 'TEXT')
+      shadow.setShadow(true)
+      shadow.initSvg()
+      shadow.render()
+      input.connection.connect(shadow.outputConnection)
     }
     this.initSvg();
     if (this.rendered) {
