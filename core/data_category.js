@@ -114,8 +114,8 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
     Blockly.VariableCategory.addSep(xmlList);
     Blockly.VariableCategory.addItemOfList(xmlList, firstList);
     Blockly.VariableCategory.addItemNumberOfList(xmlList, firstList);
-    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_amountinlist', [
-        'LIST', ['VALUE', 'text', "foo"]
+    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_amountinlist', 'LIST', [
+        ['VALUE', 'text', "foo"]
     ]);
     Blockly.VariableCategory.addLengthOfList(xmlList, firstList);
     Blockly.VariableCategory.addListContainsItem(xmlList, firstList);
