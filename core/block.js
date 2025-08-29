@@ -1356,7 +1356,11 @@ Blockly.Block.prototype.jsonInit = function(json) {
       const xmlElement = document.createElement("mutation");
       for (const [name, value] of Object.entries(serializer)) {
         // force names to be lowercase, otherwise it wont save
-        xmlElement.setAttribute(name.toLowerCase(), value);
+        const lowercaseName = name.toLowerCase();
+        if (name !== lowercaseName) {
+          console.warn(`WARNING: mutation setting named ${name} in ${this.type} has uppercase characters! Converting to lowercase...`);
+        }
+        xmlElement.setAttribute(lowercaseName, value);
       }
       return xmlElement;
     }
