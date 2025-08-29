@@ -526,3 +526,28 @@ Blockly.Blocks['sound_getSoundVolume'] = {
     });
   }
 };
+
+Blockly.Blocks["sound_isSoundPaused"] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": Blockly.Categories.sound,
+      "message0": "is %1 paused?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "extensions": [
+        "output_boolean",
+        "colours_sounds"
+      ]
+    });
+  }
+};
