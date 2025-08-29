@@ -1335,6 +1335,38 @@ Blockly.Block.prototype.jsonInit = function(json) {
   if (json['category'] !== undefined) {
     this.setCategory(json['category']);
   }
+
+  if (json['mutations']) {
+    const handler = json['mutations'];
+    this.mutationToDom = function () {
+      // save mutations
+      const serializer = Object.create(null);
+      handler.serialize(this, serializer);
+      const xmlElement = document.createElement("mutation");
+      for (const [name, value] of Object.entries(serializer)) {
+        // force names to be lowercase, otherwise it wont save
+        const lowercaseName = name.toLowerCase();
+        if (name !== lowercaseName) {
+          console.warn(`WARNING: mutation setting named ${name} in ${this.type} has uppercase characters! Converting to lowercase...`);
+        }
+        xmlElement.setAttribute(lowercaseName, value);
+      }
+      return xmlElement;
+    }
+    
+    this.domToMutation = function(xmlElement) {
+      // load mutations
+      const deserialized = {};
+      for (const attr of xmlElement.attributes) {
+        deserialized[attr.name] = attr.value;
+      }
+
+      handler.deserialize(this, deserialized);
+    }
+
+    // optional mutation initialize
+    if (handler.init) handler.init(this);
+  }
 };
 
 /**
