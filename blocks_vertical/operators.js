@@ -222,7 +222,10 @@ Blockly.Blocks['operator_expandableMath'] = {
       for (let i = 1; i < connections.length; i++) {
         const block = connections[i].targetBlock();
         if (!block) continue;
-        if (!block.category_ && !block.isShadow()) block.dispose();
+        if (
+          !block.category_ && !block.isShadow() &&
+          !block.type.startsWith("procedures_") && !block.type.startsWith("argument_")
+        ) block.dispose();
       }
     });
   },
@@ -713,7 +716,10 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
       for (let i = 1; i < connections.length; i++) {
         const block = connections[i].targetBlock();
         if (!block) continue;
-        if (!block.category_ && !block.isShadow()) block.dispose();
+        if (
+          !block.category_ && !block.isShadow() &&
+          !block.type.startsWith("procedures_") && !block.type.startsWith("argument_")
+        ) block.dispose();
       }
     });
   },
