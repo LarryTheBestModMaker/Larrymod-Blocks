@@ -1502,7 +1502,8 @@ Blockly.BlockSvg.prototype.renderClassify_ = function() {
  */
 Blockly.BlockSvg.prototype.renderDrawTop_ = function(steps, rightEdge) {
   if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-    this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+    this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' ||
+    this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat') {
     steps.push('m 0, 0');
     steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_DEFINE_HAT);
   } else {
@@ -1607,7 +1608,22 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
           this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY, cursorX);
         }
-        if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat') {
+          if (!this.edgeShape_ || this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
+            // Include corner radius in drawing the horizontal line.
+            steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS);
+            steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
+          } else {
+            // Don't include corner radius - no corner (edge shape drawn).
+            steps.push('H', cursorX - this.edgeShapeWidth_);
+          }
+          // Subtract CORNER_RADIUS * 2 to account for the top right corner
+          // and also the bottom right corner. Only move vertically the non-corner length.
+          if (!this.edgeShape_ || this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
+            steps.push('v', row.height - Blockly.BlockSvg.CORNER_RADIUS * 2);
+          }
+        }
+        if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' && this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat') {
           if (!this.edgeShape_ || this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
             // Include corner radius in drawing the horizontal line.
             steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS);
@@ -1634,7 +1650,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         // Move to the start of the notch.
         cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
   
-        if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
+        if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
+         this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat') {
           this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
         } else {
           Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
@@ -1649,7 +1666,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
             input.connection.targetBlock().getHeightWidth().width + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
         }
         if ((!(this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-          this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return')) &&
+          this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' ||
+          this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat')) &&
           (y == inputRows.length - 1 ||
             inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
           // If the final input is a statement stack, add a small row underneath.

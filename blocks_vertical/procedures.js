@@ -1075,6 +1075,26 @@ Blockly.Blocks['procedures_definition_return'] = {
   }
 };
 
+Blockly.Blocks['procedures_definition_hat'] = {
+  /**
+   * Block for defining a procedure with no return value.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "define hat %1",
+      "args0": [
+        {
+          "type": "input_hat",
+          "name": "custom_block",
+          "check": 'procedure'
+        }
+      ],
+      "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
+    });
+  }
+};
+
 Blockly.Blocks['procedures_call'] = {
   /**
    * Block for calling a procedure with no return value.

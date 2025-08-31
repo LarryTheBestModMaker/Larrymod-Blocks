@@ -1243,6 +1243,16 @@ Blockly.Block.prototype.appendStatementInput = function(name) {
 };
 
 /**
+ * Shortcut for appending a hat input row.
+ * @param {string} name Language-neutral identifier which may used to find this
+ *     input again.  Should be unique to this block.
+ * @return {!Blockly.Input} The input object created.
+ */
+Blockly.Block.prototype.appendHatInput = function(name) {
+  return this.appendInput_(Blockly.NEXT_STATEMENT, name);
+};
+
+/**
  * Shortcut for appending a dummy input row.
  * @param {string=} opt_name Language-neutral identifier which may used to find
  *     this input again.  Should be unique to this block.
@@ -1506,6 +1516,9 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
               break;
             case 'input_statement':
               input = this.appendStatementInput(element['name']);
+              break;
+            case 'input_hat':
+              input = this.appendHatInput(element['name']);
               break;
             case 'input_dummy':
               input = this.appendDummyInput(element['name']);

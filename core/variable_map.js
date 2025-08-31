@@ -245,7 +245,8 @@ Blockly.VariableMap.prototype.deleteVariableById = function(id) {
     var uses = this.getVariableUsesById(id);
     for (var i = 0, block; block = uses[i]; i++) {
       if (block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-        block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' ||
+        block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat') {
         var procedureName = block.getFieldValue('NAME');
         var deleteText = Blockly.Msg.CANNOT_DELETE_VARIABLE_PROCEDURE.
             replace('%1', variableName).
