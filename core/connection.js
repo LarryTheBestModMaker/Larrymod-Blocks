@@ -296,6 +296,18 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   }
   var blockA = this.sourceBlock_;
   var blockB = target.getSourceBlock();
+
+  function isHatBlock(block) {
+    return block && !block.previousConnection;
+  }
+
+  if (this.type === Blockly.NEXT_STATEMENT &&
+    (blockA.type.startsWith('procedures_definition')) &&
+    isHatBlock(blockB)
+  ) {
+      return Blockly.Connection.CAN_CONNECT;
+  }
+
   if (blockA && blockA == blockB) {
     return Blockly.Connection.REASON_SELF_CONNECTION;
   } else if (target.type != Blockly.OPPOSITE_TYPE[this.type]) {

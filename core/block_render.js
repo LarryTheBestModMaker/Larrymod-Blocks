@@ -1005,7 +1005,8 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
       continue;
     }
     var isSecondInputOnProcedure = (this.type == 'procedures_definition' ||
-        this.type == 'procedures_definition_return') &&
+        this.type == 'procedures_definition_return' ||
+        this.type == 'procedures_definition_hat') &&
         lastType && lastType == Blockly.NEXT_STATEMENT;
     var row;
     // Don't create a new row for the second dummy input on a procedure block.
