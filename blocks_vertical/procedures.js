@@ -220,8 +220,13 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
         this.setNextStatement(false, 'procedure')
         break
       case 'hat':
-        this.setPreviousStatement(false, 'procedure')
-        this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
+        if (this.getParent() && this.getParent().type.startsWith('procedures_definition')) {
+          this.setPreviousStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal');
+          this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal');
+        } else {
+          this.setPreviousStatement(false, 'procedure');
+          this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal');
+        }
         break
     }
   }
