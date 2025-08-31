@@ -661,7 +661,7 @@ Blockly.Blocks['motion_ifonxybounce'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "if touching x: %1 y: %2, bounce",
+      "message0": Blockly.Msg.MOTION_IFONXYBOUNCE,
       "args0": [
         {
           "type": "input_value",
@@ -692,8 +692,8 @@ Blockly.Blocks['motion_setrotationstyle'] = {
           "name": "STYLE",
           "options": [
             [Blockly.Msg.MOTION_SETROTATIONSTYLE_LEFTRIGHT, 'left-right'],
-            ['up-down', 'up-down'],
-            ['look at', 'look at'],
+            [Blockly.Msg.MOTION_SETROTATIONSTYLE_UPDOWN, 'up-down'],
+            [Blockly.Msg.MOTION_SETROTATIONSTYLE_LOOKAT, 'look at'],
             [Blockly.Msg.MOTION_SETROTATIONSTYLE_DONTROTATE, 'don\'t rotate'],
             [Blockly.Msg.MOTION_SETROTATIONSTYLE_ALLAROUND, 'all around']
           ]
@@ -758,7 +758,7 @@ Blockly.Blocks['motion_rotationstyle'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "rotation style",
+      "message0": Blockly.Msg.MOTION_ROTATIONSTYLE,
       "category": Blockly.Categories.motion,
       "checkboxInFlyout": true,
       "extensions": ["colours_motion", "output_string"]

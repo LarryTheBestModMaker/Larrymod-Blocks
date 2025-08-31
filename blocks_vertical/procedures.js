@@ -199,9 +199,9 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
         this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
         this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Number')
         break
-      case 'color':
-        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Color')
+      case 'leaf':
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_LEAF);
+        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Vector')
         break
       case 'boolean':
         this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL);
@@ -1042,7 +1042,7 @@ Blockly.Blocks['procedures_definition'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "define statement %1",
+      "message0": Blockly.Msg.PROCEDURES_DEFINITION,
       "args0": [
         {
           "type": "input_statement",
@@ -1062,7 +1062,7 @@ Blockly.Blocks['procedures_definition_return'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "define return-block %1",
+      "message0": Blockly.Msg.PROCEDURES_DEFINITION,
       "args0": [
         {
           "type": "input_value",
@@ -1082,7 +1082,7 @@ Blockly.Blocks['procedures_definition_hat'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "define hat %1",
+      "message0": Blockly.Msg.PROCEDURES_DEFINITION,
       "args0": [
         {
           "type": "input_hat",

@@ -375,7 +375,7 @@ Blockly.Blocks['sound_getEffectValue'] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 effect",
+      "message0": Blockly.Msg.SOUND_GETEFFECTVALUE,
       "category": Blockly.Categories.sound,
       "args0": [
         {
@@ -474,7 +474,7 @@ Blockly.Blocks['sound_getLength'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "length of %1",
+      "message0": Blockly.Msg.OPERATORS_LENGTH,
       "args0": [
         {
           "type": "input_value",

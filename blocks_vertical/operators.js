@@ -820,7 +820,7 @@ Blockly.Blocks["operator_newLine"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "new line",
+      "message0": Blockly.Msg.OPERATORS_NEWLINE,
       "args0": [],
       "category": Blockly.Categories.operators,
       "extensions": ["colours_operators", "output_string"]
@@ -1364,7 +1364,7 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
       "extensions": ["colours_operators", "output_string"]
     });
 
-    this.messageList = ["apple", "banana", "pear", "orange", "mango", "strawberry", "pineapple", "grape", "kiwi"];
+    this.messageList = [Blockly.Msg.OPERATORS_JOIN_APPLE, Blockly.Msg.OPERATORS_JOIN_BANANA, Blockly.Msg.OPERATORS_JOIN_PEAR, "orange", "mango", "strawberry", "pineapple", "grape", "kiwi"];
     this.inputs_ = 2;
     if (this.isInFlyout) {
       for (let i = 0; i < this.inputs_; i++) {
@@ -1571,5 +1571,55 @@ Blockly.Blocks['operator_expandableMath'] = {
       this, 'mutation', null, oldMutation, newMutation
     ));
     Blockly.Events.setGroup(false);
+  }
+};
+
+Blockly.Blocks['operator_strictlyContains'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 strictly contains %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "STRING1"
+        },
+        {
+          "type": "input_value",
+          "name": "STRING2"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks['operator_strictlyEquals'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 strictly equals %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "A"
+        },
+        {
+          "type": "input_value",
+          "name": "B"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
   }
 };

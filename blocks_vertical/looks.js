@@ -339,7 +339,7 @@ Blockly.Blocks['looks_showallsprites'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "show all sprites",
+      "message0": Blockly.Msg.LOOKS_SHOWALLSPRITES,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
     });
@@ -1102,7 +1102,7 @@ Blockly.Blocks["looks_getEffectValue"] = {
     this.jsonInit({
       "inputsInline": true,
       "category": "looks",
-      "message0": "%1 effect",
+      "message0": Blockly.Msg.LOOKS_GETEFFECTVALUE,
       "args0": [
         {
           "type": "field_dropdown",

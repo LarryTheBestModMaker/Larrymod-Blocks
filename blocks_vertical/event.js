@@ -227,7 +227,7 @@ Blockly.Blocks['event_whenlesserthan'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "when %1 < %2",
+      "message0": Blockly.Msg.EVENT_WHENLESSERTHAN,
       "args0": [
         {
           "type": "field_dropdown",

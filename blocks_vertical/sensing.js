@@ -659,7 +659,7 @@ Blockly.Blocks['sensing_getdragmode'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "draggable?",
+      "message0": Blockly.Msg.SENSING_DRAGGABLE,
       "category": Blockly.Categories.sensing,
       "extensions": ["colours_sensing", "output_boolean"]
     });
@@ -909,7 +909,7 @@ Blockly.Blocks['sensing_dayssince'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "days since %1",
+      "message0": Blockly.Msg.SENSING_DAYSSINCE,
       "args0": [
         {
           "type":"input_value",
