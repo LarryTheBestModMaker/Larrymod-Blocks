@@ -6,6 +6,26 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
+Blockly.Blocks['control_expandableCase'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": '%1 %2',
+      "args0": [
+        {
+          "type": "field_expandable_remove",
+          "name": "REMOVE"
+        },
+        {
+          "type": "field_expandable_add",
+          "name": "ADD"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_case"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_setVertTransform'] = {
   /**
    * Block to report properties of sprites.
