@@ -686,8 +686,21 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
   fillInBlock: function (connection, index) {
     if (connection.sourceBlock_.isInsertionMarker_) return;
     const block = this.workspace.newBlock('text');
-    const text = this.messageList[index];
-    block.setFieldValue(text ? text : "...", "TEXT");
+
+    let textValue = this.messageList[index];
+    const editingTarget = window.vm.editingTarget;
+    if (editingTarget) {
+      const vmBlock = editingTarget.blocks.getBlock(this.id);
+      if (vmBlock) {
+        const input = vmBlock.inputs[`INPUT${index + 1}`];
+        if (input) {
+          const inpuBlock = editingTarget.blocks.getBlock(input.block);
+          if (inpuBlock) textValue = inpuBlock.fields.TEXT.value;
+        }
+      }
+    }
+
+    block.setFieldValue(textValue !== undefined ? textValue : "...", "TEXT");
     block.setShadow(true);
     block.initSvg();
     block.render(false);
