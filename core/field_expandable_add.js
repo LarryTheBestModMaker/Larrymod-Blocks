@@ -105,8 +105,8 @@ Blockly.FieldExpandableAdd.prototype.init = function() {
   // since this field is typicall paired with expandable_remove, no need to paste this twice
   // inject utility code to source block
   this.sourceBlock_.fillInBlock = function (connection, type, optValue) {
-    const srcBlock = this.sourceBlock_;
-    if (connection.sourceBlock_.isInsertionMarker_) return;
+    const srcBlock = connection.sourceBlock_;
+    if (srcBlock.isInsertionMarker_) return;
 
     Blockly.Events.disable();
     const block = srcBlock.workspace.newBlock(type);
