@@ -27,6 +27,27 @@ goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
+/* Utility function for Expandable Blocks */
+const mutatorPopulateUtil = function (connection, type, optValue, optValueName) {
+  if (connection.sourceBlock_.isInsertionMarker_) return;
+
+  ScratchBlocks.Events.disable();
+  const block = this.workspace.newBlock(type);
+  try {
+    if (optValue) block.setFieldValue(optValue, optValueName);
+    block.setShadow(true);
+    if (!this.isInsertionMarker()) {
+      block.initSvg();
+      block.render(false);
+    }
+  } finally {
+    ScratchBlocks.Events.enable();
+  }
+
+  if (ScratchBlocks.Events.isEnabled()) ScratchBlocks.Events.fire(new ScratchBlocks.Events.BlockCreate(block));
+  if (block.outputConnection) block.outputConnection.connect(connection);
+  else block.previousConnection.connect(connection);
+}
 
 Blockly.Blocks['operator_add'] = {
   /**
@@ -147,15 +168,17 @@ Blockly.Blocks['operator_expandableMath'] = {
     });
 
     this.inputs_ = 2;
+    this.oldInputs_ = null;
     if (this.isInFlyout) {
       const input1 = this.appendValueInput("NUM1");
-      this.fillInBlock(input1.connection, 0);
+      this.fillInBlock(input1.connection, "math_number");
       const input2 = this.appendValueInput("NUM2");
       input2.appendField(this.menuGenerator());
-      this.fillInBlock(input2.connection, 1);
+      this.fillInBlock(input2.connection, "math_number");
     }
   },
 
+  fillInBlock: mutatorPopulateUtil,
   menuGenerator: function() {
     const dropdown = new Blockly.FieldDropdown(function () {
       return [
@@ -180,21 +203,11 @@ Blockly.Blocks['operator_expandableMath'] = {
     }
     return dropdown;
   },
-  fillInBlock: function (connection, index) {
-    if (connection.sourceBlock_.isInsertionMarker_) return;
-    const block = this.workspace.newBlock('math_number');
-    block.setShadow(true);
-    block.initSvg();
-    block.render(false);
-    block.outputConnection.connect(connection);
-  },
 
   mutationToDom: function () {
     // on save
     const container = document.createElement("mutation");
-    let number = Number(this.inputs_);
-    if (isNaN(number)) number = 1;
-    container.setAttribute("inputcount", String(number));
+    container.setAttribute("inputcount", String(this.inputs_));
     let orderedOperations = "";
     for (var i = 1; i < this.inputList.length; i++) {
       const input = this.inputList[i];
@@ -203,9 +216,9 @@ Blockly.Blocks['operator_expandableMath'] = {
     container.setAttribute("menuvalues", orderedOperations);
     return container;
   },
-
   domToMutation: function (xmlElement) {
     // on load
+    if (this.oldInputs_ === this.inputs_) return;
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
     const menuValues = String(xmlElement.getAttribute("menuvalues"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
@@ -215,19 +228,9 @@ Blockly.Blocks['operator_expandableMath'] = {
         const menu = input.appendField(this.menuGenerator());
         menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "+", true);
       }
-      this.fillInBlock(input.connection, i);
+      this.fillInBlock(input.connection, "math_number");
     }
-    queueMicrotask(() => {
-      const connections = this.getConnections_();
-      for (let i = 1; i < connections.length; i++) {
-        const block = connections[i].targetBlock();
-        if (!block) continue;
-        if (
-          !block.category_ && !block.isShadow() &&
-          !block.type.startsWith("procedures_") && !block.type.startsWith("argument_")
-        ) block.dispose();
-      }
-    });
+    this.oldInputs_ = this.inputs_;
   },
 
   onExpandableButtonClicked_: function (isAdding) {
@@ -240,7 +243,7 @@ Blockly.Blocks['operator_expandableMath'] = {
       const number = this.inputs_;
       const newInput = this.appendValueInput(`NUM${number}`);
       newInput.appendField(this.menuGenerator());
-      this.fillInBlock(newInput.connection, number - 1);
+      this.fillInBlock(newInput.connection, "math_number");
     } else if (this.inputs_ > 1) {
       const number = this.inputs_;
       this.removeInput(`NUM${number}`);
@@ -675,66 +678,33 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
 
     this.messageList = ["apple", "banana", "pear", "orange", "mango", "strawberry", "pineapple", "grape", "kiwi"];
     this.inputs_ = 2;
-    if (this.isInFlyout) {
+    this.oldInputs_ = null;
+    if (this.isInFlyout) queueMicrotask(() => {
       for (let i = 0; i < this.inputs_; i++) {
         const input = this.appendValueInput(`INPUT${i + 1}`);
-        this.fillInBlock(input.connection, i);
+        this.fillInBlock(input.connection, "text", this.messageList[i], "TEXT");
       }
-    }
+    })
   },
 
-  fillInBlock: function (connection, index) {
-    if (connection.sourceBlock_.isInsertionMarker_) return;
-    const block = this.workspace.newBlock('text');
-
-    let textValue = this.messageList[index];
-    const editingTarget = window.vm.editingTarget;
-    if (editingTarget) {
-      const vmBlock = editingTarget.blocks.getBlock(this.id);
-      if (vmBlock) {
-        const input = vmBlock.inputs[`INPUT${index + 1}`];
-        if (input) {
-          const inpuBlock = editingTarget.blocks.getBlock(input.block);
-          if (inpuBlock) textValue = inpuBlock.fields.TEXT.value;
-        }
-      }
-    }
-
-    block.setFieldValue(textValue !== undefined ? textValue : "...", "TEXT");
-    block.setShadow(true);
-    block.initSvg();
-    block.render(false);
-    block.outputConnection.connect(connection);
-  },
+  fillInBlock: mutatorPopulateUtil,
 
   mutationToDom: function () {
     // on save
     const container = document.createElement("mutation");
-    let number = Number(this.inputs_);
-    if (isNaN(number)) number = 1;
-    container.setAttribute("inputcount", String(number));
+    container.setAttribute("inputcount", String(this.inputs_));
     return container;
   },
-
   domToMutation: function (xmlElement) {
     // on load
+    if (this.oldInputs_ === this.inputs_) return;
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
     for (let i = 0; i < this.inputs_; i++) {
       const input = this.appendValueInput(`INPUT${i + 1}`);
-      this.fillInBlock(input.connection, i);
+      this.fillInBlock(input.connection, "text", this.messageList[i], "TEXT");
     }
-    queueMicrotask(() => {
-      const connections = this.getConnections_();
-      for (let i = 1; i < connections.length; i++) {
-        const block = connections[i].targetBlock();
-        if (!block) continue;
-        if (
-          !block.category_ && !block.isShadow() &&
-          !block.type.startsWith("procedures_") && !block.type.startsWith("argument_")
-        ) block.dispose();
-      }
-    });
+    this.oldInputs_ = this.inputs_;
   },
 
   onExpandableButtonClicked_: function (isAdding) {
@@ -746,10 +716,9 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
       this.inputs_++;
       const number = this.inputs_;
       const newInput = this.appendValueInput(`INPUT${number}`);
-      this.fillInBlock(newInput.connection, number - 1);
+      this.fillInBlock(newInput.connection, "text", this.messageList[number - 1], "TEXT");
     } else if (this.inputs_ > 1) {
-      const number = this.inputs_;
-      this.removeInput(`INPUT${number}`);
+      this.removeInput(`INPUT${this.inputs_}`);
       this.inputs_--;
     }
     this.initSvg();
