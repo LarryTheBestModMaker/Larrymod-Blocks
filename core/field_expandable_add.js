@@ -101,31 +101,6 @@ Blockly.FieldExpandableAdd.prototype.init = function() {
     this.boxGroup_
   );
   this.fieldGroup_.insertBefore(this.boxGroup_, this.textElement_);
-
-  // since this field is typicall paired with expandable_remove, no need to paste this twice
-  // inject utility code to source block
-  this.sourceBlock_.fillInBlock = function (connection, type, optValue) {
-    const srcBlock = connection.sourceBlock_;
-    if (srcBlock.isInsertionMarker_) return;
-
-    Blockly.Events.disable();
-    const block = srcBlock.workspace.newBlock(type);
-    try {
-      if (optValue) block.setFieldValue(optValue);
-      block.setShadow(true);
-      if (!srcBlock.isInsertionMarker()) {
-        block.initSvg();
-        block.render(false);
-      }
-    } finally {
-      Blockly.Events.enable();
-    }
-
-    if (Blockly.Events.isEnabled()) Blockly.Events.fire(new Blockly.Events.BlockCreate(block));
-    if (block.outputConnection) block.outputConnection.connect(connection);
-    else block.previousConnection.connect(connection);
-    return block;
-  }
 };
 
 /**
