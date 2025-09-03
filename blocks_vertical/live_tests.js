@@ -6,7 +6,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
-Blockly.Blocks['control_expandableCase'] = {
+Blockly.Blocks['control_expandableIf'] = {
   /**
    * pm: Block for joining strings together (determined by user)
    * @this Blockly.Block
@@ -27,78 +27,6 @@ Blockly.Blocks['control_expandableCase'] = {
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_case"]
     });
-
-    this.cases_ = 0;
-    if (this.isInFlyout) this.addCase();
-  },
-
-  fillInBlock: function (connection) {
-    if (connection.sourceBlock_.isInsertionMarker_) return;
-    const block = this.workspace.newBlock('text');
-    // TODO text values are undefined/dont save
-    block.setShadow(true);
-    block.initSvg();
-    block.render(false);
-    block.outputConnection.connect(connection);
-  },
-  addCase: function () {
-    this.appendDummyInput(`BREAK${this.cases_}`).appendField("case");
-    const input = this.appendValueInput(`CASE${this.cases_}`);
-    this.fillInBlock(input.connection);
-    this.appendStatementInput(`STACKCASE${this.cases_}`);
-  },
-
-  mutationToDom: function () {
-    // on save
-    const container = document.createElement("mutation");
-    let number = Number(this.cases_);
-    if (isNaN(number)) number = 1;
-    container.setAttribute("casecount", String(number));
-    return container;
-  },
-
-  domToMutation: function (xmlElement) {
-    // on load
-    const inputCount = Number(xmlElement.getAttribute("casecount"));
-    this.cases_ = isNaN(inputCount) ? 0 : inputCount;
-    for (let i = 0; i < this.cases_; i++) this.addCase();
-    // TODO white text blocks keep spawing for all expandables, i feel like this is just due to me doing it wrong
-    // TODO stack values dont save
-    /*queueMicrotask(() => {
-      const connections = this.getConnections_();
-      for (let i = 1; i < connections.length; i++) {
-        const block = connections[i].targetBlock();
-        if (!block) continue;
-        if (
-          !block.category_ && !block.isShadow() &&
-          !block.type.startsWith("procedures_") && !block.type.startsWith("argument_")
-        ) block.dispose();
-      }
-    });*/
-  },
-
-  onExpandableButtonClicked_: function (isAdding) {
-    // Create an event group to keep field value and mutator in sync
-    // Return null at the end because setValue is called here already.
-    Blockly.Events.setGroup(true);
-    var oldMutation = Blockly.Xml.domToText(this.mutationToDom());
-    if (isAdding) {
-      this.cases_++;
-      this.addCase();
-    } else if (this.cases_ > 1) {
-      this.removeInput(`CASE${this.cases_}`);
-      this.removeInput(`STACKCASE${this.cases_}`);
-      this.removeInput(`BREAK${this.cases_}`);
-      this.cases_--;
-    }
-    this.initSvg();
-    if (this.rendered) this.render();
-
-    var newMutation = Blockly.Xml.domToText(this.mutationToDom());
-    Blockly.Events.fire(new Blockly.Events.BlockChange(
-      this, 'mutation', null, oldMutation, newMutation
-    ));
-    Blockly.Events.setGroup(false);
   }
 };
 
