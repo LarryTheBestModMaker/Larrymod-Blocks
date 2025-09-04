@@ -297,13 +297,9 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   var blockA = this.sourceBlock_;
   var blockB = target.getSourceBlock();
 
-  function isHatBlock(block) {
-    return block && !block.previousConnection;
-  }
-
   if (this.type === Blockly.NEXT_STATEMENT &&
     (blockA.type.startsWith('procedures_definition')) &&
-    isHatBlock(blockB)
+    target && !target.previousConnection
   ) {
       return Blockly.Connection.CAN_CONNECT;
   }
