@@ -682,7 +682,8 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     if (this.isInFlyout) queueMicrotask(() => {
       for (let i = 0; i < this.inputs_; i++) {
         const input = this.appendValueInput(`INPUT${i + 1}`);
-        this.fillInBlock(input.connection, "text", this.messageList[i], "TEXT");
+        const text this.messageList[i];
+        this.fillInBlock(input.connection, "text", text ? text : "...", "TEXT");
       }
     })
   },
@@ -702,7 +703,8 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
     for (let i = 0; i < this.inputs_; i++) {
       const input = this.appendValueInput(`INPUT${i + 1}`);
-      this.fillInBlock(input.connection, "text", this.messageList[i], "TEXT");
+      const text = this.messageList[i];
+      this.fillInBlock(input.connection, "text", text ? text : "...", "TEXT");
     }
     this.oldInputs_ = this.inputs_;
   },
@@ -716,7 +718,8 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
       this.inputs_++;
       const number = this.inputs_;
       const newInput = this.appendValueInput(`INPUT${number}`);
-      this.fillInBlock(newInput.connection, "text", this.messageList[number - 1], "TEXT");
+      const text = this.messageList[number - 1];
+      this.fillInBlock(newInput.connection, "text",  text ? text : "...", "TEXT");
     } else if (this.inputs_ > 1) {
       this.removeInput(`INPUT${this.inputs_}`);
       this.inputs_--;
