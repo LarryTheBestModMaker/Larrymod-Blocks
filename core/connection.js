@@ -295,7 +295,9 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_TARGET_NULL;
   }
   var blockA = this.sourceBlock_;
+  console.log(blockA)
   var blockB = target.getSourceBlock();
+  console.log(target, blockB)
 
   if (this.type === Blockly.NEXT_STATEMENT &&
     (blockA.type.startsWith('procedures_definition')) &&
