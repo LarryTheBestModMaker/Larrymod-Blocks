@@ -682,7 +682,7 @@ Blockly.Blocks['operators_expandablejoininputs'] = {
     if (this.isInFlyout) queueMicrotask(() => {
       for (let i = 0; i < this.inputs_; i++) {
         const input = this.appendValueInput(`INPUT${i + 1}`);
-        const text this.messageList[i];
+        const text = this.messageList[i];
         this.fillInBlock(input.connection, "text", text ? text : "...", "TEXT");
       }
     })
