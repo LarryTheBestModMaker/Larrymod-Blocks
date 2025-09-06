@@ -6,27 +6,6 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
-const mutatorPopulateUtil = function (connection, type, optValue, optValueName) {
-  if (connection.sourceBlock_.isInsertionMarker_) return;
-
-  ScratchBlocks.Events.disable();
-  const block = this.workspace.newBlock(type);
-  try {
-    if (optValue) block.setFieldValue(optValue, optValueName);
-    block.setShadow(true);
-    if (!this.isInsertionMarker()) {
-      block.initSvg();
-      block.render(false);
-    }
-  } finally {
-    ScratchBlocks.Events.enable();
-  }
-
-  if (ScratchBlocks.Events.isEnabled()) ScratchBlocks.Events.fire(new ScratchBlocks.Events.BlockCreate(block));
-  if (block.outputConnection) block.outputConnection.connect(connection);
-  else block.previousConnection.connect(connection);
-}
-
 Blockly.Blocks['control_expandableIf'] = {
   /**
    * pm: Block for joining strings together (determined by user)
