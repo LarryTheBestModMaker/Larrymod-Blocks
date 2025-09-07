@@ -654,7 +654,7 @@ Blockly.Blocks['operator_join3'] = {
   }
 };
 
-Blockly.Blocks['operators_expandablejoininputs'] = {
+Blockly.Blocks['operator_expandablejoininputs'] = {
   /**
    * pm: Block for joining strings together (determined by user)
    * @this Blockly.Block
