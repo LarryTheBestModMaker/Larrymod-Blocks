@@ -34,12 +34,8 @@ Blockly.Blocks['control_expandableIf'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": '%1 %2 %3',
+      "message0": 'hidden %1 %2',
       "args0": [
-        {
-          "type": "field_expandable_remove",
-          "name": "HIDDEN" // this is only used to override the height of the block
-        },
         {
           "type": "field_expandable_remove",
           "name": "REMOVE"
@@ -65,7 +61,6 @@ Blockly.Blocks['control_expandableIf'] = {
     this.inputList.splice(this.inputList.indexOf(expandableInput), 1);
     this.inputList.push(expandableInput);
 
-    // TODO try fixing the width here in the hidden button
     expandableInput.setAlign(1);
     const hiddenBtn = expandableInput.fieldRow[0];
     hiddenBtn.size_.width = 0.5;
@@ -73,7 +68,6 @@ Blockly.Blocks['control_expandableIf'] = {
     hiddenBtn.setVisible(false);
   },
   addCase: function () {
-    // TODO maybe? Rare instances where the text is misplaced
     if (this.nextIsElse) {
       this.appendDummyInput(`TEXTSTART${this.branches_}`).appendField("else");
       this.appendStatementInput(`SUBSTACK${this.branches_}`);
