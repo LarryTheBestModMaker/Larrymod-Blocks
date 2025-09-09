@@ -76,7 +76,7 @@ Blockly.Blocks['control_expandableIf'] = {
     // TODO maybe? Rare instances where the text is misplaced
     if (this.nextIsElse) {
       this.appendDummyInput(`TEXTSTART${this.branches_}`).appendField("else");
-      this.appendStatementInput(`STACK${this.branches_}`);
+      this.appendStatementInput(`SUBSTACK${this.branches_}`);
       this.endsInElse = true;
     } else {
       const prevText = this.getInput(`TEXTSTART${this.branches_}`);
@@ -87,12 +87,12 @@ Blockly.Blocks['control_expandableIf'] = {
       this.appendDummyInput(`TEXTEND${this.branches_}`).appendField("then");
 
       // swap out the connection with the old and new branch
-      const prevBranch = this.getInput(`STACK${this.branches_}`);
-      const newBranch = this.appendStatementInput(`STACK${this.branches_}`);
+      const prevBranch = this.getInput(`SUBSTACK${this.branches_}`);
+      const newBranch = this.appendStatementInput(`SUBSTACK${this.branches_}`);
       if (this.branches_ > 1) {
         const prevBranchBlock = prevBranch.connection.targetBlock();
         if (prevBranchBlock) newBranch.connection.connect(prevBranchBlock.previousConnection);
-        this.removeInput(`STACK${this.branches_}`);
+        this.removeInput(`SUBSTACK${this.branches_}`);
       }
       this.endsInElse = false;
     }
@@ -123,7 +123,7 @@ Blockly.Blocks['control_expandableIf'] = {
         this.fillInBlock(input.connection, "checkbox");
         this.appendDummyInput(`TEXTEND${i}`).appendField("then");
       }
-      this.appendStatementInput(`STACK${i}`);
+      this.appendStatementInput(`SUBSTACK${i}`);
     }
 
     this.fixupButtons();
@@ -140,7 +140,7 @@ Blockly.Blocks['control_expandableIf'] = {
       this.nextIsElse = !this.nextIsElse;
     } else if (this.branches_ > 1) {
       this.removeInput(`BOOL${this.branches_}`);
-      this.removeInput(`STACK${this.branches_}`);
+      this.removeInput(`SUBSTACK${this.branches_}`);
       this.removeInput(`TEXTSTART${this.branches_}`);
       this.removeInput(`TEXTEND${this.branches_}`);
       this.branches_--;
