@@ -75,7 +75,7 @@ Blockly.Blocks['control_expandableIf'] = {
     } else {
       const prevText = this.getInput(`TEXTSTART${this.branches_}`);
       if (prevText) prevText.appendField("if");
-      else this.appendDummyInput().appendField("if");
+      else this.appendDummyInput(`TEXTSTART${this.branches_}`).appendField("if");
       const input = this.appendValueInput(`BOOL${this.branches_}`);
       this.fillInBlock(input.connection, "checkbox");
       this.appendDummyInput(`TEXTEND${this.branches_}`).appendField("then");
