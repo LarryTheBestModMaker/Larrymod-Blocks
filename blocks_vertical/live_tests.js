@@ -29,7 +29,7 @@ const mutatorPopulateUtil2 = function (connection, type, optValue, optValueName)
 
 Blockly.Blocks['control_expandableIf'] = {
   /**
-   * pm: Block for joining strings together (determined by user)
+   * pm: add this description before publishing...
    * @this Blockly.Block
    */
   init: function () {
@@ -105,19 +105,19 @@ Blockly.Blocks['control_expandableIf'] = {
   domToMutation: function (xmlElement) {
     // on load
     const inputCount = Number(xmlElement.getAttribute("branches"));
-    this.branches_ = isNaN(inputCount) ? 0 : inputCount;
-    this.endsInElse = xmlElement.getAttribute("ends-in-else") === "true";
-    this.nextIsElse = !this.endsInElse;
-    for (let i = 1; i < this.branches_ + 1; i++) {
-      if (i === this.branches_ && i > 1 && this.endsInElse) {
-        this.appendDummyInput(`TEXTEND${i}`).appendField("else");
-      } else {
-        this.appendDummyInput(`TEXTSTART${i}`).appendField(i === 1 ? "if" : "else if");
-        const input = this.appendValueInput(`BOOL${i}`);
-        this.fillInBlock(input.connection, "checkbox");
-        this.appendDummyInput(`TEXTEND${i}`).appendField("then");
-      }
-      this.appendStatementInput(`SUBSTACK${i}`);
+    let branchCount = isNaN(inputCount) ? 0 : inputCount;
+    if (branchCount > 1) {
+      branchCount = (branchCount * 2) - 1;
+      if (xmlElement.getAttribute("ends-in-else") === "true") branchCount -= 1;
+    }
+
+    this.nextIsElse = false;
+    this.endsInElse = false;
+    this.branches_ = 1;
+    for (let i = 0; i < branchCount; i++) {
+      if (this.nextIsElse) this.branches_++;
+      this.addCase();
+      this.nextIsElse = !this.nextIsElse;
     }
 
     this.fixupButtons();
@@ -133,12 +133,20 @@ Blockly.Blocks['control_expandableIf'] = {
       this.addCase();
       this.nextIsElse = !this.nextIsElse;
     } else if (this.branches_ > 1) {
+      const boolInput = this.getInput(`BOOL${this.branches_}`);
+      if (boolInput) {
+        const block = boolInput.connection.targetBlock();
+        if (block.type === "checkbox") block.dispose();
+        else block.outputConnection.disconnect();
+      }
+
       this.removeInput(`BOOL${this.branches_}`);
       this.removeInput(`SUBSTACK${this.branches_}`);
       this.removeInput(`TEXTSTART${this.branches_}`);
       this.removeInput(`TEXTEND${this.branches_}`);
       this.branches_--;
       this.nextIsElse = true;
+      this.endsInElse = false;
     }
 
     this.initSvg();
