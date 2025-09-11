@@ -64,7 +64,7 @@ Blockly.Blocks['control_expandableIf'] = {
     expandableInput.setAlign(1);
     const hiddenBtn = expandableInput.fieldRow[0];
     hiddenBtn.size_.width = 0.5;
-    hiddenBtn.size_.height = 48;
+    hiddenBtn.size_.height = Blockly.BlockSvg.INPUT_SHAPE_HEIGHT + 16;
     hiddenBtn.setVisible(false);
   },
   addCase: function () {
