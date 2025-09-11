@@ -72,6 +72,7 @@ Blockly.FieldExpandableRemove.prototype.init = function() {
   }
   Blockly.FieldExpandableRemove.superClass_.init.call(this);
 
+  const ratio = Blockly.BlockSvg.FIELD_HEIGHT / 32;
   this.size_.width = Blockly.BlockSvg.FIELD_HEIGHT;
   this.overrideSep = 1;
   this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
@@ -93,8 +94,8 @@ Blockly.FieldExpandableRemove.prototype.init = function() {
     {
       'x': 5,
       'y': 5,
-      'width': this.size_.width / 1.5,
-      'height': this.size_.height / 1.5,
+      'width': (this.size_.width / 1.5) * ratio,
+      'height': (this.size_.height / 1.5) * ratio,
       'xlink:href': removeIcon,
       'href': removeIcon,
     },
