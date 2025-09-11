@@ -72,7 +72,7 @@ Blockly.FieldExpandableRemove.prototype.init = function() {
   }
   Blockly.FieldExpandableRemove.superClass_.init.call(this);
 
-  this.size_.width = 32;
+  this.size_.width = Blockly.BlockSvg.FIELD_HEIGHT;
   this.overrideSep = 1;
   this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
   this.box_ = Blockly.utils.createSvgElement('rect',
