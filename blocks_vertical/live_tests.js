@@ -126,6 +126,7 @@ Blockly.Blocks['control_expandableIf'] = {
   onExpandableButtonClicked_: function (isAdding) {
     // Create an event group to keep field value and mutator in sync
     // Return null at the end because setValue is called here already.
+    if (this.isInFlyout) return;
     Blockly.Events.setGroup(true);
     var oldMutation = Blockly.Xml.domToText(this.mutationToDom());
     if (isAdding) {
