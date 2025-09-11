@@ -92,10 +92,10 @@ Blockly.FieldExpandableAdd.prototype.init = function() {
   );
   this.icon_ = Blockly.utils.createSvgElement('image',
     {
-      'x': 5,
-      'y': 5,
-      'width': (this.size_.width / 1.5) * ratio,
-      'height': (this.size_.height / 1.5) * ratio,
+      'x': 5 * ratio,
+      'y': 5 * ratio,
+      'width': this.size_.width / 1.5,
+      'height': this.size_.height / 1.5,
       'xlink:href': plusIcon,
       'href': plusIcon,
     },
