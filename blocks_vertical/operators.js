@@ -228,7 +228,7 @@ Blockly.Blocks['operator_expandableMath'] = {
         const menu = input.appendField(this.menuGenerator());
         menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "+", true);
       }
-      this.fillInBlock(input.connection, "math_number");
+      // vm will automatically replace empty inputs with saved shadows
     }
     this.oldInputs_ = this.inputs_;
   },
@@ -702,9 +702,8 @@ Blockly.Blocks['operator_expandablejoininputs'] = {
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
     for (let i = 0; i < this.inputs_; i++) {
-      const input = this.appendValueInput(`INPUT${i + 1}`);
-      const text = this.messageList[i];
-      this.fillInBlock(input.connection, "text", text ? text : "...", "TEXT");
+      // vm will automatically replace empty inputs with saved shadows
+      this.appendValueInput(`INPUT${i + 1}`);
     }
     this.oldInputs_ = this.inputs_;
   },
