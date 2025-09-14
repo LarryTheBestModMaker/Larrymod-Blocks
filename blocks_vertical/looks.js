@@ -1168,7 +1168,7 @@ Blockly.Blocks["looks_sayColor"] = {
       "args0": [
         {
           "type": "field_dropdown",
-          "name": "EFFECT",
+          "name": "prop",
           "options": [
             ["border","BUBBLE_STROKE"],
             ["fill","BUBBLE_FILL"],
@@ -1193,7 +1193,7 @@ Blockly.Blocks["looks_sayOther"] = {
       "args0": [
         {
           "type": "field_dropdown",
-          "name": "EFFECT",
+          "name": "prop",
           "options": [
             ["minimum width","MIN_WIDTH"],
             ["maximum width","MAX_LINE_WIDTH"],
