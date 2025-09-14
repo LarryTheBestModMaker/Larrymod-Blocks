@@ -1159,6 +1159,61 @@ Blockly.Blocks["looks_sayWidth"] = {
   }
 };
 
+Blockly.Blocks["looks_sayColor"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "bubble %1 color",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "EFFECT",
+          "options": [
+            ["border","BUBBLE_STROKE"],
+            ["fill","BUBBLE_FILL"],
+            ["text","TEXT_FILL"]
+          ]
+        }
+      ],
+      "extensions": [
+        "output_string",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_sayOther"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "bubble %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "EFFECT",
+          "options": [
+            ["minimum width","MIN_WIDTH"],
+            ["maximum width","MAX_LINE_WIDTH"],
+            ["border line width","STROKE_WIDTH"],
+            ["padding size","PADDING"],
+            ["corner radius","CORNER_RADIUS"],
+            ["tail height","TAIL_HEIGHT"],
+            ["font pading percent","FONT_HEIGHT_RATIO"],
+            ["text length limit","texlim"]
+          ]
+        }
+      ],
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
 Blockly.Blocks['looks_stoptalking'] = {
   /**
    * pm: Block to stop talking/thinking.
