@@ -264,7 +264,7 @@ Blockly.Blocks['control_expandableIf'] = {
       const prevText = this.getInput(`TEXTSTART${this.branches_}`);
       if (prevText) prevText.appendField("if");
       else this.appendDummyInput(`TEXTSTART${this.branches_}`).appendField("if");
-      const input = this.appendValueInput(`BOOL${this.branches_}`);
+      const input = this.appendValueInput(`BOOL${this.branches_}`).setCheck("Boolean");
       if (shouldPopulate) this.fillInBlock(input.connection, "checkbox");
       this.appendDummyInput(`TEXTEND${this.branches_}`).appendField("then");
 
@@ -294,6 +294,23 @@ Blockly.Blocks['control_expandableIf'] = {
     // on load
     const inputCount = Number(xmlElement.getAttribute("branches"));
     let branchCount = isNaN(inputCount) ? 0 : inputCount;
+    let needsActionConnect = false, oldConnections;
+
+    if (this.inputList.length - 1 > 0) {
+      // this was a control z action
+      needsActionConnect = true;
+      oldConnections = this.getConnections_().map(c => c.targetBlock());
+
+      // clear block
+      for (var i = this.inputList.length - 1; i--;) {
+        const input = this.inputList[i];
+        if (input.name.startsWith("SUBSTACK") || input.name.startsWith("BOOL")) {
+          if (input.connection.targetBlock()) input.connection.disconnect();
+        }
+        this.removeInput(input.name);
+      }
+    }
+
     if (branchCount > 1) {
       branchCount = (branchCount * 2) - 1;
       if (xmlElement.getAttribute("ends-in-else") === "true") branchCount -= 1;
@@ -310,6 +327,25 @@ Blockly.Blocks['control_expandableIf'] = {
     }
 
     this.fixupButtons();
+    if (needsActionConnect) {
+      let index = 2;
+      for (var i = 0; i < this.inputList.length; i++) {
+        const input = this.inputList[i];
+        if (input.name.startsWith("SUBSTACK") || input.name.startsWith("BOOL")) {
+          const oldBlock = oldConnections[index];
+          if (oldBlock) {
+            try {
+              const connector = oldBlock.outputConnection ?? oldBlock.previousConnection;
+              input.connection.connect(connector);
+            } catch {}
+          }
+          index++;
+        }
+      }
+      for (var i = index - 1; i < oldConnections.length; i++) {
+        if (oldConnections[i]?.type === "checkbox") oldConnections[i].dispose();
+      }
+    }
   },
 
   onExpandableButtonClicked_: function (isAdding) {
