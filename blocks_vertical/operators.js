@@ -157,7 +157,7 @@ Blockly.Blocks['operator_expandableMath'] = {
   },
 
   fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
-  menuGenerator: function() {
+  menuGenerator: function () {
     const dropdown = new Blockly.FieldDropdown(function () {
       return [
         ["+", "+"], ["-", "-"],
@@ -200,15 +200,45 @@ Blockly.Blocks['operator_expandableMath'] = {
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
     const menuValues = String(xmlElement.getAttribute("menuvalues"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
+    let needsActionConnect = false, oldConnections;
+
+    if (this.inputList.length > 0) {
+      // this was a control z action
+      needsActionConnect = true;
+      oldConnections = this.getConnections_().map(c => c.targetBlock());
+
+      // clear block
+      for (var i = this.inputList.length; i--;) {
+        if (i === 0) break;
+        const input = this.inputList[i];
+        if (input.connection.targetBlock()) input.connection.disconnect();
+        this.removeInput(input.name);
+      }
+    }
+
     for (let i = 0; i < this.inputs_; i++) {
       const input = this.appendValueInput(`NUM${i + 1}`);
       if (i > 0) {
         const menu = input.appendField(this.menuGenerator());
         menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "+", true);
       }
-      // vm will automatically replace empty inputs with saved shadows
+      // vm will automatically replace2 empty inputs with saved shadows
     }
     this.oldInputs_ = this.inputs_;
+
+    if (needsActionConnect) {
+      let index = 0;
+      for (const input of this.inputList) {
+        const oldBlock = oldConnections[index];
+        if (oldBlock) {
+          try {
+            const connector = oldBlock.outputConnection;
+            input.connection.connect(connector);
+          } catch(e) {}
+        }
+        index++;
+      }
+    }
   },
 
   onExpandableButtonClicked_: function (isAdding) {
@@ -634,7 +664,7 @@ Blockly.Blocks['operator_join3'] = {
 
 Blockly.Blocks['operator_expandablejoininputs'] = {
   /**
-   * pm: Block for joining strings together (determined by user)
+   * pm: Block for joining n number of strings together
    * @this Blockly.Block
    */
   init: function () {
@@ -678,12 +708,41 @@ Blockly.Blocks['operator_expandablejoininputs'] = {
     // on load
     if (this.oldInputs_ === this.inputs_) return;
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
+    let needsActionConnect = false, oldConnections;
+    if (this.inputList.length > 1) {
+      // this was a control z action
+      needsActionConnect = true;
+      oldConnections = this.getConnections_().map(c => c.targetBlock());
+
+      // clear block
+      for (var i = this.inputList.length; i--;) {
+        if (i === 0) break;
+        const input = this.inputList[i];
+        if (input.connection.targetBlock()) input.connection.disconnect();
+        this.removeInput(input.name);
+      }
+    }
+
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
     for (let i = 0; i < this.inputs_; i++) {
       // vm will automatically replace empty inputs with saved shadows
-      this.appendValueInput(`INPUT${i + 1}`);
+      if (!this.getInput(`INPUT${i + 1}`)) this.appendValueInput(`INPUT${i + 1}`);
     }
     this.oldInputs_ = this.inputs_;
+
+    if (needsActionConnect) {
+      let index = 0;
+      for (const input of this.inputList) {
+        const oldBlock = oldConnections[index];
+        if (oldBlock) {
+          try {
+            const connector = oldBlock.outputConnection;
+            input.connection.connect(connector);
+          } catch(e) {}
+        }
+        index++;
+      }
+    }
   },
 
   onExpandableButtonClicked_: function (isAdding) {
