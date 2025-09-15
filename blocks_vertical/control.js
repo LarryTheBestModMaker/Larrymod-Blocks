@@ -335,7 +335,7 @@ Blockly.Blocks['control_expandableIf'] = {
           const oldBlock = oldConnections[index];
           if (oldBlock) {
             try {
-              const connector = oldBlock.outputConnection ?? oldBlock.previousConnection;
+              const connector = oldBlock.outputConnection ? oldBlock.outputConnection : oldBlock.previousConnection;
               input.connection.connect(connector);
             } catch {}
           }
