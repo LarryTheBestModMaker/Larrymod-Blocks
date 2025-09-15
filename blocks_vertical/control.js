@@ -343,7 +343,7 @@ Blockly.Blocks['control_expandableIf'] = {
         }
       }
       for (var i = index - 1; i < oldConnections.length; i++) {
-        if (oldConnections[i]?.type === "checkbox") oldConnections[i].dispose();
+        if (oldConnections[i] && oldConnections[i].type === "checkbox") oldConnections[i].dispose();
       }
     }
   },
