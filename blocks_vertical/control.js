@@ -237,8 +237,7 @@ Blockly.Blocks['control_expandableIf'] = {
       "extensions": ["colours_control", "shape_statement"]
     });
 
-    this.branches_ = 1;
-    if (this.isInFlyout) this.addCase(true);
+    this.branches_ = 0;
     this.nextIsElse = true;
     this.endsInElse = false;
   },
