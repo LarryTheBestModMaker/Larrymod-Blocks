@@ -86,7 +86,7 @@ Blockly.scratchBlocksUtils.isShadowArgumentReporter = function(block) {
   return (block.isShadow() && (block.type == 'argument_reporter_boolean' ||
       block.type == 'argument_reporter_string_number' ||
       block.type == 'argument_reporter_color_picker' ||
-      block.type == 'argument_reporter_command'));
+      block.type == 'argument_reporter_command') || block.canDragDuplicate());
 };
 
 /**

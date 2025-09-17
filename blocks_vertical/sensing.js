@@ -909,7 +909,7 @@ Blockly.Blocks['sensing_dayssince'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": Blockly.Msg.SENSING_DAYSSINCE,
+      "message0": (Blockly.Msg.SENSING_DAYSSINCE2000).replace("2000", "%1"),
       "args0": [
         {
           "type":"input_value",

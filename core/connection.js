@@ -83,6 +83,13 @@ Blockly.Connection.prototype.targetConnection = null;
 Blockly.Connection.prototype.check_ = null;
 
 /**
+ * connection shape override
+ * @type {number?}
+ * @private
+ */
+Blockly.Connection.prototype.shape_ = null;
+
+/**
  * DOM representation of a shadow block, or null if none.
  * @type {Element}
  * @private
@@ -296,14 +303,6 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   }
   var blockA = this.sourceBlock_;
   var blockB = target.getSourceBlock();
-
-  if (this.type === Blockly.NEXT_STATEMENT &&
-    (blockA.type.startsWith('procedures_definition')) &&
-    target && !target.previousConnection
-  ) {
-      return Blockly.Connection.CAN_CONNECT;
-  }
-
   if (blockA && blockA == blockB) {
     return Blockly.Connection.REASON_SELF_CONNECTION;
   } else if (target.type != Blockly.OPPOSITE_TYPE[this.type]) {
@@ -514,16 +513,35 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
  */
 Blockly.Connection.prototype.connect = function(otherConnection) {
   if (this.targetConnection == otherConnection) {
-    // Already connected together.  NOP.
+    // Already connected together. NOP.
     return;
   }
   this.checkConnection_(otherConnection);
   // Determine which block is superior (higher in the source stack).
   if (this.isSuperior()) {
     // Superior block.
+    if (!this.otherConnection && this.check_) {
+      // reshape the connected block so it inherits the parent shape
+      const block = otherConnection.sourceBlock_;
+      const hasBranches = block.inputList.some(i => i.type === Blockly.NEXT_STATEMENT);
+      if (!hasBranches && block.type !== 'procedures_prototype') {
+        if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
+        const lastConnectShape = block.outputShape_;
+        block.outputShape_ = this.getOutputShape();
+        if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
+      }
+    }
     this.connect_(otherConnection);
   } else {
     // Inferior block.
+    if (!this.check_ && otherConnection.check_) {
+      // reshape the connected block so it inherits the parent shape
+      const block = this.sourceBlock_;
+      if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;
+      const lastConnectShape = block.outputShape_;
+      block.outputShape_ = otherConnection.getOutputShape();
+      if (block.rendered && block.outputShape_ !== lastConnectShape) block.render(true);
+    }
     otherConnection.connect_(this);
   }
 };
@@ -585,6 +603,7 @@ Blockly.Connection.prototype.disconnect = function() {
     childBlock = this.sourceBlock_;
     parentConnection = otherConnection;
   }
+  if (childBlock.originalOutputShape_ !== undefined) childBlock.outputShape_ = childBlock.originalOutputShape_;
   this.disconnectInternal_(parentBlock, childBlock);
   parentConnection.respawnShadow_();
 };
@@ -651,9 +670,12 @@ Blockly.Connection.prototype.targetBlock = function() {
  */
 Blockly.Connection.prototype.checkType_ = function(otherConnection) {
   if (!this.check_ || !otherConnection.check_) {
-    // One or both sides are promiscuous enough that anything will fit.
+    // One or both sides are promiscuous enough that anything will fit,
+    // as long as the other is not a procedure.
+    if (otherConnection.check_ && otherConnection.check_[0] === 'procedure') return false;
     return true;
   }
+
   // Find any intersection in the check lists.
   for (var i = 0; i < this.check_.length; i++) {
     if (otherConnection.check_.indexOf(this.check_[i]) != -1) {
@@ -698,11 +720,28 @@ Blockly.Connection.prototype.setCheck = function(check) {
 };
 
 /**
+ * Change a connection's shape
+ * @param {number} shape Compatible value type or list of value types.
+ *     Null if all types are compatible.
+ * @return {!Blockly.Connection} The connection being modified
+ *     (to allow chaining).
+ */
+Blockly.Connection.prototype.setShape = function(shape) {
+  if (shape) {
+    this.shape_ = shape
+  } else {
+    this.shape_ = null;
+  }
+  return this;
+};
+
+/**
  * Returns a shape enum for this connection.
  * Used in scratch-blocks to draw unoccupied inputs.
  * @return {number} Enum representing shape.
  */
 Blockly.Connection.prototype.getOutputShape = function() {
+  if (this.shape_) return this.shape_
   if (!this.check_) return Blockly.OUTPUT_SHAPE_ROUND;
   if (this.check_.indexOf('Boolean') !== -1) {
     return Blockly.OUTPUT_SHAPE_HEXAGONAL;

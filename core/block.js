@@ -876,6 +876,17 @@ Blockly.Block.prototype.setColour = function(colour, colourSecondary, colourTert
 };
 
 /**
+ * Change the colour of the text in a block
+ * @param {number|string} colour HSV hue value, or #RRGGBB string.
+ */
+Blockly.Block.prototype.setTextColour = function(colour) {
+  this.textColour = this.makeColour_(colour);
+  if (this.rendered) {
+    this.updateColour();
+  }
+};
+
+/**
  * Sets a callback function to use whenever the block's parent workspace
  * changes, replacing any prior onchange handler. This is usually only called
  * from the constructor, the block type initializer function, or an extension
@@ -1438,6 +1449,7 @@ Blockly.Block.prototype.setColourFromRawValues_ = function(primary, secondary,
 Blockly.Block.prototype.setColourFromJson_ = function(json) {
   this.setColourFromRawValues_(json['colour'], json['colourSecondary'],
       json['colourTertiary']);
+  if (json['blockText']) this.setTextColour(json['blockText']);
 };
 
 /**
@@ -1544,6 +1556,9 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
       if (field) {
         fieldStack.push([field, element['name']]);
       } else if (input) {
+        if (element['shape']) {
+          input.setShape(element['shape']);
+        }
         if (element['check']) {
           input.setCheck(element['check']);
         }
@@ -1713,7 +1728,7 @@ Blockly.Block.prototype.setCommentText = function(text) {
 
 /**
  * Set this block's output shape.
- * e.g., null, OUTPUT_SHAPE_HEXAGONAL, OUTPUT_SHAPE_ROUND, OUTPUT_SHAPE_SQUARE.
+ * e.g., null, OUTPUT_SHAPE_HEXAGONAL, OUTPUT_SHAPE_ROUND, OUTPUT_SHAPE_SQUARE, etc.
  * @param {?number} outputShape Value representing output shape
  *     (see constants.js).
  */
@@ -1769,6 +1784,7 @@ Blockly.Block.prototype.hasCheckboxInFlyout = function() {
 Blockly.Block.prototype.setDragDuplication = function(canDragDuplicate) {
   this.canDragDuplicate_ = canDragDuplicate;
 };
+
 /**
  * pm: Get whether this block can duplicate on drag.
  * This will only return true if the block is also a shadow block.
