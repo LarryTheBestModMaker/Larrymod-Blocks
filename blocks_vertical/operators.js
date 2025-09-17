@@ -687,13 +687,6 @@ Blockly.Blocks['operator_expandablejoininputs'] = {
     this.messageList = ["apple", "banana", "pear", "orange", "mango", "strawberry", "pineapple", "grape", "kiwi"];
     this.inputs_ = 2;
     this.oldInputs_ = null;
-    if (this.isInFlyout) queueMicrotask(() => {
-      for (let i = 0; i < this.inputs_; i++) {
-        const input = this.appendValueInput(`INPUT${i + 1}`);
-        const text = this.messageList[i];
-        this.fillInBlock(input.connection, "text", text ? text : "...", "TEXT");
-      }
-    })
   },
 
   fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
