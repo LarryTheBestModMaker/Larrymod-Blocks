@@ -146,7 +146,6 @@ Blockly.Blocks['operator_expandableMath'] = {
     });
 
     this.inputs_ = 2;
-    this.oldInputs_ = null;
     if (this.isInFlyout) {
       const input1 = this.appendValueInput("NUM1");
       this.fillInBlock(input1.connection, "math_number");
@@ -196,48 +195,33 @@ Blockly.Blocks['operator_expandableMath'] = {
   },
   domToMutation: function (xmlElement) {
     // on load
-    if (this.oldInputs_ === this.inputs_) return;
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
     const menuValues = String(xmlElement.getAttribute("menuvalues"));
     this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
-    let needsActionConnect = false, oldConnections;
 
-    if (this.inputList.length > 0) {
+    let repeatPreventer = false;
+    if (this.inputList.length > 1) {
       // this was a control z action
-      needsActionConnect = true;
-      oldConnections = this.getConnections_().map(c => c.targetBlock());
 
-      // clear block
-      for (var i = this.inputList.length; i--;) {
-        if (i === 0) break;
-        const input = this.inputList[i];
-        if (input.connection.targetBlock()) input.connection.disconnect();
-        this.removeInput(input.name);
+      if (this.inputList.length - 1 === menuValues.length) repeatPreventer = true;
+      else {
+        const lastInput = this.inputList[this.inputList.length - 1];
+        const innerBlock = lastInput.connection.targetBlock();
+        if (innerBlock.isShadow()) innerBlock.dispose();
+        this.removeInput(lastInput.name);
+        return;
       }
     }
 
     for (let i = 0; i < this.inputs_; i++) {
+      if (repeatPreventer && this.getInput(`NUM${i + 1}`)) continue;
+
       const input = this.appendValueInput(`NUM${i + 1}`);
       if (i > 0) {
         const menu = input.appendField(this.menuGenerator());
         menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "+", true);
       }
       // vm will automatically replace2 empty inputs with saved shadows
-    }
-    this.oldInputs_ = this.inputs_;
-
-    if (needsActionConnect) {
-      let index = 0;
-      for (const input of this.inputList) {
-        const oldBlock = oldConnections[index];
-        if (oldBlock) {
-          try {
-            const connector = oldBlock.outputConnection;
-            input.connection.connect(connector);
-          } catch(e) {}
-        }
-        index++;
-      }
     }
   },
 
@@ -685,8 +669,7 @@ Blockly.Blocks['operator_expandablejoininputs'] = {
     });
 
     this.messageList = ["apple", "banana", "pear", "orange", "mango", "strawberry", "pineapple", "grape", "kiwi"];
-    this.inputs_ = 2;
-    this.oldInputs_ = null;
+    this.inputs_ = 0;
   },
 
   fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
@@ -699,20 +682,15 @@ Blockly.Blocks['operator_expandablejoininputs'] = {
   },
   domToMutation: function (xmlElement) {
     // on load
-    if (this.oldInputs_ === this.inputs_) return;
     const inputCount = Number(xmlElement.getAttribute("inputcount"));
-    let needsActionConnect = false, oldConnections;
     if (this.inputList.length > 1) {
       // this was a control z action
-      needsActionConnect = true;
-      oldConnections = this.getConnections_().map(c => c.targetBlock());
 
-      // clear block
-      for (var i = this.inputList.length; i--;) {
-        if (i === 0) break;
-        const input = this.inputList[i];
-        if (input.connection.targetBlock()) input.connection.disconnect();
-        this.removeInput(input.name);
+      if (this.inputs_ > inputCount) {
+        const lastInput = this.inputList[this.inputList.length - 1];
+        const innerBlock = lastInput.connection.targetBlock();
+        if (innerBlock.isShadow()) innerBlock.dispose();
+        this.removeInput(lastInput.name);
       }
     }
 
@@ -720,21 +698,6 @@ Blockly.Blocks['operator_expandablejoininputs'] = {
     for (let i = 0; i < this.inputs_; i++) {
       // vm will automatically replace empty inputs with saved shadows
       if (!this.getInput(`INPUT${i + 1}`)) this.appendValueInput(`INPUT${i + 1}`);
-    }
-    this.oldInputs_ = this.inputs_;
-
-    if (needsActionConnect) {
-      let index = 0;
-      for (const input of this.inputList) {
-        const oldBlock = oldConnections[index];
-        if (oldBlock) {
-          try {
-            const connector = oldBlock.outputConnection;
-            input.connection.connect(connector);
-          } catch(e) {}
-        }
-        index++;
-      }
     }
   },
 
