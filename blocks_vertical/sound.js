@@ -447,6 +447,23 @@ Blockly.Blocks['sound_volume'] = {
   }
 };
 
+Blockly.Blocks['sound_getsoundlength'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "# of sounds",
+      "args0": [],
+      "category": Blockly.Categories.sound,
+      "checkboxInFlyout": false,
+      "extensions": ["colours_sounds", "output_number"]
+    });
+  }
+};
+
 Blockly.Blocks["sound_isSoundPlaying"] = {
   init: function() {
     this.jsonInit({
