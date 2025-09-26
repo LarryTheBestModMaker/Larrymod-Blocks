@@ -86,7 +86,7 @@ Blockly.Xml.variablesToDom = function(variableList) {
  */
 Blockly.Xml.blockToDomWithXY = function(block, opt_noId) {
   var width;  // Not used in LTR.
-  var isRTL = block.workspace ? block.workspace.RTL : false;
+  var isRTL = block.workspace.RTL;
   if (isRTL) {
     width = block.workspace.getWidth();
   }
