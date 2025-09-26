@@ -86,13 +86,13 @@ Blockly.Xml.variablesToDom = function(variableList) {
  */
 Blockly.Xml.blockToDomWithXY = function(block, opt_noId) {
   var width;  // Not used in LTR.
-  if (block.workspace.RTL) {
+  var isRTL = block.workspace ? block.workspace.RTL : false;
+  if (isRTL) {
     width = block.workspace.getWidth();
   }
   var element = Blockly.Xml.blockToDom(block, opt_noId);
   var xy = block.getRelativeToSurfaceXY();
-  element.setAttribute('x',
-      Math.round(block.workspace.RTL ? width - xy.x : xy.x));
+  element.setAttribute('x', Math.round(isRTL ? width - xy.x : xy.x));
   element.setAttribute('y', Math.round(xy.y));
   return element;
 };
