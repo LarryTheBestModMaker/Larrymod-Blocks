@@ -44,6 +44,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('argumentids', JSON.stringify(this.argumentIds_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
+  container.setAttribute('isglobal', JSON.stringify(this.is_global_));
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
   container.setAttribute('color', JSON.stringify(this.color));
@@ -64,6 +65,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.argumentIds_ = JSON.parse(xmlElement.getAttribute('argumentids'));
   this.warp_ = JSON.parse(xmlElement.getAttribute('warp'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
+  this.is_global_ = JSON.parse(xmlElement.getAttribute('isglobal'));
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.color = JSON.parse(xmlElement.getAttribute('color'));
@@ -99,6 +101,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('argumentdefaults', JSON.stringify(this.argumentDefaults_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
+  container.setAttribute('isglobal', JSON.stringify(this.is_global_));
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
   container.setAttribute('color', JSON.stringify(this.color));
@@ -124,6 +127,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.argumentDefaults_ = JSON.parse(xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
+  this.is_global_ = JSON.parse(xmlElement.getAttribute('isglobal'));
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.image = xmlElement.innerText;
   this.color = JSON.parse(xmlElement.getAttribute('color'));
@@ -870,8 +874,16 @@ Blockly.ScratchBlocks.ProcedureUtils.getEdited = function() {
   return this.edited;
 }
 
+Blockly.ScratchBlocks.ProcedureUtils.getGlobal = function() {
+  return this.is_global_;
+};
+
 Blockly.ScratchBlocks.ProcedureUtils.setEdited = function(edited) {
   this.edited = edited;
+}
+
+Blockly.ScratchBlocks.ProcedureUtils.setGlobal = function(is_global) {
+  this.is_global_ = is_global;
 }
 
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
@@ -1108,6 +1120,7 @@ Blockly.Blocks['procedures_call'] = {
     this.argumentIds_ = [];
     this.warp_ = false;
     this.output_ = false;
+    this.is_global_ = false;
     this.isDisplayOnly = false
     this.edited = false
     this.outputType = 'statement'
@@ -1152,6 +1165,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.argumentDefaults_ = [];
     this.warp_ = false;
     this.output_ = false;
+    this.is_global_ = false;
     this.isDisplayOnly = true
     this.edited = false
     this.outputType = 'statement'
@@ -1194,6 +1208,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.argumentDefaults_ = [];
     this.warp_ = false;
     this.output_ = false;
+    this.is_global_ = false;
     this.isDisplayOnly = true
     this.edited = false
     this.outputType = 'statement'
@@ -1227,6 +1242,8 @@ Blockly.Blocks['procedures_declaration'] = {
   setReturns: Blockly.ScratchBlocks.ProcedureUtils.setReturns,
   getEdited: Blockly.ScratchBlocks.ProcedureUtils.getEdited,
   setEdited: Blockly.ScratchBlocks.ProcedureUtils.setEdited,
+  getGlobal: Blockly.ScratchBlocks.ProcedureUtils.getGlobal,
+  setGlobal: Blockly.ScratchBlocks.ProcedureUtils.setGlobal,
   setType: Blockly.ScratchBlocks.ProcedureUtils.setType,
   setImage: Blockly.ScratchBlocks.ProcedureUtils.setImage,
   unsetImage: Blockly.ScratchBlocks.ProcedureUtils.unsetImage,
