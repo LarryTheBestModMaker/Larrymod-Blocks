@@ -96,8 +96,8 @@ Blockly.FieldExpandableAdd.prototype.init = function() {
       'y': 5 * ratio,
       'width': this.size_.width / 1.5,
       'height': this.size_.height / 1.5,
-      'xlink:href': plusIcon,
-      'href': plusIcon,
+      'xlink:href': Blockly.FieldExpandableAdd.prototype.BTN_IMG,
+      'href': Blockly.FieldExpandableAdd.prototype.BTN_IMG,
     },
     this.boxGroup_
   );
