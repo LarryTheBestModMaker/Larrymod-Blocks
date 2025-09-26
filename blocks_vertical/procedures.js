@@ -403,9 +403,10 @@ Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
       var fieldValue = '';
       break
     case 'b':
-      var shadowType = 'checkbox';
-      var fieldName = 'CHECKBOX';
-      var fieldValue = 'FALSE';
+      var checkboxDisabled = Blockly.Procedures.ADDON_SP_CHECKBOXES_DISABLED;
+      var shadowType = checkboxDisabled ? 'text' : 'checkbox';
+      var fieldName = checkboxDisabled ? 'TEXT' : 'CHECKBOX';
+      var fieldValue = checkboxDisabled ? '' : 'FALSE';
       break
   }
   shadowDom.setAttribute('type', shadowType);
@@ -424,7 +425,9 @@ Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
  * @this Blockly.Block
  */
 Blockly.ScratchBlocks.ProcedureUtils.attachShadow_ = function(input, argumentType) {
-  if (['n', 's', 'b'].includes(argumentType)) {
+  var validArgs = ['n', 's'];
+  if (!Blockly.Procedures.ADDON_SP_CHECKBOXES_DISABLED) validArgs.push('b');
+  if (validArgs.includes(argumentType)) {
     var blockType = {'n': 'math_number', 's': 'text', 'b': 'checkbox'}[argumentType];
     Blockly.Events.disable();
     try {
