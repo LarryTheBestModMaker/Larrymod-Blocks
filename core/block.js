@@ -1020,7 +1020,8 @@ Blockly.Block.prototype.getFieldValue = function(name) {
 Blockly.Block.prototype.setFieldValue = function(newValue, name) {
   var field = this.getField(name);
   goog.asserts.assertObject(field, 'Field "%s" not found.', name);
-  field.setValue(newValue);
+  if (field) field.setValue(newValue);
+  else console.warn(`Field '${name}' not found.`)
 };
 
 /**
