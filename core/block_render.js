@@ -575,18 +575,18 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in octagon.
   },
   7 : { // Outer shape: bumped.
-    0 : 3 * Blockly.BlockSvg.GRID_UNIT, // Field in bumped.
-    1 : 3 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in bumped.
-    2 : 1 * Blockly.BlockSvg.GRID_UNIT, // Round in bumped.
-    3 : 3 * Blockly.BlockSvg.GRID_UNIT, // Square in bumped.
-    4 : 3 * Blockly.BlockSvg.GRID_UNIT, // Leaf in bumped.
-    5 : 2 * Blockly.BlockSvg.GRID_UNIT, // Plus in bumped.
-    6 : 0 * Blockly.BlockSvg.GRID_UNIT, // Octagon in bumped.
-    7 : 1 * Blockly.BlockSvg.GRID_UNIT, // Bumped in bumped.
-    8 : 3 * Blockly.BlockSvg.GRID_UNIT, // Indented in bumped.
-    9 : 3 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in bumped.
-    10: 3 * Blockly.BlockSvg.GRID_UNIT, // Arrow in bumped.
-    11: 3 * Blockly.BlockSvg.GRID_UNIT, // Ticket in bumped.
+    0 : 5 * Blockly.BlockSvg.GRID_UNIT, // Field in bumped.
+    1 : 6 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in bumped.
+    2 : 5 * Blockly.BlockSvg.GRID_UNIT, // Round in bumped.
+    3 : 5 * Blockly.BlockSvg.GRID_UNIT, // Square in bumped.
+    4 : 5 * Blockly.BlockSvg.GRID_UNIT, // Leaf in bumped.
+    5 : 5 * Blockly.BlockSvg.GRID_UNIT, // Plus in bumped.
+    6 : 5 * Blockly.BlockSvg.GRID_UNIT, // Octagon in bumped.
+    7 : 3 * Blockly.BlockSvg.GRID_UNIT, // Bumped in bumped.
+    8 : 5 * Blockly.BlockSvg.GRID_UNIT, // Indented in bumped.
+    9 : 5 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in bumped.
+    10: 5 * Blockly.BlockSvg.GRID_UNIT, // Arrow in bumped.
+    11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in bumped.
   },
   8 : { // Outer shape: indented.
     0 : 5 * Blockly.BlockSvg.GRID_UNIT, // Field in indented.
@@ -2275,7 +2275,7 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
     }],
     [Blockly.OUTPUT_SHAPE_BUMPED, {
         emptyInputPath: "M 8 0 h 32 a 1 1 0 0 1 0 16 a 1 1 0 0 1 0 16 h -32 a 1 1 0 0 1 0 -16 a 1 1 0 0 1 0 -16 z",
-        emptyInputWidth: 14 * Blockly.BlockSvg.GRID_UNIT,
+        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
         leftPath: (block) => {
             const scale = block.height / 2;
             return [`a 1 1 0 0 1 0 ${-scale} a 1 1 0 0 1 0 ${-scale}`];
@@ -2284,12 +2284,8 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
             const scale = block.edgeShapeWidth_;
             return [`a 1 1 0 0 1 0 ${scale} a 1 1 0 0 1 0 ${scale}`];
         },
-        blockPaddingStart: (_, __, firstInput) => {
-            return Math.max(((firstInput.renderHeight - ScratchBlocks.BlockSvg.MIN_BLOCK_Y_REPORTER) * .5) + 17, 16);
-        },
-        blockPaddingEnd: (_, __, lastInput) => {
-            return Math.max(((lastInput.renderHeight - ScratchBlocks.BlockSvg.MIN_BLOCK_Y_REPORTER) * .5) + 25, 20);
-        },
+        blockPaddingStart: () => 8,
+        blockPaddingEnd: () => 8,
     }],
     [Blockly.OUTPUT_SHAPE_INDENTED, {
         emptyInputPath: "M 16 0 h 16 h 16 l -16 16 l 16 16 h -16 h -16 h -16 l 16 -16 l -16 -16 z",
