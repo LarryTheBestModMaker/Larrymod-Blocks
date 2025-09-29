@@ -264,6 +264,9 @@ Blockly.Blocks['control_expandableIf'] = {
       if (prevText) prevText.appendField("if");
       else this.appendDummyInput(`TEXTSTART${this.branches_}`).appendField("if");
       const input = this.appendValueInput(`BOOL${this.branches_}`).setCheck("Boolean");
+      input.init();
+      input.initOutlinePath(this.svgGroup_);
+      input.outlinePath.setAttribute('fill', this.getColourTertiary());
       if (shouldPopulate) this.fillInBlock(input.connection, "checkbox");
       this.appendDummyInput(`TEXTEND${this.branches_}`).appendField("then");
 
