@@ -60,6 +60,15 @@ Blockly.Blocks['control_forever'] = {
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_end"]
     });
+  },
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('hasnext', this.nextConnection != null);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    var hasNext = (xmlElement.getAttribute('hasnext') == 'true');
+    this.setNextStatement(hasNext, "normal");
   }
 };
 
