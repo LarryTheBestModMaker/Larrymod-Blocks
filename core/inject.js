@@ -234,6 +234,7 @@ Blockly.createDom_ = function(container, options) {
         x: '-40%'
       },
       defs);
+  options.stackReplaceGlow = replacementGlowFilter;
   Blockly.utils.createSvgElement('feGaussianBlur',
       {
         'in': 'SourceGraphic',
