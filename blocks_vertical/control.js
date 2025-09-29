@@ -26,7 +26,6 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
-
 Blockly.Blocks['control_forever'] = {
   /**
    * Block for repeat n times (external number).
@@ -58,16 +57,19 @@ Blockly.Blocks['control_forever'] = {
         }
       ],
       "category": Blockly.Categories.control,
-      "extensions": ["colours_control", "shape_end"]
+      "extensions": ["colours_control", "shape_statement"]
     });
+    this.setNextStatement(false);
+    this.hasBreak_ = false;
   },
   mutationToDom: function() {
     var container = document.createElement('mutation');
-    container.setAttribute('hasnext', this.nextConnection != null);
+    container.setAttribute('hasbreak', this.hasBreak_);
     return container;
   },
   domToMutation: function(xmlElement) {
-    var hasNext = (xmlElement.getAttribute('hasnext') == 'true');
+    var hasNext = (xmlElement.getAttribute('hasbreak') == 'true');
+    this.hasBreak_ = hasNext;
     this.setNextStatement(hasNext, "normal");
   }
 };
@@ -252,7 +254,7 @@ Blockly.Blocks['control_expandableIf'] = {
   },
 
   fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
-  fixupButtons: function () {
+  fixupButtons: function() {
     const expandableInput = this.getInput("");
     this.inputList.splice(this.inputList.indexOf(expandableInput), 1);
     this.inputList.push(expandableInput);
@@ -263,7 +265,7 @@ Blockly.Blocks['control_expandableIf'] = {
     hiddenBtn.size_.height = Blockly.BlockSvg.INPUT_SHAPE_HEIGHT + 16;
     hiddenBtn.setVisible(false);
   },
-  addCase: function (shouldPopulate) {
+  addCase: function(shouldPopulate) {
     if (this.nextIsElse) {
       this.appendDummyInput(`TEXTSTART${this.branches_}`).appendField("else");
       this.appendStatementInput(`SUBSTACK${this.branches_}`).setCheck("normal");
@@ -293,7 +295,7 @@ Blockly.Blocks['control_expandableIf'] = {
     this.fixupButtons();
   },
 
-  mutationToDom: function () {
+  mutationToDom: function() {
     // on save
     const container = document.createElement("mutation");
     container.setAttribute("branches", String(this.branches_));
@@ -301,7 +303,7 @@ Blockly.Blocks['control_expandableIf'] = {
     return container;
   },
 
-  domToMutation: function (xmlElement) {
+  domToMutation: function(xmlElement) {
     // on load
     const inputCount = Number(xmlElement.getAttribute("branches"));
     let branchCount = isNaN(inputCount) ? 0 : inputCount;
@@ -1254,6 +1256,57 @@ Blockly.Blocks['control_exitLoop'] = {
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_end"]
     });
+
+    this.oldLoopBlock = null;
+
+    // its rather expensive to start listening to Blockly Events, its lighter to
+    // patch this function for this specific block
+    this.originalSetDraggingFunc = this.setDragging;
+    this.setDragging = function(adding) {
+      this.originalSetDraggingFunc.call(this, adding);
+
+      if (adding) {
+        if (!this.getParent() && this.oldLoopBlock) {
+          var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
+          this.oldLoopBlock.setNextStatement(false);
+          this.hasBreak_ = false;
+          this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+          this.oldLoopBlock = null;
+        }
+      } else {
+        queueMicrotask(() => this.climbBlockTree((block) => {
+          var oldMutation = Blockly.Xml.domToText(block.mutationToDom());
+          block.setNextStatement(true, "normal");
+          block.hasBreak_ = true;
+          this.oldLoopBlock = block;
+          this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+        }));
+      }
+    }
+  },
+  climbBlockTree: function(callback) {
+    // recursively climb tree until we reach a forever loop block
+    let parent = this.getParent();
+    while (parent !== null) {
+      if (parent && parent.type === "control_forever") {
+        // a smart way to check if we are a child is by checking our position
+        // child blocks are not aligned on the x axis
+        var childPos = this.getRelativeToSurfaceXY();
+        var parentPos = parent.getRelativeToSurfaceXY();
+        if (Math.round(childPos.x) !== Math.round(parentPos.x)) callback(parent);
+        return;
+      }
+
+      var nextParent = parent.getParent();
+      if (nextParent) parent = nextParent;
+      else break;
+    }
+  },
+  updateForeverMutation: function(oldMutation, foreverBlock) {
+    var newMutation = Blockly.Xml.domToText(foreverBlock.mutationToDom());
+    Blockly.Events.fire(new Blockly.Events.BlockChange(
+      foreverBlock, 'mutation', null, oldMutation, newMutation
+    ));
   }
 };
 
