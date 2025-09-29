@@ -1290,18 +1290,18 @@ Blockly.Blocks['control_exitLoop'] = {
     // recursively climb tree until we reach a forever loop block
     let parent = this.getParent();
     while (parent !== null) {
-      if (parent && parent.type === "control_forever") {
+      if (parent.type === "control_forever") {
         // a smart way to check if we are a child is by checking our position
         // child blocks are not aligned on the x axis
         var childPos = this.getRelativeToSurfaceXY();
         var parentPos = parent.getRelativeToSurfaceXY();
-        if (Math.round(childPos.x) !== Math.round(parentPos.x)) callback(parent);
-        return;
+        if (Math.round(childPos.x) !== Math.round(parentPos.x)) {
+          callback(parent);
+          return;
+        }
       }
 
-      var nextParent = parent.getParent();
-      if (nextParent) parent = nextParent;
-      else break;
+      parent = parent.getParent();
     }
   },
   updateForeverMutation: function(oldMutation, foreverBlock) {
