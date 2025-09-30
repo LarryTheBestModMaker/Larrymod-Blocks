@@ -145,14 +145,7 @@ Blockly.Blocks['operator_expandableMath'] = {
       "extensions": ["colours_operators", "output_number"]
     });
 
-    this.inputs_ = 2;
-    if (this.isInFlyout) {
-      const input1 = this.appendValueInput("NUM1");
-      this.fillInBlock(input1.connection, "math_number");
-      const input2 = this.appendValueInput("NUM2");
-      input2.appendField(this.menuGenerator());
-      this.fillInBlock(input2.connection, "math_number");
-    }
+    this.inputs_ = 0;
   },
 
   fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
