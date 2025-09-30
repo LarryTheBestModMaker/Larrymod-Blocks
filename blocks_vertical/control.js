@@ -907,7 +907,7 @@ Blockly.Blocks['control_run_as_sprite_menu'] = {
 Blockly.Blocks['control_run_as_sprite'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'as %1',
+      "message0": 'as %1 do',
       "message1": "%1",
       "args0": [
         {
