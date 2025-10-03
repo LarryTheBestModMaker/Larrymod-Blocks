@@ -1286,12 +1286,13 @@ Blockly.Blocks['control_exitLoop'] = {
       }
     }
 
-    this.originalDisconnect = this.previousConnection.disconnect;
-    this.previousConnection.disconnect = function(...args) {
-      this.originalDisconnect.call(this, ...args);
+    this.originalSetParent = this.setParent;
+    this.setParent = function(...args) {
+      this.originalSetParent.call(this, ...args);
 
       // no need for climbing
-      if (this.oldLoopBlock) {
+      if (!this.isInsertionMarker_ && args[0] === null && this.oldLoopBlock) {
+        var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
         this.oldLoopBlock.setNextStatement(false);
         this.oldLoopBlock.hasBreak_ = false;
         this.updateForeverMutation(oldMutation, this.oldLoopBlock);
