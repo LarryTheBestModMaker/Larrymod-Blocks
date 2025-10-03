@@ -1262,7 +1262,7 @@ Blockly.Blocks['control_exitLoop'] = {
     this.oldLoopBlock = null;
 
     // its rather expensive to start listening to Blockly Events, its lighter to
-    // patch this function for this specific block
+    // patch these functions for this specific block
     this.originalSetDraggingFunc = this.setDragging;
     this.setDragging = function(adding) {
       this.originalSetDraggingFunc.call(this, adding);
@@ -1271,7 +1271,7 @@ Blockly.Blocks['control_exitLoop'] = {
         if (!this.getParent() && this.oldLoopBlock) {
           var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
           this.oldLoopBlock.setNextStatement(false);
-          this.hasBreak_ = false;
+          this.oldLoopBlock.hasBreak_ = false;
           this.updateForeverMutation(oldMutation, this.oldLoopBlock);
           this.oldLoopBlock = null;
         }
@@ -1283,6 +1283,19 @@ Blockly.Blocks['control_exitLoop'] = {
           this.oldLoopBlock = block;
           this.updateForeverMutation(oldMutation, this.oldLoopBlock);
         }));
+      }
+    }
+
+    this.originalDisconnect = this.previousConnection.disconnect;
+    this.previousConnection.disconnect = function(...args) {
+      this.originalDisconnect.call(this, ...args);
+
+      // no need for climbing
+      if (this.oldLoopBlock) {
+        this.oldLoopBlock.setNextStatement(false);
+        this.oldLoopBlock.hasBreak_ = false;
+        this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+        this.oldLoopBlock = null;
       }
     }
   },
