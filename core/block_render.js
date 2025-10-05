@@ -1784,9 +1784,10 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
         break;
       case Blockly.OUTPUT_SHAPE_PLUS: {
         // Draw a half-plus.
-        const unit = 6;
-        const remainingHeight = scale * 2 - 36;
-        const remainingWidth = scale - 20;
+        const paddingMultiplier = Blockly.BlockSvg.SEP_SPACE_Y / 2 / Blockly.BlockSvg.GRID_UNIT;
+        const unit = 6 * paddingMultiplier;
+        const remainingHeight = scale * 2 - 36 * paddingMultiplier;
+        const remainingWidth = scale - 20 * paddingMultiplier;
         steps.push(
           `l ${-remainingWidth} 0 ` +
           `a ${unit} ${unit} 0 0 1 ${-unit} ${-unit} ` +
