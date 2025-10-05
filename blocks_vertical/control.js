@@ -1294,11 +1294,15 @@ Blockly.Blocks['control_exitLoop'] = {
 
       // no need for climbing
       if (!this.isInsertionMarker_ && args[0] === null && this.oldLoopBlock) {
-        var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
-        this.oldLoopBlock.setNextStatement(false);
-        this.oldLoopBlock.hasBreak_ = false;
-        this.updateForeverMutation(oldMutation, this.oldLoopBlock);
-        this.oldLoopBlock = null;
+        queueMicrotask(() => {
+          if (this.workspace === null) return;
+
+          var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
+          this.oldLoopBlock.setNextStatement(false);
+          this.oldLoopBlock.hasBreak_ = false;
+          this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+          this.oldLoopBlock = null;
+        });
       }
     }
   },
