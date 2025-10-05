@@ -1786,18 +1786,18 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
         // Draw a half-plus.
         const unit = 6;
         const remainingHeight = scale * 2 - 36;
-        const remainingWidth = scale  - 20;
+        const remainingWidth = scale - 20;
         steps.push(
-          `l -${remainingWidth} 0 ` +
-          `a ${unit} ${unit} 0 0 1 -${unit} -${unit} ` +
-          `a ${unit} ${unit} 0 0 0 -${unit} -${unit} ` +
+          `l ${-remainingWidth} 0 ` +
+          `a ${unit} ${unit} 0 0 1 ${-unit} ${-unit} ` +
+          `a ${unit} ${unit} 0 0 0 ${-unit} ${-unit} ` +
           `l -2 0 ` +
-          `a ${unit} ${unit} 0 0 1 -${unit} -${unit} ` +
-          `l 0 -${remainingHeight} ` +
-          `a ${unit} ${unit} 0 0 1 ${unit} -${unit} ` +
+          `a ${unit} ${unit} 0 0 1 ${-unit} ${-unit} ` +
+          `l 0 ${-remainingHeight} ` +
+          `a ${unit} ${unit} 0 0 1 ${unit} ${-unit} ` +
           `l 2 0 ` +
-          `a ${unit} ${unit} 0 0 0 ${unit} -${unit} ` +
-          `a ${unit} ${unit} 0 0 1 ${unit} -${unit} ` +
+          `a ${unit} ${unit} 0 0 0 ${unit} ${-unit} ` +
+          `a ${unit} ${unit} 0 0 1 ${unit} ${-unit} ` +
           `l ${remainingWidth} 0`
         );
         break;
@@ -1855,11 +1855,11 @@ Blockly.BlockSvg.prototype.drawEdgeShapeRight_ = function(steps) {
           `l 2 0 ` +
           `a ${unit} ${unit} 0 0 1 ${unit} ${unit} ` +
           `l 0 ${remainingHeight} ` +
-          `a ${unit} ${unit} 0 0 1 -${unit} ${unit} ` +
+          `a ${unit} ${unit} 0 0 1 ${-unit} ${unit} ` +
           `l -2 0 ` +
-          `a ${unit} ${unit} 0 0 0 -${unit} ${unit} ` +
-          `a ${unit} ${unit} 0 0 1 -${unit} ${unit} ` +
-          `l -${remainingWidth} 0`
+          `a ${unit} ${unit} 0 0 0 ${-unit} ${unit} ` +
+          `a ${unit} ${unit} 0 0 1 ${-unit} ${unit} ` +
+          `l ${-remainingWidth} 0`
         );
         break;
       }
