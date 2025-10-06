@@ -1271,19 +1271,11 @@ Blockly.Blocks['control_exitLoop'] = {
 
       if (adding) {
         if (!this.getParent() && this.oldLoopBlock) {
-          var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
-          this.oldLoopBlock.setNextStatement(false);
-          this.oldLoopBlock.hasBreak_ = false;
-          this.updateForeverMutation(oldMutation, this.oldLoopBlock);
-          this.oldLoopBlock = null;
+          this.setForeverNub(this.oldLoopBlock, false, true);
         }
       } else {
         queueMicrotask(() => this.climbBlockTree((block) => {
-          var oldMutation = Blockly.Xml.domToText(block.mutationToDom());
-          block.setNextStatement(true, "normal");
-          block.hasBreak_ = true;
-          this.oldLoopBlock = block;
-          this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+          this.setForeverNub(block, true, true);
         }));
       }
     }
@@ -1291,19 +1283,15 @@ Blockly.Blocks['control_exitLoop'] = {
     this.originalSetParent = this.setParent;
     this.setParent = function(...args) {
       this.originalSetParent.call(this, ...args);
+      if (this.isInsertionMarker_) return;
 
-      // no need for climbing
-      if (!this.isInsertionMarker_ && args[0] === null && this.oldLoopBlock) {
-        queueMicrotask(() => {
-          if (this.workspace === null) return;
-
-          var oldMutation = Blockly.Xml.domToText(this.oldLoopBlock.mutationToDom());
-          this.oldLoopBlock.setNextStatement(false);
-          this.oldLoopBlock.hasBreak_ = false;
-          this.updateForeverMutation(oldMutation, this.oldLoopBlock);
-          this.oldLoopBlock = null;
-        });
-      }
+      queueMicrotask(() => {
+        if (args[0]) this.climbBlockTree((block) => this.setForeverNub(block, true, true));
+        else {
+          if (!this.oldLoopBlock || this.workspace === null) return;
+          this.setForeverNub(this.oldLoopBlock, false, false);
+        }
+      });
     }
   },
   climbBlockTree: function(callback) {
@@ -1322,6 +1310,20 @@ Blockly.Blocks['control_exitLoop'] = {
       }
 
       parent = parent.getParent();
+    }
+  },
+  setForeverNub: function(block, adding, callMutation) {
+    var oldMutation = Blockly.Xml.domToText(block.mutationToDom());
+    if (adding) {
+      block.setNextStatement(true, "normal");
+      block.hasBreak_ = true;
+      this.oldLoopBlock = block;
+      this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+    } else {
+      this.oldLoopBlock.setNextStatement(false);
+      this.oldLoopBlock.hasBreak_ = false;
+      if (callMutation) this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+      this.oldLoopBlock = null;
     }
   },
   updateForeverMutation: function(oldMutation, foreverBlock) {
