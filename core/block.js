@@ -1525,6 +1525,16 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
           switch (element['type']) {
             case 'input_value':
               input = this.appendValueInput(element['name']);
+
+              if (element['shape']) {
+                // temporary patch (connect_ will be auto replaced)
+                const shape = element['shape'];
+                const ogConnect = input.connection.connect_;
+                input.connection.connect_ = function(...args) {
+                  args[0].sourceBlock_.setOutputShape(shape);
+                  ogConnect.call(this, ...args);
+                }
+              }
               break;
             case 'input_statement':
               input = this.appendStatementInput(element['name']);

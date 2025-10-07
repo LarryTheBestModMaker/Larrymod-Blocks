@@ -58,8 +58,20 @@ Blockly.Blocks['control_forever'] = {
         }
       ],
       "category": Blockly.Categories.control,
-      "extensions": ["colours_control", "shape_end"]
+      "extensions": ["colours_control", "shape_statement"]
     });
+    this.setNextStatement(false);
+    this.hasBreak_ = false;
+  },
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('hasbreak', this.hasBreak_);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    var hasNext = (xmlElement.getAttribute('hasbreak') == 'true');
+    this.hasBreak_ = hasNext;
+    this.setNextStatement(hasNext, "normal");
   }
 };
 
@@ -723,7 +735,7 @@ Blockly.Blocks['control_run_as_sprite_menu'] = {
 Blockly.Blocks['control_run_as_sprite'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'as %1',
+      "message0": 'as %1 do',
       "message1": "%1",
       "args0": [
         {
@@ -935,7 +947,8 @@ Blockly.Blocks["control_if_return_else_return"] = {
         }
       ],
       "category": Blockly.Categories.control,
-      "extensions": ["colours_control", "output_string"]
+      "output": null,
+      "extensions": ["colours_control"]
     });
   }
 };
@@ -1209,6 +1222,77 @@ Blockly.Blocks['control_exitLoop'] = {
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_end"]
     });
+
+    this.oldLoopBlock = null;
+
+    // its rather expensive to start listening to Blockly Events, its lighter to
+    // patch these functions for this specific block
+    this.originalSetDraggingFunc = this.setDragging;
+    this.setDragging = function(adding) {
+      this.originalSetDraggingFunc.call(this, adding);
+
+      if (adding) {
+        if (!this.getParent() && this.oldLoopBlock) {
+          this.setForeverNub(this.oldLoopBlock, false, true);
+        }
+      } else {
+        queueMicrotask(() => this.climbBlockTree((block) => {
+          this.setForeverNub(block, true, true);
+        }));
+      }
+    }
+
+    this.originalSetParent = this.setParent;
+    this.setParent = function(...args) {
+      this.originalSetParent.call(this, ...args);
+      if (this.isInsertionMarker_) return;
+
+      queueMicrotask(() => {
+        if (args[0]) this.climbBlockTree((block) => this.setForeverNub(block, true, true));
+        else {
+          if (!this.oldLoopBlock || this.workspace === null) return;
+          this.setForeverNub(this.oldLoopBlock, false, false);
+        }
+      });
+    }
+  },
+  climbBlockTree: function(callback) {
+    // recursively climb tree until we reach a forever loop block
+    let parent = this.getParent();
+    while (parent !== null) {
+      if (parent.type === "control_forever") {
+        // a smart way to check if we are a child is by checking our position
+        // child blocks are not aligned on the x axis
+        var childPos = this.getRelativeToSurfaceXY();
+        var parentPos = parent.getRelativeToSurfaceXY();
+        if (Math.round(childPos.x) !== Math.round(parentPos.x)) {
+          callback(parent);
+          return;
+        }
+      }
+
+      parent = parent.getParent();
+    }
+  },
+  setForeverNub: function(block, adding, callMutation) {
+    var oldMutation = Blockly.Xml.domToText(block.mutationToDom());
+    if (adding) {
+      block.setNextStatement(true, "normal");
+      block.hasBreak_ = true;
+      this.oldLoopBlock = block;
+      this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+    } else {
+      this.oldLoopBlock.setNextStatement(false);
+      this.oldLoopBlock.hasBreak_ = false;
+      if (callMutation) this.updateForeverMutation(oldMutation, this.oldLoopBlock);
+      this.oldLoopBlock = null;
+    }
+  },
+  updateForeverMutation: function(oldMutation, foreverBlock) {
+    var newMutation = Blockly.Xml.domToText(foreverBlock.mutationToDom());
+    Blockly.Events.fire(new Blockly.Events.BlockChange(
+      foreverBlock, 'mutation', null, oldMutation, newMutation
+    ));
   }
 };
 
