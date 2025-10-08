@@ -948,7 +948,7 @@ Blockly.Blocks["control_if_return_else_return"] = {
       ],
       "category": Blockly.Categories.control,
       "output": null,
-      "extensions": ["colours_control"]
+      "extensions": ["colours_control", "output_string"]
     });
   }
 };

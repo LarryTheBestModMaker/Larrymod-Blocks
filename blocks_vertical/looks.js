@@ -1278,3 +1278,39 @@ Blockly.Blocks['looks_getinput_menu'] = {
     });
   }
 };
+
+Blockly.Blocks['looks_shoutforsecs'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "shout %1 for %2 seconds",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MESSAGE"
+        },
+        {
+          "type": "input_value",
+          "name": "SECS"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_shout'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "shout %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MESSAGE"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
