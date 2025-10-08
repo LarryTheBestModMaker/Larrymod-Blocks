@@ -181,7 +181,7 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
     this.type = prototypeName;
     var prototype = Blockly.Blocks[prototypeName];
     goog.asserts.assertObject(prototype,
-        'Error: Unknown block type "".', prototypeName);
+        'Error: Unknown block type "%s".', prototypeName);
     goog.mixin(this, prototype);
   }
 
@@ -1019,7 +1019,7 @@ Blockly.Block.prototype.getFieldValue = function(name) {
  */
 Blockly.Block.prototype.setFieldValue = function(newValue, name) {
   var field = this.getField(name);
-  goog.asserts.assertObject(field, 'Field "" not found.', name);
+  goog.asserts.assertObject(field, 'Field "%s" not found.', name);
   field.setValue(newValue);
 };
 
@@ -1630,9 +1630,9 @@ Blockly.Block.prototype.moveInputBefore = function(name, refName) {
       }
     }
   }
-  goog.asserts.assert(inputIndex != -1, 'Named input "" not found.', name);
+  goog.asserts.assert(inputIndex != -1, 'Named input "%s" not found.', name);
   goog.asserts.assert(
-      refIndex != -1, 'Reference input "" not found.', refName);
+      refIndex != -1, 'Reference input "%s" not found.', refName);
   this.moveNumberedInputBefore(inputIndex, refIndex);
 };
 
@@ -1686,7 +1686,7 @@ Blockly.Block.prototype.removeInput = function(name, opt_quiet) {
     }
   }
   if (!opt_quiet) {
-    goog.asserts.fail('Input "" not found.', name);
+    goog.asserts.fail('Input "%s" not found.', name);
   }
 };
 
