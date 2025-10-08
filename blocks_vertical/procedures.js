@@ -308,7 +308,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createIcon_ = function() {
 Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) {
   this.createIcon_()
   // Split the proc into components, by %n, %b, and %s (ignoring escaped).
-  var procComponents = this.procCode_.split(/(?=[^\\]%[nsbc])/);
+  var procComponents = this.procCode_.split(/(?=[^\\]%[nsbcm])/);
   procComponents = procComponents.map(function(c) {
     return c.trim(); // Strip whitespace.
   });
@@ -319,7 +319,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
     var argumentType = component.substring(1, 2);
     var id = this.argumentIds_[argumentCount];
     // user error shouldnt literally nuke the app, ignore invalid markers instead of erroring on them
-    if (component.substring(0, 1) == '%' && (['n', 's', 'b', 'c'].includes(argumentType)) && id) {
+    if (component.substring(0, 1) == '%' && (['n', 's', 'b', 'c', 'm'].includes(argumentType)) && id) {
       /*
       if (!(argumentType == 'n' || argumentType == 'b' || argumentType == 's')) {
         throw new Error(
@@ -410,7 +410,7 @@ Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
     var shadowType = 'math_number';
     var fieldName = 'NUM';
     var fieldValue = '1';
-  } else if (type == 'co') {
+  } else if (type == 'm') {
     var shadowType = 'colour_picker';
     var fieldName = 'COL';
     var fieldValue = '#FF0000';
@@ -486,7 +486,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentReporter_ = function(
         case 'c':
           var blockType = 'argument_reporter_command';
           break;
-        case 'co':
+        case 'm':
           var blockType = 'argument_reporter_color_picker';
           break;
   }
@@ -663,7 +663,7 @@ Blockly.ScratchBlocks.ProcedureUtils.checkOldTypeMatches_ = function(oldBlock,
   if (type == 'c' && oldBlock.type == 'argument_reporter_command') {
     return true;
   }
-  if (type == 'co' && oldBlock.type == 'argument_reporter_color_picker') {
+  if (type == 'm' && oldBlock.type == 'argument_reporter_color_picker') {
     return true;
   }
   return false;
@@ -697,7 +697,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentEditor_ = function(
         break;
       case 'c':
         var newBlock = this.workspace.newBlock('argument_editor_command')
-        case 'c':
+      case 'm':
         var newBlock = this.workspace.newBlock('argument_editor_color_picker')
     }
     newBlock.setFieldValue(displayName, 'TEXT');
@@ -749,7 +749,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDeclarationProcCode_ = function() {
           this.procCode_ += "%c";
           break;
           case 'argument_editor_color_picker':
-          this.procCode_ += "%co";
+          this.procCode_ += "%m";
           break;
       }
     } else {
@@ -849,7 +849,7 @@ Blockly.ScratchBlocks.ProcedureUtils.addNumberExternal = function() {
  */
 Blockly.ScratchBlocks.ProcedureUtils.addColorExternal = function() {
   Blockly.WidgetDiv.hide(true);
-  this.procCode_ = this.procCode_ + ' %co';
+  this.procCode_ = this.procCode_ + ' %m';
   this.displayNames_.push('color');
   this.argumentIds_.push(Blockly.utils.genUid());
   this.argumentDefaults_.push('');
