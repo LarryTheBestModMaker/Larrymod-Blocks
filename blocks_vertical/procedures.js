@@ -437,13 +437,13 @@ Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_ = function(type) {
 Blockly.ScratchBlocks.ProcedureUtils.attachShadow_ = function(input,
     argumentType) {
   if (argumentType == 'n' || argumentType == 's') {
-    var blockType = argumentType == 'n' ? 'math_number' : 'text';
+    var blockType = argumentType == 'n' ? 'math_number' : argumentType == 'm' ? 'colour_picker' : 'text';
     Blockly.Events.disable();
     try {
       var newBlock = this.workspace.newBlock(blockType);
       if (argumentType == 'n') {
         newBlock.setFieldValue('1', 'NUM');
-      } else {
+      } else if (!argumentType == 'm') {
         newBlock.setFieldValue('', 'TEXT');
       }
       newBlock.setShadow(true);
@@ -1250,6 +1250,7 @@ Blockly.Blocks['procedures_declaration'] = {
   setColor: Blockly.ScratchBlocks.ProcedureUtils.setColor,
   removeColor: Blockly.ScratchBlocks.ProcedureUtils.removeColor,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
+  addColorExternal: Blockly.ScratchBlocks.ProcedureUtils.addColorExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addCommandExternal: Blockly.ScratchBlocks.ProcedureUtils.addCommandExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
@@ -1301,12 +1302,16 @@ Blockly.Blocks['argument_reporter_color_picker'] = {
       "message0": " %1",
       "args0": [
         {
-          "type": "field_label_serializable",
+          "type": "field_colour_slider",
           "name": "VALUE",
-          "text": ""
+          "colour": (() => {
+            var num = Math.floor(Math.random() * Math.pow(2, 24));
+            return '#' + ('00000' + num.toString(16)).substr(-6);
+          })()
         }
       ],
-      "extensions": ["colours_more", "output_colour_picker"]
+      "output": "Colour",
+      "extensions": ["colours_more"]
     });
   },
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
@@ -1397,14 +1402,14 @@ Blockly.Blocks['argument_editor_color_picker'] = {
     this.jsonInit({ "message0": " %1",
       "args0": [
         {
-          "type": "field_input_removable",
+          "type": "field_colour_removable",
           "name": "TEXT",
         }
       ],
       "colour": Blockly.Colours.textField,
       "colourSecondary": Blockly.Colours.textField,
       "colourTertiary": Blockly.Colours.textField,
-      "extensions": ["output_colour_picker"]
+      "output": "Colour"
     });
   },
   // Exist on declaration and arguments editors, with different implementations.
