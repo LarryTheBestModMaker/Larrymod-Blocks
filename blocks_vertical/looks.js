@@ -1314,3 +1314,16 @@ Blockly.Blocks['looks_shout'] = {
     });
   }
 };
+
+Blockly.Blocks['looks_getWhatBubbleIsDisplaying'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "current text displayed in bubble",
+      "args0": [],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
