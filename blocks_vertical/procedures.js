@@ -443,8 +443,8 @@ Blockly.ScratchBlocks.ProcedureUtils.attachShadow_ = function(input,
       var newBlock = this.workspace.newBlock(blockType);
       if (argumentType == 'n') {
         newBlock.setFieldValue('1', 'NUM');
-      } else if (!argumentType == 'm') {
-        newBlock.setFieldValue('', 'TEXT');
+      } else {
+        if (argumentType !== 'm') newBlock.setFieldValue('', 'TEXT');
       }
       newBlock.setShadow(true);
       if (!this.isInsertionMarker()) {
@@ -1302,15 +1302,12 @@ Blockly.Blocks['argument_reporter_color_picker'] = {
       "message0": " %1",
       "args0": [
         {
-          "type": "field_colour_slider",
+          "type": "field_label_serializable",
           "name": "VALUE",
-          "colour": (() => {
-            var num = Math.floor(Math.random() * Math.pow(2, 24));
-            return '#' + ('00000' + num.toString(16)).substr(-6);
-          })()
+          "text": ""
         }
       ],
-      "output": "Colour",
+      "output": "colour",
       "extensions": ["colours_more"]
     });
   },
@@ -1409,7 +1406,7 @@ Blockly.Blocks['argument_editor_color_picker'] = {
       "colour": Blockly.Colours.textField,
       "colourSecondary": Blockly.Colours.textField,
       "colourTertiary": Blockly.Colours.textField,
-      "output": "Colour"
+      "extensions": ["output_string"]
     });
   },
   // Exist on declaration and arguments editors, with different implementations.
