@@ -31,12 +31,14 @@ Blockly.Blocks['operator_expandableBool'] = {
     this.inputs_ = 0;
   },
 
+  // EDIT THIS IN https://github.com/PenguinMod/penguinmod.github.io/blob/develop/src/addons/addons/editor-tweaks/userscript.js#L105
   fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
   menuGenerator: function () {
     const dropdown = new Blockly.FieldDropdown(function () {
       return [
-        ["and", "and"], ["or", "or"],
-        ["xand", "xand"], ["xor", "xor"]
+        ["and", "a"], ["or", "o"],
+        ["xand", "A"], ["nand", "n"],
+        ["xor", "O"], ["nor", "N"], ["xnor", "x"]
       ];
     });
     const ogSetValue = dropdown.setValue;
@@ -94,7 +96,7 @@ Blockly.Blocks['operator_expandableBool'] = {
       const input = this.appendValueInput(`BOOL${i + 1}`).setCheck("Boolean");
       if (i > 0) {
         const menu = input.appendField(this.menuGenerator());
-        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "and", true);
+        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "a", true);
       }
       // vm will automatically replace empty inputs with saved shadows
     }
@@ -116,7 +118,7 @@ Blockly.Blocks['operator_expandableBool'] = {
       }
       newInput.appendField(this.menuGenerator());
       this.fillInBlock(newInput.connection, "checkbox");
-    } else if (this.inputs_ > 1) {
+    } else if (this.inputs_ > 2) {
       const number = this.inputs_;
       this.removeInput(`BOOL${number}`);
       this.inputs_--;
@@ -161,8 +163,8 @@ Blockly.Blocks['operator_expandableCompare'] = {
   menuGenerator: function () {
     const dropdown = new Blockly.FieldDropdown(function () {
       return [
-        [">", ">"], ["≥", "≥"], ["<", "<"], ["≤", "≤"],
-        ["=", "="], ["===", "s"], ["≠", "≠"]
+        [">", "m"], ["≥", "M"], ["<", "l"], ["≤", "L"],
+        ["=", "e"], ["===", "E"], ["≠", "n"]
       ];
     });
     const ogSetValue = dropdown.setValue;
@@ -220,7 +222,7 @@ Blockly.Blocks['operator_expandableCompare'] = {
       const input = this.appendValueInput(`INPUT${i + 1}`);
       if (i > 0) {
         const menu = input.appendField(this.menuGenerator());
-        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : ">", true);
+        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "m", true);
       }
       // vm will automatically replace2 empty inputs with saved shadows
     }
@@ -236,8 +238,8 @@ Blockly.Blocks['operator_expandableCompare'] = {
       const number = this.inputs_;
       const newInput = this.appendValueInput(`INPUT${number}`);
       newInput.appendField(this.menuGenerator());
-      this.fillInBlock(newInput.connection, "text");
-    } else if (this.inputs_ > 1) {
+      this.fillInBlock(newInput.connection, "text", "", "TEXT");
+    } else if (this.inputs_ > 2) {
       const number = this.inputs_;
       this.removeInput(`INPUT${number}`);
       this.inputs_--;
