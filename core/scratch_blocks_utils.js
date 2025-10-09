@@ -253,7 +253,7 @@ Blockly.scratchBlocksUtils.generateMutatorShadow = function (connection, type, o
   Blockly.Events.disable();
   const block = this.workspace.newBlock(type);
   try {
-    if (optValue) block.setFieldValue(optValue, optValueName);
+    if (optValue !== undefined) block.setFieldValue(optValue, optValueName);
     block.setShadow(true);
     if (!this.isInsertionMarker()) {
       block.initSvg();
