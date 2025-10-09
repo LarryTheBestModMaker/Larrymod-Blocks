@@ -6,6 +6,253 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
+Blockly.Blocks['operator_expandableBool'] = {
+  /**
+   * pm: Block for performing multiple truth operations (determined by user)
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": '%1 %2',
+      "args0": [
+        {
+          "type": "field_expandable_remove",
+          "name": "REMOVE"
+        },
+        {
+          "type": "field_expandable_add",
+          "name": "ADD"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+
+    this.inputs_ = 0;
+  },
+
+  fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
+  menuGenerator: function () {
+    const dropdown = new Blockly.FieldDropdown(function () {
+      return [
+        ["and", "and"], ["or", "or"],
+        ["xand", "xand"], ["xor", "xor"]
+      ];
+    });
+    const ogSetValue = dropdown.setValue;
+    dropdown.setValue = function (value, omitMutation) {
+      const srcBlock = this.sourceBlock_;
+      let oldMutation;
+      if (!omitMutation) oldMutation = Blockly.Xml.domToText(srcBlock.mutationToDom());
+
+      ogSetValue.call(this, value);
+      if (!omitMutation) {
+        const newMutation = Blockly.Xml.domToText(srcBlock.mutationToDom());
+        Blockly.Events.fire(new Blockly.Events.BlockChange(
+          srcBlock, 'mutation', null, oldMutation, newMutation
+        ));
+      }
+    }
+    return dropdown;
+  },
+
+  mutationToDom: function () {
+    // on save
+    const container = document.createElement("mutation");
+    container.setAttribute("inputcount", String(this.inputs_));
+    let orderedOperations = "";
+    for (var i = 1; i < this.inputList.length; i++) {
+      const input = this.inputList[i];
+      if (input.fieldRow[0]) orderedOperations += input.fieldRow[0].getValue();
+    }
+    container.setAttribute("menuvalues", orderedOperations);
+    return container;
+  },
+  domToMutation: function (xmlElement) {
+    // on load
+    const inputCount = Number(xmlElement.getAttribute("inputcount"));
+    const menuValues = String(xmlElement.getAttribute("menuvalues"));
+    this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
+
+    let repeatPreventer = false;
+    if (this.inputList.length > 1) {
+      // this was a control z action
+
+      if (this.inputList.length - 1 === menuValues.length) repeatPreventer = true;
+      else {
+        const lastInput = this.inputList[this.inputList.length - 1];
+        const innerBlock = lastInput.connection.targetBlock();
+        if (innerBlock.isShadow()) innerBlock.dispose();
+        this.removeInput(lastInput.name);
+        return;
+      }
+    }
+
+    for (let i = 0; i < this.inputs_; i++) {
+      if (repeatPreventer && this.getInput(`BOOL${i + 1}`)) continue;
+
+      const input = this.appendValueInput(`BOOL${i + 1}`).setCheck("Boolean");
+      if (i > 0) {
+        const menu = input.appendField(this.menuGenerator());
+        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : "and", true);
+      }
+      // vm will automatically replace empty inputs with saved shadows
+    }
+  },
+
+  onExpandableButtonClicked_: function (isAdding) {
+    // Create an event group to keep field value and mutator in sync
+    // Return null at the end because setValue is called here already.
+    Blockly.Events.setGroup(true);
+    var oldMutation = Blockly.Xml.domToText(this.mutationToDom());
+    if (isAdding) {
+      this.inputs_++;
+      const number = this.inputs_;
+      const newInput = this.appendValueInput(`BOOL${number}`).setCheck("Boolean");
+      if (!this.isInsertionMarker_) {
+        newInput.init();
+        newInput.initOutlinePath(this.svgGroup_);
+        newInput.outlinePath.setAttribute('fill', this.getColourTertiary());
+      }
+      newInput.appendField(this.menuGenerator());
+      this.fillInBlock(newInput.connection, "checkbox");
+    } else if (this.inputs_ > 1) {
+      const number = this.inputs_;
+      this.removeInput(`BOOL${number}`);
+      this.inputs_--;
+    }
+    this.initSvg();
+    if (this.rendered) this.render();
+
+    const newMutation = Blockly.Xml.domToText(this.mutationToDom());
+    Blockly.Events.fire(new Blockly.Events.BlockChange(
+      this, 'mutation', null, oldMutation, newMutation
+    ));
+    Blockly.Events.setGroup(false);
+  }
+};
+
+Blockly.Blocks['operator_expandableCompare'] = {
+  /**
+   * pm: Block for performing multiple comparisons (determined by user)
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": '%1 %2',
+      "args0": [
+        {
+          "type": "field_expandable_remove",
+          "name": "REMOVE"
+        },
+        {
+          "type": "field_expandable_add",
+          "name": "ADD"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+
+    this.inputs_ = 0;
+  },
+
+  fillInBlock: Blockly.scratchBlocksUtils.generateMutatorShadow,
+  menuGenerator: function () {
+    const dropdown = new Blockly.FieldDropdown(function () {
+      return [
+        [">", ">"], ["≥", "≥"], ["<", "<"], ["≤", "≤"],
+        ["=", "="], ["===", "s"], ["≠", "≠"]
+      ];
+    });
+    const ogSetValue = dropdown.setValue;
+    dropdown.setValue = function (value, omitMutation) {
+      const srcBlock = this.sourceBlock_;
+      let oldMutation;
+      if (!omitMutation) oldMutation = Blockly.Xml.domToText(srcBlock.mutationToDom());
+
+      ogSetValue.call(this, value);
+      if (!omitMutation) {
+        const newMutation = Blockly.Xml.domToText(srcBlock.mutationToDom());
+        Blockly.Events.fire(new Blockly.Events.BlockChange(
+          srcBlock, 'mutation', null, oldMutation, newMutation
+        ));
+      }
+    }
+    return dropdown;
+  },
+
+  mutationToDom: function () {
+    // on save
+    const container = document.createElement("mutation");
+    container.setAttribute("inputcount", String(this.inputs_));
+    let orderedOperations = "";
+    for (var i = 1; i < this.inputList.length; i++) {
+      const input = this.inputList[i];
+      if (input.fieldRow[0]) orderedOperations += input.fieldRow[0].getValue();
+    }
+    container.setAttribute("menuvalues", orderedOperations);
+    return container;
+  },
+  domToMutation: function (xmlElement) {
+    // on load
+    const inputCount = Number(xmlElement.getAttribute("inputcount"));
+    const menuValues = String(xmlElement.getAttribute("menuvalues"));
+    this.inputs_ = isNaN(inputCount) ? 0 : inputCount;
+
+    let repeatPreventer = false;
+    if (this.inputList.length > 1) {
+      // this was a control z action
+
+      if (this.inputList.length - 1 === menuValues.length) repeatPreventer = true;
+      else {
+        const lastInput = this.inputList[this.inputList.length - 1];
+        const innerBlock = lastInput.connection.targetBlock();
+        if (innerBlock.isShadow()) innerBlock.dispose();
+        this.removeInput(lastInput.name);
+        return;
+      }
+    }
+
+    for (let i = 0; i < this.inputs_; i++) {
+      if (repeatPreventer && this.getInput(`INPUT${i + 1}`)) continue;
+
+      const input = this.appendValueInput(`INPUT${i + 1}`);
+      if (i > 0) {
+        const menu = input.appendField(this.menuGenerator());
+        menu.fieldRow[0].setValue(menuValues[i - 1] ? menuValues[i - 1] : ">", true);
+      }
+      // vm will automatically replace2 empty inputs with saved shadows
+    }
+  },
+
+  onExpandableButtonClicked_: function (isAdding) {
+    // Create an event group to keep field value and mutator in sync
+    // Return null at the end because setValue is called here already.
+    Blockly.Events.setGroup(true);
+    var oldMutation = Blockly.Xml.domToText(this.mutationToDom());
+    if (isAdding) {
+      this.inputs_++;
+      const number = this.inputs_;
+      const newInput = this.appendValueInput(`INPUT${number}`);
+      newInput.appendField(this.menuGenerator());
+      this.fillInBlock(newInput.connection, "text");
+    } else if (this.inputs_ > 1) {
+      const number = this.inputs_;
+      this.removeInput(`INPUT${number}`);
+      this.inputs_--;
+    }
+    this.initSvg();
+    if (this.rendered) this.render();
+
+    const newMutation = Blockly.Xml.domToText(this.mutationToDom());
+    Blockly.Events.fire(new Blockly.Events.BlockChange(
+      this, 'mutation', null, oldMutation, newMutation
+    ));
+    Blockly.Events.setGroup(false);
+  }
+};
+
 Blockly.Blocks['looks_setVertTransform'] = {
   /**
    * Block to report properties of sprites.
