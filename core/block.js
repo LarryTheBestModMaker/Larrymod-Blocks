@@ -1522,7 +1522,9 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
                 const shape = element['shape'];
                 const ogConnect = input.connection.connect_;
                 input.connection.connect_ = function(...args) {
-                  args[0].sourceBlock_.setOutputShape(shape);
+                  if (args[0].sourceBlock_.isShadow()) {
+                    args[0].sourceBlock_.setOutputShape(shape);
+                  }
                   ogConnect.call(this, ...args);
                 }
               }
