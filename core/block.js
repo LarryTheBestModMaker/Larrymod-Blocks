@@ -582,6 +582,17 @@ Blockly.Block.prototype.setParent = function(newParent) {
   if (newParent) {
     // Add this block to the new parent's child list.
     newParent.childBlocks_.push(this);
+
+    // apply the shape changer if this block is droppable anywhere
+    if (this.outputConnection) {
+        if (!this.outputConnection.check_) {
+            var shape = this.outputConnection.targetConnection.shape_;
+            if (shape) {
+                this.originalOutputShape_ = this.outputShape_;
+                this.outputShape_ = shape;
+            }
+        }
+    }
   } else {
     this.workspace.addTopBlock(this);
   }
