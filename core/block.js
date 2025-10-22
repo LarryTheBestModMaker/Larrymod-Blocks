@@ -584,7 +584,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
     newParent.childBlocks_.push(this);
 
     // apply the shape changer if this block is droppable anywhere
-    if (this.outputConnection) {
+    if (this.outputConnection && !this.originalOutputShape_) {
         if (!this.outputConnection.check_) {
             var shape = this.outputConnection.targetConnection.shape_;
             if (shape) {
