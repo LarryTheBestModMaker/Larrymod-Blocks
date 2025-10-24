@@ -2294,13 +2294,16 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
         emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
         leftPath: (block) => {
             const scale = block.height / 2;
-            return [`h ${-scale * 2} l ${scale} ${-scale} l ${-scale} ${-scale} h ${scale * 2}`];
+            return [`h ${-scale} l ${scale} ${-scale} l ${-scale} ${-scale} h ${scale}`];
         },
         rightPath: (block) => {
             const scale = block.edgeShapeWidth_;
-            return [`h ${scale * 2} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale * 2}`];
+            return [`h ${scale} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale}`];
         },
         blockPaddingStart: (block) => {
+          return block.height / 2;
+        },
+        blockPaddingEnd: (block) => {
           return block.height / 2;
         }
         /*blockPaddingStart: (_, __, firstInput) => {
