@@ -2300,6 +2300,9 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
             const scale = block.edgeShapeWidth_;
             return [`h ${scale * 2} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale * 2}`];
         },
+        blockPaddingStart: (block) => {
+          return block.height / 2;
+        }
         /*blockPaddingStart: (_, __, firstInput) => {
             return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
         },
