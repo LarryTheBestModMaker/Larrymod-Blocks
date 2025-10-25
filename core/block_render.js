@@ -499,7 +499,7 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     5 : 3 * Blockly.BlockSvg.GRID_UNIT, // Plus in hexagon.
     6 : 5 * Blockly.BlockSvg.GRID_UNIT, // Octagon in hexagon.
     7 : 5 * Blockly.BlockSvg.GRID_UNIT, // Bumped in hexagon.
-    8 : 2 * Blockly.BlockSvg.GRID_UNIT, // Indented in hexagon.
+    8 : 5 * Blockly.BlockSvg.GRID_UNIT, // Indented in hexagon.
     9 : 2 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in hexagon.
     10: 2 * Blockly.BlockSvg.GRID_UNIT, // Arrow in hexagon.
     11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in hexagon.
@@ -513,7 +513,7 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     5 : 2 * Blockly.BlockSvg.GRID_UNIT, // Plus in round.
     6 : 1 * Blockly.BlockSvg.GRID_UNIT, // Octagon in round.
     7 : 1 * Blockly.BlockSvg.GRID_UNIT, // Bumped in round.
-    8 : 3 * Blockly.BlockSvg.GRID_UNIT, // Indented in round.
+    8 : 4 * Blockly.BlockSvg.GRID_UNIT, // Indented in round.
     9 : 3 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in round.
     10: 3 * Blockly.BlockSvg.GRID_UNIT, // Arrow in round.
     11: 3 * Blockly.BlockSvg.GRID_UNIT, // Ticket in round.
@@ -589,18 +589,18 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in bumped.
   },
   8 : { // Outer shape: indented.
-    0 : 5 * Blockly.BlockSvg.GRID_UNIT, // Field in indented.
-    1 : 2 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in indented.
-    2 : 5 * Blockly.BlockSvg.GRID_UNIT, // Round in indented.
-    3 : 5 * Blockly.BlockSvg.GRID_UNIT, // Square in indented.
-    4 : 5 * Blockly.BlockSvg.GRID_UNIT, // Leaf in indented.
+    0 : 3 * Blockly.BlockSvg.GRID_UNIT, // Field in indented.
+    1 : 3 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in indented.
+    2 : 3 * Blockly.BlockSvg.GRID_UNIT, // Round in indented.
+    3 : 3 * Blockly.BlockSvg.GRID_UNIT, // Square in indented.
+    4 : 3 * Blockly.BlockSvg.GRID_UNIT, // Leaf in indented.
     5 : 3 * Blockly.BlockSvg.GRID_UNIT, // Plus in indented.
-    6 : 2 * Blockly.BlockSvg.GRID_UNIT, // Octagon in indented.
-    7 : 5 * Blockly.BlockSvg.GRID_UNIT, // Bumped in indented.
-    8 : 2 * Blockly.BlockSvg.GRID_UNIT, // Indented in indented.
-    9 : 2 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in indented.
-    10: 2 * Blockly.BlockSvg.GRID_UNIT, // Arrow in indented.
-    11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in indented.
+    6 : 3 * Blockly.BlockSvg.GRID_UNIT, // Octagon in indented.
+    7 : 3 * Blockly.BlockSvg.GRID_UNIT, // Bumped in indented.
+    8 : 0, // Indented in indented.
+    9 : 3 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in indented.
+    10: 3 * Blockly.BlockSvg.GRID_UNIT, // Arrow in indented.
+    11: 3 * Blockly.BlockSvg.GRID_UNIT, // Ticket in indented.
   },
   9 : { // Outer shape: scrapped.
     0 : 5 * Blockly.BlockSvg.GRID_UNIT, // Field in scrapped.
@@ -2300,18 +2300,12 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
             const scale = block.edgeShapeWidth_;
             return [`h ${scale} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale}`];
         },
-        blockPaddingStart: (block) => {
-          return block.height / 2;
+        blockPaddingStart: (_, _, _, _, row) => {
+          return (row.height - 8) / 2;
         },
-        blockPaddingEnd: (block) => {
-          return block.height / 2;
+        blockPaddingEnd: (_, _, _, _, row) => {
+          return (row.height - 8) / 2;
         }
-        /*blockPaddingStart: (_, __, firstInput) => {
-            return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
-        },
-        blockPaddingEnd: (_, __, lastInput) => {
-            return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
-        },*/
     }],
     [Blockly.OUTPUT_SHAPE_SCRAPPED, {
         emptyInputPath: "M 16 0 h 16 h 16 l -6 10 l -4 1 l 4 2 v 6 l -4 2 l 4 1 l 6 10 h -16 h -16 h -16 l 6 -10 l 4 -1 l -4 -2 v -6 l 4 -2 l -4 -1 l -6 -10 z",
