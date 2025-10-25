@@ -2300,10 +2300,10 @@ Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
             const scale = block.edgeShapeWidth_;
             return [`h ${scale} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale}`];
         },
-        blockPaddingStart: (_, _, _, _, row) => {
+        blockPaddingStart: (_, _2, _3, _4, row) => {
           return (row.height - 8) / 2;
         },
-        blockPaddingEnd: (_, _, _, _, row) => {
+        blockPaddingEnd: (_, _2, _3, _4, row) => {
           return (row.height - 8) / 2;
         }
     }],
