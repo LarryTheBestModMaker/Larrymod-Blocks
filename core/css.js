@@ -358,6 +358,7 @@ Blockly.Css.CONTENT = [
     'font-size: .8em;',
     'display: flex;',
     'justify-content: center;',
+    'tab-size: 4;',
   '}',
 
   '.blocklyResizeSE {',
