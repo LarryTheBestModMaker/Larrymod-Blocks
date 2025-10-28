@@ -1089,7 +1089,7 @@ Blockly.Blocks["control_backToGreenFlag"] = {
           "src": Blockly.mainWorkspace.options.pathToMedia + "blue-flag.svg",
           "width": 24,
           "height": 24,
-          "alt": "flag"
+          "alt": "flag",
           "flip_rtl": false
         }
       ],
