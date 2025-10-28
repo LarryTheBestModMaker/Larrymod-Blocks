@@ -512,7 +512,7 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     4 : 3 * Blockly.BlockSvg.GRID_UNIT, // Leaf in round.
     5 : 2 * Blockly.BlockSvg.GRID_UNIT, // Plus in round.
     6 : 1 * Blockly.BlockSvg.GRID_UNIT, // Octagon in round.
-    7 : 1 * Blockly.BlockSvg.GRID_UNIT, // Bumped in round.
+    7 : 3 * Blockly.BlockSvg.GRID_UNIT, // Bumped in round.
     8 : 4 * Blockly.BlockSvg.GRID_UNIT, // Indented in round.
     9 : 3 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in round.
     10: 3 * Blockly.BlockSvg.GRID_UNIT, // Arrow in round.
@@ -540,7 +540,7 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     4 : 1 * Blockly.BlockSvg.GRID_UNIT, // Leaf in leaf.
     5 : 2 * Blockly.BlockSvg.GRID_UNIT, // Plus in leaf.
     6 : 2 * Blockly.BlockSvg.GRID_UNIT, // Octagon in leaf.
-    7 : 2 * Blockly.BlockSvg.GRID_UNIT, // Bumped in leaf.
+    7 : 3 * Blockly.BlockSvg.GRID_UNIT, // Bumped in leaf.
     8 : 3 * Blockly.BlockSvg.GRID_UNIT, // Indented in leaf.
     9 : 3 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in leaf.
     10: 3 * Blockly.BlockSvg.GRID_UNIT, // Arrow in leaf.
@@ -554,7 +554,7 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     4 : 5 * Blockly.BlockSvg.GRID_UNIT, // Leaf in plus.
     5 : 3 * Blockly.BlockSvg.GRID_UNIT, // Plus in plus.
     6 : 4 * Blockly.BlockSvg.GRID_UNIT, // Octagon in plus.
-    7 : 4 * Blockly.BlockSvg.GRID_UNIT, // Bumped in plus.
+    7 : 5 * Blockly.BlockSvg.GRID_UNIT, // Bumped in plus.
     8 : 4 * Blockly.BlockSvg.GRID_UNIT, // Indented in plus.
     9 : 4 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in plus.
     10: 4 * Blockly.BlockSvg.GRID_UNIT, // Arrow in plus.
@@ -568,25 +568,25 @@ Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING = {
     4 : 5 * Blockly.BlockSvg.GRID_UNIT, // Leaf in octagon.
     5 : 3 * Blockly.BlockSvg.GRID_UNIT, // Plus in octagon.
     6 : 1 * Blockly.BlockSvg.GRID_UNIT, // Octagon in octagon.
-    7 : 5 * Blockly.BlockSvg.GRID_UNIT, // Bumped in octagon.
+    7 : 3 * Blockly.BlockSvg.GRID_UNIT, // Bumped in octagon.
     8 : 2 * Blockly.BlockSvg.GRID_UNIT, // Indented in octagon.
     9 : 2 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in octagon.
     10: 2 * Blockly.BlockSvg.GRID_UNIT, // Arrow in octagon.
     11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in octagon.
   },
   7 : { // Outer shape: bumped.
-    0 : 5 * Blockly.BlockSvg.GRID_UNIT, // Field in bumped.
-    1 : 6 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in bumped.
-    2 : 5 * Blockly.BlockSvg.GRID_UNIT, // Round in bumped.
-    3 : 5 * Blockly.BlockSvg.GRID_UNIT, // Square in bumped.
-    4 : 5 * Blockly.BlockSvg.GRID_UNIT, // Leaf in bumped.
-    5 : 5 * Blockly.BlockSvg.GRID_UNIT, // Plus in bumped.
-    6 : 5 * Blockly.BlockSvg.GRID_UNIT, // Octagon in bumped.
+    0 : 1 * Blockly.BlockSvg.GRID_UNIT, // Field in bumped.
+    1 : 1 * Blockly.BlockSvg.GRID_UNIT, // Hexagon in bumped.
+    2 : 1 * Blockly.BlockSvg.GRID_UNIT, // Round in bumped.
+    3 : 1 * Blockly.BlockSvg.GRID_UNIT, // Square in bumped.
+    4 : 1 * Blockly.BlockSvg.GRID_UNIT, // Leaf in bumped.
+    5 : 1 * Blockly.BlockSvg.GRID_UNIT, // Plus in bumped.
+    6 : 1 * Blockly.BlockSvg.GRID_UNIT, // Octagon in bumped.
     7 : 3 * Blockly.BlockSvg.GRID_UNIT, // Bumped in bumped.
-    8 : 5 * Blockly.BlockSvg.GRID_UNIT, // Indented in bumped.
-    9 : 5 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in bumped.
-    10: 5 * Blockly.BlockSvg.GRID_UNIT, // Arrow in bumped.
-    11: 5 * Blockly.BlockSvg.GRID_UNIT, // Ticket in bumped.
+    8 : 1 * Blockly.BlockSvg.GRID_UNIT, // Indented in bumped.
+    9 : 1 * Blockly.BlockSvg.GRID_UNIT, // Scrapped in bumped.
+    10: 1 * Blockly.BlockSvg.GRID_UNIT, // Arrow in bumped.
+    11: 1 * Blockly.BlockSvg.GRID_UNIT, // Ticket in bumped.
   },
   8 : { // Outer shape: indented.
     0 : 3 * Blockly.BlockSvg.GRID_UNIT, // Field in indented.
@@ -2260,181 +2260,185 @@ Blockly.BlockSvg.registerCustomNotch("inverted", `c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 
 /* -= Custom Block Shape API =- */
 // Stores all user-defined custom shapes
 Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
-    /* pre-made shapes */
-    // NOTE: the keys should be numbers, see src/extension-support/block-shape in VM
-    // Reference: boolean shape -> m 16 0 h 16 (rightPath) l 16 16 l -16 16 h -16 (leftPath) l -16 -16 l 16 -16 z
-    [Blockly.OUTPUT_SHAPE_OCTAGONAL, {
-        emptyInputPath: "M 8 0 h 32 l 8 8 l 0 16 l -8 8 h -32 l -8 -8 l 0 -16 l 8 -8 z",
-        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
-        leftPath: (block) => {
-            const scale = block.height / 2;
-            return [`l ${-scale / 2} 0 l ${-scale / 2} ${-scale / 2} l 0 ${-scale} l ${scale / 2} ${-scale / 2} l ${scale / 2} 0`];
-        },
-        rightPath: (block) => {
-            const scale = block.edgeShapeWidth_;
-            return [`l ${scale / 2} 0 l ${scale / 2} ${scale / 2} l 0 ${scale} l ${-scale / 2} ${scale / 2} l ${-scale / 2} 0`];
-        },
-    }],
-    [Blockly.OUTPUT_SHAPE_BUMPED, {
-        emptyInputPath: "M 8 0 h 32 a 1 1 0 0 1 0 16 a 1 1 0 0 1 0 16 h -32 a 1 1 0 0 1 0 -16 a 1 1 0 0 1 0 -16 z",
-        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
-        leftPath: (block) => {
-            const scale = block.height / 2;
-            return [`a 1 1 0 0 1 0 ${-scale} a 1 1 0 0 1 0 ${-scale}`];
-        },
-        rightPath: (block) => {
-            const scale = block.edgeShapeWidth_;
-            return [`a 1 1 0 0 1 0 ${scale} a 1 1 0 0 1 0 ${scale}`];
-        },
-        blockPaddingStart: () => 8,
-        blockPaddingEnd: () => 8,
-    }],
-    [Blockly.OUTPUT_SHAPE_INDENTED, {
-        emptyInputPath: "M 16 0 h 16 h 16 l -16 16 l 16 16 h -16 h -16 h -16 l 16 -16 l -16 -16 z",
-        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
-        leftPath: (block) => {
-            const scale = block.height / 2;
-            return [`h ${-scale} l ${scale} ${-scale} l ${-scale} ${-scale} h ${scale}`];
-        },
-        rightPath: (block) => {
-            const scale = block.edgeShapeWidth_;
-            return [`h ${scale} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale}`];
-        },
-        blockPaddingStart: (_, _2, _3, _4, row) => {
-          return (row.height - 8) / 2;
-        },
-        blockPaddingEnd: (_, _2, _3, _4, row) => {
-          return (row.height - 8) / 2;
-        }
-    }],
-    [Blockly.OUTPUT_SHAPE_SCRAPPED, {
-        emptyInputPath: "M 16 0 h 16 h 16 l -6 10 l -4 1 l 4 2 v 6 l -4 2 l 4 1 l 6 10 h -16 h -16 h -16 l 6 -10 l 4 -1 l -4 -2 v -6 l 4 -2 l -4 -1 l -6 -10 z",
-        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
-        leftPath: (block) => {
-            const scale = block.height / 2;
-            const s = scale / 16;
-            return [
-                `h ${-16 * s}`,
-                `l ${6 * s} ${-10 * s}`,
-                `l ${4 * s} ${-1 * s}`,
-                `l ${-4 * s} ${-2 * s}`,
-                `v ${-6 * s}`,
-                `l ${4 * s} ${-2 * s}`,
-                `l ${-4 * s} ${-1 * s}`,
-                `l ${-6 * s} ${-10 * s}`,
-            ];
-        },
-        rightPath: (block) => {
-            const scale = block.edgeShapeWidth_;
-            const s = scale / 16;
-            return [
-                `h ${16 * s}`,
-                `l ${-6 * s} ${10 * s}`,
-                `l ${-4 * s} ${1 * s}`,
-                `l ${4 * s} ${2 * s}`,
-                `v ${6 * s}`,
-                `l ${-4 * s} ${2 * s}`,
-                `l ${4 * s} ${1 * s}`,
-                `l ${6 * s} ${10 * s}`,
-                `h ${-16 * s}`,
-            ];
-        },
-        blockPaddingStart: (_, __, firstInput) => {
-            return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 3, 0);
-        },
-        blockPaddingEnd: (_, __, lastInput) => {
-            return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 3, 0);
-        },
-    }],
-    [Blockly.OUTPUT_SHAPE_ARROW, {
-        emptyInputPath: "M 16 0 h 16 c 0.059 0 0.1175 0.0014 0.1758 0.0042 c 0.6594 -0.0042 1.7729 -0.0042 3.2858 0.9866 l 13.0645 11.9969 c 0.1287 0.0979 0.2521 0.2057 0.3696 0.3231 c 0.4447 0.4447 0.7494 0.9762 0.9143 1.5401 l 0.0454 0.0755 l -0.0123 0.0452 c 0.0757 0.297 0.1133 0.6017 0.1126 0.9064 c 0.0007 0.3047 -0.0369 0.6093 -0.1126 0.9063 l 0.0123 0.0452 l -0.0454 0.0755 c -0.1649 0.5638 -0.4695 1.0954 -0.9143 1.5401 c -0.1175 0.1175 -0.241 0.2252 -0.3696 0.3231 l -13.0645 11.9969 c -0.9561 0.9699 -3.0641 1.2348 -3.4616 1.2349 h -16 h -12.2464 c -0.6168 0 -1.1976 -0.1543 -1.7058 -0.4265 l -0.0742 -0.0397 l -0.0567 -0.0341 c -0.4474 -0.2641 -0.8331 -0.6217 -1.1301 -1.046 c -0.7213 -0.9079 -0.9437 -2.082 -0.6674 -3.1542 l 0.0166 -0.0623 l 0.024 -0.0822 c 0.167 -0.5518 0.4684 -1.0716 0.9047 -1.5078 l 10.6386 -9.7693 l -10.6386 -9.7693 c -0.4362 -0.4362 -0.7377 -0.9559 -0.9047 -1.5078 l -0.0245 -0.0877 l -0.0161 -0.0568 c -0.3091 -1.1994 0.006 -2.5264 0.9451 -3.4655 c 0.8871 -0.8871 2.217 -0.9908 3.2649 -0.9908 h 11.6706 z",
-        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
-        leftPath: (block) => {
-            const scale = block.height / 2;
-            const s = scale / 16;
-            return [
-                `h ${-12.2464 * s}`,
-                `c ${-0.6168 * s} 0 ${-1.1976 * s} ${-0.1543 * s} ${-1.7058 * s} ${-0.4265 * s}`,
-                `l ${-0.0742 * s} ${-0.0397 * s}`,
-                `l ${-0.0567 * s} ${-0.0341 * s}`,
-                `c ${-0.4474 * s} ${-0.2641 * s} ${-0.8331 * s} ${-0.6217 * s} ${-1.1301 * s} ${-1.046 * s}`,
-                `c ${-0.7213 * s} ${-0.9079 * s} ${-0.9437 * s} ${-2.082 * s} ${-0.6674 * s} ${-3.1542 * s}`,
-                `l ${0.0166 * s} ${-0.0623 * s}`,
-                `l ${0.024 * s} ${-0.0822 * s}`,
-                `c ${0.167 * s} ${-0.5518 * s} ${0.4684 * s} ${-1.0716 * s} ${0.9047 * s} ${-1.5078 * s}`,
-                `l ${10.6386 * s} ${-9.7693 * s}`,
-                `l ${-10.6386 * s} ${-9.7693 * s}`,
-                `c ${-0.4362 * s} ${-0.4362 * s} ${-0.7377 * s} ${-0.9559 * s} ${-0.9047 * s} ${-1.5078 * s}`,
-                `l ${-0.0245 * s} ${-0.0877 * s}`,
-                `l ${-0.0161 * s} ${-0.0568 * s}`,
-                `c ${-0.3091 * s} ${-1.1994 * s} ${0.006 * s} ${-2.5264 * s} ${0.9451 * s} ${-3.4655 * s}`,
-                `c ${0.8871 * s} ${-0.8871 * s} ${2.217 * s} ${-0.9908 * s} ${3.2649 * s} ${-0.9908 * s}`,
-                `h ${11.6706 * s}`,
-            ];
-        },
-        rightPath: (block) => {
-            const scale = block.edgeShapeWidth_;
-            const s = scale / 16;
-            return [
-                `c ${0.059 * s} 0 ${0.1175 * s} ${0.0014 * s} ${0.1758 * s} ${0.0042 * s}`,
-                `c ${0.6594 * s} ${-0.0042 * s} ${1.7729 * s} ${-0.0042 * s} ${3.2858 * s} ${0.9866 * s}`,
-                `l ${13.0645 * s} ${11.9969 * s}`,
-                `c ${0.1287 * s} ${0.0979 * s} ${0.2521 * s} ${0.2057 * s} ${0.3696 * s} ${0.3231 * s}`,
-                `c ${0.4447 * s} ${0.4447 * s} ${0.7494 * s} ${0.9762 * s} ${0.9143 * s} ${1.5401 * s}`,
-                `l ${0.0454 * s} ${0.0755 * s}`,
-                `l ${-0.0123 * s} ${0.0452 * s}`,
-                `c ${0.0757 * s} ${0.297 * s} ${0.1133 * s} ${0.6017 * s} ${0.1126 * s} ${0.9064 * s}`,
-                `c ${0.0007 * s} ${0.3047 * s} ${-0.0369 * s} ${0.6093 * s} ${-0.1126 * s} ${0.9063 * s}`,
-                `l ${0.0123 * s} ${0.0452 * s}`,
-                `l ${-0.0454 * s} ${0.0755 * s}`,
-                `c ${-0.1649 * s} ${0.5638 * s} ${-0.4695 * s} ${1.0954 * s} ${-0.9143 * s} ${1.5401 * s}`,
-                `c ${-0.1175 * s} ${0.1175 * s} ${-0.241 * s} ${0.2252 * s} ${-0.3696 * s} ${0.3231 * s}`,
-                `l ${-13.0645 * s} ${11.9969 * s}`,
-                `c ${-0.9561 * s} ${0.9699 * s} ${-3.0641 * s} ${1.2348 * s} ${-3.4616 * s} ${1.2349 * s}`,
-            ];
-        },
-        blockPaddingStart: (_, __, firstInput) => {
-            return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
-        },
-        blockPaddingEnd: (_, __, lastInput) => {
-            return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
-        },
-    }],
-    [Blockly.OUTPUT_SHAPE_TICKET, {
-        emptyInputPath: "m 0 0 m 15 0 H 46 z L 2 0 A 2 2 0 0 0 0 2 L 0 8 A 2 2 0 0 0 2 10 L 7 10 c 4 2 4 9 0 11 L 2 21 A 2 2 0 0 0 0 23 L 0 30 A 2 2 0 0 0 2 32 L 46 32 A 2 2 0 0 0 48 30 L 48 23 A 2 2 0 0 0 46 21 L 41 21 c -4 -2 -4 -9 0 -11 L 46 10 A 2 2 0 0 0 48 8 L 48 2 A 2 2 0 0 0 46 0 z",
-        emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
-        // 13.4 is the height of the hole
-        leftPath: (block) => {
-            const w = block.height / 2;
-            return [
-                `h-${w - 1}`,
-                `a 2 2 0 0 1 -2 -2`, // 2unit rounded
-                `v-${w - (13.4 / 2) - 4}`,
-                `a 2 2 0 0 1 2 -2`, // 2unit rounded
-                `h10`,
-                `c4 -2 4 -12 0 -${13.4}`,
-                `h-10`,
-                `a 2 2 0 0 1 -2 -2`, // 2unit rounded
-                `v-${w - (13.4 / 2) - 4}`,
-                `a 2 2 0 0 1 2 -2`, // 2unit rounded
-            ];
-        },
-        rightPath: (block) => {
-            const w = block.edgeShapeWidth_;
-            return [
-                `h${w}`,
-                `a 2 2 0 0 1 2 2`, // 2unit rounded
-                `v${w - (13.4 / 2) - 4}`,
-                `a 2 2 0 0 1 -2 2`, // 2unit rounded
-                `h-10`,
-                `c-4 2 -4 12 0 ${13.4}`,
-                `h10`,
-                `a 2 2 0 0 1 2 2`, // 2unit rounded
-                `v${w - (13.4 / 2) - 4}`,
-                `a 2 2 0 0 1 -2 2`, // 2unit rounded
-            ];
-        },
-    }],
+  /* pre-made shapes */
+  // NOTE: the keys should be numbers, see src/extension-support/block-shape in VM
+  // Reference: boolean shape -> m 16 0 h 16 (rightPath) l 16 16 l -16 16 h -16 (leftPath) l -16 -16 l 16 -16 z
+  [Blockly.OUTPUT_SHAPE_OCTAGONAL, {
+    emptyInputPath: "M 8 0 h 32 l 8 8 l 0 16 l -8 8 h -32 l -8 -8 l 0 -16 l 8 -8 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      return [`l ${-scale / 2} 0 l ${-scale / 2} ${-scale / 2} l 0 ${-scale} l ${scale / 2} ${-scale / 2} l ${scale / 2} 0`];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      return [`l ${scale / 2} 0 l ${scale / 2} ${scale / 2} l 0 ${scale} l ${-scale / 2} ${scale / 2} l ${-scale / 2} 0`];
+    },
+  }],
+  [Blockly.OUTPUT_SHAPE_BUMPED, {
+    emptyInputPath: "M 8 0 h 32 a 1 1 0 0 1 0 16 a 1 1 0 0 1 0 16 h -32 a 1 1 0 0 1 0 -16 a 1 1 0 0 1 0 -16 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      return [`h ${scale / -3} a 1 1 0 0 1 0 ${-scale} a 1 1 0 0 1 0 ${-scale} h ${scale / 3}`];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      return [`h ${scale / 3} a 1 1 0 0 1 0 ${scale} a 1 1 0 0 1 0 ${scale} h ${scale / -3}`];
+    },
+    blockPaddingStart: (_, _2, _3, _4, row) => {
+      return (row.height - 4) / 2;
+    },
+    blockPaddingEnd: (_, _2, _3, _4, row) => {
+      return (row.height - 4) / 2;
+    }
+  }],
+  [Blockly.OUTPUT_SHAPE_INDENTED, {
+    emptyInputPath: "M 16 0 h 16 h 16 l -16 16 l 16 16 h -16 h -16 h -16 l 16 -16 l -16 -16 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      return [`h ${-scale} l ${scale} ${-scale} l ${-scale} ${-scale} h ${scale}`];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      return [`h ${scale} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale}`];
+    },
+    blockPaddingStart: (_, _2, _3, _4, row) => {
+      return (row.height - 8) / 2;
+    },
+    blockPaddingEnd: (_, _2, _3, _4, row) => {
+      return (row.height - 8) / 2;
+    }
+  }],
+  [Blockly.OUTPUT_SHAPE_SCRAPPED, {
+    emptyInputPath: "M 16 0 h 16 h 16 l -6 10 l -4 1 l 4 2 v 6 l -4 2 l 4 1 l 6 10 h -16 h -16 h -16 l 6 -10 l 4 -1 l -4 -2 v -6 l 4 -2 l -4 -1 l -6 -10 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      const s = scale / 16;
+      return [
+        `h ${-16 * s}`,
+        `l ${6 * s} ${-10 * s}`,
+        `l ${4 * s} ${-1 * s}`,
+        `l ${-4 * s} ${-2 * s}`,
+        `v ${-6 * s}`,
+        `l ${4 * s} ${-2 * s}`,
+        `l ${-4 * s} ${-1 * s}`,
+        `l ${-6 * s} ${-10 * s}`,
+      ];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      const s = scale / 16;
+      return [
+        `h ${16 * s}`,
+        `l ${-6 * s} ${10 * s}`,
+        `l ${-4 * s} ${1 * s}`,
+        `l ${4 * s} ${2 * s}`,
+        `v ${6 * s}`,
+        `l ${-4 * s} ${2 * s}`,
+        `l ${4 * s} ${1 * s}`,
+        `l ${6 * s} ${10 * s}`,
+        `h ${-16 * s}`,
+      ];
+    },
+    blockPaddingStart: (_, __, firstInput) => {
+      return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 3, 0);
+    },
+    blockPaddingEnd: (_, __, lastInput) => {
+      return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 3, 0);
+    },
+  }],
+  [Blockly.OUTPUT_SHAPE_ARROW, {
+    emptyInputPath: "M 16 0 h 16 c 0.059 0 0.1175 0.0014 0.1758 0.0042 c 0.6594 -0.0042 1.7729 -0.0042 3.2858 0.9866 l 13.0645 11.9969 c 0.1287 0.0979 0.2521 0.2057 0.3696 0.3231 c 0.4447 0.4447 0.7494 0.9762 0.9143 1.5401 l 0.0454 0.0755 l -0.0123 0.0452 c 0.0757 0.297 0.1133 0.6017 0.1126 0.9064 c 0.0007 0.3047 -0.0369 0.6093 -0.1126 0.9063 l 0.0123 0.0452 l -0.0454 0.0755 c -0.1649 0.5638 -0.4695 1.0954 -0.9143 1.5401 c -0.1175 0.1175 -0.241 0.2252 -0.3696 0.3231 l -13.0645 11.9969 c -0.9561 0.9699 -3.0641 1.2348 -3.4616 1.2349 h -16 h -12.2464 c -0.6168 0 -1.1976 -0.1543 -1.7058 -0.4265 l -0.0742 -0.0397 l -0.0567 -0.0341 c -0.4474 -0.2641 -0.8331 -0.6217 -1.1301 -1.046 c -0.7213 -0.9079 -0.9437 -2.082 -0.6674 -3.1542 l 0.0166 -0.0623 l 0.024 -0.0822 c 0.167 -0.5518 0.4684 -1.0716 0.9047 -1.5078 l 10.6386 -9.7693 l -10.6386 -9.7693 c -0.4362 -0.4362 -0.7377 -0.9559 -0.9047 -1.5078 l -0.0245 -0.0877 l -0.0161 -0.0568 c -0.3091 -1.1994 0.006 -2.5264 0.9451 -3.4655 c 0.8871 -0.8871 2.217 -0.9908 3.2649 -0.9908 h 11.6706 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      const s = scale / 16;
+      return [
+        `h ${-12.2464 * s}`,
+        `c ${-0.6168 * s} 0 ${-1.1976 * s} ${-0.1543 * s} ${-1.7058 * s} ${-0.4265 * s}`,
+        `l ${-0.0742 * s} ${-0.0397 * s}`,
+        `l ${-0.0567 * s} ${-0.0341 * s}`,
+        `c ${-0.4474 * s} ${-0.2641 * s} ${-0.8331 * s} ${-0.6217 * s} ${-1.1301 * s} ${-1.046 * s}`,
+        `c ${-0.7213 * s} ${-0.9079 * s} ${-0.9437 * s} ${-2.082 * s} ${-0.6674 * s} ${-3.1542 * s}`,
+        `l ${0.0166 * s} ${-0.0623 * s}`,
+        `l ${0.024 * s} ${-0.0822 * s}`,
+        `c ${0.167 * s} ${-0.5518 * s} ${0.4684 * s} ${-1.0716 * s} ${0.9047 * s} ${-1.5078 * s}`,
+        `l ${10.6386 * s} ${-9.7693 * s}`,
+        `l ${-10.6386 * s} ${-9.7693 * s}`,
+        `c ${-0.4362 * s} ${-0.4362 * s} ${-0.7377 * s} ${-0.9559 * s} ${-0.9047 * s} ${-1.5078 * s}`,
+        `l ${-0.0245 * s} ${-0.0877 * s}`,
+        `l ${-0.0161 * s} ${-0.0568 * s}`,
+        `c ${-0.3091 * s} ${-1.1994 * s} ${0.006 * s} ${-2.5264 * s} ${0.9451 * s} ${-3.4655 * s}`,
+        `c ${0.8871 * s} ${-0.8871 * s} ${2.217 * s} ${-0.9908 * s} ${3.2649 * s} ${-0.9908 * s}`,
+        `h ${11.6706 * s}`,
+      ];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      const s = scale / 16;
+      return [
+        `c ${0.059 * s} 0 ${0.1175 * s} ${0.0014 * s} ${0.1758 * s} ${0.0042 * s}`,
+        `c ${0.6594 * s} ${-0.0042 * s} ${1.7729 * s} ${-0.0042 * s} ${3.2858 * s} ${0.9866 * s}`,
+        `l ${13.0645 * s} ${11.9969 * s}`,
+        `c ${0.1287 * s} ${0.0979 * s} ${0.2521 * s} ${0.2057 * s} ${0.3696 * s} ${0.3231 * s}`,
+        `c ${0.4447 * s} ${0.4447 * s} ${0.7494 * s} ${0.9762 * s} ${0.9143 * s} ${1.5401 * s}`,
+        `l ${0.0454 * s} ${0.0755 * s}`,
+        `l ${-0.0123 * s} ${0.0452 * s}`,
+        `c ${0.0757 * s} ${0.297 * s} ${0.1133 * s} ${0.6017 * s} ${0.1126 * s} ${0.9064 * s}`,
+        `c ${0.0007 * s} ${0.3047 * s} ${-0.0369 * s} ${0.6093 * s} ${-0.1126 * s} ${0.9063 * s}`,
+        `l ${0.0123 * s} ${0.0452 * s}`,
+        `l ${-0.0454 * s} ${0.0755 * s}`,
+        `c ${-0.1649 * s} ${0.5638 * s} ${-0.4695 * s} ${1.0954 * s} ${-0.9143 * s} ${1.5401 * s}`,
+        `c ${-0.1175 * s} ${0.1175 * s} ${-0.241 * s} ${0.2252 * s} ${-0.3696 * s} ${0.3231 * s}`,
+        `l ${-13.0645 * s} ${11.9969 * s}`,
+        `c ${-0.9561 * s} ${0.9699 * s} ${-3.0641 * s} ${1.2348 * s} ${-3.4616 * s} ${1.2349 * s}`,
+      ];
+    },
+    blockPaddingStart: (_, __, firstInput) => {
+      return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
+    },
+    blockPaddingEnd: (_, __, lastInput) => {
+      return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
+    },
+  }],
+  [Blockly.OUTPUT_SHAPE_TICKET, {
+    emptyInputPath: "m 0 0 m 15 0 H 46 z L 2 0 A 2 2 0 0 0 0 2 L 0 8 A 2 2 0 0 0 2 10 L 7 10 c 4 2 4 9 0 11 L 2 21 A 2 2 0 0 0 0 23 L 0 30 A 2 2 0 0 0 2 32 L 46 32 A 2 2 0 0 0 48 30 L 48 23 A 2 2 0 0 0 46 21 L 41 21 c -4 -2 -4 -9 0 -11 L 46 10 A 2 2 0 0 0 48 8 L 48 2 A 2 2 0 0 0 46 0 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    // 13.4 is the height of the hole
+    leftPath: (block) => {
+      const w = block.height / 2;
+      return [
+        `h-${w - 1}`,
+        `a 2 2 0 0 1 -2 -2`, // 2unit rounded
+        `v-${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 2 -2`, // 2unit rounded
+        `h10`,
+        `c4 -2 4 -12 0 -${13.4}`,
+        `h-10`,
+        `a 2 2 0 0 1 -2 -2`, // 2unit rounded
+        `v-${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 2 -2`, // 2unit rounded
+      ];
+    },
+    rightPath: (block) => {
+      const w = block.edgeShapeWidth_;
+      return [
+        `h${w}`,
+        `a 2 2 0 0 1 2 2`, // 2unit rounded
+        `v${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 -2 2`, // 2unit rounded
+        `h-10`,
+        `c-4 2 -4 12 0 ${13.4}`,
+        `h10`,
+        `a 2 2 0 0 1 2 2`, // 2unit rounded
+        `v${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 -2 2`, // 2unit rounded
+      ];
+    },
+  }],
 ]);
 
 /**
