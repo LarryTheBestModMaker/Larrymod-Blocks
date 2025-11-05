@@ -466,7 +466,8 @@ Blockly.Blocks['looks_seteffectto'] = {
             [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
             [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
             [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
-            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE']
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['blur', 'BLUR']
           ]
         },
         {

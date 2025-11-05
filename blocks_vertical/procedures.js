@@ -1316,6 +1316,26 @@ Blockly.Blocks['argument_reporter_color_picker'] = {
   domToMutation: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation
 };
 
+Blockly.Blocks['argument_reporter_empty'] = {
+  init: function() {
+    this.jsonInit({ 
+      "message0": " %1",
+      "args0": [
+        {
+          "type": "field_label_serializable",
+          "name": "VALUE",
+          "text": ""
+        }
+      ],
+      "output": "colour",
+      "extensions": ["colours_more"]
+    });
+  },
+  updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
+  mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom,
+  domToMutation: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation
+};
+
 Blockly.Blocks['argument_reporter_command'] = {
   init: function () {
     this.jsonInit({ "message0": " %1",
