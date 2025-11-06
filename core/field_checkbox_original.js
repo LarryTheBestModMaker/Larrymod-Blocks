@@ -89,7 +89,7 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     return;
   }
   Blockly.FieldCheckboxOriginal.superClass_.init.call(this);
-  if (this.sourceBlock_ && (this.sourceBlock_.inputList.length > 1 || this.sourceBlock_.inputList[0].fieldRow.length > 1)) {
+  if (this.sourceBlock_ && this.sourceBlock_.type !== "checkbox") {
     this.checkBackground_ = Blockly.utils.createSvgElement('path',
       {
         'd': 'M25.9 2.5H6.1A3.6 3.6 90 002.5 6.1v19.8A3.6 3.6 90 006.1 29.5h19.8a3.6 3.6 90 003.6-3.6V6.1A3.6 3.6 90 0025.9 2.5'

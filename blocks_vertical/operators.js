@@ -1488,3 +1488,19 @@ Blockly.Blocks["operator_javascript_boolean"] = {
     });
   }
 };
+
+Blockly.Blocks['operator_checkboxBoolean'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_checkbox_original",
+          "name": "CHECKBOX"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
