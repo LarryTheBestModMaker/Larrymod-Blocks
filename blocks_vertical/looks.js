@@ -425,7 +425,9 @@ Blockly.Blocks['looks_seteffectto'] = {
             ["red", 'RED'],
             ["green", 'GREEN'],
             ["blue", 'BLUE'],
-            ["opaque", 'OPAQUE']
+            ["opaque", 'OPAQUE'],
+            ["horizontal shear", 'HORIZONTAL_SHEAR'],
+            ["vertical shear", 'VERTICAL_SHEAR']
           ]
         },
         {
@@ -1050,7 +1052,9 @@ Blockly.Blocks["looks_getEffectValue"] = {
             ["red", 'RED'],
             ["green", 'GREEN'],
             ["blue", 'BLUE'],
-            ["opaque", 'OPAQUE']
+            ["opaque", 'OPAQUE'],
+            ["horizontal shear", 'HORIZONTAL_SHEAR'],
+            ["vertical shear", 'VERTICAL_SHEAR']
           ]
         }
       ],
