@@ -161,4 +161,9 @@ Blockly.FieldCheckboxOriginal.prototype.updateWidth = function() {
   this.size_.width = 8 * Blockly.BlockSvg.GRID_UNIT
 }
 
+Blockly.FieldCheckboxOriginal.prototype.getClickTarget_ = function() {
+  let output = Blockly.FieldCheckboxOriginal.superClass_.getClickTarget_.call(this)
+  return this.sourceBlock_ && this.sourceBlock_.type !== "checkbox" ? this.fieldGroup_ : output
+}
+
 Blockly.Field.register('field_checkbox_original', Blockly.FieldCheckboxOriginal);
