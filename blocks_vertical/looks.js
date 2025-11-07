@@ -387,7 +387,9 @@ Blockly.Blocks['looks_changeeffectby'] = {
             ["red", 'RED'],
             ["green", 'GREEN'],
             ["blue", 'BLUE'],
-            ["opaque", 'OPAQUE']
+            ["opaque", 'OPAQUE'],
+            ["horizontal shear", 'HORIZONTAL_SHEAR'],
+            ["vertical shear", 'VERTICAL_SHEAR']
           ]
         },
         {
