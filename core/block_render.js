@@ -1745,9 +1745,16 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
     // Bottom left corner
     steps.push(Blockly.BlockSvg.BOTTOM_LEFT_CORNER);
   } else {
-    steps.push('H', this.height / 2);
+    steps.push('H', this.outputLeftPadding_());
   }
 };
+
+Blockly.BlockSvg.prototype.outputLeftPadding_ = function() {
+  if (!this.outputConnection) return 0;
+  const shape = this.getOutputShape();
+
+  return this.height / 2;
+}
 
 /**
  * Render the left edge of the block.
@@ -1760,7 +1767,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
 
   if (this.outputConnection) {
     // Scratch-style reporters have output connection y at half block height.
-    this.outputConnection.setOffsetInBlock(0, this.height / 2);
+    this.outputConnection.setOffsetInBlock(0, this.outputLeftPadding_());
   }
   if (this.edgeShape_) {
     // Draw the left-side edge shape.
