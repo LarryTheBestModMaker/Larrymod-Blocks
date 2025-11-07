@@ -903,7 +903,7 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
  */
 Blockly.BlockSvg.prototype.renderFields_ = function(fieldList, cursorX,
     cursorY) {
-  if (this.edgeShapeWidth_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
+  if (this.edgeShape_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
   if (this.RTL) {
     cursorX = -cursorX;
   }
@@ -1593,6 +1593,9 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
             input.connection.setOffsetInBlock(connectionX, connectionY);
             this.renderInputShape_(input, cursorX, cursorY + connectionYOffset);
             cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
+            if (input.connection.targetConnection) {
+              cursorX += input.connection.targetConnection.sourceBlock_.outputLeftPadding_()
+            }
           }
         }
         // Remove final separator and replace it with right-padding.
@@ -1745,7 +1748,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, cursorY) {
     // Bottom left corner
     steps.push(Blockly.BlockSvg.BOTTOM_LEFT_CORNER);
   } else {
-    steps.push('H', this.outputLeftPadding_());
+    steps.push('H', this.height / 2);
   }
 };
 
@@ -1753,7 +1756,23 @@ Blockly.BlockSvg.prototype.outputLeftPadding_ = function() {
   if (!this.outputConnection) return 0;
   const shape = this.getOutputShape();
 
-  return this.height / 2;
+  switch (shape) {
+    case Blockly.OUTPUT_SHAPE_PLUS: {
+      if (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) {
+        const paddingMultiplier = Blockly.BlockSvg.SEP_SPACE_Y / 2 / Blockly.BlockSvg.GRID_UNIT;
+        const unit = 6 * paddingMultiplier;
+        return -this.height / 2 + unit * 3;
+      }
+    }
+    default: {
+      const customShape = Blockly.BlockSvg.CUSTOM_SHAPES.get(this.edgeShape_);
+      if (customShape && customShape.outputLeftPadding) {
+        return customShape.outputLeftPadding()
+      }
+    }
+  }
+
+  return 0;
 }
 
 /**
@@ -1767,7 +1786,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
 
   if (this.outputConnection) {
     // Scratch-style reporters have output connection y at half block height.
-    this.outputConnection.setOffsetInBlock(0, this.outputLeftPadding_());
+    this.outputConnection.setOffsetInBlock(-this.outputLeftPadding_(), this.height / 2);
   }
   if (this.edgeShape_) {
     // Draw the left-side edge shape.
@@ -1795,8 +1814,9 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
         const unit = 6 * paddingMultiplier;
         const remainingHeight = scale * 2 - 36 * paddingMultiplier;
         const remainingWidth = scale - 20 * paddingMultiplier;
+        const hasBranch = this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)
+        if (!hasBranch) steps.push(`l ${-remainingWidth} 0 `)
         steps.push(
-          `l ${-remainingWidth} 0 ` +
           `a ${unit} ${unit} 0 0 1 ${-unit} ${-unit} ` +
           `a ${unit} ${unit} 0 0 0 ${-unit} ${-unit} ` +
           `l -2 0 ` +
@@ -1805,9 +1825,9 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
           `a ${unit} ${unit} 0 0 1 ${unit} ${-unit} ` +
           `l 2 0 ` +
           `a ${unit} ${unit} 0 0 0 ${unit} ${-unit} ` +
-          `a ${unit} ${unit} 0 0 1 ${unit} ${-unit} ` +
-          `l ${remainingWidth} 0`
+          `a ${unit} ${unit} 0 0 1 ${unit} ${-unit} `
         );
+        if (!hasBranch) steps.push(`l ${remainingWidth} 0 `)
         break;
       }
       default: {
