@@ -1084,6 +1084,37 @@ Blockly.Blocks["operator_randomBoolean"] = {
   }
 };
 
+lockly.Blocks['operator_forceBooleanTo'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * this is the only operator block.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "force %1 to be %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "CONDITION",
+          "check": "Boolean"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OPERATOR",
+          "options": [
+            [Blockly.Msg.OPERATORS_TRUEBOOLEAN, 'true'],
+            [Blockly.Msg.OPERATORS_FALSEBOOLEAN, 'false'],
+          ]
+        },
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks["operator_indexOfTextInText"] = {
   init: function() {
     this.jsonInit({
