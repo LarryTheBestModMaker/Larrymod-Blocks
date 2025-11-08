@@ -357,7 +357,7 @@ Blockly.Css.CONTENT = [
     'font-family: "Helvetica Neue", Helvetica, sans-serif;',
     'font-size: .8em;',
     'display: flex;',
-    'justify-content: center;',
+    'justify-content: space-around;',
     'tab-size: 4;',
   '}',
 
