@@ -1767,7 +1767,7 @@ Blockly.BlockSvg.prototype.outputLeftPadding_ = function() {
     default: {
       const customShape = Blockly.BlockSvg.CUSTOM_SHAPES.get(this.edgeShape_);
       if (customShape && customShape.outputLeftPadding) {
-        return customShape.outputLeftPadding()
+        return customShape.outputLeftPadding(this)
       }
     }
   }
