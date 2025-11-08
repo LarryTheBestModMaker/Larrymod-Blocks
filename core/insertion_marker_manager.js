@@ -205,6 +205,7 @@ Blockly.InsertionMarkerManager.prototype.wouldConnectBlock = function() {
  */
 Blockly.InsertionMarkerManager.prototype.applyConnections = function() {
   if (this.closestConnection_) {
+    let previousPadding = this.closestConnection_.sourceBlock_.getRootBlock().outputLeftPadding_();
     // Don't fire events for insertion markers.
     Blockly.Events.disable();
     this.hidePreview_();
@@ -221,6 +222,7 @@ Blockly.InsertionMarkerManager.prototype.applyConnections = function() {
       // Bring the just-edited stack to the front.
       var rootBlock = this.topBlock_.getRootBlock();
       rootBlock.bringToFront();
+      rootBlock.moveBy(rootBlock.outputLeftPadding_() - previousPadding, 0);
     }
   }
 };

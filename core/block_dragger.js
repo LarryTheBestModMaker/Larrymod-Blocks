@@ -166,12 +166,17 @@ Blockly.BlockDragger.prototype.startBlockDrag = function(currentDragDeltaXY) {
   Blockly.BlockAnimations.disconnectUiStop();
 
   if (this.draggingBlock_.getParent()) {
+    let rootBlock = this.draggingBlock_.getRootBlock()
+    let previousPadding = rootBlock.outputLeftPadding_();
+
     this.draggingBlock_.unplug();
     var delta = this.pixelsToWorkspaceUnits_(currentDragDeltaXY);
     var newLoc = goog.math.Coordinate.sum(this.startXY_, delta);
 
     this.draggingBlock_.translate(newLoc.x, newLoc.y);
     Blockly.BlockAnimations.disconnectUiEffect(this.draggingBlock_);
+
+    rootBlock.moveBy(rootBlock.outputLeftPadding_() - previousPadding, 0);
   }
   this.draggingBlock_.setDragging(true);
   // For future consideration: we may be able to put moveToDragSurface inside
