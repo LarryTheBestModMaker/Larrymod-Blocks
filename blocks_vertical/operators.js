@@ -1084,7 +1084,7 @@ Blockly.Blocks["operator_randomBoolean"] = {
   }
 };
 
-lockly.Blocks['operator_forceBooleanTo'] = {
+Blockly.Blocks['operator_forceBooleanTo'] = {
   /**
    * dinosaurmod: a block that could be added to dinosaurmod.
    * this is NOT compatible with PenguinMod.
