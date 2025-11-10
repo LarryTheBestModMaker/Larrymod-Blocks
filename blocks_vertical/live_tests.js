@@ -37,8 +37,7 @@ Blockly.Blocks['operator_expandableBool'] = {
     const dropdown = new Blockly.FieldDropdown(function () {
       return [
         ["and", "a"], ["or", "o"],
-        ["xand", "A"], ["nand", "n"],
-        ["xor", "O"], ["nor", "N"], ["xnor", "x"]
+        ["nand", "n"], ["nor", "N"]
       ];
     });
     const ogSetValue = dropdown.setValue;
@@ -62,12 +61,14 @@ Blockly.Blocks['operator_expandableBool'] = {
     // on save
     const container = document.createElement("mutation");
     container.setAttribute("inputcount", String(this.inputs_));
-    let orderedOperations = "";
+    const operations = [];
     for (var i = 1; i < this.inputList.length; i++) {
       const input = this.inputList[i];
-      if (input.fieldRow[0]) orderedOperations += input.fieldRow[0].getValue();
+      if (input.fieldRow[0]) operations.push(input.fieldRow[0].getValue());
     }
-    container.setAttribute("menuvalues", orderedOperations);
+
+    container.setAttribute("menuvalues", operations.join(""));
+    container.setAttribute("optimize", operations.every((o) => operations[0] === o));
     return container;
   },
   domToMutation: function (xmlElement) {
