@@ -327,7 +327,10 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
     } else {
       labelText = component.trim();
     }
-    this.addProcedureLabel_(labelText.replace(/\\%/, '%'));
+    
+    if (labelText) {
+      this.addProcedureLabel_(labelText.replace(/\\%/, '%'));
+    }
   }
 };
 
