@@ -125,9 +125,11 @@ Blockly.Mutator.prototype.createEditor_ = function() {
     [Workspace]
   </svg>
   */
-  this.svgDialog_ = Blockly.utils.createSvgElement('svg',
-      {'x': Blockly.Bubble.BORDER_WIDTH, 'y': Blockly.Bubble.BORDER_WIDTH},
-      null);
+  this.svgDialog_ = Blockly.utils.createSvgElement(
+    'svg',
+    { class: 'mutator-svg', 'x': Blockly.Bubble.BORDER_WIDTH, 'y': Blockly.Bubble.BORDER_WIDTH },
+    null
+  );
   // Convert the list of names into a list of XML objects for the flyout.
   if (this.quarkNames_.length) {
     var quarkXml = goog.dom.createDom('xml');
@@ -163,6 +165,16 @@ Blockly.Mutator.prototype.createEditor_ = function() {
   // dragging work properly.
   background.insertBefore(flyoutSvg, this.workspace_.svgBlockCanvas_);
   this.svgDialog_.appendChild(background);
+
+  this.unfocusCheck = (clickEvent) => {
+    /* close the editor if we lose focus */
+    const focused = clickEvent.target.closest('.blocklyMutatorBackground') 
+      || clickEvent.target.closest('.blocklyDraggable')
+      || clickEvent.target.closest('.mutator-svg');
+
+    if (!focused) this.setVisible(false);
+  };
+  document.addEventListener('click', this.unfocusCheck);
 
   return this.svgDialog_;
 };
@@ -249,7 +261,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     this.bubble_ = new Blockly.Bubble(
         /** @type {!Blockly.WorkspaceSvg} */ (this.block_.workspace),
         this.createEditor_(), this.block_.svgPath_, this.iconXY_, null, null);
-    this.bubble_.setColour("#00000055");
+    this.bubble_.setColour('#00000055');
     var tree = this.workspace_.options.languageTree;
     if (tree) {
       this.workspace_.flyout_.init(this.workspace_);
@@ -265,7 +277,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     this.rootBlock_.setMovable(false);
     this.rootBlock_.setDeletable(false);
     this.rootBlock_.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
-    this.rootBlock_.setOutput(true, "normal");
+    this.rootBlock_.setOutput(true, 'normal');
     this.rootBlock_.setPreviousStatement(false);
     this.rootBlock_.output_ = true;
 
@@ -295,6 +307,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     this.updateColour();
   } else {
     // Dispose of the bubble.
+    document.removeEventListener('click', this.unfocusCheck);
     this.svgDialog_ = null;
     this.workspace_.dispose();
     this.workspace_ = null;
