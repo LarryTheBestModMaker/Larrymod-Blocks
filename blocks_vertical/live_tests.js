@@ -36,8 +36,8 @@ Blockly.Blocks['operator_expandableBool'] = {
   menuGenerator: function () {
     const dropdown = new Blockly.FieldDropdown(function () {
       return [
-        ["and", "a"], ["or", "o"],
-        ["nand", "n"], ["nor", "N"]
+        ["and", "a"], ["or", "o"], ["xor", "x"],
+        ["nand", "n"], ["nor", "N"], ["xnor", "X"]
       ];
     });
     const ogSetValue = dropdown.setValue;
