@@ -1103,27 +1103,6 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     previousRow = row;
   }
 
-  // fix incorrect width calculations for mega-chin blocks
-  // ie, C- or E- shaped blocks with labels and/or inputs on the end branch
-  if (hasStatement) {
-    // the mega-chin block issue only happens to blocks with images
-    const input = inputList[inputList.length - 1];
-    const field = input.fieldRow[0];
-    if (field instanceof Blockly.FieldImage) {
-      // check for inputs before the last branch
-      const measureables = [];
-      for (var i = inputList.length - 1; i--; ) {
-        if (inputList[i].type == Blockly.NEXT_STATEMENT) break;
-        measureables.push(inputList[i]);
-      }
-
-      if (measureables.length) {
-        const newWidth = measureables.reduce((w, input) => w + (input.fieldWidth), 0);
-        input.fieldWidth = newWidth * (Blockly.BlockSvg.BOX_FIELD_PADDING / 4);
-      }
-    }
-  }
-
   // Compute padding for output blocks.
   // Data is attached to the row.
   this.computeOutputPadding_(inputRows);
@@ -2134,8 +2113,32 @@ Blockly.BlockSvg.getInputShapeInfo_ = function(shape) {
 Blockly.BlockSvg.getAlignedCursor_ = function(cursorX, input, rightEdge) {
   // Align inline field rows (left/right/centre).
   if (input.align === Blockly.ALIGN_RIGHT) {
-    cursorX += rightEdge - input.fieldWidth -
-      (2 * Blockly.BlockSvg.SEP_SPACE_X);
+    const SEP_SPACE = 2 * Blockly.BlockSvg.SEP_SPACE_X;
+    const offsetAmt = rightEdge - input.fieldWidth - SEP_SPACE;
+    cursorX += offsetAmt;
+
+    // fix incorrect width calculations for mega-chin blocks
+    // ie, branched blocks with labels and/or inputs on the end branch
+    const srcInputList = input.sourceBlock_.inputList;
+    const inputIndex = srcInputList.indexOf(input);
+    const lastBranchIndex = srcInputList.findLastIndex((i) => i.type === Blockly.NEXT_STATEMENT);
+    const subInputs = srcInputList.slice(lastBranchIndex + 1, inputIndex);
+
+    if (subInputs.length) {
+      // measure the widths of the fields in the block row and subtract it
+      // from cursorX. Without this, the row width will be doubled.
+      const backOffset = subInputs.reduce((acc, cur) => {
+        let amt = cur.fieldWidth;
+        if (cur.connection) {
+          const block = cur.connection.targetBlock();
+          if (block) amt += block.width + SEP_SPACE;
+          else amt += Blockly.BlockSvg.INPUT_AND_FIELD_MIN_X + SEP_SPACE;
+        }
+        return acc + amt;
+      }, 0);
+
+      cursorX -= Math.min(backOffset, offsetAmt);
+    }
   } else if (input.align === Blockly.ALIGN_CENTRE) {
     cursorX = Math.max(cursorX, rightEdge / 2 - input.fieldWidth / 2);
   }
