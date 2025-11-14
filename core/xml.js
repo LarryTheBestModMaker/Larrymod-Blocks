@@ -885,8 +885,10 @@ Blockly.Xml.domToFieldVariable_ = function(workspace, xml, text, field) {
 Blockly.Xml.domToField_ = function(block, fieldName, xml) {
   var field = block.getField(fieldName);
   if (!field) {
-    console.warn('Ignoring non-existent field ' + fieldName + ' in block ' +
-                 block.type);
+    // dont expect fields in drag duplicates
+    if (!block.canDragDuplicate_) {
+      console.warn('Ignoring non-existent field ' + fieldName + ' in block ' + block.type, block);
+    }
     return;
   }
 
