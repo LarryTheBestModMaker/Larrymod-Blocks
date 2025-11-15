@@ -6,6 +6,28 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
+Blockly.Blocks['test_spread'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": '... %1',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SPREAD",
+          "shape": 3
+        }
+      ],
+      "colour": "#808080",
+      "category": "...",
+      "outputShape": 3,
+      "extensions": ["output_string"]
+    });
+  },
+};
+
 Blockly.Blocks['operator_expandableBool'] = {
   /**
    * pm: Block for performing multiple truth operations (determined by user)
