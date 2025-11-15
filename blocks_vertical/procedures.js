@@ -700,6 +700,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentEditor_ = function(
     }
     newBlock.setFieldValue(displayName, 'TEXT');
     newBlock.setShadow(true);
+    newBlock.setColour(...this.color);
     if (!this.isInsertionMarker()) {
       newBlock.initSvg();
       newBlock.render(false);
