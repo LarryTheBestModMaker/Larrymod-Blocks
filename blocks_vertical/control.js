@@ -378,8 +378,10 @@ Blockly.Blocks['control_expandableIf'] = {
       const boolInput = this.getInput(`BOOL${this.branches_}`);
       if (boolInput) {
         const block = boolInput.connection.targetBlock();
-        if (block && block.type === "checkbox") block.dispose();
-        else block.outputConnection.disconnect();
+        if (block) {
+          if (block.type === "checkbox") block.dispose();
+          else block.outputConnection.disconnect();
+        }
       }
 
       this.removeInput(`BOOL${this.branches_}`);
