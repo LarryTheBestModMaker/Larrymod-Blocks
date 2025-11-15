@@ -314,7 +314,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
       labelText = component.substring(2).trim();
 
       if (argumentType == 'c') {
-        var input = this.appendStatementInput(id)
+        var input = this.appendStatementInput(id).setCheck(this.type == 'procedures_prototype' ? "argumentReporterCommand" : "normal");
       } else {
         var input = this.appendValueInput(id);
       }
@@ -495,6 +495,10 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentReporter_ = function(
     if (!this.isInsertionMarker()) {
       newBlock.initSvg();
       newBlock.render(false);
+    }
+    if (argumentType === 'c') {
+      newBlock.setPreviousStatement(true, 'argumentReporterCommand')
+      newBlock.setNextStatement(true, 'argumentReporterCommand')
     }
   } finally {
     Blockly.Events.enable();
