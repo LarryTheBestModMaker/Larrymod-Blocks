@@ -55,6 +55,7 @@
       <td id="editor-actions">
         <button id="text_number" onclick="addTextNumber()">Add text/number input</button>
         <button id="boolean" onclick="addBoolean()">Add boolean input</button>
+        <button id="command" onclick="addCommand()">Add command input</button>
         <button id="label" onclick="addLabel()">Add label</button>
         <button id="cancelButton" onclick="cancel()">cancel</button>
         <button id="okButton" onclick="applyMutation()">ok</button>
@@ -230,6 +231,10 @@
 
     function addTextNumber() {
       mutationRoot.addStringNumberExternal();
+    }
+
+    function addCommand() {
+      mutationRoot.addCommandExternal();
     }
 
     function setOutput(type) {

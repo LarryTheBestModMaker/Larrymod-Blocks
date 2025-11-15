@@ -1386,7 +1386,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
     // Width of the curve/pointy-curve
     var shape = this.getOutputShape();
     if (shape != Blockly.OUTPUT_SHAPE_SQUARE) {
-      this.edgeShapeWidth_ = inputRows.bottomEdge / 2;
+      this.edgeShapeWidth_ = (inputRows.bottomEdge + Math.max(this.inputList.filter(v => v.type == Blockly.NEXT_STATEMENT).length-1, 0) * Blockly.BlockSvg.NOTCH_WIDTH) / 2;
       this.edgeShape_ = shape;
       this.squareTopLeftCorner_ = true;
     }

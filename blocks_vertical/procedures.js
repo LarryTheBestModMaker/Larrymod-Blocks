@@ -313,7 +313,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
       */
       labelText = component.substring(2).trim();
 
-      if (argumentType == "c") {
+      if (argumentType == 'c') {
         var input = this.appendStatementInput(id)
       } else {
         var input = this.appendValueInput(id);
@@ -530,7 +530,7 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnCaller_ = function(type,
   if (connectionMap && oldBlock) {
     // Reattach the old block and shadow DOM.
     connectionMap[input.name] = null;
-    if (type == "c") {
+    if (type == 'c') {
       oldBlock.previousConnection.connect(input.connection);
     } else {
       oldBlock.outputConnection.connect(input.connection);
@@ -588,7 +588,7 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnPrototype_ = function(
   }
 
   // Attach the block.
-  if (type == "c") {
+  if (type == 'c') {
     input.connection.connect(argumentReporter.previousConnection);
   } else {
     input.connection.connect(argumentReporter.outputConnection);
@@ -634,7 +634,7 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnDeclaration_ = function(
   }
 
   // Attach the block.
-  if (type == "c") {
+  if (type == 'c') {
     input.connection.connect(argumentEditor.previousConnection);
   } else {
     input.connection.connect(argumentEditor.outputConnection);
