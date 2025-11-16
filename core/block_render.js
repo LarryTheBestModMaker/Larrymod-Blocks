@@ -1903,7 +1903,10 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
     var dx = existingConnection.x_ - newConnection.x_;
     var dy = existingConnection.y_ - newConnection.y_;
 
-    newBlock.moveBy(dx, dy);
+    var offset = newConnection.sourceBlock_.outputLeftPadding_();
+    if (offset !== 0) offset += Blockly.BlockSvg.SEP_SPACE_X;
+
+    newBlock.moveBy(dx + offset, dy);
   }
 };
 
