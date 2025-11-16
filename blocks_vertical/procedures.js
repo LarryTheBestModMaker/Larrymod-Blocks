@@ -895,7 +895,7 @@ Blockly.ScratchBlocks.ProcedureUtils.removeFieldCallback = function(field) {
   for (var n = 0; n < this.inputList.length; n++) {
     var input = this.inputList[n];
     if (input.connection) {
-      var target = input.connection.tak();
+      var target = input.connection.targetBlock();
       if (target.getField(field.name) == field) {
         if (cannotRemove(n)) return
         inputNameToRemove = input.name;
