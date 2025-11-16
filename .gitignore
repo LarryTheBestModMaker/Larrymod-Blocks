@@ -31,11 +31,14 @@ python_compressed.js
 !/msg/json/en.json
 /blockly_compressed_horizontal.js
 /blockly_compressed_vertical.js
+/blockly_compressed_vertical.js.config
 /blockly_uncompressed_horizontal.js
 /blockly_uncompressed_vertical.js
 /blocks_compressed_horizontal.js
 /blocks_compressed_vertical.js
+/blocks_compressed_vertical.js.config
 /blocks_compressed.js
+/blocks_compressed.js.config
 /gh-pages/main.js
 /gh-pages/playgrounds
 /gh-pages/Gemfile.lock
