@@ -1902,12 +1902,9 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
   if (newConnection.type == Blockly.NEXT_STATEMENT) {
     var dx = existingConnection.x_ - newConnection.x_;
     var dy = existingConnection.y_ - newConnection.y_;
-
-    var paddedOffset = newConnection.sourceBlock_.outputLeftPadding_();
-    if (paddedOffset) {
+    if (newConnection.sourceBlock_.edgeShape_) {
       var bounds = existingConnection.sourceBlock_.getBoundingRectangle();
-      dx += ((bounds.bottomRight.y - bounds.topLeft.y) / -2) - paddedOffset
-        - (Blockly.BlockSvg.SEP_SPACE_X * -1.75);
+      dx += ((bounds.bottomRight.y - bounds.topLeft.y) / -2) + 6 * Blockly.BlockSvg.GRID_UNIT;
     }
 
     newBlock.moveBy(dx, dy);
