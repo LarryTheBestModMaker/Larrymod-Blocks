@@ -384,6 +384,7 @@ Blockly.Events.Move = function(block) {
   this.oldParentId = location.parentId;
   this.oldInputName = location.inputName;
   this.oldCoordinate = location.coordinate;
+  this.isFromExpandable = Blockly.Events.expandableClick;
 };
 goog.inherits(Blockly.Events.Move, Blockly.Events.BlockBase);
 

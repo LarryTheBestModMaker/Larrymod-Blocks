@@ -167,7 +167,7 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
  */
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
-  // @todo add statement check?
+
   var ConectionType = (this.outputType || (this.output_ ? 'string' : 'statement')).toLowerCase()
   this.rendered = false;
 
@@ -232,6 +232,9 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.rendered = wasRendered;
   if (wasRendered && !this.isInsertionMarker()) {
+    if (this.type === "procedures_declaration") {
+      for (var child of this.childBlocks_) child.updateColour();
+    }
     this.initSvg();
     this.render();
   }
@@ -328,8 +331,8 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
       */
       labelText = component.substring(2).trim();
 
-      if (argumentType == "c") {
-        var input = this.appendStatementInput(id)
+      if (argumentType == 'c') {
+        var input = this.appendStatementInput(id).setCheck(this.type == 'procedures_prototype' ? "argumentReporterCommand" : "normal");
       } else {
         var input = this.appendValueInput(id);
       }
@@ -342,7 +345,9 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
     } else {
       labelText = component.trim();
     }
-    this.addProcedureLabel_(labelText.replace(/\\%/, '%'));
+    if (labelText) {
+      this.addProcedureLabel_(labelText.replace(/\\%/, '%'));
+    }
   }
 };
 
@@ -451,6 +456,10 @@ Blockly.ScratchBlocks.ProcedureUtils.attachShadow_ = function(input,
         newBlock.initSvg();
         newBlock.render(false);
       }
+      if (argumentType === 'c') {
+        newBlock.setPreviousStatement(true, 'argumentReporterCommand')
+        newBlock.setNextStatement(true, 'argumentReporterCommand')
+      }
     } finally {
       Blockly.Events.enable();
     }
@@ -535,7 +544,7 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnCaller_ = function(type,
   if (connectionMap && oldBlock) {
     // Reattach the old block and shadow DOM.
     connectionMap[input.name] = null;
-    if (type == "c") {
+    if (type == 'c') {
       oldBlock.previousConnection.connect(input.connection);
     } else {
       oldBlock.outputConnection.connect(input.connection);
@@ -587,7 +596,7 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnPrototype_ = function(
   }
 
   // Attach the block.
-  if (type == "c") {
+  if (type == 'c') {
     input.connection.connect(argumentReporter.previousConnection);
   } else {
     input.connection.connect(argumentReporter.outputConnection);
@@ -633,7 +642,7 @@ Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnDeclaration_ = function(
   }
 
   // Attach the block.
-  if (type == "c") {
+  if (type == 'c') {
     input.connection.connect(argumentEditor.previousConnection);
   } else {
     input.connection.connect(argumentEditor.outputConnection);
@@ -702,6 +711,7 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentEditor_ = function(
     }
     newBlock.setFieldValue(displayName, 'TEXT');
     newBlock.setShadow(true);
+    if (argumentType === 'c') newBlock.setColour(...this.color);
     if (!this.isInsertionMarker()) {
       newBlock.initSvg();
       newBlock.render(false);

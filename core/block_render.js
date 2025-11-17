@@ -903,7 +903,6 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
  */
 Blockly.BlockSvg.prototype.renderFields_ = function(fieldList, cursorX,
     cursorY) {
-  if (this.edgeShapeWidth_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
   if (this.RTL) {
     cursorX = -cursorX;
   }
@@ -1561,6 +1560,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
     var connectionX, connectionY;
     for (var y = 0, row; row = inputRows[y]; y++) {
       cursorX = row.paddingStart;
+      if (this.edgeShape_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
       if (y == 0) {
         cursorX += this.RTL ? -iconWidth : iconWidth;
       }
@@ -1913,6 +1913,13 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
   if (newConnection.type == Blockly.NEXT_STATEMENT) {
     var dx = existingConnection.x_ - newConnection.x_;
     var dy = existingConnection.y_ - newConnection.y_;
+
+    var paddedOffset = newConnection.sourceBlock_.outputLeftPadding_();
+    if (paddedOffset) {
+      var bounds = existingConnection.sourceBlock_.getBoundingRectangle();
+      dx += ((bounds.bottomRight.y - bounds.topLeft.y) / -2) - paddedOffset
+        - (Blockly.BlockSvg.SEP_SPACE_X * -1.75);
+    }
 
     newBlock.moveBy(dx, dy);
   }

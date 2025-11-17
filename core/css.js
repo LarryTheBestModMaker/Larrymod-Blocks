@@ -356,6 +356,9 @@ Blockly.Css.CONTENT = [
     'text-align: center;',
     'font-family: "Helvetica Neue", Helvetica, sans-serif;',
     'font-size: .8em;',
+    'display: flex;',
+    'justify-content: space-around;',
+    'tab-size: 4;',
   '}',
 
   '.blocklyResizeSE {',
