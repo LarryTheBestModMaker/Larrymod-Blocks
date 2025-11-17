@@ -1907,7 +1907,7 @@ Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection,
     if (paddedOffset) {
       var bounds = existingConnection.sourceBlock_.getBoundingRectangle();
       dx += ((bounds.bottomRight.y - bounds.topLeft.y) / -2) - paddedOffset
-        - (Blockly.BlockSvg.SEP_SPACE_X * 2);
+        - (Blockly.BlockSvg.SEP_SPACE_X * -1.75);
     }
 
     newBlock.moveBy(dx, dy);
