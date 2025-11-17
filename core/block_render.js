@@ -903,7 +903,6 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
  */
 Blockly.BlockSvg.prototype.renderFields_ = function(fieldList, cursorX,
     cursorY) {
-  if (this.edgeShape_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
   if (this.RTL) {
     cursorX = -cursorX;
   }
@@ -1538,6 +1537,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
     var connectionX, connectionY;
     for (var y = 0, row; row = inputRows[y]; y++) {
       cursorX = row.paddingStart;
+      if (this.edgeShape_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
       if (y == 0) {
         cursorX += this.RTL ? -iconWidth : iconWidth;
       }
