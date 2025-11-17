@@ -165,7 +165,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
 
   if (this.procCode_ === "") this.procCode_ = "unnamed block";
-  // @todo add statement check?
+
   var ConectionType = (this.outputType || (this.output_ ? 'string' : 'statement')).toLowerCase();
   this.rendered = false;
 
@@ -217,6 +217,9 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.rendered = wasRendered;
   if (wasRendered && !this.isInsertionMarker()) {
+    if (this.type === "procedures_declaration") {
+      for (var child of this.childBlocks_) child.updateColour();
+    }
     this.initSvg();
     this.render();
   }
