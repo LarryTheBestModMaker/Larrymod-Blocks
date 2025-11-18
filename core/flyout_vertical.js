@@ -529,7 +529,7 @@ Blockly.VerticalFlyout.prototype.layout_ = function(contents, gaps) {
 
       // The block moves a bit extra for the hat, but the block's rectangle
       // doesn't.  That's because the hat actually extends up from 0.
-      block.moveBy(moveX,
+      block.moveBy(moveX + block.outputLeftPadding_() * (this.RTL ? -1 : 1),
           cursorY + (block.startHat_ ? Blockly.BlockSvg.START_HAT_HEIGHT : 0));
 
       var rect = this.createRect_(block, this.RTL ? moveX - blockHW.width : moveX, cursorY, blockHW, i);
