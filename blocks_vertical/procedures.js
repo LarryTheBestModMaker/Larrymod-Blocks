@@ -214,7 +214,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
         this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Boolean')
         break
     }
-    //this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : null);
+    this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : null);
   } else {
     this.setOutput(false)
     switch (ConectionType) {
