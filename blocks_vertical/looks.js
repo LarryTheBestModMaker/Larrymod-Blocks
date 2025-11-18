@@ -428,7 +428,9 @@ Blockly.Blocks['looks_changeeffectby'] = {
             [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
             [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
             [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
-            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE']
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['horizontal shear', 'horizontal_shear'],
+            ['vertical shear', 'vertical_shear'],
           ]
         },
         {
@@ -467,6 +469,8 @@ Blockly.Blocks['looks_seteffectto'] = {
             [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
             [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
             [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['horizontal shear', 'horizontal_shear'],
+            ['vertical shear', 'vertical_shear'],
             //['blur', 'BLUR']
           ]
         },
@@ -1120,7 +1124,9 @@ Blockly.Blocks["looks_getEffectValue"] = {
             [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
             [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
             [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
-            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE']
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['horizontal shear', 'horizontal_shear'],
+            ['vertical shear', 'vertical_shear'],
           ]
         }
       ],
