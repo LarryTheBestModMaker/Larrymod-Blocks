@@ -1573,9 +1573,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
             input.connection.setOffsetInBlock(connectionX, connectionY);
             this.renderInputShape_(input, cursorX, cursorY + connectionYOffset);
             cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
-            if (input.connection.targetConnection) {
-              cursorX += input.connection.targetConnection.sourceBlock_.outputLeftPadding_()
-            }
           }
         }
         // Remove final separator and replace it with right-padding.
@@ -1768,7 +1765,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
 
   if (this.outputConnection) {
     // Scratch-style reporters have output connection y at half block height.
-    this.outputConnection.setOffsetInBlock(-this.outputLeftPadding_(), this.height / 2);
+    this.outputConnection.setOffsetInBlock(0, this.height / 2);
   }
   if (this.edgeShape_) {
     // Draw the left-side edge shape.
