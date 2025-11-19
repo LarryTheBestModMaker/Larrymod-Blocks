@@ -208,7 +208,6 @@ Blockly.InsertionMarkerManager.prototype.applyConnections = function() {
     // Don't fire events for insertion markers.
     Blockly.Events.disable();
     this.hidePreview_();
-    let previousPadding = this.closestConnection_.sourceBlock_.getRootBlock().outputLeftPadding_();
     Blockly.Events.enable();
     // Connect two blocks together.
     this.localConnection_.connect(this.closestConnection_);
@@ -222,7 +221,6 @@ Blockly.InsertionMarkerManager.prototype.applyConnections = function() {
       // Bring the just-edited stack to the front.
       var rootBlock = this.topBlock_.getRootBlock();
       rootBlock.bringToFront();
-      rootBlock.moveBy(rootBlock.outputLeftPadding_() - previousPadding, 0);
     }
   }
 };
@@ -615,8 +613,6 @@ Blockly.InsertionMarkerManager.prototype.disconnectMarker_ = function() {
   var markerNext = imBlock.nextConnection;
   var markerPrev = imBlock.previousConnection;
 
-  let rootBlock = imBlock.getRootBlock();
-  let previousPadding = rootBlock.outputLeftPadding_();
 
   // The insertion marker is the first block in a stack, either because it
   // doesn't have a previous connection or because the previous connection is
@@ -644,8 +640,6 @@ Blockly.InsertionMarkerManager.prototype.disconnectMarker_ = function() {
   if (imConn.targetConnection) {
     throw 'markerConnection_ still connected at the end of disconnectInsertionMarker';
   }
-
-  rootBlock.moveBy(rootBlock.outputLeftPadding_() - previousPadding, 0)
 
   this.markerConnection_ = null;
   imBlock.getSvgRoot().setAttribute('visibility', 'hidden');
@@ -677,11 +671,8 @@ Blockly.InsertionMarkerManager.prototype.connectMarker_ = function() {
   imBlock.positionNewBlock(imBlock, imConn, closest);
 
   // Connect() also renders the insertion marker.
-  let rootBlock = closest.sourceBlock_.getRootBlock();
-  let previousPadding = rootBlock.outputLeftPadding_();
   imConn.connect(closest);
   this.markerConnection_ = imConn;
-  rootBlock.moveBy(rootBlock.outputLeftPadding_() - previousPadding, 0);
 };
 
 /**** End insertion marker display functions ****/
