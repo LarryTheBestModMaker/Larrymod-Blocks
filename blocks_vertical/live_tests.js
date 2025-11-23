@@ -6,83 +6,26 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
-Blockly.Blocks['sensing_set_of'] = {
+Blockly.Blocks['test_spread'] = {
   /**
-   * Block to report properties of sprites.
    * @this Blockly.Block
    */
-  init: function() {
+  init: function () {
     this.jsonInit({
-      "message0": 'set %1 of %2 to %3',
-      "args0": [
-        {
-          "type": "field_dropdown",
-          "name": "PROPERTY",
-          "options": [
-            [Blockly.Msg.SENSING_OF_XPOSITION, 'x position'],
-            [Blockly.Msg.SENSING_OF_YPOSITION, 'y position'],
-            [Blockly.Msg.SENSING_OF_DIRECTION, 'direction'],
-            [Blockly.Msg.SENSING_OF_COSTUMENUMBER, 'costume #'],
-            [Blockly.Msg.SENSING_OF_COSTUMENAME, 'costume name'],
-            [Blockly.Msg.SENSING_OF_SIZE, 'size'],
-            [Blockly.Msg.SENSING_OF_VOLUME, 'volume'],
-            [Blockly.Msg.SENSING_OF_BACKDROPNUMBER, 'backdrop #'],
-            [Blockly.Msg.SENSING_OF_BACKDROPNAME, 'backdrop name']
-          ]
-        },
-        {
-          "type": "input_value",
-          "name": "OBJECT"
-        },
-        {
-          "type": "input_value",
-          "name": "VALUE"
-        }
-      ],
-      "category": Blockly.Categories.sensing,
-      "extensions": ["colours_sensing", "shape_statement"]
-    });
-  }
-};
-
-Blockly.Blocks['looks_setVertTransform'] = {
-  /**
-   * Block to report properties of sprites.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": 'skew sprite vertically %1 %',
+      "message0": '... %1',
       "args0": [
         {
           "type": "input_value",
-          "name": "PERCENT"
+          "name": "SPREAD",
+          "shape": 3
         }
       ],
-      "category": Blockly.Categories.looks,
-      "extensions": ["colours_looks", "shape_statement"]
+      "colour": "#808080",
+      "category": "...",
+      "outputShape": 3,
+      "extensions": ["output_string"]
     });
-  }
-};
-
-Blockly.Blocks['looks_setHorizTransform'] = {
-  /**
-   * Block to report properties of sprites.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": 'skew sprite horizontally %1 %',
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "PERCENT"
-        }
-      ],
-      "category": Blockly.Categories.looks,
-      "extensions": ["colours_looks", "shape_statement"]
-    });
-  }
+  },
 };
 
 Blockly.Blocks['field_textdropdown_test'] = {
@@ -202,6 +145,34 @@ Blockly.Blocks['motion_mutatorCheckboxTest'] = {
   }
 };
 
+/* custom button field */
+Blockly.FieldCustom.registerInput(
+  'TEST_BUTTON',
+  (() => {
+    const div = document.createElement("div");
+    div.setAttribute("style", `width: 32px; height: 32px; padding: 6px 10px; text-align: center; font-weight: 500; border-radius: 4px; border: solid 1px #00000030;`);
+    return div;
+  })(),
+  (field, input) => {
+    /* on init */
+    const srcBlock = field.sourceBlock_;
+
+    input.textContent = "alert";
+    input.style.width = "max-content";
+    input.style.color = srcBlock && srcBlock.textColor ? srcBlock.textColor : "#fff";
+
+    const properWidth = goog.style.getSize(input).width;
+    input.style.width = properWidth + "px";
+    input.parentNode.setAttribute("width", properWidth);
+    field.size_.width = properWidth;
+    srcBlock.render(false);
+  },
+  () => {
+    /* on click */
+    alert("wow");
+  },
+  () => { /* not needed */ }
+);
 Blockly.Blocks['control_fieldbutton'] = {
   /**
    * @this Blockly.Block
@@ -211,9 +182,9 @@ Blockly.Blocks['control_fieldbutton'] = {
       "message0": 'button %1',
       "args0": [
         {
-          "type": "field_button",
+          "type": "field_customInput",
           "name": "BUTTON",
-          "label": "alert",
+          "id": "TEST_BUTTON",
           "opcode": "alert"
         }
       ],
@@ -221,14 +192,6 @@ Blockly.Blocks['control_fieldbutton'] = {
       "extensions": ["colours_control", "shape_statement"]
     });
   },
-
-  onFieldButtonClicked_: function (opcode) {
-    if (opcode === "alert") {
-      alert('wow');
-    } else if (opcode === "flaberghasted") {
-      alert(':rivflabbergasted:')
-    }
-  }
 };
 
 Blockly.Blocks['control_fieldcheckboxoriginal'] = {
@@ -273,6 +236,7 @@ Blockly.Blocks['control_testcolorfieldoriginal'] = {
     });
   }
 };
+
 Blockly.Blocks['control_blockduplicatesondrag'] = {
   /**
    * @this Blockly.Block
@@ -287,32 +251,121 @@ Blockly.Blocks['control_blockduplicatesondrag'] = {
   }
 };
 
-/*Blockly.Blocks['dinosaurmod_data_itemoflist'] = {
-   Block for reporting item of list.
-   @this Blockly.Block
-  
-  init: function() {
+Blockly.Blocks['control_dualblock'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
     this.jsonInit({
-      "message0": Blockly.Msg.DATA_ITEMOFLIST,
-      "args0": [
-        {
-          "type": "field_textdropdown",
-          "name": "INDEX",
-          "options": [
-            [ "last", "last" ],
-            [ "random", "random" ],
-          ]
-        },
-        {
-          "type": "field_variable",
-          "name": "LIST",
-          "variableTypes": [Blockly.LIST_VARIABLE_TYPE]
-        }
-      ],
-      "output": null,
-      "category": Blockly.Categories.dataLists,
-      "extensions": ["colours_data_lists"],
-      "outputShape": Blockly.OUTPUT_SHAPE_ROUND
+      "message0": 'dual block',
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement", "output_string"]
     });
   }
-};*/
+};
+
+/* The following are Deprecated, either scrapped or redone */
+/**
+ * Hidden since this is dangerous to keep in the main
+ * toolbox. Its also now in the javascript extension
+ * which is built to be safer and more focused on js
+ */
+Blockly.Blocks['control_javascript_command'] = {
+  init: function () {
+    this.jsonInit({
+      "message0": "javascript %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+Blockly.Blocks["operator_javascript_output"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "javascript %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+Blockly.Blocks["operator_javascript_boolean"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "javascript %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+Blockly.Blocks["event_whenjavascript"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "when javascript %1 === true",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.event,
+      "extensions": ["colours_event", "shape_hat"]
+    });
+  }
+};
+
+/**
+ * Renamed to shear, which is now an effect in looks
+ */
+Blockly.Blocks['looks_setVertTransform'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'skew sprite vertically %1 %',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "PERCENT"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+Blockly.Blocks['looks_setHorizTransform'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'skew sprite horizontally %1 %',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "PERCENT"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+/* End of Deprecation marker */

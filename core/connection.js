@@ -534,7 +534,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     this.connect_(otherConnection);
   } else {
     // Inferior block.
-    if (!this.check_ && otherConnection.check_) {
+    if (!this.check_ || otherConnection.check_) {
       // reshape the connected block so it inherits the parent shape
       const block = this.sourceBlock_;
       if (block.originalOutputShape_ === undefined) block.originalOutputShape_ = block.outputShape_;

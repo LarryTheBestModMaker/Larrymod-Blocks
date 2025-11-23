@@ -416,7 +416,8 @@ Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
  * @param {number} dy Vertical offset in workspace units.
  */
 Blockly.BlockSvg.prototype.moveBy = function(dx, dy) {
-  goog.asserts.assert(!this.parentBlock_, 'Block has parent.');
+  //goog.asserts.assert(!this.parentBlock_, 'Block has parent.');
+  if (this.parentBlock_) return
   var eventsEnabled = Blockly.Events.isEnabled();
   if (eventsEnabled) {
     var event = new Blockly.Events.BlockMove(this);
@@ -726,10 +727,16 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
   var block = this;
   var menuOptions = [];
   if (this.isDeletable() && this.isMovable() && !block.isInFlyout) {
-    menuOptions.push(
-        Blockly.ContextMenu.blockDuplicateOption(block, e));
+    menuOptions.push(Blockly.ContextMenu.blockDuplicateOption(block, e));
     if (this.isEditable() && this.workspace.options.comments) {
       menuOptions.push(Blockly.ContextMenu.blockCommentOption(block));
+    }
+    // UNUSED menuOptions.push(Blockly.ContextMenu.blockCollapseOption(block));
+    if (this.isExpandable()) {
+      menuOptions.push(
+        Blockly.ContextMenu.expandBlockOption(block),
+        Blockly.ContextMenu.contractBlockOption(block),
+      );
     }
     menuOptions.push(Blockly.ContextMenu.blockDeleteOption(block));
   } else if (this.parentBlock_ && this.isShadow_ && this.type !== 'polygon') {
@@ -1045,15 +1052,16 @@ Blockly.BlockSvg.prototype.setWarningText = function(text, opt_id) {
 /**
  * Give this block a mutator dialog.
  * @param {Blockly.Mutator} mutator A mutator dialog instance or null to remove.
+ * @param {Boolean} forceCreate Boolean for wether or not we should create the icon for the mutator
  */
-Blockly.BlockSvg.prototype.setMutator = function(mutator) {
+Blockly.BlockSvg.prototype.setMutator = function(mutator, forceCreate) {
   if (this.mutator && this.mutator !== mutator) {
     this.mutator.dispose();
   }
   if (mutator) {
     mutator.block_ = this;
     this.mutator = mutator;
-    mutator.createIcon();
+    if (forceCreate) mutator.createIcon();
   }
 };
 

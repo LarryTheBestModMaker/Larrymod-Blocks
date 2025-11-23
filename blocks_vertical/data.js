@@ -117,12 +117,11 @@ Blockly.Blocks['data_showvariable'] = {
           "name": "VARIABLE"
         }
       ],
-      "previousStatement": null,
-      "nextStatement": null,
       "category": Blockly.Categories.data,
       "colour": Blockly.Colours.data.primary,
       "colourSecondary": Blockly.Colours.data.secondary,
-      "colourTertiary": Blockly.Colours.data.tertiary
+      "colourTertiary": Blockly.Colours.data.tertiary,
+      "extensions": ["shape_statement"]
     });
   }
 };
@@ -141,12 +140,11 @@ Blockly.Blocks['data_hidevariable'] = {
           "name": "VARIABLE"
         }
       ],
-      "previousStatement": null,
-      "nextStatement": null,
       "category": Blockly.Categories.data,
       "colour": Blockly.Colours.data.primary,
       "colourSecondary": Blockly.Colours.data.secondary,
-      "colourTertiary": Blockly.Colours.data.tertiary
+      "colourTertiary": Blockly.Colours.data.tertiary,
+      "extensions": ["shape_statement"]
     });
   }
 };

@@ -52,10 +52,14 @@ Blockly.FlyoutButton = function(workspace, targetWorkspace, xml, isLabel) {
   this.callback_ = null;
 
   var callbackKey = xml.getAttribute('callbackKey');
+  var isCallbackDefinedAfter = xml.getAttribute('isLaterDefined') === "true";
+
   if (this.isLabel_ && callbackKey) {
     console.warn('Labels should not have callbacks. Label text: ' + this.text_);
-  } else if (!this.isLabel_ &&
-      !(callbackKey && targetWorkspace.getButtonCallback(callbackKey))) {
+  } else if (
+      !this.isLabel_ && !isCallbackDefinedAfter &&
+      !(callbackKey && targetWorkspace.getButtonCallback(callbackKey))
+  ) {
     console.warn('Buttons should have callbacks. Button text: ' + this.text_);
   } else {
     this.callback_ = targetWorkspace.getButtonCallback(callbackKey);

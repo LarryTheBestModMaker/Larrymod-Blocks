@@ -293,6 +293,31 @@ Blockly.ContextMenu.blockDuplicateOption = function(block, event) {
  * @return {!Object} A menu option, containing text, enabled, and a callback.
  * @package
  */
+Blockly.ContextMenu.blockCollapseOption = function(block) {
+  var commentOption = {
+    enabled: true
+  };
+  if (block.isCollapsed()) {
+    commentOption.text = "Expand block";
+    commentOption.callback = function() {
+      block.setCollapsed(false)
+    };
+  } else {
+    commentOption.text = "Collapse block";
+    commentOption.callback = function() {
+      block.setCollapsed(true)
+    };
+  }
+  return commentOption;
+};
+
+/**
+ * Make a context menu option for adding or removing comments on the current
+ * block.
+ * @param {!Blockly.BlockSvg} block The block where the right-click originated.
+ * @return {!Object} A menu option, containing text, enabled, and a callback.
+ * @package
+ */
 Blockly.ContextMenu.blockCommentOption = function(block) {
   var commentOption = {
     enabled: !goog.userAgent.IE
@@ -312,6 +337,38 @@ Blockly.ContextMenu.blockCommentOption = function(block) {
     };
   }
   return commentOption;
+};
+
+/**
+ * Make a context menu option for expanding an expandable block.
+ * @param {!Blockly.BlockSvg} block The block where the right-click originated.
+ * @return {!Object} A menu option, containing text, enabled, and a callback.
+ * @package
+ */
+Blockly.ContextMenu.expandBlockOption = function(block) {
+  return {
+    enabled: true,
+    text: "Expand",
+    callback: function() {
+      block.onExpandableButtonClicked_(true);
+    }
+  };
+};
+
+/**
+ * Make a context menu option for contracting an expandable block.
+ * @param {!Blockly.BlockSvg} block The block where the right-click originated.
+ * @return {!Object} A menu option, containing text, enabled, and a callback.
+ * @package
+ */
+Blockly.ContextMenu.contractBlockOption = function(block) {
+  return {
+    enabled: true,
+    text: "Contract",
+    callback: function() {
+      block.onExpandableButtonClicked_(false);
+    }
+  };
 };
 
 /**

@@ -86,13 +86,13 @@ Blockly.Xml.variablesToDom = function(variableList) {
  */
 Blockly.Xml.blockToDomWithXY = function(block, opt_noId) {
   var width;  // Not used in LTR.
-  if (block.workspace.RTL) {
+  var isRTL = block.workspace.RTL;
+  if (isRTL) {
     width = block.workspace.getWidth();
   }
   var element = Blockly.Xml.blockToDom(block, opt_noId);
   var xy = block.getRelativeToSurfaceXY();
-  element.setAttribute('x',
-      Math.round(block.workspace.RTL ? width - xy.x : xy.x));
+  element.setAttribute('x', Math.round(isRTL ? width - xy.x : xy.x));
   element.setAttribute('y', Math.round(xy.y));
   return element;
 };
@@ -885,8 +885,10 @@ Blockly.Xml.domToFieldVariable_ = function(workspace, xml, text, field) {
 Blockly.Xml.domToField_ = function(block, fieldName, xml) {
   var field = block.getField(fieldName);
   if (!field) {
-    console.warn('Ignoring non-existent field ' + fieldName + ' in block ' +
-                 block.type);
+    // dont expect fields in drag duplicates
+    if (!block.canDragDuplicate_) {
+      console.warn('Ignoring non-existent field ' + fieldName + ' in block ' + block.type, block);
+    }
     return;
   }
 

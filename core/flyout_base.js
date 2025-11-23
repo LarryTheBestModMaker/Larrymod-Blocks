@@ -521,10 +521,10 @@ Blockly.Flyout.prototype.show = function(xmlList) {
           console.error('failed to load block "' + type + '" for toolbox;', err)
           // when a block errors, obscure it from the ui so it doesnt cause death
           var errorString = 
-            '<xml><label text="ERR: Block with type ' + 
+            '<xml><label text="ERR: Block type ' + 
               goog.string.htmlEscape('"' + type + '"') + 
             ' failed to load"></label></xml>'
-          var errorXML = Blockly.Xml.textToDom(errorString).firstChild
+          var errorXML = Blockly.Xml.textToDom(errorString).firstChild;
           var curButton = new Blockly.FlyoutButton(this.workspace_,
               this.targetWorkspace_, errorXML, true);
           contents.push({type: 'button', button: curButton});

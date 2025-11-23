@@ -309,6 +309,11 @@ Blockly.WorkspaceSvg.prototype.inverseScreenCTM_ = null;
 Blockly.WorkspaceSvg.prototype.inverseScreenCTMDirty_ = true;
 
 /**
+ * @type {boolean} True if this workspace is allowed to be dragged.
+ */
+Blockly.WorkspaceSvg.prototype.allowDragging = true;
+
+/**
  * Getter for the inverted screen CTM.
  * @return {SVGMatrix} The matrix to use in mouseToSvg
  */
@@ -1019,7 +1024,7 @@ Blockly.WorkspaceSvg.prototype.reportValue = function(id, value, isError) {
   var contentDiv = Blockly.DropDownDiv.getContentDiv();
   var valueReportBox = goog.dom.createElement('div');
   valueReportBox.setAttribute('class', 'valueReportBox');
-  if (typeof value !== 'object' || typeof value.toReporterContent !== 'function') {
+  if (typeof value !== 'object' || value === null || typeof value.toReporterContent !== 'function') {
     valueReportBox.textContent = String(value);
   } else {
     valueReportBox.appendChild(value.toReporterContent());
@@ -1342,7 +1347,7 @@ Blockly.WorkspaceSvg.prototype.isDragging = function() {
  * @return {boolean} True if this workspace may be dragged.
  */
 Blockly.WorkspaceSvg.prototype.isDraggable = function() {
-  return !!this.scrollbar;
+  return this.allowDragging && !!this.scrollbar;
 };
 
 /**

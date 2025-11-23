@@ -301,7 +301,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
       '</value>' +
     '</block>' +
     '<block type="control_forever" id="control_forever"></block>' +
-    '<block type="control_if" id="control_if"></block>' +
+    '<block type="control_if" id="control_if"><value name="CONDITION"><shadow type="checkbox" /></value></block>' +
     '<block type="control_if_else" id="control_if_else"></block>' +
     '<block type="control_wait_until" id="control_wait_until"></block>' +
     '<block type="control_repeat_until" id="control_repeat_until"></block>' +
@@ -528,6 +528,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
         '</shadow>' +
       '</value>' +
     '</block>' +
+    '<block type="operator_checkboxBoolean" id="operator_checkboxBoolean"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_VARIABLES}" id="variable" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">' +
   '</category>' +
@@ -549,10 +550,12 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="extension_wedo_motor" id="extension_wedo_motor"></block>' +
     '<block type="extension_wedo_hat" id="extension_wedo_hat"></block>' +
     '<block type="extension_wedo_boolean" id="extension_wedo_boolean"></block>' +
-  '<block type="control_fieldbutton" id="control_fieldbutton"></block>' +
-  '<block type="control_fieldcheckboxoriginal" id="control_fieldcheckboxoriginal"></block>' +
-  '<block type="motion_mutatorCheckboxTest" id="motion_mutatorCheckboxTest"></block>' +
-    '<block type="operators_expandablejoininputs" id="extension_wedo_boolean"></block>' +
+    '<block type="control_fieldbutton" id="control_fieldbutton">' +
+          '<field name="BUTTON" id="TEST_BUTTON"></field>' +
+    '</block>' +
+    '<block type="control_fieldcheckboxoriginal" id="control_fieldcheckboxoriginal"></block>' +
+    '<block type="motion_mutatorCheckboxTest" id="motion_mutatorCheckboxTest"></block>' +
+    '<block type="operator_expandablejoininputs" id="extension_wedo_boolean"></block>' +
     '<block type="extension_wedo_tilt_reporter" id="extension_wedo_reporter">' +
       '<value name="TILT">' +
         '<shadow type="extension_wedo_tilt_menu"></shadow>' +
@@ -562,6 +565,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="extension_microbit_display" id="extension_microbit_display">' +
       '<value name="MATRIX">' +
         '<shadow type="matrix">' +
+          '<mutation width="10" height="10"></mutation>' +
           '<field name="MATRIX">0101010101100010101000100</field>' +
         '</shadow>' +
       '</value>' +

@@ -35,9 +35,9 @@
 #   msg/js/<LANG>.js for every language <LANG> defined in msg/js/<LANG>.json.
 
 import sys
-if sys.version_info[0] != 2:
-  raise Exception("Blockly build only compatible with Python 2.x.\n"
-                  "You are using: " + sys.version)
+# if sys.version_info[0] != 2:
+#   raise Exception("Blockly build only compatible with Python 2.x.\n"
+#                   "You are using: " + sys.version)
 
 import errno, glob, httplib, json, os, re, subprocess, threading, urllib, platform
 

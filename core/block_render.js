@@ -1573,6 +1573,9 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
             input.connection.setOffsetInBlock(connectionX, connectionY);
             this.renderInputShape_(input, cursorX, cursorY + connectionYOffset);
             cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
+            if (input.connection.targetConnection) {
+              cursorX += input.connection.targetConnection.sourceBlock_.outputLeftPadding_()
+            }
           }
         }
         // Remove final separator and replace it with right-padding.
@@ -1614,8 +1617,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         // Move to the start of the notch.
         cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
   
-        if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-         this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat') {
+        if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
           this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
         } else {
           Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
@@ -1630,8 +1632,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
             input.connection.targetBlock().getHeightWidth().width + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
         }
         if ((!(this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-          this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' ||
-          this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_hat')) &&
+          this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return')) &&
           (y == inputRows.length - 1 ||
             inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
           // If the final input is a statement stack, add a small row underneath.
@@ -1765,7 +1766,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, cursorY) {
 
   if (this.outputConnection) {
     // Scratch-style reporters have output connection y at half block height.
-    this.outputConnection.setOffsetInBlock(0, this.height / 2);
+    this.outputConnection.setOffsetInBlock(-this.outputLeftPadding_(), this.height / 2);
   }
   if (this.edgeShape_) {
     // Draw the left-side edge shape.
@@ -2182,6 +2183,391 @@ Blockly.BlockSvg.prototype.renderMoveConnections_ = function() {
       this.nextConnection.tighten_();
     }
   }
+};
+
+/* -= Custom Block Notch API =- */
+// utility functions
+Blockly.BlockSvg.CUSTOM_NOTCH_UTIL = {
+  supportedCommands: { m: 2, l: 2, h: 1, v: 1, c: 6, s: 4, q: 4, t: 2, a: 7 },
+  commandXpos: { m: [0], l: [0], h: [0], c: [0, 2, 4], s: [0, 2], q: [0, 2], t: [0], a: [5] },
+  path2TokenList: (pathStr) => {
+    return pathStr.match(/[a-z]|-?\d*\.?\d+(?:[eE][-+]?\d+)?/g);
+  },
+  validateSVGPath: (pathStr) => {
+    const util = Blockly.BlockSvg.CUSTOM_NOTCH_UTIL;
+    const tokens = util.path2TokenList(pathStr);
+    let i = 0;
+    while (i < tokens.length) {
+      const cmd = tokens[i++];
+      const expected = util.supportedCommands[cmd];
+      if (expected === undefined) throw new Error(`Unsupported or invalid command '${cmd}'`);
+      while (i + expected <= tokens.length && !/^[a-z]$/.test(tokens[i])) {
+        for (let j = 0; j < expected; j++) {
+          if (!/^[-+]?\d*\.?\d+(e[-+]?\d+)?$/i.test(tokens[i + j])) {
+            throw new Error(`Invalid number '${tokens[i + j]}' in '${cmd}' command`);
+          }
+        }
+        i += expected;
+      }
+    }
+    return true;
+  },
+  flipPathX: (pathStr) => {
+    const util = Blockly.BlockSvg.CUSTOM_NOTCH_UTIL;
+    const tokens = util.path2TokenList(pathStr);
+    let i = 0, result = [];
+    while (i < tokens.length) {
+      const cmd = tokens[i++];
+      result.push(cmd);
+      const expected = util.supportedCommands[cmd];
+      while (i + expected <= tokens.length && !/^[a-z]$/.test(tokens[i])) {
+        const group = [];
+        if (cmd === 'a') {
+          // Arc: rx ry x-axis-rotation large-arc-flag sweep-flag dx dy
+          group.push(
+            parseFloat(tokens[i]), parseFloat(tokens[i + 1]),
+            parseFloat(tokens[i + 2]), parseInt(tokens[i + 3]),
+            1 - parseInt(tokens[i + 4]),
+            -parseFloat(tokens[i + 5]), parseFloat(tokens[i + 6])
+          );
+        } else {
+          const xIndexes = util.commandXpos[cmd] || [];
+          for (let j = 0; j < expected; j++) {
+            let val = parseFloat(tokens[i + j]);
+            if (xIndexes.includes(j)) val = -val;
+            group.push(val);
+          }
+        }
+        result.push(...group);
+        i += expected;
+      }
+    }
+    return result.join(' ');
+  }
+};
+
+// Stores all user-defined custom shapes
+Blockly.BlockSvg.CUSTOM_NOTCHES = new Map([]);
+
+/**
+ * Register a custom block notch
+ * @param {string} name The name used to identify the custom notch
+ * @param {string} path SVG Path that resembles the notch
+ */
+Blockly.BlockSvg.registerCustomNotch = function(name, path) {
+  if (!name || typeof path !== 'string') {
+    console.error([
+      `Registration for Notch '${name}' failed`,
+      "Param 2 must be a SVG path",
+      "Use 'BlockSvg.NOTCH_PATH_LEFT' as a reference"
+    ].join("\n"));
+    return;
+  }
+
+  try {
+    const util = Blockly.BlockSvg.CUSTOM_NOTCH_UTIL;
+    if (util.validateSVGPath(path)) Blockly.BlockSvg.CUSTOM_NOTCHES.set(String(name), {
+      left: path, right: util.flipPathX(path)
+    });
+  } catch (err) {
+    // svg path was probably Invalid
+    console.error(err);
+  }
+};
+
+// Preset custom notches
+Blockly.BlockSvg.registerCustomNotch("switchCase", `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 c 2 0 4 -4 6 -4 c 2 0 4 4 6 4 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`);
+Blockly.BlockSvg.registerCustomNotch("jigsaw", `l 9 0 c 2 0 4 1 4 2 c 0 2 -4 1 -4 4 c 0 1 2 2 4 2 h 10 c 2 0 4 -1 4 -2 c 0 -3 -4 -2 -4 -4 c 0 -1 2 -2 4 -2 l 9 0`);
+Blockly.BlockSvg.registerCustomNotch("hexagon", `l 6 0 c 1 0 2 1 2 2 l 0 2 l 10 6 l 10 -6 l 0 -2 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("round", `l 4 0 c 2 0 4 2 4 4 c 2 9 18 9 20 0 c 0 -2 2 -4 4 -4 l 4 0`);
+Blockly.BlockSvg.registerCustomNotch("square", `l 2 0 c 1 0 2 1 2 2 l 0 4 c 0 1 1 2 2 2 h 24 c 1 0 2 -1 2 -2 l 0 -4 c 0 -1 1 -2 2 -2 l 2 0`);
+Blockly.BlockSvg.registerCustomNotch("leaf", `l 5 0 c 1 0 2 1 3 2 l 4 4 c 4 4 8 4 12 0 l 4 -4 c 1 -1 2 -2 3 -2 l 5 0`);
+Blockly.BlockSvg.registerCustomNotch("plus", `l 6 0 c 1 0 2 1 2 2 c 0 1 1 2 2 2 l 2 0 c 1 0 2 1 2 2 c 0 1 1 2 2 2 l 4 0 c 1 0 2 -1 2 -2 c 0 -1 1 -2 2 -2 l 2 0 c 1 0 2 -1 2 -2 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("octagonal", `l 6 0 c 1 0 2 1 2 2 l 0 2 l 5 5 l 10 0 l 5 -5 l 0 -2 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("bumped", `l 6 0 c 1 0 2 1 2 2 l 0 2 c 0 6 10 6 10 0 c 0 6 10 6 10 0 l 0 -2 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("indented", `l 6 0 c 1 0 2 1 2 2 l 0 6 l 10 -5 l 10 5 l 0 -6 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("scrapped", `l 6 0 c 1 0 2 1 2 2 l 0 5 l 4 -2 l 1 -2 l 1 3 l 8 0 l 1 -3 l 1 2 l 4 2 l 0 -5 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("arrow", `l 7 0 c 1 0 2 1 2 2 c 0 1 -1 2 -2 2 l -5 0 l 12 3 c 4 1 4 1 8 0 l 12 -3 l -5 0 c -1 0 -2 -1 -2 -2 c 0 -1 1 -2 2 -2 l 7 0`);
+Blockly.BlockSvg.registerCustomNotch("ticket", `l 6 0 c 1 0 2 1 2 2 l 0 6 l 8 0 l 0 -4 c 0 -3 4 -3 4 0 l 0 4 l 8 0 l 0 -6 c 0 -1 1 -2 2 -2 l 6 0`);
+Blockly.BlockSvg.registerCustomNotch("pincer", `c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 l 1 0 l 0 -2 l -1 0 c -2 0 -3 -2 -4 -3 l 5 1 l 5 -2 l 5 2 l 5 -1 c -1 1 -2 3 -4 3 l -1 0 l 0 2 l 1 0 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2`);
+Blockly.BlockSvg.registerCustomNotch("inverted", `c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2 h 12 c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2`);
+
+/* -= Custom Block Shape API =- */
+// Stores all user-defined custom shapes
+Blockly.BlockSvg.CUSTOM_SHAPES = new Map([
+  /* pre-made shapes */
+  // NOTE: the keys should be numbers, see src/extension-support/block-shape in VM
+  // Reference: boolean shape -> m 16 0 h 16 (rightPath) l 16 16 l -16 16 h -16 (leftPath) l -16 -16 l 16 -16 z
+  [Blockly.OUTPUT_SHAPE_OCTAGONAL, {
+    emptyInputPath: "M 8 0 h 32 l 8 8 l 0 16 l -8 8 h -32 l -8 -8 l 0 -16 l 8 -8 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      return [`l ${-scale / 2} 0 l ${-scale / 2} ${-scale / 2} l 0 ${-scale} l ${scale / 2} ${-scale / 2} l ${scale / 2} 0`];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      return [`l ${scale / 2} 0 l ${scale / 2} ${scale / 2} l 0 ${scale} l ${-scale / 2} ${scale / 2} l ${-scale / 2} 0`];
+    },
+  }],
+  [Blockly.OUTPUT_SHAPE_BUMPED, {
+    emptyInputPath: "M 8 0 h 32 a 1 1 0 0 1 0 16 a 1 1 0 0 1 0 16 h -32 a 1 1 0 0 1 0 -16 a 1 1 0 0 1 0 -16 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      return [`h ${scale / -3} a 1 1 0 0 1 0 ${-scale} a 1 1 0 0 1 0 ${-scale} h ${scale / 3}`];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      return [`h ${scale / 3} a 1 1 0 0 1 0 ${scale} a 1 1 0 0 1 0 ${scale} h ${scale / -3}`];
+    },
+    blockPaddingStart: (_, _2, _3, _4, row) => {
+      return (row.height - 4) / 2;
+    },
+    blockPaddingEnd: (_, _2, _3, _4, row) => {
+      return (row.height - 4) / 2;
+    }
+  }],
+  [Blockly.OUTPUT_SHAPE_INDENTED, {
+    emptyInputPath: "M 16 0 h 16 h 16 l -16 16 l 16 16 h -16 h -16 h -16 l 16 -16 l -16 -16 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      return [`h ${-scale} l ${scale} ${-scale} l ${-scale} ${-scale} h ${scale}`];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      return [`h ${scale} l ${-scale} ${scale} l ${scale} ${scale} h ${-scale}`];
+    },
+    blockPaddingStart: (_, _2, _3, _4, row) => {
+      return (row.height - 8) / 2;
+    },
+    blockPaddingEnd: (_, _2, _3, _4, row) => {
+      return (row.height - 8) / 2;
+    }
+  }],
+  [Blockly.OUTPUT_SHAPE_SCRAPPED, {
+    emptyInputPath: "M 16 0 h 16 h 16 l -6 10 l -4 1 l 4 2 v 6 l -4 2 l 4 1 l 6 10 h -16 h -16 h -16 l 6 -10 l 4 -1 l -4 -2 v -6 l 4 -2 l -4 -1 l -6 -10 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      const s = scale / 16;
+      return [
+        `h ${-16 * s}`,
+        `l ${6 * s} ${-10 * s}`,
+        `l ${4 * s} ${-1 * s}`,
+        `l ${-4 * s} ${-2 * s}`,
+        `v ${-6 * s}`,
+        `l ${4 * s} ${-2 * s}`,
+        `l ${-4 * s} ${-1 * s}`,
+        `l ${-6 * s} ${-10 * s}`,
+      ];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      const s = scale / 16;
+      return [
+        `h ${16 * s}`,
+        `l ${-6 * s} ${10 * s}`,
+        `l ${-4 * s} ${1 * s}`,
+        `l ${4 * s} ${2 * s}`,
+        `v ${6 * s}`,
+        `l ${-4 * s} ${2 * s}`,
+        `l ${4 * s} ${1 * s}`,
+        `l ${6 * s} ${10 * s}`,
+        `h ${-16 * s}`,
+      ];
+    },
+    blockPaddingStart: (_, __, firstInput) => {
+      return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 3, 0);
+    },
+    blockPaddingEnd: (_, __, lastInput) => {
+      return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 3, 0);
+    },
+  }],
+  [Blockly.OUTPUT_SHAPE_ARROW, {
+    emptyInputPath: "M 16 0 h 16 c 0.059 0 0.1175 0.0014 0.1758 0.0042 c 0.6594 -0.0042 1.7729 -0.0042 3.2858 0.9866 l 13.0645 11.9969 c 0.1287 0.0979 0.2521 0.2057 0.3696 0.3231 c 0.4447 0.4447 0.7494 0.9762 0.9143 1.5401 l 0.0454 0.0755 l -0.0123 0.0452 c 0.0757 0.297 0.1133 0.6017 0.1126 0.9064 c 0.0007 0.3047 -0.0369 0.6093 -0.1126 0.9063 l 0.0123 0.0452 l -0.0454 0.0755 c -0.1649 0.5638 -0.4695 1.0954 -0.9143 1.5401 c -0.1175 0.1175 -0.241 0.2252 -0.3696 0.3231 l -13.0645 11.9969 c -0.9561 0.9699 -3.0641 1.2348 -3.4616 1.2349 h -16 h -12.2464 c -0.6168 0 -1.1976 -0.1543 -1.7058 -0.4265 l -0.0742 -0.0397 l -0.0567 -0.0341 c -0.4474 -0.2641 -0.8331 -0.6217 -1.1301 -1.046 c -0.7213 -0.9079 -0.9437 -2.082 -0.6674 -3.1542 l 0.0166 -0.0623 l 0.024 -0.0822 c 0.167 -0.5518 0.4684 -1.0716 0.9047 -1.5078 l 10.6386 -9.7693 l -10.6386 -9.7693 c -0.4362 -0.4362 -0.7377 -0.9559 -0.9047 -1.5078 l -0.0245 -0.0877 l -0.0161 -0.0568 c -0.3091 -1.1994 0.006 -2.5264 0.9451 -3.4655 c 0.8871 -0.8871 2.217 -0.9908 3.2649 -0.9908 h 11.6706 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    leftPath: (block) => {
+      const scale = block.height / 2;
+      const s = scale / 16;
+      return [
+        `h ${-12.2464 * s}`,
+        `c ${-0.6168 * s} 0 ${-1.1976 * s} ${-0.1543 * s} ${-1.7058 * s} ${-0.4265 * s}`,
+        `l ${-0.0742 * s} ${-0.0397 * s}`,
+        `l ${-0.0567 * s} ${-0.0341 * s}`,
+        `c ${-0.4474 * s} ${-0.2641 * s} ${-0.8331 * s} ${-0.6217 * s} ${-1.1301 * s} ${-1.046 * s}`,
+        `c ${-0.7213 * s} ${-0.9079 * s} ${-0.9437 * s} ${-2.082 * s} ${-0.6674 * s} ${-3.1542 * s}`,
+        `l ${0.0166 * s} ${-0.0623 * s}`,
+        `l ${0.024 * s} ${-0.0822 * s}`,
+        `c ${0.167 * s} ${-0.5518 * s} ${0.4684 * s} ${-1.0716 * s} ${0.9047 * s} ${-1.5078 * s}`,
+        `l ${10.6386 * s} ${-9.7693 * s}`,
+        `l ${-10.6386 * s} ${-9.7693 * s}`,
+        `c ${-0.4362 * s} ${-0.4362 * s} ${-0.7377 * s} ${-0.9559 * s} ${-0.9047 * s} ${-1.5078 * s}`,
+        `l ${-0.0245 * s} ${-0.0877 * s}`,
+        `l ${-0.0161 * s} ${-0.0568 * s}`,
+        `c ${-0.3091 * s} ${-1.1994 * s} ${0.006 * s} ${-2.5264 * s} ${0.9451 * s} ${-3.4655 * s}`,
+        `c ${0.8871 * s} ${-0.8871 * s} ${2.217 * s} ${-0.9908 * s} ${3.2649 * s} ${-0.9908 * s}`,
+        `h ${11.6706 * s}`,
+      ];
+    },
+    rightPath: (block) => {
+      const scale = block.edgeShapeWidth_;
+      const s = scale / 16;
+      return [
+        `c ${0.059 * s} 0 ${0.1175 * s} ${0.0014 * s} ${0.1758 * s} ${0.0042 * s}`,
+        `c ${0.6594 * s} ${-0.0042 * s} ${1.7729 * s} ${-0.0042 * s} ${3.2858 * s} ${0.9866 * s}`,
+        `l ${13.0645 * s} ${11.9969 * s}`,
+        `c ${0.1287 * s} ${0.0979 * s} ${0.2521 * s} ${0.2057 * s} ${0.3696 * s} ${0.3231 * s}`,
+        `c ${0.4447 * s} ${0.4447 * s} ${0.7494 * s} ${0.9762 * s} ${0.9143 * s} ${1.5401 * s}`,
+        `l ${0.0454 * s} ${0.0755 * s}`,
+        `l ${-0.0123 * s} ${0.0452 * s}`,
+        `c ${0.0757 * s} ${0.297 * s} ${0.1133 * s} ${0.6017 * s} ${0.1126 * s} ${0.9064 * s}`,
+        `c ${0.0007 * s} ${0.3047 * s} ${-0.0369 * s} ${0.6093 * s} ${-0.1126 * s} ${0.9063 * s}`,
+        `l ${0.0123 * s} ${0.0452 * s}`,
+        `l ${-0.0454 * s} ${0.0755 * s}`,
+        `c ${-0.1649 * s} ${0.5638 * s} ${-0.4695 * s} ${1.0954 * s} ${-0.9143 * s} ${1.5401 * s}`,
+        `c ${-0.1175 * s} ${0.1175 * s} ${-0.241 * s} ${0.2252 * s} ${-0.3696 * s} ${0.3231 * s}`,
+        `l ${-13.0645 * s} ${11.9969 * s}`,
+        `c ${-0.9561 * s} ${0.9699 * s} ${-3.0641 * s} ${1.2348 * s} ${-3.4616 * s} ${1.2349 * s}`,
+      ];
+    },
+    blockPaddingStart: (_, __, firstInput) => {
+      return Math.max(((firstInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
+    },
+    blockPaddingEnd: (_, __, lastInput) => {
+      return Math.max(((lastInput.renderHeight - Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0) + 4;
+    },
+  }],
+  [Blockly.OUTPUT_SHAPE_TICKET, {
+    emptyInputPath: "m 0 0 m 15 0 H 46 z L 2 0 A 2 2 0 0 0 0 2 L 0 8 A 2 2 0 0 0 2 10 L 7 10 c 4 2 4 9 0 11 L 2 21 A 2 2 0 0 0 0 23 L 0 30 A 2 2 0 0 0 2 32 L 46 32 A 2 2 0 0 0 48 30 L 48 23 A 2 2 0 0 0 46 21 L 41 21 c -4 -2 -4 -9 0 -11 L 46 10 A 2 2 0 0 0 48 8 L 48 2 A 2 2 0 0 0 46 0 z",
+    emptyInputWidth: 12 * Blockly.BlockSvg.GRID_UNIT,
+    // 13.4 is the height of the hole
+    leftPath: (block) => {
+      const w = block.height / 2;
+      return [
+        `h-${w - 1}`,
+        `a 2 2 0 0 1 -2 -2`, // 2unit rounded
+        `v-${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 2 -2`, // 2unit rounded
+        `h10`,
+        `c4 -2 4 -12 0 -${13.4}`,
+        `h-10`,
+        `a 2 2 0 0 1 -2 -2`, // 2unit rounded
+        `v-${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 2 -2`, // 2unit rounded
+      ];
+    },
+    rightPath: (block) => {
+      const w = block.edgeShapeWidth_;
+      return [
+        `h${w}`,
+        `a 2 2 0 0 1 2 2`, // 2unit rounded
+        `v${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 -2 2`, // 2unit rounded
+        `h-10`,
+        `c-4 2 -4 12 0 ${13.4}`,
+        `h10`,
+        `a 2 2 0 0 1 2 2`, // 2unit rounded
+        `v${w - (13.4 / 2) - 4}`,
+        `a 2 2 0 0 1 -2 2`, // 2unit rounded
+      ];
+    },
+  }],
+]);
+
+/**
+ * Register a custom block shape
+ * @param {string} name The name used to identify custom shapes
+ * @param {object} shapeInfo All relative information for generating the shape (see below)
+ */
+/*
+shapeInfo entries ==> 
+{
+  emptyInputPath: (string) -- SVG path for the inside of an empty input slot
+  emptyInputWidth: (number) -- (optional) Default width for a empty input slot
+  leftPath: (block) => { return Array } -– Returns an array of SVG path parts for the left side of the block
+  rightPath: (block) => { return Array } –- Returns an array of SVG path parts for the right side of the block
+  blockPadding: (object) -- (optional) Object for block-in-block padding, example format: {
+    internal: {
+      // padding values for each block shape as your block
+      // formatted like each shape in Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING
+    },
+    external: {
+      // padding values for your block in each block shape
+      // include all keys from Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING and insert the padding as the value
+    },
+  }
+  blockPaddingStart: (block, otherShape, firstInput, firstField, row) => { return Number } -– Returns a number adding extra padding to the start of the block in 'computeOutputPadding_', used for boolean-like shapes.
+  blockPaddingEnd: (block, otherShape, lastInput, lastField, row) => { return Number } –- Returns a number adding extra padding to the end of the block in 'computeOutputPadding_', used for boolean-like shapes.
+}
+*/
+Blockly.BlockSvg.registerCustomShape = function(name, shapeInfo) {
+  if (!name || typeof shapeInfo !== 'object' || Array.isArray(shapeInfo)) {
+    console.error([
+      `Registration for Shape '${name}' failed`,
+      "Param 2 must be a object containing:",
+      "'emptyInputPath' (string) -- SVG path for the inside of an empty input slot",
+      "'emptyInputWidth' (number) -- (optional) Default width for a empty input slot",
+      "'leftPath' (function) -– Returns an array of SVG path parts for the left side of the block",
+      "'rightPath' (function) –- Returns an array of SVG path parts for the right side of the block",
+      "'blockPadding' (object) -- (optional) Object for block-in-block padding, similar to 'Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING', 'internal' entry for custom block padding, 'external' entry for other shapes padding",
+      "'blockPaddingStart' (function) -- (optional) Returns a number adding extra padding to the start of the block in 'computeOutputPadding_', used for boolean-like shapes.",
+      "'blockPaddingEnd' (function) -- (optional) Returns a number adding extra padding to the end of the block in 'computeOutputPadding_', used for boolean-like shapes.",
+    ].join("\n"));
+    return;
+  }
+  if (typeof shapeInfo.emptyInputPath !== "string") {
+    console.error(`Registration for Shape '${name}' failed\nNo 'emptyInputPath' entry found in Param 2/invalid SVG path string`);
+    return;
+  }
+  if (typeof shapeInfo.leftPath !== "function") {
+    console.error(`Registration for Shape '${name}' failed\nNo 'leftPath' entry found in Param 2/entry is not a function`);
+    return;
+  }
+  if (typeof shapeInfo.rightPath !== "function") {
+    console.error(`Registration for Shape '${name}' failed\nNo 'rightPath' entry found in Param 2/entry is not a function`);
+    return;
+  }
+
+  name = "custom-" + String(name);
+  shapeInfo.name = name;
+
+  // optional value, this default value is constant for all shapes
+  if (!shapeInfo.emptyInputWidth) shapeInfo.emptyInputWidth = 12 * Blockly.BlockSvg.GRID_UNIT;
+
+  // optional value, padding defaults to DEFAULT_SHAPE_PADDING
+  if (shapeInfo.blockPadding) {
+    const internalPads = shapeInfo.blockPadding.internal;
+    if (typeof internalPads === "object" && !Array.isArray(internalPads)) {
+      Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING[name] = internalPads;
+    } else {
+      console.warn(`No 'internal' padding object provided in custom shape ${name}, please refer to 'ScratchBlocks.BlockSvg.SHAPE_IN_SHAPE_PADDING', for formatting`);
+    }
+
+    const externalPads = shapeInfo.blockPadding.external;
+    if (typeof externalPads === "object" && !Array.isArray(externalPads)) {
+      const paddingEntries = Object.entries(Blockly.BlockSvg.SHAPE_IN_SHAPE_PADDING);
+      for (const shape of paddingEntries) {
+        if (!externalPads[shape[0]]) continue;
+        shape[1][name] = externalPads[shape[0]];
+      }
+    } else {
+      console.warn(`No 'external' padding object provided in custom shape ${name}, please refer to 'ScratchBlocks.BlockSvg.SHAPE_IN_SHAPE_PADDING', for formatting`);
+    }
+  }
+
+  // optional value, just validating it if it exists
+  if (shapeInfo.blockPaddingStart && typeof shapeInfo.blockPaddingStart !== "function") {
+    console.error(`Registration for Shape '${name}' failed\n'blockPaddingStart' entry found in Param 2/entry is not a function`);
+    return;
+  }
+  if (shapeInfo.blockPaddingEnd && typeof shapeInfo.blockPaddingEnd !== "function") {
+    console.error(`Registration for Shape '${name}' failed\n'blockPaddingEnd' entry found in Param 2/entry is not a function`);
+    return;
+  }
+
+  Blockly.BlockSvg.CUSTOM_SHAPES.set(name, shapeInfo);
 };
 
 /* -= Custom Block Notch API =- */

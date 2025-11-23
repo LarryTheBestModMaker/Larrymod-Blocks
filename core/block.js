@@ -119,6 +119,12 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
    * @type {boolean}
    * @private
    */
+  this.expandable_ = false;
+
+  /**
+   * @type {boolean}
+   * @private
+   */
   this.isShadow_ = false;
 
   /**
@@ -582,6 +588,17 @@ Blockly.Block.prototype.setParent = function(newParent) {
   if (newParent) {
     // Add this block to the new parent's child list.
     newParent.childBlocks_.push(this);
+
+    // apply the shape changer if this block is droppable anywhere
+    if (this.outputConnection && !this.originalOutputShape_) {
+        if (!this.outputConnection.check_) {
+            var shape = this.outputConnection.targetConnection.shape_;
+            if (shape) {
+                this.originalOutputShape_ = this.outputShape_;
+                this.outputShape_ = shape;
+            }
+        }
+    }
   } else {
     this.workspace.addTopBlock(this);
   }
@@ -691,6 +708,14 @@ Blockly.Block.prototype.setInsertionMarker = function(insertionMarker) {
  */
 Blockly.Block.prototype.isEditable = function() {
   return this.editable_ && !(this.workspace && this.workspace.options.readOnly);
+};
+
+/**
+ * Get whether this block is expandable or not
+ * @return {boolean} True if expandable.
+ */
+Blockly.Block.prototype.isExpandable = function() {
+  return this.expandable_;
 };
 
 /**
@@ -1020,7 +1045,8 @@ Blockly.Block.prototype.getFieldValue = function(name) {
 Blockly.Block.prototype.setFieldValue = function(newValue, name) {
   var field = this.getField(name);
   goog.asserts.assertObject(field, 'Field "%s" not found.', name);
-  field.setValue(newValue);
+  if (field) field.setValue(newValue);
+  else console.warn(`Field '${name}' not found.`)
 };
 
 /**
@@ -1210,7 +1236,7 @@ Blockly.Block.prototype.toString = function(opt_maxLength, opt_emptyToken) {
         if (field instanceof Blockly.FieldDropdown && !field.getValue()) {
           text.push(emptyFieldPlaceholder);
         } else {
-          text.push(field.getText());
+          if (field.isVisible()) text.push(field.getText());
         }
       }
       if (input.connection) {
@@ -1531,7 +1557,9 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
                 const shape = element['shape'];
                 const ogConnect = input.connection.connect_;
                 input.connection.connect_ = function(...args) {
-                  args[0].sourceBlock_.setOutputShape(shape);
+                  if (args[0].sourceBlock_.isShadow()) {
+                    args[0].sourceBlock_.setOutputShape(shape);
+                  }
                   ogConnect.call(this, ...args);
                 }
               }

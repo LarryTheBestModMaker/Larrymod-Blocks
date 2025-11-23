@@ -569,7 +569,7 @@ Blockly.Toolbox.prototype.selectCategoryById = function(id) {
  */
 Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
   var selectedItem = item;
-  var RTL = this.RTL
+  var RTL = this.RTL;
   if (item.getMenuOptions()) {
     return function(e) {
       if (e.button === undefined || e.button == 0) {
@@ -578,12 +578,12 @@ Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
           Blockly.Touch.clearTouchIdentifier();
         }
       } else if (e.button == 2) {
-        var menuOptions = selectedItem.getMenuOptions()
-        Blockly.ContextMenu.show(e, menuOptions, RTL)
+        var menuOptions = selectedItem.getMenuOptions();
+        Blockly.ContextMenu.show(e, menuOptions, RTL);
       }
     };
   }
-  return function(e) {
+  return function() {
     if (!this.workspace_.isDragging()) {
       this.setSelectedItem(selectedItem);
       Blockly.Touch.clearTouchIdentifier();

@@ -353,9 +353,12 @@ Blockly.Css.CONTENT = [
     '-moz-user-select: text;',
     '-webkit-user-select: text;',
     '-ms-user-select: text;',
-    'text-align: center;',
+    'text-align: left;',
     'font-family: "Helvetica Neue", Helvetica, sans-serif;',
     'font-size: .8em;',
+    'display: flex;',
+    'justify-content: space-around;',
+    'tab-size: 4;',
   '}',
 
   '.blocklyResizeSE {',
@@ -472,6 +475,10 @@ Blockly.Css.CONTENT = [
 
   '.blocklyTextTruncated {',
     'font-size: 11pt;',
+  '}',
+  
+  '.blocklyCheckbox {',
+    'fill: #fff;',
   '}',
 
   '.blocklyNonEditableText>text {',
@@ -782,9 +789,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyAngleCircle {',
-    'stroke: ' + Blockly.Colours.motion.tertiary + ';',
     'stroke-width: 1;',
-    'fill: ' + Blockly.Colours.motion.secondary + ';',
   '}',
 
   '.blocklyAngleCenterPoint {',

@@ -151,7 +151,7 @@ Blockly.VerticalFlyout.prototype.createDom = function(tagName) {
 
   /*
     <defs>
-      <clipPath id="blocklyBlockMenuClipPath">
+      <clipPath id="blocklyBlockMenuClipPath-ID">
         <rect id="blocklyBlockMenuClipRect" height="1147px"
             width="248px" y="0" x="0">
         </rect>
@@ -160,7 +160,7 @@ Blockly.VerticalFlyout.prototype.createDom = function(tagName) {
   */
   this.defs_ = Blockly.utils.createSvgElement('defs', {}, this.svgGroup_);
   var clipPath = Blockly.utils.createSvgElement('clipPath',
-      {'id':'blocklyBlockMenuClipPath'}, this.defs_);
+      {'id':`blocklyBlockMenuClipPath-${this.workspace_ ? this.workspace_.id : ""}`}, this.defs_);
   this.clipRect_ = Blockly.utils.createSvgElement('rect',
       {
         'id': 'blocklyBlockMenuClipRect',
@@ -171,7 +171,7 @@ Blockly.VerticalFlyout.prototype.createDom = function(tagName) {
       },
       clipPath);
   this.workspace_.svgGroup_.setAttribute(
-      'clip-path', 'url(#blocklyBlockMenuClipPath)');
+      'clip-path', `url(#blocklyBlockMenuClipPath-${this.workspace_ ? this.workspace_.id : ""})`);
 
   return this.svgGroup_;
 };
@@ -529,7 +529,7 @@ Blockly.VerticalFlyout.prototype.layout_ = function(contents, gaps) {
 
       // The block moves a bit extra for the hat, but the block's rectangle
       // doesn't.  That's because the hat actually extends up from 0.
-      block.moveBy(moveX,
+      block.moveBy(moveX + block.outputLeftPadding_() * (this.RTL ? -1 : 1),
           cursorY + (block.startHat_ ? Blockly.BlockSvg.START_HAT_HEIGHT : 0));
 
       var rect = this.createRect_(block, this.RTL ? moveX - blockHW.width : moveX, cursorY, blockHW, i);
@@ -603,7 +603,7 @@ Blockly.VerticalFlyout.prototype.createRect_ = function(block, x, y,
  */
 Blockly.VerticalFlyout.prototype.createCheckbox_ = function(block, cursorX,
     cursorY, blockHW) {
-  var checkboxState = Blockly.VerticalFlyout.getCheckboxState(block.id);
+  var checkboxState = Blockly.VerticalFlyout.getCheckboxState(block.id, block.inputList);
   var svgRoot = block.getSvgRoot();
   var extraSpace = this.CHECKBOX_SIZE + this.CHECKBOX_MARGIN;
   var width = this.RTL ? this.getWidth() / this.workspace_.scale - extraSpace : cursorX;

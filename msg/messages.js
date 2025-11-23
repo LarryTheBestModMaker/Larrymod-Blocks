@@ -24,14 +24,48 @@
  *
  * PENGUINMOD SCRIPT INSTRUCTIONS
  * All message strings must use single quotes for the build scripts to work properly.
- * Lines starting with "Blockly.Msg" will be evaluated as JS. This likely doesn't apply in the build scripts.
+ * Don't use JS only methods to define these messages.
  * Make sure to import the translations from the google sheet before running any scripts!
+ * 
+ * READ COMMENT BELOW THIS ONE TO GET COPY & PASTE COMMANDS FOR THESE!
+ * How to import translations:
+ *      1. Download the Google Sheet as an xlsx file under msg/input/sheet.xlsx
+ *      2. Run the i18n/sync_xlsx script with the xlsx sheet as the input
+ *      3. Match any changes to the English sheet into this file (en.js and en.json have the values imported from the sheet)
  * After modifying this file:
- * 1. Run the i18n/create_en_msgs script and replace msg/js/en.js and msg/json/en.json with the output
- * 2. Run the i18n/messages_fillout script for sheet creation (make sure you imported the translations from the google sheet first)
- * 2.5. If you modified the text of a translation key, run i18n/messages_override with the generated filled_scratch_msgs.js from step 2 as an argument to the script & then specify the changed keys as arguments after.
- * 3. Generate an XLSX file with i18n/create_base_xlsx for translation
- * 4. Please update the Google Sheets if you have access (otherwise, someone with access needs to update it later)
+ *      1. Run the i18n/create_en_msgs script and replace msg/js/en.js and msg/json/en.json with the output
+ *      2. Run the i18n/messages_fillout script for sheet creation (make sure you imported the translations from the google sheet first)
+ *      2.5:
+ *          If you modified the text of a translation key,
+ *          run i18n/messages_override with the generated filled_scratch_msgs.js from step 2 as an argument to the script
+ *          and then specify the changed keys as arguments after.
+ *          This will pull from the **imported** en translations, so make sure you edited the English translations from the Google Sheet and *then* imported the sheet.
+ *      3. Generate an XLSX file with i18n/create_base_xlsx for translation
+ *      4. Please update the Google Sheets (click Replace spreadsheet when importing) if you have access (otherwise, someone with access needs to update it later)
+*/
+/*
+
+BEFORE ANYTHING:
+cd i18n
+
+How to import translations:
+node sync_xlsx ../msg/input/sheet.xlsx
+
+After modifying this file (DOES NOT INCLUDE STEP 2.5):
+node create_en_msgs
+cp ../msg/output/en.js ../msg/js/en.js
+cp ../msg/output/en.json ../msg/json/en.json
+node messages_fillout
+node create_base_xlsx ../msg/output/filled_scratch_msgs.js
+
+After modifying this file (INCLUDES STEP 2.5 BUT YOU NEED TO CHANGE COMMAND 5):
+node create_en_msgs
+cp ../msg/output/en.js ../msg/js/en.js
+cp ../msg/output/en.json ../msg/json/en.json
+node messages_fillout
+node messages_override (PATH TO msg/output/filled_scratch_msgs.js) (List the keys you changed in the Google sheet, split by spaces)
+node create_base_xlsx ../msg/output/override_scratch_msgs.js
+
 */
 
 // SCRATCH SCRIPT INSTRUCTIONS (NOT REQUIRED IN PM)
@@ -353,6 +387,12 @@ Blockly.Msg.SOUND_SETVOLUMETO = 'set volume to %1%';
 Blockly.Msg.SOUND_VOLUME = 'volume';
 Blockly.Msg.SOUND_RECORD = 'record...';
 
+// Data category labels
+Blockly.Msg.DATA_VARIABLE_LIST_ALLSPRITES = 'Variables for all sprites';
+Blockly.Msg.DATA_VARIABLE_LIST_THISSPRITE = 'Variables for this sprite';
+Blockly.Msg.DATA_LIST_LIST_ALLSPRITES = 'Lists for all sprites';
+Blockly.Msg.DATA_LIST_LIST_THISSPRITE = 'Lists for this sprite';
+
 // Category labels
 Blockly.Msg.CATEGORY_MOTION = 'Motion';
 Blockly.Msg.CATEGORY_LOOKS = 'Looks';
@@ -427,3 +467,8 @@ Blockly.Msg.NEW_BROADCAST_MESSAGE = 'New message';
 Blockly.Msg.NEW_BROADCAST_MESSAGE_TITLE = 'New message name:';
 Blockly.Msg.BROADCAST_MODAL_TITLE = 'New Message';
 Blockly.Msg.DEFAULT_BROADCAST_MESSAGE_NAME = 'message1';
+
+// Extension/Extra Stuff
+Blockly.Msg.OPEN_DOCUMENTATION = 'Open Documentation';
+Blockly.Msg.HELP_MANUAL = 'Help Manual';
+Blockly.Msg.YOUR_MOM = 'your mom';
