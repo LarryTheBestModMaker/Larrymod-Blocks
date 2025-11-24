@@ -476,7 +476,7 @@ Blockly.VariableCategory.addLabel = function(xmlList, text) {
   if (Blockly.Blocks[blockType]) {
     var valueFields = "";
     if (opt_values) for (var valueField of opt_values) {
-      console.log(valueField)
+      console.log(opt_values[valueField])
       valueFields += Blockly.VariableCategory.createValue(
         valueField[0], valueField[1], valueField[2]
       );
