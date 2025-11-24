@@ -130,9 +130,8 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_filterlist', 'LIST', [
         ['INDEX', 'data_filterlistindex'], ['ITEM', 'data_filterlistitem'], ['BOOL', 'checkbox']
     ]);
-    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_arraylist', 'LIST', [
-        ['VALUE', 'text', '["a", "b", "c"]']
-    ]);
+    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_arraylist',
+        'LIST', ['VALUE', 'text', '["a", "b", "c"]']);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_listarray', 'LIST');
     Blockly.VariableCategory.addSep(xmlList);
     Blockly.VariableCategory.addShowList(xmlList, firstList);
