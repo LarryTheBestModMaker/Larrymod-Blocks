@@ -104,8 +104,9 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
     Blockly.VariableCategory.addSep(xmlList);
     Blockly.VariableCategory.addDeleteOfList(xmlList, firstList);
     Blockly.VariableCategory.addDeleteAllOfList(xmlList, firstList);
-    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_shiftlist', 'LIST',
-        ['INDEX', 'math_integer', 1]);
+    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_shiftlist', 'LIST', [
+        ['INDEX', 'math_integer', 1]
+    ]);
     Blockly.VariableCategory.addInsertAtList(xmlList, firstList);
     Blockly.VariableCategory.addReplaceItemOfList(xmlList, firstList);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_listforeachitem', 'LIST');
@@ -127,9 +128,12 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
     Blockly.VariableCategory.addSep(xmlList);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_reverselist', 'LIST');
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_shufflelist', 'LIST');
-    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_filterlist', 'LIST', [['INDEX', 'data_filterlistindex'], ['ITEM', 'data_filterlistitem'], ['BOOL', 'checkbox']]);
-    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_arraylist',
-        'LIST', ['VALUE', 'text', '["a", "b", "c"]']);
+    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_filterlist', 'LIST', [
+        ['INDEX', 'data_filterlistindex'], ['ITEM', 'data_filterlistitem'], ['BOOL', 'checkbox']
+    ]);
+    Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_arraylist', 'LIST', [
+        ['VALUE', 'text', '["a", "b", "c"]']
+    ]);
     Blockly.VariableCategory.addBlock(xmlList, firstList, 'data_listarray', 'LIST');
     Blockly.VariableCategory.addSep(xmlList);
     Blockly.VariableCategory.addShowList(xmlList, firstList);
@@ -434,18 +438,14 @@ Blockly.VariableCategory.addCreateButton = function(xmlList, workspace, type) {
   var msg = Blockly.Msg.NEW_VARIABLE;
   var callbackKey = 'CREATE_VARIABLE';
   var callback = function(button) {
-    const workspace = button.getTargetWorkspace();
-    Blockly.Variables.createVariable(workspace, null, '');
-  };
+    Blockly.Variables.createVariable(button.getTargetWorkspace(), null, '');};
 
   if (type === 'LIST') {
     msg = Blockly.Msg.NEW_LIST;
     callbackKey = 'CREATE_LIST';
     callback = function(button) {
-      const workspace = button.getTargetWorkspace();
-      Blockly.Variables.createVariable(workspace, null,
-          Blockly.LIST_VARIABLE_TYPE);
-    };
+      Blockly.Variables.createVariable(button.getTargetWorkspace(), null,
+          Blockly.LIST_VARIABLE_TYPE);};
   }
   button.setAttribute('text', msg);
   button.setAttribute('callbackKey', callbackKey);
@@ -476,7 +476,6 @@ Blockly.VariableCategory.addLabel = function(xmlList, text) {
   if (Blockly.Blocks[blockType]) {
     var valueFields = "";
     if (opt_values) for (var valueField of opt_values) {
-      console.log(opt_values[valueField])
       valueFields += Blockly.VariableCategory.createValue(
         valueField[0], valueField[1], valueField[2]
       );
@@ -503,8 +502,6 @@ Blockly.VariableCategory.addLabel = function(xmlList, text) {
  * @return {string} The generated dom element in text.
  */
 Blockly.VariableCategory.createValue = function(valueName, type, value) {
-  console.log(type)
-  console.log(typeof type)
   var isShadowBlock = type.startsWith("data_") || type === "checkbox";
   var fieldName;
   switch (valueName) {
