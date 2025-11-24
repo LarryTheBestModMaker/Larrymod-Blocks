@@ -476,6 +476,7 @@ Blockly.VariableCategory.addLabel = function(xmlList, text) {
   if (Blockly.Blocks[blockType]) {
     var valueFields = "";
     if (opt_values) for (var valueField of opt_values) {
+      console.log(valueField)
       valueFields += Blockly.VariableCategory.createValue(
         valueField[0], valueField[1], valueField[2]
       );
@@ -502,6 +503,8 @@ Blockly.VariableCategory.addLabel = function(xmlList, text) {
  * @return {string} The generated dom element in text.
  */
 Blockly.VariableCategory.createValue = function(valueName, type, value) {
+  console.log(type)
+  console.log(typeof type)
   var isShadowBlock = type.startsWith("data_") || type === "checkbox";
   var fieldName;
   switch (valueName) {
