@@ -154,17 +154,12 @@ Blockly.FieldDropdown.prototype.init = function() {
   }
 
   // Force a reset of the text to add the arrow.
+  if (this.sourceBlock_.textColour) {
+    this.textColour = this.sourceBlock_.textColour;
+  }
   var text = this.text_;
   this.text_ = null;
   this.setText(text);
-
-  if (this.sourceBlock_.textColour) {
-    this.textElement_.style.setProperty(
-      "fill",
-      this.sourceBlock_.textColour,
-      "important"
-    );
-  }
 };
 
 /**
