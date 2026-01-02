@@ -205,6 +205,10 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     menuItem.setRightToLeft(this.sourceBlock_.RTL);
     menuItem.setValue(value);
     menuItem.setCheckable(true);
+    if (this.sourceBlock_.textColour) {
+      menuItem.element_.style.color = this.sourceBlock_.textColour;
+    }
+
     menu.addChild(menuItem, true);
     var checked = (value == this.value_);
     menuItem.setChecked(checked);
