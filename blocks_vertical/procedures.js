@@ -48,6 +48,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
   container.setAttribute('color', JSON.stringify(this.color));
+  container.setAttribute('customdata', JSON.stringify(this.customData));
   container.innerText = this.image;
   return container;
 };
@@ -69,6 +70,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.color = JSON.parse(xmlElement.getAttribute('color'));
+  this.customData = JSON.parse(xmlElement.getAttribute('customdata'));
   // compat bc dum poopoo code
   if (!this.color) this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   if (this.color && this.color.primary) {
@@ -105,6 +107,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
   container.setAttribute('color', JSON.stringify(this.color));
+  container.setAttribute('customdata', JSON.stringify(this.customData));
   container.innerText = this.image;
   return container;
 };
@@ -131,6 +134,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.image = xmlElement.innerText;
   this.color = JSON.parse(xmlElement.getAttribute('color'));
+  this.customData = JSON.parse(xmlElement.getAttribute('customdata'));
   // compat bc dum poopoo code
   if (!this.color) this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   if (this.color && this.color.primary) {
@@ -377,6 +381,24 @@ Blockly.ScratchBlocks.ProcedureUtils.deleteShadows_ = function(connectionMap) {
       }
     }
   }
+};
+
+/**
+ * Sets a custom data variable in the block
+ * @param {any} name The name of the variable
+ * @param {any} value The value of the variable
+ * @this Blockly.Block
+ */
+Blockly.ScratchBlocks.ProcedureUtils.setCustomData = function(name, value) {
+  this.customData[name] = value;
+};
+
+/**
+ * Gets all custom data of the block in a json
+ * @this Blockly.Block
+ */
+Blockly.ScratchBlocks.ProcedureUtils.getCustomData = function() {
+  return this.customData;
 };
 // End of shared code.
 
@@ -1149,6 +1171,7 @@ Blockly.Blocks['procedures_call'] = {
     this.outputType = 'statement'
     this.image = ''
     this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
+    this.customData = {}
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -1158,6 +1181,8 @@ Blockly.Blocks['procedures_call'] = {
   createIcon_: Blockly.ScratchBlocks.ProcedureUtils.createIcon_,
   createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
+  setCustomData: Blockly.ScratchBlocks.ProcedureUtils.setCustomData,
+  getCustomData: Blockly.ScratchBlocks.ProcedureUtils.getCustomData,
 
   // Exist on all three blocks, but have different implementations.
   mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom,
@@ -1194,6 +1219,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.outputType = 'statement';
     this.image = '';
     this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
+    this.customData = {}
 
     queueMicrotask(() => {
       if (this.parentBlock_) this.parentBlock_.setColour(...this.color);
@@ -1209,6 +1235,8 @@ Blockly.Blocks['procedures_prototype'] = {
   createIcon_: Blockly.ScratchBlocks.ProcedureUtils.createIcon_,
   createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
+  setCustomData: Blockly.ScratchBlocks.ProcedureUtils.setCustomData,
+  getCustomData: Blockly.ScratchBlocks.ProcedureUtils.getCustomData,
 
   // Exist on all three blocks, but have different implementations.
   mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom,
@@ -1243,6 +1271,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.outputType = 'statement';
     this.image = '';
     this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary];
+    this.customData = {};
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -1252,6 +1281,8 @@ Blockly.Blocks['procedures_declaration'] = {
   createIcon_: Blockly.ScratchBlocks.ProcedureUtils.createIcon_,
   createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
+  setCustomData: Blockly.ScratchBlocks.ProcedureUtils.setCustomData,
+  getCustomData: Blockly.ScratchBlocks.ProcedureUtils.getCustomData,
 
   // Exist on all three blocks, but have different implementations.
   mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom,
