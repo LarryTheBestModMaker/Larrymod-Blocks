@@ -701,6 +701,14 @@ Blockly.Field.prototype.updateTextNode_ = function() {
   var textNode = document.createTextNode(text);
   this.textElement_.appendChild(textNode);
 
+  if (this.textColour) {
+    this.textElement_.style.setProperty(
+      "fill",
+      this.textColour,
+      "important"
+    );
+  }
+
   // Cached width is obsolete.  Clear it.
   this.size_.width = 0;
 };

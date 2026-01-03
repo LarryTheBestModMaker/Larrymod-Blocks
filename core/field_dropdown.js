@@ -152,7 +152,11 @@ Blockly.FieldDropdown.prototype.init = function() {
     }, null);
     this.fieldGroup_.insertBefore(this.box_, this.textElement_);
   }
+
   // Force a reset of the text to add the arrow.
+  if (this.sourceBlock_.textColour) {
+    this.textColour = this.sourceBlock_.textColour;
+  }
   var text = this.text_;
   this.text_ = null;
   this.setText(text);
@@ -202,6 +206,10 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     menuItem.setValue(value);
     menuItem.setCheckable(true);
     menu.addChild(menuItem, true);
+    if (this.sourceBlock_.textColour) {
+      menuItem.element_.style.color = this.sourceBlock_.textColour;
+    }
+
     var checked = (value == this.value_);
     menuItem.setChecked(checked);
     if (checked) {
