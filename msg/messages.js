@@ -163,6 +163,9 @@ Blockly.Msg.LOOKS_HIDE = 'hide';
 Blockly.Msg.LOOKS_GETSPRITEVISIBLE = 'visible?';
 Blockly.Msg.LOOKS_HIDEALLSPRITES = 'hide all sprites';
 Blockly.Msg.LOOKS_SHOWALLSPRITES = 'show all sprites';
+Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE = 'are all sprites %1 ?';
+Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE_VISIBLE = 'visible';
+Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE_INVISIBLE = 'invisible';
 Blockly.Msg.LOOKS_EFFECT_COLOR = 'color';
 Blockly.Msg.LOOKS_EFFECT_FISHEYE = 'fisheye';
 Blockly.Msg.LOOKS_EFFECT_WHIRL = 'whirl';
@@ -209,6 +212,11 @@ Blockly.Msg.LOOKS_NEXTBACKDROP = 'next backdrop';
 Blockly.Msg.LOOKS_PREVIOUSBACKDROP_BLOCK = 'previous backdrop';
 Blockly.Msg.LOOKS_PREVIOUSBACKDROP = 'previous backdrop';
 Blockly.Msg.LOOKS_RANDOMBACKDROP = 'random backdrop';
+Blockly.Msg.LOOKS_LAYERSSETLAYER = 'go to layer %1';
+Blockly.Msg.LOOKS_LAYERSGETLAYER = 'layer';
+Blockly.Msg.LOOKS_GETINPUT_MENU_WIDTH = 'width';
+Blockly.Msg.LOOKS_GETINPUT_MENU_HEIGHT = 'height';
+Blockly.Msg.LOOKS_GETINPUT_MENU_DRAWINGMODE = 'drawing mode';
 
 // Motion blocks
 Blockly.Msg.MOTION_MOVESTEPS = 'move %1 steps';
@@ -326,6 +334,7 @@ Blockly.Msg.SENSING_TOUCHINGOBJECT_POINTER = 'mouse-pointer';
 Blockly.Msg.SENSING_TOUCHINGOBJECT_EDGE = 'edge';
 Blockly.Msg.SENSING_TOUCHINGCOLOR = 'touching color %1?';
 Blockly.Msg.SENSING_COLORISTOUCHINGCOLOR = 'color %1 is touching %2?';
+Blockly.Msg.SENSING_OBJECTTOUCHINGOBJECT = '%1 touching %2?';
 Blockly.Msg.SENSING_DISTANCETO = 'distance to %1';
 Blockly.Msg.SENSING_DISTANCETO_POINTER = 'mouse-pointer';
 Blockly.Msg.SENSING_DISTANCETO2 = 'distance from %1 %2 to %3 %4';
@@ -386,6 +395,7 @@ Blockly.Msg.SOUND_CHANGEVOLUMEBY = 'change volume by %1';
 Blockly.Msg.SOUND_SETVOLUMETO = 'set volume to %1%';
 Blockly.Msg.SOUND_VOLUME = 'volume';
 Blockly.Msg.SOUND_RECORD = 'record...';
+Blockly.Msg.SOUND_SET_STOP_FADEOUT_TO = 'set fade out to %1 seconds on %2';
 
 // Data category labels
 Blockly.Msg.DATA_VARIABLE_LIST_ALLSPRITES = 'Variables for all sprites';

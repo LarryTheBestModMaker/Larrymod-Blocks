@@ -173,7 +173,7 @@ Blockly.Blocks['sound_set_stop_fadeout_to'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "set fade out to %1 seconds on %2",
+      "message0": Blockly.Msg.SOUND_SET_STOP_FADEOUT_TO,
       "args0": [
         {
           "type": "input_value",

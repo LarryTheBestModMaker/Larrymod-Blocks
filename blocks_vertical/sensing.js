@@ -79,7 +79,7 @@ Blockly.Blocks['sensing_objecttouchingobject'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "%1 touching %2?",
+      "message0": Blockly.Msg.SENSING_OBJECTTOUCHINGOBJECT,
       "args0": [
         {
           "type": "input_value",

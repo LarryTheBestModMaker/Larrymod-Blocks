@@ -355,14 +355,14 @@ Blockly.Blocks["looks_getAllSpritesVisible"] = {
     this.jsonInit({
       "inputsInline": true,
       "category": "looks",
-      "message0": "are all sprites %1 ?",
+      "message0": Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE,
       "args0": [
         {
           "type": "field_dropdown",
           "name": "VISIBLE_TYPE",
           "options": [
-            ["visible", "show"],
-            ["invisible", "hide"]
+            [Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE_VISIBLE, "show"],
+            [Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE_INVISIBLE, "hide"]
           ]
         }
       ],
@@ -811,7 +811,7 @@ Blockly.Blocks["looks_layersSetLayer"] = {
     this.jsonInit({
       "inputsInline": true,
       "category": "looks",
-      "message0": "go to layer %1",
+      "message0": Blockly.Msg.LOOKS_LAYERSSETLAYER,
       "args0": [
         {
           "type": "input_value",
@@ -831,7 +831,7 @@ Blockly.Blocks["looks_layersGetLayer"] = {
     this.jsonInit({
       "inputsInline": true,
       "category": "looks",
-      "message0": "layer",
+      "message0": Blockly.Msg.LOOKS_LAYERSGETLAYER,
       "checkboxInFlyout": true,
       "extensions": [
         "output_number",
@@ -1165,6 +1165,7 @@ Blockly.Blocks["looks_sayWidth"] = {
       "inputsInline": true,
       "category": "looks",
       "message0": "bubble width",
+      "checkboxInFlyout": true,
       "extensions": [
         "output_number",
         "colours_looks"
@@ -1190,7 +1191,6 @@ Blockly.Blocks["looks_sayColor"] = {
           ]
         }
       ],
-      "checkboxInFlyout": true,
       "extensions": [
         "output_string",
         "colours_looks"
@@ -1250,7 +1250,7 @@ Blockly.Blocks['looks_getinputofcostume'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "%1 of %2",
+      "message0": Blockly.Msg.OPERATORS_MATHOP,
       "args0": [
         {
           "type": "input_value",
@@ -1281,11 +1281,11 @@ Blockly.Blocks['looks_getinput_menu'] = {
           "type": "field_dropdown",
           "name": "INPUT",
           "options": [
-            ['width', 'width'],
-            ['height', 'height'],
+            [Blockly.Msg.LOOKS_GETINPUT_MENU_WIDTH, 'width'],
+            [Blockly.Msg.LOOKS_GETINPUT_MENU_HEIGHT, 'height'],
             ['rotation center x', 'rotation center x'],
             ['rotation center y', 'rotation center y'],
-            ['drawing mode', 'drawing mode']
+            [Blockly.Msg.LOOKS_GETINPUT_MENU_DRAWINGMODE, 'drawing mode']
           ]
         }
       ],
