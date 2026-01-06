@@ -4531,7 +4531,7 @@ Blockly.ScratchMsgs.locales["de"] =
     "LOOKS_PREVIOUSBACKDROP_BLOCK": "wechsle zum vorherigen Bühnenbild",
     "LOOKS_PREVIOUSBACKDROP": "vorheriges Bühnenbild",
     "LOOKS_RANDOMBACKDROP": "zufälliges Bühnenbild",
-    "LOOKS_LAYERSSETLAYER": "gehe zu %1 . Ebene",
+    "LOOKS_LAYERSSETLAYER": "gehe zu Ebene Nummer %1",
     "LOOKS_LAYERSGETLAYER": "Ebene",
     "LOOKS_GETINPUT_MENU_WIDTH": "Breite",
     "LOOKS_GETINPUT_MENU_HEIGHT": "Höhe",

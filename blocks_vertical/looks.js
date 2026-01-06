@@ -1342,3 +1342,27 @@ Blockly.Blocks['looks_getWhatBubbleIsDisplaying'] = {
     });
   }
 };
+
+Blockly.Blocks['looks_getinputofbackdrop'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 of backdrop %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "INPUT"
+        },
+        {
+          "type": "input_value",
+          "name": "COSTUME"
+        },
+      ],
+      "category": Blockly.Categories.looks,
+      "inputsInline": true,
+      "extensions": ["colours_looks", "output_number"]
+    });
+  }
+};
