@@ -1138,6 +1138,8 @@ Blockly.Block.prototype.setInputsInline = function(newBoolean) {
   if (this.inputsInline != newBoolean) {
     Blockly.Events.fire(new Blockly.Events.BlockChange(
         this, 'inline', null, this.inputsInline, newBoolean));
+    console.log(new Blockly.Events.BlockChange(
+        this, 'inline', null, this.inputsInline, newBoolean))
     this.inputsInline = newBoolean;
   }
 };
