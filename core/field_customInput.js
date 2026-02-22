@@ -136,7 +136,7 @@ Blockly.FieldCustom.prototype.init = function() {
  * @override
  */
 Blockly.FieldCustom.prototype.setValue = function(value) {
-  if (!value || value === this.value_) {
+  if (value === this.value_) {
     return; // No change
   }
   if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
