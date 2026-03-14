@@ -59,6 +59,8 @@ Blockly.Blocks['control_forever'] = {
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_statement"]
     });
+
+    this.nextStatementIsDynamic_ = true;
     this.setNextStatement(false);
     this.hasBreak_ = false;
   },
@@ -1269,8 +1271,8 @@ Blockly.Blocks['control_exitLoop'] = {
 
     this.oldLoopBlock = null;
 
-    // its rather expensive to start listening to Blockly Events, its lighter to
-    // patch these functions for this specific block
+    // its rather expensive to start listening to Blockly Events, its better
+    // to patch these functions for this specific block
     this.originalSetDraggingFunc = this.setDragging;
     this.setDragging = function(adding) {
       this.originalSetDraggingFunc.call(this, adding);
@@ -1304,7 +1306,7 @@ Blockly.Blocks['control_exitLoop'] = {
     // recursively climb tree until we reach a forever loop block
     let parent = this.getParent();
     while (parent !== null) {
-      if (parent.type === "control_forever") {
+      if (parent.nextStatementIsDynamic_) {
         // a smart way to check if we are a child is by checking our position
         // child blocks are not aligned on the x axis
         var childPos = this.getRelativeToSurfaceXY();
