@@ -1497,3 +1497,54 @@ Blockly.Blocks['control_continueLoop'] = {
     });
   }
 };
+
+Blockly.Blocks['control_from_to'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "for %1 of %2 to %3 %4",
+      "message1": "%1",
+      "lastDummyAlign1": "RIGHT",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SHADOW"
+        },
+        {
+          "type": "input_value",
+          "name": "FROM"
+        },
+        {
+          "type": "input_value",
+          "name": "TO"
+        },
+        {
+          "type": "input_statement",
+          "name": "SUBSTACK"
+        }
+      ],
+      "args1": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "repeat.svg",
+          "width": 24,
+          "height": 24,
+          "alt": "*",
+          "flip_rtl": true
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_from_to_index'] = {
+  init: function () {
+    this.jsonInit({
+      "message0": "index",
+      "canDragDuplicate": true,
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "output_number"]
+    });
+  }
+};
