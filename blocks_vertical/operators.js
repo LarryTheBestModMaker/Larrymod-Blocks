@@ -1188,7 +1188,7 @@ Blockly.Blocks["operator_replaceAll"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "in %1 replace all %2 with %3",
+      "message0": Blockly.Msg.OPERATORS_REPLACEALL,
       "args0": [
         {
           "type": "input_value",
@@ -1858,8 +1858,8 @@ Blockly.Blocks["operator_toUpperLowerCase"] = {
           "type": "field_dropdown",
           "name": "OPTION",
           "options": [
-            ["uppercase", "upper"],
-            ["lowercase", "lower"]
+            [Blockly.Msg.OPERATORS_ISUPPERLOWERCASE_UPPERCASE, "upper"],
+            [Blockly.Msg.OPERATORS_ISUPPERLOWERCASE_LOWERCASE, "lower"]
           ]
         }
       ],
@@ -1878,7 +1878,7 @@ Blockly.Blocks["operator_isUpperLowerCase"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "is %1 %2 ?",
+      "message0": Blockly.Msg.OPERATORS_ISUPPERLOWERCASE,
       "args0": [
         {
           "type": "input_value",
@@ -1888,38 +1888,8 @@ Blockly.Blocks["operator_isUpperLowerCase"] = {
           "type": "field_dropdown",
           "name": "OPTION",
           "options": [
-            ["uppercase", "upper"],
-            ["lowercase", "lower"]
-          ]
-        }
-      ],
-      "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_boolean"]
-    });
-  }
-};
-
-Blockly.Blocks["operator_isUpperLowerCase"] = {
-  /**
-   * dinosaurmod: a block that could be added to dinosaurmod.
-   * this is NOT compatible with PenguinMod.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "inputsInline": true,
-      "message0": "is %1 %2 ?",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "TEXT"
-        },
-        {
-          "type": "field_dropdown",
-          "name": "OPTION",
-          "options": [
-            ["uppercase", "upper"],
-            ["lowercase", "lower"]
+            [Blockly.Msg.OPERATORS_ISUPPERLOWERCASE_UPPERCASE, "upper"],
+            [Blockly.Msg.OPERATORS_ISUPPERLOWERCASE_LOWERCASE, "lower"]
           ]
         }
       ],
@@ -1954,7 +1924,7 @@ Blockly.Blocks["operator_percentage"] = {
   init: function () {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 \% of %2",
+      "message0": Blockly.Msg.OPERATORS_PERCENTAGE,
       "args0": [
         {
           "type": "input_value",

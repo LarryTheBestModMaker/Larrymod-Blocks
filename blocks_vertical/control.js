@@ -1110,7 +1110,7 @@ Blockly.Blocks["control_if_return_else_return"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "if %1 then %2 else %3",
+      "message0": Blockly.Msg.CONTROL_IF_RETURN_ELSE_RETURN,
       "args0": [
         {
           "type": "input_value",

@@ -278,6 +278,7 @@ Blockly.Msg["SENSING_OF_VOLUME"] = "volume";
 Blockly.Msg["SENSING_OF_BACKDROPNUMBER"] = "backdrop #";
 Blockly.Msg["SENSING_OF_BACKDROPNAME"] = "backdrop name";
 Blockly.Msg["SENSING_OF_STAGE"] = "Stage";
+Blockly.Msg["SENSING_SET_OF"] = "set %1 of %2 to %3";
 Blockly.Msg["SENSING_CURRENT"] = "current %1";
 Blockly.Msg["SENSING_CURRENT_YEAR"] = "year";
 Blockly.Msg["SENSING_CURRENT_MONTH"] = "month";

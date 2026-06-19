@@ -289,7 +289,7 @@ Blockly.Blocks['sound_playallsounds'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "play all sounds",
+      "message0": Blockly.Msg.SOUND_PLAYALLSOUNDS,
       "category": Blockly.Categories.sound,
       "extensions": ["colours_sounds", "shape_statement"]
     });

@@ -786,7 +786,7 @@ Blockly.Blocks['sensing_settimer'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "set timer to %1",
+      "message0": Blockly.Msg.SENSING_SETTIMER,
       "args0": [
         {
           "type": "input_value",
@@ -870,7 +870,7 @@ Blockly.Blocks['sensing_set_of'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": 'set %1 of %2 to %3',
+      "message0": Blockly.Msg.SENSING_SET_OF,
       "args0": [
         {
           "type": "field_dropdown",
@@ -922,8 +922,8 @@ Blockly.Blocks['sensing_current'] = {
             [Blockly.Msg.SENSING_CURRENT_HOUR, 'HOUR'],
             [Blockly.Msg.SENSING_CURRENT_MINUTE, 'MINUTE'],
             [Blockly.Msg.SENSING_CURRENT_SECOND, 'SECOND'],
-            ['millisecond', 'MILLISECOND'],
-            ['js timestamp', 'TIMESTAMP']
+            [Blockly.Msg.SENSING_CURRENT_MILLISECOND, 'MILLISECOND'],
+            [Blockly.Msg.SENSING_CURRENT_TIMESTAMP, 'TIMESTAMP']
           ]
         }
       ],

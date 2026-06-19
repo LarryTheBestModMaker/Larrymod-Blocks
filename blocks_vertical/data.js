@@ -591,7 +591,7 @@ Blockly.Blocks['data_listisempty'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": 'is %1 empty?',
+      "message0": Blockly.Msg.DATA_LISTISEMPTY,
       "args0": [
         {
           "type": "field_variable",
@@ -608,7 +608,7 @@ Blockly.Blocks['data_listisempty'] = {
 Blockly.Blocks['data_listarray'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'get list %1 as an array',
+      "message0": Blockly.Msg.DATA_LISTARRAY,
       "args0": [
         {
           "type": "field_variable",
@@ -625,7 +625,7 @@ Blockly.Blocks['data_listarray'] = {
 Blockly.Blocks['data_amountinlist'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'amount of %1 in %2',
+      "message0": Blockly.Msg.DATA_AMOUNTINLIST,
       "args0": [
         {
           "type": "input_value",

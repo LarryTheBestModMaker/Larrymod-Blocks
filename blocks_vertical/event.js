@@ -484,7 +484,7 @@ Blockly.Blocks["event_whenanything"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "when %1",
+      "message0": Blockly.Msg.EVENT_WHENANYTHING,
       "args0": [
         {
           "type": "input_value",
