@@ -129,6 +129,7 @@ Blockly.Msg.DATA_INDEX_LAST = 'last';
 Blockly.Msg.DATA_INDEX_RANDOM = 'random';
 Blockly.Msg.DATA_LISTISEMPTY = 'is %1 empty?';
 Blockly.Msg.DATA_LISTARRAY = 'get list %1 as an array';
+Blockly.Msg.DATA_ARRAYLIST = 'set %2 to array %1';
 Blockly.Msg.DATA_AMOUNTINLIST = 'amount of %1 in %2';
 
 // Event blocks
