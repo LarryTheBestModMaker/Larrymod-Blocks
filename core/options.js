@@ -62,6 +62,10 @@ Blockly.Options = function(options) {
     if (hasCollapse === undefined) {
       hasCollapse = hasCategories;
     }
+    var hasExternal = options['externalInputs'];
+    if (hasExternal === undefined) {
+      hasExternal = hasCategories;
+    }
     var hasComments = options['comments'];
     if (hasComments === undefined) {
       hasComments = hasCategories;
@@ -121,6 +125,7 @@ Blockly.Options = function(options) {
   this.RTL = rtl;
   this.oneBasedIndex = oneBasedIndex;
   this.collapse = hasCollapse;
+  this.externalInputs = hasExternal;
   this.comments = hasComments;
   this.disable = hasDisable;
   this.readOnly = readOnly;

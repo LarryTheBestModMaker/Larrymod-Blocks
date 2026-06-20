@@ -1247,7 +1247,7 @@ Blockly.BlockSvg.prototype.computeRightEdge_ = function(curEdge, hasStatement) {
       edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_OUTPUT);
     }
   }
-  if (hasStatement) {
+  if (hasStatement && !this.isCollapsed()) {
     // Statement blocks (C- or E- shaped) have a longer minimum width.
     edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT);
   }
@@ -1385,7 +1385,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
     // Width of the curve/pointy-curve
     var shape = this.getOutputShape();
     if (shape != Blockly.OUTPUT_SHAPE_SQUARE) {
-      this.edgeShapeWidth_ = (inputRows.bottomEdge + Math.max(this.inputList.filter(v => v.type == Blockly.NEXT_STATEMENT).length-1, 0) * Blockly.BlockSvg.NOTCH_WIDTH) / 2;
+      this.edgeShapeWidth_ = (inputRows.bottomEdge + (this.isCollapsed() ? 0 : Math.max(this.inputList.filter(v => v.type == Blockly.NEXT_STATEMENT).length-1, 0)) * Blockly.BlockSvg.NOTCH_WIDTH) / 2;
       this.edgeShape_ = shape;
       this.squareTopLeftCorner_ = true;
     }
@@ -1398,6 +1398,9 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
   var cursorY = this.renderDrawRight_(steps, inputRows, iconWidth);
   this.renderDrawBottom_(steps, cursorY);
   this.renderDrawLeft_(steps, cursorY);
+
+  // fix collapsed inputs
+  if (this.isCollapsed()) this.svgGroup_.querySelectorAll('[data-argument-type="input"]').forEach(v => v.setAttribute('style', 'visibility: hidden'));
 
   var pathString = steps.join(' ');
   this.svgPath_.setAttribute('d', pathString);
@@ -1538,7 +1541,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
     var connectionX, connectionY;
     for (var y = 0, row; row = inputRows[y]; y++) {
       cursorX = row.paddingStart;
-      if (this.edgeShape_ && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
+      if (this.edgeShape_ && !this.isCollapsed() && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT)) cursorX += this.edgeShapeWidth_ + Blockly.BlockSvg.CORNER_RADIUS * 2
       if (y == 0) {
         cursorX += this.RTL ? -iconWidth : iconWidth;
       }
@@ -1552,15 +1555,14 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
           // by its own rendered height.
           var fieldY = cursorY + row.height / 2;
   
-          var fieldX = Blockly.BlockSvg.getAlignedCursor_(cursorX, input,
-              inputRows.rightEdge);
+          var fieldX = Blockly.BlockSvg.getAlignedCursor_(cursorX, input, inputRows, y);
   
           cursorX = this.renderFields_(input.fieldRow, fieldX, fieldY);
           if (input.type == Blockly.INPUT_VALUE) {
             // Create inline input connection.
             // In blocks with a notch, inputs should be bumped to a min X,
             // to avoid overlapping with the notch.
-            if (this.previousConnection) {
+            if (this.previousConnection && (!inputRows[y - 1] || inputRows[y - 1].type !== Blockly.BlockSvg.INLINE)) {
               cursorX = Math.max(cursorX, Blockly.BlockSvg.INPUT_AND_FIELD_MIN_X);
             }
             if (this.outputConnection && (input.connection.targetConnection ? input.connection.targetConnection.getSourceBlock().getOutputShape() : input.connection.getOutputShape()) === Blockly.OUTPUT_SHAPE_SQUARE && this.getOutputShape() !== Blockly.OUTPUT_SHAPE_SQUARE) {
@@ -1583,7 +1585,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         cursorX += row.paddingEnd;
         // Update right edge for all inputs, such that all rows
         // stretch to be at least the size of all previous rows.
-        inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge, this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT + this.edgeShapeWidth_ : 0);
+        inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge, !this.isCollapsed() && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT + this.edgeShapeWidth_ : 0);
         // Move to the right edge
         cursorX = Math.max(cursorX, inputRows.rightEdge);
         this.width = Math.max(this.width, cursorX);
@@ -1629,7 +1631,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         input.connection.setOffsetInBlock(connectionX, cursorY);
         if (input.connection.isConnected()) {
           this.width = Math.max(this.width, inputRows.statementEdge +
-            input.connection.targetBlock().getHeightWidth().width + (this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
+            input.connection.targetBlock().getHeightWidth().width + (!this.isCollapsed() && this.inputList.find(v => v.type == Blockly.NEXT_STATEMENT) ? this.edgeShapeWidth_ : 0));
         }
         if ((!(this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
           this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return')) &&
@@ -1669,7 +1671,7 @@ Blockly.BlockSvg.prototype.renderInputShape_ = function(input, x, y) {
     return;
   }
   // Input shapes are only visibly rendered on non-connected slots.
-  if (input.connection.targetConnection) {
+  if (input.connection.targetConnection || this.isCollapsed()) {
     inputShape.setAttribute('style', 'visibility: hidden');
   } else {
     var inputShapeX = 0, inputShapeY = 0;
@@ -2115,11 +2117,11 @@ Blockly.BlockSvg.getInputShapeInfo_ = function(shape) {
  * @return {number} The new cursor position.
  * @private
  */
-Blockly.BlockSvg.getAlignedCursor_ = function(cursorX, input, rightEdge) {
+Blockly.BlockSvg.getAlignedCursor_ = function(cursorX, input, inputRows, rowI) {
   // Align inline field rows (left/right/centre).
   if (input.align === Blockly.ALIGN_RIGHT) {
     const SEP_SPACE = 2 * Blockly.BlockSvg.SEP_SPACE_X;
-    const offsetAmt = rightEdge - input.fieldWidth - SEP_SPACE;
+    const offsetAmt = inputRows.rightEdge - input.fieldWidth - SEP_SPACE;
     cursorX += offsetAmt;
 
     // fix incorrect width calculations for mega-chin blocks
@@ -2145,7 +2147,7 @@ Blockly.BlockSvg.getAlignedCursor_ = function(cursorX, input, rightEdge) {
       cursorX -= Math.min(backOffset, offsetAmt);
     }
   } else if (input.align === Blockly.ALIGN_CENTRE) {
-    cursorX = Math.max(cursorX, rightEdge / 2 - input.fieldWidth / 2);
+    cursorX = Math.max(cursorX, inputRows.rightEdge / 2 - input.fieldWidth / 2);
   }
   return cursorX;
 };

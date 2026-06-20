@@ -156,10 +156,6 @@ Blockly.Icon.prototype.renderIcon = function(cursorX) {
     this.iconGroup_ = Blockly.utils.createSvgElement('g',
       {'class': 'blocklyIconGroup'}, null);
   }
-  if (this.collapseHidden && this.block_.isCollapsed()) {
-    this.iconGroup_.setAttribute('display', 'none');
-    return cursorX;
-  }
   this.iconGroup_.setAttribute('display', 'block');
 
   var TOP_MARGIN = 17;

@@ -160,6 +160,14 @@ Blockly.Field.prototype.sourceBlock_ = null;
 Blockly.Field.prototype.visible_ = true;
 
 /**
+ * can field show text when collapsed
+ * @type {boolean}
+ * @private
+ */
+Blockly.Field.prototype.showWhenCollapsed_ = true;
+
+
+/**
  * Null, or an array of the field's argTypes (for styling).
  * @type {Array}
  * @private

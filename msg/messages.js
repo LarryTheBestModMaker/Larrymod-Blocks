@@ -517,3 +517,13 @@ Blockly.Msg.DEFAULT_BROADCAST_MESSAGE_NAME = 'message1';
 Blockly.Msg.OPEN_DOCUMENTATION = 'Open Documentation';
 Blockly.Msg.HELP_MANUAL = 'Help Manual';
 Blockly.Msg.YOUR_MOM = 'your mom';
+
+// extra pm stuff
+Blockly.Msg.PM_COLLAPSE_ALL = 'Collapse All';
+Blockly.Msg.PM_COLLAPSE_BLOCK = 'Collapse Block';
+Blockly.Msg.PM_COLLAPSE_X_BLOCKS = 'Collapse %1 Blocks';
+Blockly.Msg.PM_EXPAND_ALL = 'Expand All';
+Blockly.Msg.PM_EXPAND_BLOCK = 'Expand Block';
+Blockly.Msg.PM_EXPAND_X_BLOCKS = 'Expand %1 Blocks';
+Blockly.Msg.PM_INLINE_BLOCK = 'Inline Inputs';
+Blockly.Msg.PM_EXTERNAL_BLOCK = 'External Inputs';

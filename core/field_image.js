@@ -31,7 +31,6 @@ goog.require('goog.dom');
 goog.require('goog.math.Size');
 goog.require('goog.userAgent');
 
-
 /**
  * Class for an image on a block.
  * @param {string} src The URL of the image.
@@ -44,6 +43,8 @@ goog.require('goog.userAgent');
  */
 Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl, opt_onclick, opt_id) {
   this.sourceBlock_ = null;
+
+  this.showWhenCollapsed_ = false;
 
   // Ensure height and width are numbers.  Strings are bad at math.
   this.height_ = Number(height);

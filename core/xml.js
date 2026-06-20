@@ -232,9 +232,7 @@ Blockly.Xml.blockToDom = function(block, opt_noId) {
       element.appendChild(container);
     }
   }
-  if (block.inputsInlineDefault != block.inputsInline) {
-    element.setAttribute('inline', block.inputsInline);
-  }
+  element.setAttribute('inline', block.inputsInline);
   if (block.isCollapsed()) {
     element.setAttribute('collapsed', true);
   }
@@ -801,6 +799,8 @@ Blockly.Xml.domToBlockHeadless_ = function(xmlBlock, workspace) {
   var inline = xmlBlock.getAttribute('inline');
   if (inline) {
     block.setInputsInline(inline == 'true');
+  } else {
+    block.setInputsInline(true);
   }
   var disabled = xmlBlock.getAttribute('disabled');
   if (disabled) {
