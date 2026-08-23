@@ -243,16 +243,22 @@ Blockly.TOOLBOX_AT_RIGHT = 3;
 Blockly.OUTPUT_SHAPE_HEXAGONAL = 1;
 
 /**
- * ENUM for output shape: rounded (numbers).
+ * ENUM for output shape: rounded (strings and numbers).
  * @const
  */
 Blockly.OUTPUT_SHAPE_ROUND = 2;
 
 /**
- * ENUM for output shape: squared (any/all values; strings).
+ * ENUM for output shape: squared (arrays).
  * @const
  */
 Blockly.OUTPUT_SHAPE_SQUARE = 3;
+
+/**
+ * ENUM for output shape: object (objects).
+ * @type {number}
+ */
+Blockly.OUTPUT_SHAPE_OBJECT = 4;
 
 /**
  * ENUM for categories.
@@ -266,6 +272,7 @@ Blockly.Categories = {
   "pen": "pen",
   "data": "data",
   "dataLists": "data-lists",
+  "json": "json",
   "event": "events",
   "control": "control",
   "sensing": "sensing",
