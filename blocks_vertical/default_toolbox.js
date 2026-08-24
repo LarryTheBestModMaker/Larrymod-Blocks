@@ -256,6 +256,43 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '</block>' +
     '<block type="sound_volume" id="sound_volume"></block>' +
   '</category>' +
+  '<category name="%{BKY_CATEGORY_ASSETS}" id="assets" colour="#FCB103" secondaryColour="#DB9A37">' +
+    '<block type="assets_file_as_type" id="assets_file_as_type">' +
+      '<value name="ASSET_MENU">' +
+        '<shadow type="assets_menu"></shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block>' +
+      '<value name="SPRITE">' +
+        '<shadow type="assets_sprite_menu"></shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="assets_metadata" id="assets_metadata">' +
+      '<value name="ASSET_MENU">' +
+        '<shadow type="assets_menu"></shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="assets_set" id="assets_set">' +
+      '<value name="ASSET_MENU">' +
+        '<shadow type="assets_menu"></shadow>' +
+      '</value>' +
+      '<value name="VALUE">' +
+        '<shadow type="text">' +
+            '<field name="TEXT">Hello</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="assets_write" id="assets_write">' +
+      '<value name="VALUE">' +
+        '<shadow type="text">' +
+            '<field name="TEXT">Hello</field>' +
+        '</shadow>' +
+      '</value>' +
+      '<value name="ASSET_MENU">' +
+        '<shadow type="assets_menu"></shadow>' +
+      '</value>' +
+    '</block>' +
+  '</category>' +
   '<category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">' +
     '<block type="event_whenflagclicked" id="event_whenflagclicked"></block>' +
     '<block type="event_whenkeypressed" id="event_whenkeypressed">' +
@@ -531,6 +568,137 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="operator_checkboxBoolean" id="operator_checkboxBoolean"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_VARIABLES}" id="variable" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">' +
+  '</category>' +
+  '<category name="%{BKY_CATEGORY_JSON}" id="json" colour="#5755D4" secondaryColour="#4644AA">' +
+    '<block type="json_new_object" id="json_new_object">' +
+    '</block>' +
+    '<block type="json_to_object" id="json_to_object">' +
+      '<value name="STR">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">{"key":"value"}</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_to_string" id="json_to_string">' +
+    '</block>' +
+    '<block type="json_keys" id="json_keys">' +
+    '</block>' +
+    '<block type="json_values" id="json_values">' +
+    '</block>' +
+    '<block type="json_value_of_key" id="json_value_of_key">' +
+      '<value name="KEY">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">key</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_set_key" id="json_set_key">' +
+      '<value name="KEY">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">key</field>' +
+        '</shadow>' +
+      '</value>' +
+      '<value name="VALUE">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">bar</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_delete_key" id="json_delete_key">' +
+      '<value name="KEY">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">key</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_join_object" id="json_join_object">' +
+    '</block>' +
+    '<block type="json_has_key" id="json_has_key">' +
+      '<value name="KEY">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">key</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_new_array" id="json_new_array">' +
+    '</block>' +
+    '<block type="json_to_array" id="json_to_array">' +
+      '<value name="STR">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">["foo", "bar"]</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_value_of_index" id="json_value_of_index">' +
+      '<value name="INDEX">' +
+        '<shadow type="math_number">' +
+          '<field name="NUM">0</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_index_of_value" id="json_index_of_value">' +
+      '<value name="VALUE">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">bar</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_add_item" id="json_add_item">' +
+      '<value name="ITEM">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">bar</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_replace_index" id="json_replace_index">' +
+      '<value name="INDEX">' +
+        '<shadow type="math_number">' +
+          '<field name="NUM">1</field>' +
+        '</shadow>' +
+      '</value>' +
+      '<value name="ITEM">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">baz</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_delete_index" id="json_delete_index">' +
+      '<value name="INDEX">' +
+        '<shadow type="math_number">' +
+          '<field name="NUM">0</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_delete_all_occurrences" id="json_delete_all_occurrences">' +
+      '<value name="ITEM">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">bar</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="json_join_array" id="json_join_array">' +
+    '</block>' +
+    '<block type="json_has_item" id="json_has_item">' +
+      '<value name="ITEM">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">bar</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="comments_object" id="comments_object">' +
+      '<value name="COMMENT">' +
+        '<shadow type="text">' +
+          '<field name="TEXT"></field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="comments_array" id="comments_array">' +
+      '<value name="COMMENT">' +
+        '<shadow type="text">' +
+          '<field name="TEXT"></field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_LISTS}" id="list" colour="#FF661A" secondaryColour="#FF5500" custom="LIST">' +
   '</category>' +

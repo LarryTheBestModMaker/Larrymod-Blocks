@@ -255,6 +255,12 @@ Blockly.OUTPUT_SHAPE_ROUND = 2;
 Blockly.OUTPUT_SHAPE_SQUARE = 3;
 
 /**
+ * ENUM for output shape: object (objects).
+ * @type {number}
+ */
+Blockly.OUTPUT_SHAPE_OBJECT = 4;
+
+/**
  * ENUM for output shape: leaf (vectors).
  * @const
  */
@@ -310,9 +316,11 @@ Blockly.Categories = {
   "motion": "motion",
   "looks": "looks",
   "sound": "sounds",
+  "assets": "assets",
   "pen": "pen",
   "data": "data",
   "dataLists": "data-lists",
+  "json": "json",
   "event": "events",
   "control": "control",
   "sensing": "sensing",

@@ -40,6 +40,12 @@ Blockly.Colours = {
     "secondary": "#C94FC9",
     "tertiary": "#BD42BD"
   },
+  "assets": {
+    "primary": "#FCB103",
+    "secondary": "#DB9A37",
+    "tertiary": "#DB8937",
+    "quaternary": "#DB8937"
+  },
   "control": {
     "primary": "#FFAB19",
     "secondary": "#EC9C13",
@@ -69,6 +75,12 @@ Blockly.Colours = {
     "primary": "#FF8C1A",
     "secondary": "#FF8000",
     "tertiary": "#DB6E00"
+  },
+  "json": {
+    "primary": "#5755D4",
+    "secondary": "#4644AA",
+    "tertiary": "#4644AA",
+    "quaternary": "#4644AA"
   },
   // This is not a new category, but rather for differentiation
   // between lists and scalar variables.
