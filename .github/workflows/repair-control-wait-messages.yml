@@ -1,0 +1,103 @@
+name: Repair control wait messages in built bundles
+
+on:
+  push:
+    branches:
+      - develop-builds
+
+permissions:
+  contents: write
+
+jobs:
+  repair-built-bundles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: develop-builds
+
+      - name: Restore clean bundle baseline and add wait units
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import subprocess
+
+          baseline = 'c26b39ff9acc9550e1d8857c8edb2195763dee9f'
+          paths = [Path('dist/vertical.js'), Path('dist/web/vertical.js')]
+
+          subprocess.run([
+              'git', 'checkout', baseline, '--',
+              'dist/vertical.js', 'dist/web/vertical.js'
+          ], check=True)
+
+          english_needle = b"Blockly.Msg.CONTROL_WAIT = 'wait %1 seconds';\\nBlockly.Msg.CONTROL_WAITSECONDSORUNTIL"
+          english_replacement = (
+              b"Blockly.Msg.CONTROL_WAIT = 'wait %1 seconds';\\n"
+              b"Blockly.Msg.CONTROL_WAIT_MINUTES = 'wait %1 minutes';\\n"
+              b"Blockly.Msg.CONTROL_WAIT_HOURS = 'wait %1 hours';\\n"
+              b"Blockly.Msg.CONTROL_WAITSECONDSORUNTIL"
+          )
+
+          # Locale dictionaries are embedded inside eval strings. Add the new
+          # keys to every JSON-style CONTROL_WAIT entry. English is used as a
+          # fallback here because this builds-only branch contains no source
+          # translation catalog to regenerate localized strings from.
+          locale_pattern = re.compile(
+              r'(\\+"CONTROL_WAIT\\+"\\s*:\\s*\\+")([^"\\]*(?:\\.[^"\\]*)*)(\\+",)'
+          )
+
+          for path in paths:
+              text = path.read_bytes()
+
+              if b'CONTROL_WAIT_MINUTES' not in text:
+                  if english_needle not in text:
+                      raise SystemExit(f'{path}: English CONTROL_WAIT insertion point not found')
+                  text = text.replace(english_needle, english_replacement, 1)
+
+              decoded = text.decode('utf-8')
+              before_locale = len(locale_pattern.findall(decoded))
+
+              def add_locale(match):
+                  prefix, value, suffix = match.groups()
+                  return (
+                      prefix + value + suffix +
+                      r'\\n\\"CONTROL_WAIT_MINUTES\\": \\"wait %1 minutes\\",\\n'
+                      r'\\"CONTROL_WAIT_HOURS\\": \\"wait %1 hours\\"'
+                  )
+
+              decoded, locale_count = locale_pattern.subn(add_locale, decoded)
+
+              path.write_text(decoded, encoding='utf-8')
+              print(f'{path}: locale_wait_entries={locale_count}')
+
+          if not all(b'CONTROL_WAIT_MINUTES' in p.read_bytes() for p in paths):
+              raise SystemExit('CONTROL_WAIT_MINUTES missing after patch')
+          if not all(b'CONTROL_WAIT_HOURS' in p.read_bytes() for p in paths):
+              raise SystemExit('CONTROL_WAIT_HOURS missing after patch')
+
+      - name: Verify
+        shell: bash
+        run: |
+          set -e
+          node --check dist/vertical.js
+          node --check dist/web/vertical.js
+          grep -q "CONTROL_WAIT_MINUTES" dist/vertical.js
+          grep -q "CONTROL_WAIT_HOURS" dist/vertical.js
+          grep -q "CONTROL_WAIT_MINUTES" dist/web/vertical.js
+          grep -q "CONTROL_WAIT_HOURS" dist/web/vertical.js
+          git diff --check
+
+      - name: Commit repaired bundles
+        shell: bash
+        run: |
+          set -e
+          rm -f .github/workflows/repair-control-wait-messages.yml
+          rm -f dummy-noop.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A dist/vertical.js dist/web/vertical.js dummy-noop.txt .github/workflows/repair-control-wait-messages.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Add control wait minutes and hours"
+          git push origin develop-builds
