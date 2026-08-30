@@ -27,8 +27,6 @@ jobs:
           baseline = 'c26b39ff9acc9550e1d8857c8edb2195763dee9f'
           paths = [Path('dist/vertical.js'), Path('dist/web/vertical.js')]
 
-          # The checkout is shallow, so explicitly fetch the known-good
-          # baseline commit before checking out the two generated bundles.
           subprocess.run([
               'git', 'fetch', '--no-tags', 'origin', baseline, '--depth=1'
           ], check=True)
@@ -45,41 +43,60 @@ jobs:
               b"Blockly.Msg.CONTROL_WAITSECONDSORUNTIL"
           )
 
-          # Locale dictionaries are embedded in the bundles as escaped JSON
-          # inside eval strings. Add the new IDs to every locale entry. The
-          # builds-only repository has no source translation catalog, so the
-          # new entries use English fallback text until translated source data
-          # is generated later.
+          # Locale JSON is embedded in escaped strings. Support one or more
+          # escape slashes before JSON quotes so the patch works with either
+          # generated escaping form while preserving the bundle's structure.
           locale_pattern = re.compile(
-              rb'(\\"CONTROL_WAIT\\":\\s*\\")((?:[^"\\]|\\.)*)(\\",)'
+              rb'(\\+)"CONTROL_WAIT(\\+)":\\s*(\\+)"((?:\\.|[^"\\])*)(\\+)",'
           )
-          locale_insert = (
-              rb'\\n\\"CONTROL_WAIT_MINUTES\\": \\"wait %1 minutes\\",\\n'
-              rb'\\"CONTROL_WAIT_HOURS\\": \\"wait %1 hours\\"'
-          )
+
+          def locale_replacement(match):
+              key_open, key_close, quote_open, value, quote_close = match.groups()
+              minutes = (
+                  key_open + b'"CONTROL_WAIT_MINUTES' + key_close +
+                  b'": ' + quote_open + b'wait %1 minutes' + quote_close + b'",'
+              )
+              hours = (
+                  key_open + b'"CONTROL_WAIT_HOURS' + key_close +
+                  b'": ' + quote_open + b'wait %1 hours' + quote_close + b'",'
+              )
+              return (
+                  match.group(0) +
+                  b'\\n' + minutes +
+                  b'\\n' + hours
+              )
 
           for path in paths:
               text = path.read_bytes()
 
-              # Always start from the known-good baseline and add the keys.
               if english_needle not in text:
                   raise SystemExit(f'{path}: English CONTROL_WAIT insertion point not found')
               text = text.replace(english_needle, english_replacement, 1)
 
-              text, locale_count = locale_pattern.subn(
-                  lambda match: match.group(1) + match.group(2) + match.group(3) + locale_insert,
-                  text
-              )
-
-              if locale_count == 0:
+              original_locale_count = len(locale_pattern.findall(text))
+              if original_locale_count == 0:
                   raise SystemExit(f'{path}: no locale CONTROL_WAIT entries were found')
 
-              path.write_bytes(text)
-              print(f'{path}: locale_wait_entries={locale_count}')
+              text, locale_count = locale_pattern.subn(locale_replacement, text)
 
-          # Clean up accidental files created during the repair attempt.
-          for accidental in [Path('README.md'), Path('dummy-noop.txt')]:
-              if accidental.exists() and accidental.stat().st_size == 0:
+              # The English entry is one occurrence; every locale occurrence
+              # should now have a minute/hour pair beside it.
+              minutes_count = text.count(b'CONTROL_WAIT_MINUTES')
+              hours_count = text.count(b'CONTROL_WAIT_HOURS')
+              if minutes_count < original_locale_count or hours_count < original_locale_count:
+                  raise SystemExit(
+                      f'{path}: expected at least {original_locale_count} localized pairs, '
+                      f'got minutes={minutes_count}, hours={hours_count}'
+                  )
+
+              path.write_bytes(text)
+              print(
+                  f'{path}: locale_entries={locale_count}, '
+                  f'minutes_keys={minutes_count}, hours_keys={hours_count}'
+              )
+
+          for accidental in (Path('README.md'), Path('dummy-noop.txt')):
+              if accidental.exists():
                   accidental.unlink()
 
       - name: Verify
