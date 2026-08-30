@@ -1,0 +1,118 @@
+name: Repair control wait messages in built bundles
+
+on:
+  push:
+    branches:
+      - develop-builds
+
+permissions:
+  contents: write
+
+jobs:
+  repair-built-bundles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: develop-builds
+
+      - name: Restore clean bundles and add wait units
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import subprocess
+
+          baseline = 'c26b39ff9acc9550e1d8857c8edb2195763dee9f'
+          paths = [Path('dist/vertical.js'), Path('dist/web/vertical.js')]
+
+          subprocess.run([
+              'git', 'fetch', '--no-tags', 'origin', baseline, '--depth=1'
+          ], check=True)
+          subprocess.run([
+              'git', 'checkout', baseline, '--',
+              'dist/vertical.js', 'dist/web/vertical.js'
+          ], check=True)
+
+          english_needle = b"Blockly.Msg.CONTROL_WAIT = 'wait %1 seconds';\\nBlockly.Msg.CONTROL_WAITSECONDSORUNTIL"
+          english_replacement = (
+              b"Blockly.Msg.CONTROL_WAIT = 'wait %1 seconds';\\n"
+              b"Blockly.Msg.CONTROL_WAIT_MINUTES = 'wait %1 minutes';\\n"
+              b"Blockly.Msg.CONTROL_WAIT_HOURS = 'wait %1 hours';\\n"
+              b"Blockly.Msg.CONTROL_WAITSECONDSORUNTIL"
+          )
+
+          # Locale dictionaries contain quoted CONTROL_WAITUNTIL keys. By
+          # inserting the new entries immediately before CONTROL_WAITUNTIL we
+          # avoid having to parse the escaped JSON value for CONTROL_WAIT.
+          locale_until_pattern = re.compile(rb'(\\+)"CONTROL_WAITUNTIL(\\+)":')
+
+          for path in paths:
+              text = path.read_bytes()
+
+              if english_needle not in text:
+                  raise SystemExit(f'{path}: English CONTROL_WAIT insertion point not found')
+              text = text.replace(english_needle, english_replacement, 1)
+
+              def add_locale(match):
+                  key_open, key_close = match.groups()
+                  minutes = (
+                      key_open + b'"CONTROL_WAIT_MINUTES' + key_close +
+                      b'": ' + key_open + b'"wait %1 minutes' + key_close + b'",'
+                  )
+                  hours = (
+                      key_open + b'"CONTROL_WAIT_HOURS' + key_close +
+                      b'": ' + key_open + b'"wait %1 hours' + key_close + b'",'
+                  )
+                  return minutes + b'\\n' + hours + b'\\n' + match.group(0)
+
+              text, locale_count = locale_until_pattern.subn(add_locale, text)
+              if locale_count == 0:
+                  raise SystemExit(f'{path}: no localized CONTROL_WAITUNTIL entries were found')
+
+              # Remove accidental files from earlier repair attempts.
+              for accidental in (Path('README.md'), Path('dummy-noop.txt')):
+                  if accidental.exists():
+                      accidental.unlink()
+
+              path.write_bytes(text)
+
+              minutes_count = text.count(b'CONTROL_WAIT_MINUTES')
+              hours_count = text.count(b'CONTROL_WAIT_HOURS')
+              print(
+                  f'{path}: locale_entries={locale_count}, '
+                  f'minutes_keys={minutes_count}, hours_keys={hours_count}'
+              )
+
+              expected = locale_count + 1
+              if minutes_count != expected or hours_count != expected:
+                  raise SystemExit(
+                      f'{path}: expected {expected} total keys '
+                      f'(1 English + {locale_count} locale), got '
+                      f'minutes={minutes_count}, hours={hours_count}'
+                  )
+
+      - name: Verify
+        shell: bash
+        run: |
+          set -e
+          node --check dist/vertical.js
+          node --check dist/web/vertical.js
+          grep -q "CONTROL_WAIT_MINUTES" dist/vertical.js
+          grep -q "CONTROL_WAIT_HOURS" dist/vertical.js
+          grep -q "CONTROL_WAIT_MINUTES" dist/web/vertical.js
+          grep -q "CONTROL_WAIT_HOURS" dist/web/vertical.js
+          git diff --check
+
+      - name: Commit repaired bundles
+        shell: bash
+        run: |
+          set -e
+          rm -f .github/workflows/repair-control-wait-messages.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A dist/vertical.js dist/web/vertical.js README.md dummy-noop.txt .github/workflows/repair-control-wait-messages.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Add control wait minutes and hours"
+          git push origin develop-builds
