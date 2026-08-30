@@ -320,6 +320,20 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
         '</shadow>' +
       '</value>' +
     '</block>' +
+    '<block type="control_wait_minutes" id="control_wait_minutes">' +
+      '<value name="DURATION">' +
+        '<shadow type="math_positive_number">' +
+          '<field name="NUM">1</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
+    '<block type="control_wait_hours" id="control_wait_hours">' +
+      '<value name="DURATION">' +
+        '<shadow type="math_positive_number">' +
+          '<field name="NUM">1</field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
     '<block type="control_repeat" id="control_repeat">' +
       '<value name="TIMES">' +
         '<shadow type="math_whole_number">' +
