@@ -245,6 +245,48 @@ Blockly.Blocks['control_wait'] = {
   }
 };
 
+Blockly.Blocks['control_wait_minutes'] = {
+  /**
+   * Block to wait (pause) stack (minute).
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_wait_minutes",
+      "message0": Blockly.Msg.CONTROL_WAIT_MINUTES,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "DURATION"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_wait_hours'] = {
+  /**
+   * Block to wait (pause) stack (hour).
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_wait_hours",
+      "message0": Blockly.Msg.CONTROL_WAIT_HOURS,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "DURATION"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['control_wait_until'] = {
   /**
    * Block to wait until a condition becomes true.
